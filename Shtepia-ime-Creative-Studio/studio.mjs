@@ -209,7 +209,9 @@ const commands = {
     const fmt = flags.format ? String(flags.format) : sb.format || 'reel';
     const lib = path.join(KIT, 'local/library', sb.id);
     fs.mkdirSync(lib, { recursive: true });
-    const meta = { id: sb.id, title: localize(sb.title || sb.id, 'en'), brief: sb.brief || '', created: new Date().toISOString(), format: fmt, languages: {} };
+    // Re-running some languages updates them and keeps the others.
+    const prev = fs.existsSync(path.join(lib, 'idea.json')) ? JSON.parse(fs.readFileSync(path.join(lib, 'idea.json'), 'utf8')) : null;
+    const meta = { id: sb.id, title: localize(sb.title || sb.id, 'en'), brief: localize(sb.brief || '', 'en'), created: prev ? prev.created : new Date().toISOString(), updated: new Date().toISOString(), format: fmt, languages: { ...(prev ? prev.languages : {}) } };
     fs.writeFileSync(path.join(lib, 'storyboard.json'), JSON.stringify(sb, null, 2));
     for (const lang of langs) {
       const one = localize(JSON.parse(JSON.stringify({ ...sb, template: sb.template || 'idea' })), lang);

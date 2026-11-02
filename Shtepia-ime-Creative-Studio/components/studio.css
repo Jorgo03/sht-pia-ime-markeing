@@ -75,7 +75,7 @@ html, body {
 /* Split helpers: words and chars must be inline-block to transform. */
 .sp { white-space: pre-wrap; }
 .w, .ch { display: inline-block; will-change: transform, opacity, filter; }
-.line-mask { display: block; overflow: hidden; padding: 0.06em 0 0.12em; margin: -0.06em 0 -0.12em; }
+.line-mask { display: block; overflow: hidden; padding: 0.32em 0 0.12em; margin: -0.32em 0 -0.12em; } /* headroom for accents above caps: Ż Ë Ç É */
 .line-mask > .line { display: block; }
 
 /* ---------- Brand pieces ---------- */

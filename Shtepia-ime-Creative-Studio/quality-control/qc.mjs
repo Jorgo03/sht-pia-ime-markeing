@@ -323,7 +323,7 @@ async function textAudit(projectDir, dur, fmt) {
           const underRail = portrait && b.right > safe.right + 4 && b.bottom > H * 0.45 && b.top < safe.bottom;
           const inSafe = b.top >= safe.top - 4 && b.bottom <= safe.bottom + 4 && b.left >= safe.left - 4 && b.right <= W - safe.left + 4 && !underRail;
           // Per-line boxes: a phrase that wraps has one rect per line (its union box would overlap its neighbours).
-          const lines = Array.from(r.getClientRects()).filter((q) => q.width > 1 && q.height > 1).map((q) => [q.left, q.top, q.right, q.bottom].map(Math.round));
+          const lines = Array.from(r.getClientRects()).filter((q) => q.width > 1 && q.height > 1).map((q) => [Math.max(q.left, L), Math.max(q.top, T), Math.min(q.right, Rr), Math.min(q.bottom, B)].map(Math.round)).filter((q) => q[2] > q[0] && q[3] > q[1]);
           out.push({ text: txt.slice(0, 40), rect: [b.left, b.top, b.right, b.bottom].map(Math.round), lines, h: Math.round(rb.height), inSafe, decor: ui });
         }
         return out;
