@@ -1,0 +1,28 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    #root .cover { position: absolute; inset: 0; background: var(--ground); }
+  </style>
+  <div id="root" data-composition-id="tx-door-iris" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="cover"></div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('tx-door-iris', window.__hyperframes.getVariables());
+    const { tl, $ } = c;
+    const W = S.fmt.W, H = S.fmt.H, d = c.dur;
+    // An arched doorway (the brand's door shape) closes to nothing, then
+    // opens again on the next scene: the frame is covered at mid-slot.
+    const arch = (k) => {
+      const w = W * 1.6 * k, h = H * 1.25 * k, x = (W - w) / 2, y = (H - h) / 2 + h * 0.08, r = w / 2;
+      return `path(evenodd, "M0 0H${W}V${H}H0Z M${x} ${y + h}V${y + r}A${r} ${r} 0 0 1 ${x + w} ${y + r}V${y + h}Z")`;
+    };
+    const p = { k: 1 };
+    const draw = () => { $('.cover').style.clipPath = arch(Math.max(0.0001, p.k)); };
+    draw();
+    tl.fromTo(p, { k: 1 }, { k: 0, duration: d * 0.48, ease: 'power3.in', onUpdate: draw }, 0);
+    tl.to(p, { k: 1, duration: d * 0.48, ease: 'power3.out', onUpdate: draw }, d * 0.52);
+    c.done();
+  })();
+  </script>
+</template>

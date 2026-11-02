@@ -1,0 +1,15 @@
+{
+  "id": "outro-photo-endcard",
+  "name": "Photo grid end card",
+  "mode": "cinematic",
+  "technique": "An editorial end card: three property photographs wipe into an asymmetric grid from three directions while each settles from 1.15×, then the official lockup and a closing line land below (beside, in landscape).",
+  "duration": 3.2,
+  "in": "none",
+  "out": "none",
+  "vars": {
+    "photos": { "type": "string", "label": "Three photos", "default": "assets/property-images/villa-coast.jpg, assets/property-images/living-tirana.jpg, assets/property-images/stone-house.jpg" },
+    "line": { "type": "string", "label": "Closing line (*accent*)", "default": "Çdo mundësi, *në një vend.*" }
+  },
+  "sfx": [{ "id": "whoosh-paper", "at": 0.0, "volume": 0.35 }, { "id": "logo-reveal", "at": 0.8, "volume": 0.6 }],
+  "tags": ["outro", "photos", "end-card"]
+}

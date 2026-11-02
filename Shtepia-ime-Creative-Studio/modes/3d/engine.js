@@ -68,10 +68,10 @@
   // (GSAP has no scaleZ, so each prism gets a proxy that writes scale3d.)
   D.rise = (tl, prisms, at, { stagger = 0.03, dur = 0.8 } = {}) => {
     prisms.forEach((b, i) => {
-      const p = { k: 0.001 };
-      const draw = () => { b.style.transform = `scale3d(1, 1, ${p.k})`; };
+      const p = { k: 0.02 };
+      const draw = () => { b.style.transform = p.k >= 0.999 ? 'none' : `scale3d(1, 1, ${Math.max(0.02, p.k)})`; };
       draw();
-      tl.fromTo(p, { k: 0.001 }, { k: 1, duration: dur, ease: 'expo.out', onUpdate: draw }, at + i * stagger);
+      tl.fromTo(p, { k: 0.02 }, { k: 1, duration: dur, ease: 'expo.out', onUpdate: draw }, at + i * stagger);
     });
     return at + stagger * (prisms.length - 1) + dur * 0.6;
   };

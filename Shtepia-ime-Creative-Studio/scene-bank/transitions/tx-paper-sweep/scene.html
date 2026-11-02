@@ -1,0 +1,21 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    #root .sheet { position: absolute; left: -5%; right: -5%; top: 0; height: 120%; }
+  </style>
+  <div id="root" data-composition-id="tx-paper-sweep" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="sheet paper" data-palette="paper" style="--lift:40px"></div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('tx-paper-sweep', window.__hyperframes.getVariables());
+    const { tl, $ } = c;
+    const s = $('.sheet'), d = c.dur;
+    S.print.torn(s, { edge: 'top', seed: 21, depth: 3, teeth: 30 });
+    // A paper sheet slides up over the frame (covering it at mid-slot) and on out the top.
+    tl.fromTo(s, { yPercent: 100, rotation: 2 }, { yPercent: -8, rotation: 0, duration: d * 0.5, ease: 'power3.out' }, 0);
+    tl.to(s, { yPercent: -120, rotation: -2, duration: d * 0.45, ease: 'power3.in' }, d * 0.52);
+    c.done();
+  })();
+  </script>
+</template>

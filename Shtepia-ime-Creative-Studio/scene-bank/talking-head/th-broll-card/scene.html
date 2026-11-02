@@ -1,0 +1,30 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: visible; pointer-events: none; }
+    #root .kw { position: absolute; left: var(--cap-x); right: var(--cap-x); text-align: center; z-index: 6; }
+    #root .kw .display { font-size: 96px; color: #fff; text-shadow: 0 6px 30px rgba(0,0,0,.55); }
+  </style>
+  <div id="root" data-composition-id="th-broll-card" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="cards layer"></div>
+    <div class="kw"><div class="display k"></div></div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('th-broll-card', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      const land = S.fmt.landscape;
+      const src = v.screen ? S.screen(v.screen, v.theme) : v.image;
+      const w = v.screen ? (land ? 360 : 460) : (land ? 640 : 760), h = v.screen ? w * 2796 / 1290 : w * 0.75;
+      const y = land ? (S.fmt.H - h) / 2 : S.fmt.safe.top + 40;
+      const x = land ? S.fmt.W * 0.62 - w / 2 : null;
+      S.th.card(c, $('.cards'), src, { at: 0.1, hold: c.dur - 0.45, w, h, x, y, rot: v.rotate });
+      S.rich($('.k'), v.keyword);
+      $('.kw').style.top = (land ? S.fmt.H * 0.8 : y + h + 50) + 'px';
+      S.a.slam(tl, $('.k'), 0.35, { from: 1.5 });
+      tl.to($('.k'), { opacity: 0, duration: 0.2 }, c.dur - 0.35);
+      c.done();
+    }, [v.image]);
+  })();
+  </script>
+</template>

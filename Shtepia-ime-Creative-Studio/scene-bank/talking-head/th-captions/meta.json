@@ -1,0 +1,19 @@
+{
+  "id": "th-captions",
+  "name": "Word-by-word captions",
+  "mode": "talking-head",
+  "technique": "Captions from a real transcript (word-level timings): words grouped on pauses ≥150 ms, punctuation or a word limit; one group at a time, each word lighting up exactly on its spoken start, keywords turning accent and slightly larger; every group hard-killed after its last word.",
+  "duration": 10,
+  "in": "none",
+  "out": "none",
+  "trackKind": "captions",
+  "overlay": true,
+  "vars": {
+    "text": { "type": "string", "label": "Preview text (used only without a transcript)", "default": "Po kërkon shtëpi në Tiranë? Me Shtëpia.ime filtron sipas çmimit dhe dhomave, dhe i sheh të gjitha në hartë." },
+    "keywords": { "type": "string", "label": "Keywords (accent)", "default": "Tiranë, Shtëpia.ime, hartë" },
+    "groupSize": { "type": "number", "label": "Max words per group", "default": 3, "min": 1, "max": 6, "step": 1 },
+    "size": { "type": "number", "label": "Font size", "default": 74, "min": 42, "max": 110, "step": 2 }
+  },
+  "previewAt": 0.3,
+  "tags": ["talking-head", "captions", "subtitles"]
+}

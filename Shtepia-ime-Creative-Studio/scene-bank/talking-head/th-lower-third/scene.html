@@ -1,0 +1,18 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: visible; pointer-events: none; }
+  </style>
+  <div id="root" data-composition-id="th-lower-third" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="lt layer"></div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('th-lower-third', window.__hyperframes.getVariables());
+    const { v, $ } = c;
+    S.ready(() => {
+      S.th.lowerThird(c, $('.lt'), { name: v.name, role: v.role, at: 0.3, hold: Math.max(1, c.dur - 0.8) });
+      c.done();
+    });
+  })();
+  </script>
+</template>

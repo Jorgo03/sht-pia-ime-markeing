@@ -1,0 +1,40 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--ground); }
+    #root .icon { position: absolute; left: 50%; top: 40%; width: 300px; height: 300px; margin: -150px 0 0 -150px; border-radius: 68px; overflow: hidden; box-shadow: 0 50px 100px rgba(0,0,0,.55), 0 0 0 2px rgba(255,255,255,.08); }
+    #root .icon img { width: 100%; height: 100%; display: block; }
+    #root .copy { position: absolute; left: var(--cap-x); right: var(--cap-x); top: 40%; margin-top: 210px; text-align: center; }
+    #root .copy .headline { font-size: 96px; }
+    #root .pill { margin-top: 44px; }
+    #root .small { margin-top: 30px; }
+  </style>
+  <div id="root" data-composition-id="cta-app-icon" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="stage layer">
+      <div class="glow"></div>
+      <div class="icon"><img class="ico" src="assets/logos/app-icon-dark.svg" alt="Shtëpia.ime" /></div>
+      <div class="copy"><div class="headline t"></div><div class="pill p"></div><div class="kicker small s"></div></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('cta-app-icon', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      if (v.icon === 'light') $('.ico').src = 'assets/logos/app-icon-light.svg';
+      S.rich($('.t'), v.title); $('.p').textContent = v.button; $('.s').textContent = v.small;
+      // The official app icon lands on a spring (overshoot reads 'tap me'),
+      // then the line, the button and the small print.
+      tl.fromTo($('.icon'), { scale: 0.4, y: 120, opacity: 0, rotation: -8 }, { scale: 1, y: 0, opacity: 1, rotation: 0, duration: 0.9, ease: 'elastic.out(1, 0.6)' }, 0.05);
+      tl.fromTo($('.glow'), { opacity: 0 }, { opacity: 0.6, duration: 1 }, 0.1);
+      S.a.wordsBlur(tl, S.words($('.t')), 0.5);
+      S.a.pop(tl, $('.p'), 0.95);
+      tl.to($('.p'), { scale: 0.95, duration: 0.09, ease: 'power2.out' }, 1.8);
+      tl.to($('.p'), { scale: 1, duration: 0.25, ease: 'back.out(2)' }, 1.89);
+      S.a.blurIn(tl, $('.s'), 1.2);
+      S.tx.out(c, $('.stage'), 'none');
+      c.done();
+    });
+  })();
+  </script>
+</template>

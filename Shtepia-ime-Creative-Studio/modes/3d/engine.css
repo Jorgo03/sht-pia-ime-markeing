@@ -2,7 +2,7 @@
    preserve-3d so boxes, buildings and phones keep real depth. */
 .world { position: absolute; inset: 0; perspective: 2400px; perspective-origin: 50% 40%; }
 .s3 { position: absolute; transform-style: preserve-3d; }
-.face { position: absolute; left: 0; top: 0; backface-visibility: hidden; }
+.face { position: absolute; left: 0; top: 0; } /* no backface culling: prism faces are oriented both ways; 3D sorting handles depth */
 .box { transform-style: preserve-3d; position: absolute; }
 .bld-win {
   background-image:

@@ -1,0 +1,16 @@
+{
+  "id": "outro-lockup-tagline",
+  "name": "Lockup + tagline end card",
+  "mode": "kinetic-typography",
+  "technique": "The quiet ending: the official horizontal lockup (dark or light version to match the ground) sharpens in, a hairline grows, the tagline turns from faint to ink word by word and the handle blurs in — then everything holds dead still for reading.",
+  "duration": 3.0,
+  "in": "blur",
+  "out": "none",
+  "vars": {
+    "tagline": { "type": "string", "label": "Tagline (*accent*)", "default": "Shtëpia jote. *Zgjedhja jote.*" },
+    "handle": { "type": "string", "label": "Handle / URL", "default": "@shtepia.ime" },
+    "ground": { "type": "enum", "label": "Ground", "default": "dark", "options": ["dark", "light"] }
+  },
+  "sfx": [{ "id": "logo-reveal", "at": 0.05, "volume": 0.7 }],
+  "tags": ["outro", "logo", "end-card"]
+}

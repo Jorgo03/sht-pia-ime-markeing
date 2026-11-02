@@ -1,0 +1,24 @@
+{
+  "id": "tx-paper-sweep",
+  "name": "Paper sheet sweep (overlay)",
+  "mode": "print",
+  "technique": "Overlay transition for print films: a torn-edged paper sheet with a deep contact shadow slides up over the frame, covers it at mid-slot, and continues out of the top.",
+  "duration": 0.9,
+  "in": "none",
+  "out": "none",
+  "overlay": true,
+  "vars": {},
+  "sfx": [
+    {
+      "id": "whoosh-paper",
+      "at": 0.1,
+      "volume": 0.55
+    }
+  ],
+  "tags": [
+    "transition",
+    "overlay",
+    "paper"
+  ],
+  "previewAt": 0.35
+}

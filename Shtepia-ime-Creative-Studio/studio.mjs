@@ -91,7 +91,11 @@ const commands = {
     const reg = registry();
     const only = flags.only ? String(flags.only).split(',') : null;
     const list = Object.values(reg).filter((s) => !only || only.includes(s.id)).sort((a, b) => a.rel.localeCompare(b.rel));
-    const sb = { id: '_scene-bank-previews', title: 'Scene bank previews', format: flags.format || 'reel', autoSfx: false, scenes: list.map((s) => ({ scene: s.id, ...(s.previewVars ? { vars: s.previewVars } : {}) })) };
+    const sb = { id: '_scene-bank-previews', title: 'Scene bank previews', format: flags.format || 'reel', autoSfx: false, scenes: [] };
+    // Explicit starts: overlay scenes (transitions, talking-head layers) would otherwise sit on a seam.
+    let t0 = 0;
+    for (const s of list) { const d = s.duration ?? 3; sb.scenes.push({ scene: s.id, start: +t0.toFixed(3), duration: d, ...(s.previewVars ? { vars: s.previewVars } : {}) }); t0 += d; }
+    sb.duration = +t0.toFixed(3);
     const { dir, scenes } = build(sb, { format: flags.format });
     if (flags.check) { try { hf(['check'], { cwd: dir }); } catch (e) { console.log(String(e.stdout).slice(-3000)); } }
     const at = scenes.map((s) => +(s.start + s.duration * (s.meta.previewAt ?? 0.8)).toFixed(2));

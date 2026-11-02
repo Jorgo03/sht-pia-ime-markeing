@@ -1,0 +1,39 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--ground); }
+    #root .lock { position: absolute; left: 50%; top: 46%; width: 680px; margin: -87px 0 0 -340px; }
+    #root .lock img { width: 100%; display: block; }
+    #root .rule { position: absolute; left: 50%; top: 46%; width: 420px; height: 2px; margin: 120px 0 0 -210px; background: var(--line); }
+    #root .tag { position: absolute; left: var(--cap-x); right: var(--cap-x); top: 46%; margin-top: 160px; text-align: center; }
+    #root .tag .headline { font-size: 64px; }
+    #root .handle { position: absolute; left: 0; right: 0; bottom: calc(var(--H) - var(--safe-bottom) + 10px); text-align: center; }
+  </style>
+  <div id="root" data-composition-id="outro-lockup-tagline" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="stage layer">
+      <div class="lock"><img class="lk" alt="Shtëpia.ime" /></div>
+      <div class="rule"></div>
+      <div class="tag"><div class="headline t"></div></div>
+      <div class="kicker handle h"></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('outro-lockup-tagline', window.__hyperframes.getVariables());
+    const { tl, v, $, el } = c;
+    S.ready(() => {
+      const light = v.ground === 'light';
+      if (light) c.palette('paper');
+      $('.lk').src = S.lockup(light ? 'light' : 'dark');
+      S.rich($('.t'), v.tagline); $('.h').textContent = v.handle;
+      if (!S.fmt.portrait) gsap.set($('.lock'), { scale: 0.8 });
+      tl.fromTo($('.lock'), { opacity: 0, filter: 'blur(12px)', scale: S.fmt.portrait ? 0.96 : 0.77 }, { opacity: 1, filter: 'blur(0px)', scale: S.fmt.portrait ? 1 : 0.8, duration: 0.6, ease: 'expo.out' }, 0.05);
+      S.a.rule(tl, $('.rule'), 0.45, { dur: 0.7 });
+      S.a.wordsInk(tl, S.words($('.t')), 0.7, { stagger: 0.1 });
+      S.a.blurIn(tl, $('.h'), 1.2);
+      // Then everything holds dead still: the last 2 s of a film are for reading.
+      c.done();
+    });
+  })();
+  </script>
+</template>

@@ -1,0 +1,15 @@
+{
+  "id": "outro-into-the-door",
+  "name": "Push into the door's knob",
+  "mode": "cinematic",
+  "technique": "The logo's own idea, reversed: the official door symbol settles, then the camera pushes into its knob (a hole that shows the ground) on a power4 ease-in until the hole becomes the whole frame, and the closing line appears inside it on a warm glow.",
+  "duration": 3.4,
+  "in": "blur",
+  "out": "none",
+  "vars": {
+    "line": { "type": "string", "label": "Closing line (*accent*)", "default": "Mirë se vjen *në shtëpi.*" },
+    "handle": { "type": "string", "label": "Handle / URL", "default": "Shtëpia.ime" }
+  },
+  "sfx": [{ "id": "whoosh-deep", "at": 0.95, "volume": 0.5 }, { "id": "impact-cinema", "at": 1.85, "volume": 0.6 }],
+  "tags": ["outro", "logo", "push-in"]
+}

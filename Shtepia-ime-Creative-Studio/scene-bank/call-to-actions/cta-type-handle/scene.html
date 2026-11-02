@@ -1,0 +1,38 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--ground); }
+    #root .field { position: absolute; left: var(--cap-x); right: var(--cap-x); top: 50%; margin-top: -70px; height: 140px; border-radius: 999px; background: var(--surface); box-shadow: inset 0 0 0 3px var(--accent); display: flex; align-items: center; justify-content: center; }
+    #root .typed { font-family: var(--font-mono); font-size: 54px; color: var(--ink); white-space: nowrap; }
+    #root .caret { display: inline-block; width: 4px; height: 58px; background: var(--accent); margin-left: 6px; vertical-align: middle; }
+    #root .under { position: absolute; left: var(--cap-x); right: var(--cap-x); top: 50%; margin-top: 110px; text-align: center; }
+    #root .logo-s { position: absolute; left: 50%; top: 50%; width: 120px; height: 120px; margin: -320px 0 0 -60px; }
+  </style>
+  <div id="root" data-composition-id="cta-type-handle" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="stage layer">
+      <img class="logo-s" src="assets/logos/symbol-orange.svg" alt="" />
+      <div class="field"><span class="typed"></span><span class="caret"></span></div>
+      <div class="under"><div class="kicker u"></div></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('cta-type-handle', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      $('.u').textContent = v.line;
+      const maxW = S.fmt.W - 2 * Math.max(S.fmt.safe.left, S.fmt.W - S.fmt.safe.right) - 120;
+      $('.typed').textContent = v.text; S.fit($('.typed'), { maxWidth: maxW, max: 64, min: 30 }); $('.typed').textContent = '';
+      tl.fromTo($('.logo-s'), { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: 'expo.out' }, 0);
+      tl.fromTo($('.field'), { scaleX: 0.2, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.6, ease: 'expo.out' }, 0.15);
+      const end = S.a.typeOn(tl, $('.typed'), v.text, 0.7, { cps: 14 });
+      // The caret blinks a finite number of times after typing.
+      const blinks = Math.max(0, Math.floor((c.dur - end) / 0.5));
+      for (let i = 0; i < blinks; i++) { tl.set($('.caret'), { opacity: 0 }, end + i * 0.5 + 0.25); tl.set($('.caret'), { opacity: 1 }, end + i * 0.5 + 0.5); }
+      S.a.blurIn(tl, $('.u'), end + 0.1);
+      S.tx.out(c, $('.stage'), 'none');
+      c.done();
+    });
+  })();
+  </script>
+</template>

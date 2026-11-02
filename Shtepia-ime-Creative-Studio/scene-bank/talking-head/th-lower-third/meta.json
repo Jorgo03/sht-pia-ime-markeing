@@ -1,0 +1,18 @@
+{
+  "id": "th-lower-third",
+  "name": "Lower third",
+  "mode": "talking-head",
+  "technique": "A glass lower third with an accent bar wipes in from the left (clip-path), the name (serif) and role (mono) slide in staggered, it holds, then wipes out to the right. Sits inside the title-safe band, clear of the face.",
+  "duration": 3.5,
+  "in": "none",
+  "out": "none",
+  "overlay": true,
+  "vars": {
+    "name": { "type": "string", "label": "Name", "default": "Emri Mbiemri" },
+    "role": { "type": "string", "label": "Role", "default": "Agjent · Shtëpia.ime" }
+  },
+  "previewAt": 0.5,
+  "notes": "Replace the placeholder name with the real speaker's name and role.",
+  "sfx": [{ "id": "whoosh-air", "at": 0.3, "volume": 0.3 }],
+  "tags": ["talking-head", "lower-third"]
+}

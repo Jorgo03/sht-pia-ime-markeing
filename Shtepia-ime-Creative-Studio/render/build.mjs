@@ -58,7 +58,8 @@ export const resetRegistry = () => { _registry = null; };
 // Declared variables for a scene's root (HyperFrames' data-composition-variables).
 function declareVars(meta) {
   const std = {
-    duration: { type: 'number', label: 'Duration (s)', default: meta.duration ?? 3, min: 0.5, max: 30, step: 0.1 },
+    duration: { type: 'number', label: 'Duration (s)', default: meta.duration ?? 3, min: 0.5, max: 600, step: 0.1 },
+    start: { type: 'number', label: 'Start in film (s, set by the builder)', default: 0, min: 0, max: 3600, step: 0.01 },
     in: { type: 'enum', label: 'Transition in', default: meta.in ?? 'auto', options: ['auto', 'none', 'blur', 'whip-left', 'whip-right', 'whip-up', 'zoom-in', 'zoom-out', 'iris', 'slide-up', 'shutter', 'paper', 'flood', 'dip'] },
     out: { type: 'enum', label: 'Transition out', default: meta.out ?? 'auto', options: ['auto', 'none', 'blur', 'whip-left', 'whip-right', 'whip-up', 'zoom-in', 'zoom-out', 'iris', 'slide-up', 'shutter', 'paper', 'dip'] },
     palette: { type: 'enum', label: 'Palette', default: meta.palette ?? '', options: ['', 'night', 'paper', 'orange', 'navy', 'mono'] },
@@ -114,6 +115,13 @@ export function timeline(sb) {
     const meta = reg[s.scene];
     if (!meta) throw new Error(`scene ${i + 1}: "${s.scene}" is not in the scene bank (npm run scenes lists them)`);
     const dur = +(s.duration ?? meta.duration ?? 3);
+    // Overlay transitions (meta.overlay) sit centred on the seam they follow
+    // and do not move the timeline on; they paint above everything.
+    if (meta.overlay) {
+      const start = s.start !== undefined ? +s.start : Math.max(0, t - dur / 2);
+      out.push({ ...s, meta, index: i, start: +start.toFixed(3), duration: +dur.toFixed(3), z: s.z ?? 900 + i, iid: `s${String(i + 1).padStart(2, '0')}-${meta.id}` });
+      return;
+    }
     const start = s.start !== undefined ? +s.start : Math.max(0, t - (s.overlap ?? 0));
     out.push({ ...s, meta, index: i, start: +start.toFixed(3), duration: +dur.toFixed(3), iid: `s${String(i + 1).padStart(2, '0')}-${meta.id}` });
     t = Math.max(t, start + dur);
@@ -159,7 +167,7 @@ export function build(sb, { out, format, log = console.log } = {}) {
     const html = instantiate(s.meta, s.iid, fmt);
     write(path.join(dir, 'compositions', `${s.iid}.html`), html);
     texts.push(html);
-    const vals = { ...(s.vars || {}), duration: s.duration };
+    const vals = { ...(s.vars || {}), duration: s.duration, start: s.start };
     if (s.in) vals.in = s.in; if (s.out) vals.out = s.out; if (s.palette) vals.palette = s.palette;
     texts.push(JSON.stringify(vals));
     const kind = s.meta.trackKind || 'graphics';
@@ -172,7 +180,10 @@ export function build(sb, { out, format, log = console.log } = {}) {
   (sb.footage || []).forEach((f, i) => {
     const len = +(f.out - f.in).toFixed(3);
     texts.push(f.src);
-    media.push(`      <div id="fw-${i}" class="clip footage" data-start="${f.start}" data-duration="${len}" data-track-index="0" style="position:absolute;inset:0;z-index:${f.z ?? 1};overflow:hidden">
+    // rect: place the footage in part of the frame (split screens), e.g. {"top":0,"height":"50%"}.
+    const r = f.rect || {};
+    const box = r.top !== undefined || r.height !== undefined ? `left:${r.left ?? 0};top:${r.top ?? 0};width:${r.width ?? '100%'};height:${r.height ?? '100%'}` : 'inset:0';
+    media.push(`      <div id="fw-${i}" class="clip footage" data-start="${f.start}" data-duration="${len}" data-track-index="0" style="position:absolute;${box};z-index:${f.z ?? 1};overflow:hidden">
         <div id="fp-${i}" class="punch" style="position:absolute;inset:0">
           <video id="fv-${i}" src="${f.src}" data-media-start="${f.in}" ${f.hasAudio === false ? 'muted' : 'data-has-audio="true"'} data-volume="${f.volume ?? 1}" playsinline style="position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover"></video>
         </div>

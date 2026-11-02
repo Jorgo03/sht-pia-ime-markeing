@@ -1,0 +1,18 @@
+{
+  "id": "cta-app-icon",
+  "name": "App icon call to action",
+  "mode": "kinetic-typography",
+  "technique": "The official app icon (dark or light) lands on an elastic spring with a soft glow, the line sharpens in, an orange button pops and is pressed once at the end — the final ask, held long enough to act on.",
+  "duration": 3.0,
+  "in": "blur",
+  "out": "none",
+  "vars": {
+    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Gjej shtëpinë tënde *sot.*" },
+    "button": { "type": "string", "label": "Button", "default": "Provoje falas" },
+    "small": { "type": "string", "label": "Small print", "default": "Link në bio" },
+    "icon": { "type": "enum", "label": "Icon version", "default": "dark", "options": ["dark", "light"] }
+  },
+  "notes": "Only say 'App Store / Google Play' once the app is actually published there. 'Falas' (free) must be true for the user side.",
+  "sfx": [{ "id": "pop", "at": 0.25, "volume": 0.5 }, { "id": "pop", "at": 0.98, "volume": 0.4 }, { "id": "ui-tap", "at": 1.8, "volume": 0.6 }],
+  "tags": ["cta", "app-icon", "download"]
+}

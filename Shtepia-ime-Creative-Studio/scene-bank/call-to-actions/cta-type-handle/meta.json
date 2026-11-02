@@ -1,0 +1,16 @@
+{
+  "id": "cta-type-handle",
+  "name": "Typed handle / URL",
+  "mode": "kinetic-typography",
+  "technique": "The official symbol settles, an accent-outlined field unrolls and the handle or URL types into it in mono at reading pace (fitted to the safe width), then the caret blinks a finite number of times under a short line.",
+  "duration": 3.2,
+  "in": "blur",
+  "out": "none",
+  "vars": {
+    "text": { "type": "string", "label": "Typed text (handle or URL)", "default": "@shtepia.ime" },
+    "line": { "type": "string", "label": "Line under", "default": "Na ndiq për pronat e reja" }
+  },
+  "notes": "@shtepia.ime is a placeholder handle (config/brand.json $todo): confirm it before publishing.",
+  "sfx": [{ "id": "type-tick", "at": 0.75, "volume": 0.3 }, { "id": "type-tick", "at": 1.0, "volume": 0.3 }, { "id": "type-tick", "at": 1.25, "volume": 0.3 }, { "id": "type-tick", "at": 1.5, "volume": 0.3 }],
+  "tags": ["cta", "handle", "typing"]
+}

@@ -1,0 +1,35 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    #root .bottom { position: absolute; left: 0; right: 0; top: 50%; bottom: 0; background: var(--ground); overflow: hidden; }
+    #root .divider { position: absolute; left: 0; right: 0; top: 50%; height: 8px; margin-top: -4px; background: var(--accent); z-index: 5; }
+    #root .tag { position: absolute; left: var(--cap-x); top: calc(50% + 40px); z-index: 6; }
+    [data-orient="landscape"] #root .bottom { left: 50%; top: 0; }
+    [data-orient="landscape"] #root .divider { left: 50%; top: 0; bottom: 0; right: auto; width: 8px; height: auto; margin: 0 0 0 -4px; }
+  </style>
+  <div id="root" data-composition-id="th-split-screen" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="bottom"><div class="phone-host layer"></div></div>
+    <div class="divider"></div>
+    <div class="chip tag"></div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('th-split-screen', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      // The speaker's footage fills the other half (storyboard footage with
+      // rect {"top":0,"height":"50%"}); this half demonstrates the real app.
+      const land = S.fmt.landscape;
+      const p = S.ui.phone($('.phone-host'), { screen: v.screen, theme: v.theme, w: land ? 340 : 420, y: land ? 0 : 330 });
+      $('.tag').innerHTML = '<span class="dot"></span>' + v.tag;
+      tl.fromTo($('.bottom'), land ? { xPercent: 100 } : { yPercent: 100 }, land ? { xPercent: 0, duration: 0.6, ease: 'expo.out' } : { yPercent: 0, duration: 0.6, ease: 'expo.out' }, 0);
+      tl.fromTo($('.divider'), { scaleX: land ? 1 : 0, scaleY: land ? 0 : 1 }, { scaleX: 1, scaleY: 1, duration: 0.5, ease: 'expo.out' }, 0.2);
+      S.ui.enter(tl, p, 0.3, { dur: 0.9 });
+      if (v.region) S.ui.zoomTo(tl, p, v.region, 1.4, { scale: 1.6, dur: 0.8 });
+      S.a.pop(tl, $('.tag'), 0.7);
+      tl.to($('.bottom'), land ? { xPercent: 100, duration: 0.35, ease: 'power3.in' } : { yPercent: 100, duration: 0.35, ease: 'power3.in' }, c.dur - 0.36);
+      c.done();
+    });
+  })();
+  </script>
+</template>

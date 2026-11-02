@@ -31,14 +31,15 @@
       const spans = grp.map((w) => {
         const s = document.createElement('span'); s.className = 'w th-word'; s.textContent = w.text;
         if (kw.has(w.text.toLowerCase().replace(/[^\p{L}\p{N}]/gu, ''))) s.classList.add('th-key');
-        el.appendChild(s); el.appendChild(document.createTextNode(' '));
+        el.appendChild(s);
+        const sp = document.createElement('span'); sp.className = 'sp'; sp.textContent = ' '; el.appendChild(sp);
         return s;
       });
       box.appendChild(el);
       const t0 = Math.max(0.05, grp[0].start - offset - 0.05), t1 = grp[grp.length - 1].end - offset + 0.08;
       c.tl.fromTo(el, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.12, ease: 'power2.out' }, t0);
       grp.forEach((w, i) => {
-        c.tl.fromTo(spans[i], { scale: 1 }, { scale: spans[i].classList.contains('th-key') ? 1.12 : 1.04, duration: 0.08, ease: 'power2.out' }, w.start - offset);
+        c.tl.fromTo(spans[i], { scale: 1 }, { scale: spans[i].classList.contains('th-key') ? 1.06 : 1.0, duration: 0.08, ease: 'power2.out' }, w.start - offset);
         // (GSAP 3 has no className tweening: set the 'on' look directly.)
         c.tl.set(spans[i], { opacity: 1, color: spans[i].classList.contains('th-key') ? 'var(--accent)' : '#fff' }, w.start - offset);
       });
@@ -54,7 +55,7 @@
     const st = document.createElement('style');
     st.textContent = `.th-group{font-family:var(--font-sans),sans-serif;font-weight:800;font-size:${size}px;line-height:1.08;color:#fff;letter-spacing:-.02em;
       text-shadow:0 4px 18px rgba(0,0,0,.55),0 2px 4px rgba(0,0,0,.6);}
-      .th-word{opacity:.72}`;
+      .th-word{opacity:.72;margin:0 .06em}`;
     document.head.appendChild(st);
   }
 

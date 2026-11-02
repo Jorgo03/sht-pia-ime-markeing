@@ -3,7 +3,7 @@
   "name": "Shtëpia.ime",
   "company": "Future Home Orange",
   "handle": "@shtepia.ime",
-  "website": "shtepia.ime",
+  "website": "",
   "logo": {
     "door": "#FF5F1F",
     "files": {
@@ -117,5 +117,6 @@
     "tone": "Warm, confident, editorial. Short sentences. Never hype words like 'revolutionary' or 'best ever'.",
     "headlineStyle": "Serif headline; the payoff words in italic orange: 'Gjej *shtëpinë tënde.*'",
     "kicker": "Mono, uppercase, wide tracking — like a catalogue plate number."
-  }
+  },
+  "$todo": "Confirm the real social handle and website before publishing: the app repo does not state them. '@shtepia.ime' is a placeholder; website is empty until confirmed (CTA scenes then say 'Link në bio')."
 }

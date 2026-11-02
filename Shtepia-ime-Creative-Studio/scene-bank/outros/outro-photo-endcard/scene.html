@@ -1,0 +1,40 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--ground); }
+    #root .tiles { position: absolute; left: var(--safe-left); right: var(--safe-left); top: calc(var(--safe-top) + 30px); height: 54%; display: grid; grid-template-columns: 1.3fr 1fr; grid-template-rows: 1fr 1fr; gap: 18px; }
+    #root .tile { border-radius: 26px; overflow: hidden; position: relative; }
+    #root .tile img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    #root .t1 { grid-row: 1 / span 2; }
+    #root .bar { position: absolute; left: var(--safe-left); right: var(--safe-left); bottom: calc(var(--H) - var(--safe-bottom) + 10px); display: flex; flex-direction: column; align-items: center; gap: 30px; }
+    #root .bar img { width: 560px; display: block; }
+    #root .bar .headline { font-size: 60px; text-align: center; }
+    [data-orient="landscape"] #root .tiles { left: 8%; right: 50%; top: 12%; height: 76%; }
+    [data-orient="landscape"] #root .bar { left: 52%; right: 6%; top: 0; bottom: 0; justify-content: center; }
+  </style>
+  <div id="root" data-composition-id="outro-photo-endcard" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="stage layer">
+      <div class="tiles"><div class="tile t1"><img alt="" /></div><div class="tile t2"><img alt="" /></div><div class="tile t3"><img alt="" /></div></div>
+      <div class="bar"><img class="lk" src="assets/logos/lockup-horizontal-dark.svg" alt="Shtëpia.ime" /><div class="headline t"></div></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('outro-photo-endcard', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    const photos = String(v.photos).split(/\s*,\s*/).filter(Boolean);
+    S.ready(() => {
+      ['.t1', '.t2', '.t3'].forEach((k, i) => { $(k + ' img').src = S.asset(photos[i % photos.length]); });
+      S.rich($('.t'), v.line);
+      // Tiles wipe in from different sides; each photo settles from 1.15.
+      S.a.wipe(tl, $('.t1'), 0.0, { dir: 'up', dur: 0.7 });
+      S.a.wipe(tl, $('.t2'), 0.15, { dir: 'left', dur: 0.6 });
+      S.a.wipe(tl, $('.t3'), 0.3, { dir: 'right', dur: 0.6 });
+      ['.t1', '.t2', '.t3'].forEach((k, i) => tl.fromTo($(k + ' img'), { scale: 1.15 }, { scale: 1, duration: 1.4, ease: 'power3.out' }, i * 0.15));
+      tl.fromTo($('.lk'), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' }, 0.8);
+      S.a.wordsBlur(tl, S.words($('.t')), 1.1);
+      c.done();
+    }, photos);
+  })();
+  </script>
+</template>

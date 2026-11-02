@@ -1,0 +1,16 @@
+{
+  "id": "paper-cards-stack",
+  "name": "Paper list cards drop",
+  "mode": "print",
+  "technique": "A numbered list on paper strips: each strip drops onto the table with a slight random tilt and a shadow that shrinks as it lands (lift 46 → 10 px); the last strip is orange, and a piece of tape pins the stack.",
+  "duration": 3.2,
+  "in": "none",
+  "out": "paper",
+  "vars": {
+    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Pse *Shtëpia.ime?*" },
+    "items": { "type": "string", "label": "Items (| separated, max 5)", "default": "Shitje dhe qira|Filtra të saktë|Harta e pronave|8 gjuhë" }
+  },
+  "features": ["listing-type", "filters", "map-view", "multilingual"],
+  "sfx": [{ "id": "paper-drop", "at": 0.55, "volume": 0.5 }, { "id": "paper-drop", "at": 0.75, "volume": 0.5 }, { "id": "paper-drop", "at": 0.95, "volume": 0.5 }, { "id": "paper-drop", "at": 1.15, "volume": 0.5 }],
+  "tags": ["print", "list", "benefits"]
+}

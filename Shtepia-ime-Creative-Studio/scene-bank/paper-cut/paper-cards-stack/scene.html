@@ -1,0 +1,43 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--paper-shade); }
+    #root .card { position: absolute; left: 50%; width: 760px; height: 190px; margin-left: -380px; border-radius: 18px; display: flex; align-items: center; gap: 30px; padding: 0 44px; }
+    #root .card .n { font-family: var(--font-mono); font-size: 34px; color: var(--accent); }
+    #root .card .x { font-family: var(--font-serif); font-size: 58px; color: #1a1714; letter-spacing: -0.02em; }
+    #root .card.orange .x, #root .card.orange .n { color: #fff; }
+    #root .tape { left: 50%; margin-left: -90px; transform: rotate(-4deg); z-index: 3; }
+  </style>
+  <div id="root" data-composition-id="paper-cards-stack" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="stage layer grain" data-palette="paper">
+      <div class="cap"><div class="headline t"></div></div>
+      <div class="list"></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('paper-cards-stack', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      const items = String(v.items).split(/\s*\|\s*/).filter(Boolean).slice(0, 5);
+      const top0 = S.fmt.safe.top + (S.fmt.portrait ? 300 : 160), step = S.fmt.portrait ? 215 : 160;
+      const r = S.rng(4);
+      const cards = items.map((txt, i) => {
+        const d = document.createElement('div'); d.className = 'card paper' + (i === items.length - 1 ? ' orange' : '');
+        d.innerHTML = `<span class="n">0${i + 1}</span><span class="x"></span>`;
+        d.querySelector('.x').textContent = txt;
+        d.style.top = top0 + i * step + 'px';
+        d.dataset.rot = ((r() - 0.5) * 5).toFixed(2);
+        $('.list').appendChild(d); return d;
+      });
+      const tape = document.createElement('div'); tape.className = 'print-tape tape'; tape.style.top = top0 - 26 + 'px'; $('.list').appendChild(tape);
+      S.rich($('.t'), v.title);
+      S.a.charsDrop(tl, S.chars($('.t')), 0.05, { stagger: 0.02 });
+      S.print.drop(tl, cards, 0.35, { stagger: 0.2, dur: 0.7 });
+      tl.fromTo(tape, { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.3, ease: 'power2.out' }, 0.35 + cards.length * 0.2);
+      S.tx.out(c, $('.stage'), 'paper');
+      c.done();
+    });
+  })();
+  </script>
+</template>

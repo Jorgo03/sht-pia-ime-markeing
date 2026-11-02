@@ -1,0 +1,27 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: visible; pointer-events: none; }
+  </style>
+  <div id="root" data-composition-id="th-captions" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="caps layer"></div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('th-captions', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      // Word timings in FILM seconds: the project's transcript (storyboard
+      // captions.words → STUDIO_DATA.words), else an even read of `text` for previews.
+      let words = (window.STUDIO_DATA && window.STUDIO_DATA.words) || null;
+      if (!words || !words.length) {
+        const toks = String(v.text).split(/\s+/).filter(Boolean); const rate = 1 / 2.6;
+        words = toks.map((w, i) => ({ text: w, start: v.start + 0.2 + i * rate, end: v.start + 0.2 + (i + 0.85) * rate }));
+      }
+      words = words.filter((w) => w.start >= v.start - 0.05 && w.start < v.start + c.dur);
+      const keys = String(v.keywords).split(/\s*,\s*/).filter(Boolean);
+      S.th.captions(c, $('.caps'), words, { max: v.groupSize, offset: v.start, keywords: keys, size: v.size });
+      c.done();
+    });
+  })();
+  </script>
+</template>

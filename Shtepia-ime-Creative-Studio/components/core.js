@@ -184,9 +184,12 @@
     // JSON-typed variables (lists of cards, stats…) arrive as strings.
     for (const [k, x] of Object.entries(v)) if (typeof x === 'string' && /^\s*[[{]/.test(x)) { try { v[k] = JSON.parse(x); } catch { /* plain text */ } }
     const tl = gsap.timeline({ paused: true });
+    // HyperFrames leaves empty-string defaults out of getVariables(): a
+    // missing variable reads as '' instead of undefined.
+    const vp = new Proxy(v, { get: (o, k) => (k in o ? o[k] : typeof k === 'string' ? '' : undefined) });
     const ctx = {
-      id, el, $, $$, v, tl,
-      get dur() { return v.duration; },
+      id, el, $, $$, v: vp, tl,
+      get dur() { return +v.duration || 3; },
       // When exits start: the last ~0.35 s of the slot (or `out: none`).
       get outAt() { return Math.max(0.2, v.duration - (v.outLen || 0.4)); },
       // Apply a palette to this scene only (night/paper/orange/navy/mono).

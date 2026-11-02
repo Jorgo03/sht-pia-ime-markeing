@@ -1,0 +1,15 @@
+{
+  "id": "paper-key-unlock",
+  "name": "Paper key unlocks",
+  "mode": "print",
+  "technique": "A paper lock plate drops, a cut-paper key slides into the keyhole on an expo ease, turns (a scaleY flip reads as a quarter turn in flat paper) and warm light bursts out — the 'keys to your home' moment.",
+  "duration": 2.8,
+  "in": "none",
+  "out": "zoom-in",
+  "vars": {
+    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Çelësat e *shtëpisë së re.*" },
+    "footer": { "type": "string", "label": "Footer", "default": "Gjeje në Shtëpia.ime" }
+  },
+  "sfx": [{ "id": "paper-drop", "at": 0.15, "volume": 0.5 }, { "id": "whoosh-paper", "at": 0.35, "volume": 0.4 }, { "id": "stamp", "at": 1.3, "volume": 0.5 }, { "id": "impact-soft", "at": 1.45, "volume": 0.4 }],
+  "tags": ["print", "key", "payoff"]
+}

@@ -1,0 +1,25 @@
+{
+  "id": "tx-door-iris",
+  "name": "Doorway iris (overlay)",
+  "mode": "kinetic-typography",
+  "technique": "Overlay transition shaped like an arched doorway (evenodd clip-path path): the ground closes in through a shrinking door until the frame is covered, then the door opens again onto the next scene.",
+  "duration": 1.0,
+  "in": "none",
+  "out": "none",
+  "overlay": true,
+  "vars": {},
+  "sfx": [
+    {
+      "id": "whoosh-deep",
+      "at": 0.1,
+      "volume": 0.45
+    }
+  ],
+  "tags": [
+    "transition",
+    "overlay",
+    "door",
+    "iris"
+  ],
+  "previewAt": 0.35
+}

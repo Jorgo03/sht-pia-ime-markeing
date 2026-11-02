@@ -4,11 +4,12 @@
     #root .stage { background: var(--ground); }
     #root .word { position: absolute; left: 0; right: 0; top: 50%; height: 0; }
     #root .half { position: absolute; left: 0; right: 0; text-align: center; overflow: hidden; }
-    #root .half .display { display: block; text-transform: uppercase; white-space: nowrap; }
+    #root .half .display { position: absolute; left: 0; right: 0; display: block; text-transform: uppercase; white-space: nowrap; line-height: 1; }
+    /* Both halves hold the whole word, centred on the seam; each mask shows one half. */
     #root .top { bottom: 0; height: var(--hh); }
-    #root .top .display { transform: translateY(50%); }
+    #root .top .display { bottom: 0; transform: translateY(42%); }
     #root .bot { top: 0; height: var(--hh); }
-    #root .bot .display { transform: translateY(-50%); }
+    #root .bot .display { top: 0; transform: translateY(-58%); }
     #root .seam { position: absolute; left: var(--safe-left); right: var(--safe-left); top: 50%; height: 4px; margin-top: -2px; background: var(--accent); }
     #root .sub { position: absolute; left: var(--cap-x); right: var(--cap-x); top: 50%; text-align: center; opacity: 0; }
     #root .sub .headline { font-size: 64px; }
@@ -32,7 +33,7 @@
       const width = S.fmt.W - 2 * S.fmt.safe.left;
       const fs = S.fit($('.d1'), { maxWidth: width, max: 420 });
       $('.d2').style.fontSize = fs + 'px';
-      $('.word').style.setProperty('--hh', fs * 0.5 + 'px');
+      $('.word').style.setProperty('--hh', fs * 0.6 + 'px');
       $('.d1').style.color = 'var(--ink)'; $('.d2').style.color = 'var(--accent)';
       S.rich($('.s'), v.inside);
       // The seam draws, the word closes from both halves, then splits open

@@ -22,7 +22,7 @@
     S.ready(() => {
       const D = S.d3;
       const plane = D.plane($('.cam'), { size: 2400, tiltX: 58, rotZ: -38 });
-      const blocks = D.city(plane, { n: 8, cell: 180, seed: v.seed, maxH: 560, size: 2400 });
+      const blocks = D.city(plane, { n: 8, cell: 180, seed: v.seed, maxH: 380, size: 2400 });
       $('.k').textContent = v.kicker;
       S.rich($('.t'), v.title);
       $('.tagpin').textContent = v.pin;

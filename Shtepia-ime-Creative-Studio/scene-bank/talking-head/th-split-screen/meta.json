@@ -1,0 +1,20 @@
+{
+  "id": "th-split-screen",
+  "name": "Split screen: speaker + app",
+  "mode": "talking-head",
+  "technique": "Half of the frame slides in over the speaker's footage (bottom half in 9:16, right half in 16:9) with an accent divider, carrying a phone with a real screen that zooms to the feature the speaker names. Pair with storyboard footage rect {top:0,height:'50%'}.",
+  "duration": 4.0,
+  "in": "none",
+  "out": "none",
+  "overlay": true,
+  "vars": {
+    "screen": { "type": "screen", "label": "Screen", "default": "map" },
+    "region": { "type": "string", "label": "Zoom to region (optional)", "default": "clusterTirana" },
+    "tag": { "type": "string", "label": "Tag", "default": "Harta e pronave" },
+    "theme": { "type": "enum", "label": "App theme", "default": "light", "options": ["light", "dark"] }
+  },
+  "screens": true,
+  "features": ["map-view"],
+  "sfx": [{ "id": "whoosh-air", "at": 0.0, "volume": 0.4 }],
+  "tags": ["talking-head", "split-screen", "ui"]
+}

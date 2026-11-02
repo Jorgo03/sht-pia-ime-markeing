@@ -1,0 +1,24 @@
+{
+  "id": "tx-orange-wipe",
+  "name": "Orange band wipe (overlay)",
+  "mode": "kinetic-typography",
+  "technique": "Overlay transition: three skewed bands (accent, deep accent, ground) sweep across in sequence, covering the frame at the slot's midpoint. Place it over a seam with \"overlap\" so the cut underneath happens while the frame is covered.",
+  "duration": 0.8,
+  "in": "none",
+  "out": "none",
+  "overlay": true,
+  "vars": {},
+  "sfx": [
+    {
+      "id": "whoosh-air",
+      "at": 0.15,
+      "volume": 0.5
+    }
+  ],
+  "tags": [
+    "transition",
+    "overlay",
+    "wipe"
+  ],
+  "previewAt": 0.35
+}
