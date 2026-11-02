@@ -322,7 +322,9 @@ async function textAudit(projectDir, dur, fmt) {
           const portrait = H > W * 1.3;
           const underRail = portrait && b.right > safe.right + 4 && b.bottom > H * 0.45 && b.top < safe.bottom;
           const inSafe = b.top >= safe.top - 4 && b.bottom <= safe.bottom + 4 && b.left >= safe.left - 4 && b.right <= W - safe.left + 4 && !underRail;
-          out.push({ text: txt.slice(0, 40), rect: [b.left, b.top, b.right, b.bottom].map(Math.round), h: Math.round(rb.height), inSafe, decor: ui });
+          // Per-line boxes: a phrase that wraps has one rect per line (its union box would overlap its neighbours).
+          const lines = Array.from(r.getClientRects()).filter((q) => q.width > 1 && q.height > 1).map((q) => [q.left, q.top, q.right, q.bottom].map(Math.round));
+          out.push({ text: txt.slice(0, 40), rect: [b.left, b.top, b.right, b.bottom].map(Math.round), lines, h: Math.round(rb.height), inSafe, decor: ui });
         }
         return out;
       }, { safe: fmt.safe, W: fmt.width, H: fmt.height });
@@ -330,11 +332,14 @@ async function textAudit(projectDir, dur, fmt) {
       // Text-on-text collisions between different lines in this sample.
       const live = found.filter((f) => !f.decor);
       for (let i = 0; i < live.length; i++) for (let j = i + 1; j < live.length; j++) {
-        const [a, b] = [live[i].rect, live[j].rect];
-        const ix = Math.min(a[2], b[2]) - Math.max(a[0], b[0]), iy = Math.min(a[3], b[3]) - Math.max(a[1], b[1]);
-        if (ix <= 0 || iy <= 0) continue;
-        const small = Math.min((a[2] - a[0]) * (a[3] - a[1]), (b[2] - b[0]) * (b[3] - b[1]));
-        if (ix * iy > 0.2 * small) collisions.push({ t, a: live[i].text, b: live[j].text });
+        let hit = false;
+        for (const a of live[i].lines.length ? live[i].lines : [live[i].rect]) for (const b of live[j].lines.length ? live[j].lines : [live[j].rect]) {
+          const ix = Math.min(a[2], b[2]) - Math.max(a[0], b[0]), iy = Math.min(a[3], b[3]) - Math.max(a[1], b[1]);
+          if (ix <= 0 || iy <= 0) continue;
+          const small = Math.min((a[2] - a[0]) * (a[3] - a[1]), (b[2] - b[0]) * (b[3] - b[1]));
+          if (ix * iy > 0.2 * small) hit = true;
+        }
+        if (hit) collisions.push({ t, a: live[i].text, b: live[j].text });
       }
     }
     // Keep collisions that persist across two consecutive samples.
