@@ -30,18 +30,17 @@
     const { tl, v, $ } = c;
     S.ready(() => {
       $('.d1').textContent = v.word; $('.d2').textContent = v.word;
-      const width = S.fmt.W - 2 * S.fmt.safe.left;
+      const width = S.fmt.W - 2 * Math.max(S.fmt.safe.left, S.fmt.W - S.fmt.safe.right);
       const fs = S.fit($('.d1'), { maxWidth: width, max: 420 });
       $('.d2').style.fontSize = fs + 'px';
       $('.word').style.setProperty('--hh', fs * 0.6 + 'px');
       $('.d1').style.color = 'var(--ink)'; $('.d2').style.color = 'var(--accent)';
       S.rich($('.s'), v.inside);
-      // The seam draws, the word closes from both halves, then splits open
-      // vertically to reveal the line hidden inside it.
-      S.a.rule(tl, $('.seam'), 0.0, { dur: 0.4 });
-      tl.fromTo($('.top'), { yPercent: -60, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, 0.15);
-      tl.fromTo($('.bot'), { yPercent: 60, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, 0.15);
-      const open = 1.25;
+      // Frame 0 already shows the closed word on its seam (it is the thumbnail);
+      // the word settles, then splits apart to reveal the line inside it.
+      tl.fromTo($('.word'), { scale: 1.06 }, { scale: 1, duration: 0.8, ease: 'expo.out' }, 0);
+      tl.fromTo($('.seam'), { scaleX: 1 }, { scaleX: 1, duration: 0.01 }, 0);
+      const open = 0.85;
       tl.to($('.top'), { y: -fs * 0.55, duration: 0.6, ease: 'power3.inOut' }, open);
       tl.to($('.bot'), { y: fs * 0.55, duration: 0.6, ease: 'power3.inOut' }, open);
       tl.to($('.seam'), { scaleX: 0, duration: 0.3, ease: 'power3.in' }, open);

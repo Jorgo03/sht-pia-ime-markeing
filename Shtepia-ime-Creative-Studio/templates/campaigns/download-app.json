@@ -1,0 +1,62 @@
+{
+  "template": "download-app",
+  "id": "download-app",
+  "title": {
+    "sq": "Shkarko aplikacionin",
+    "en": "Download the app",
+    "it": "Scarica l'app"
+  },
+  "brief": "12 s, short CTA. Confirm store availability before adding store names.",
+  "modes": [
+    "ui-motion",
+    "kinetic-typography"
+  ],
+  "targetDuration": 12,
+  "language": "sq",
+  "format": "reel",
+  "palette": "night",
+  "voice": {
+    "provider": "none"
+  },
+  "audio": {
+    "music": {
+      "bed": "bright",
+      "bpm": 120
+    }
+  },
+  "features": [],
+  "scenes": [
+    {
+      "scene": "phone-trio-fan",
+      "duration": 3.2
+    },
+    {
+      "scene": "ui-screens-wall",
+      "duration": 3.0
+    },
+    {
+      "scene": "cta-app-icon",
+      "duration": 3.0,
+      "payoff": true
+    },
+    {
+      "scene": "cta-type-handle",
+      "duration": 2.8
+    }
+  ],
+  "caption": {
+    "sq": "Gjej shtëpinë tënde me Shtëpia.ime. Linku në bio. 📲",
+    "en": "Find your home with Shtëpia.ime. Link in bio. 📲",
+    "it": "Trova casa con Shtëpia.ime. Link in bio. 📲"
+  },
+  "hashtags": [
+    "shtepiaime",
+    "shtepi",
+    "pronatshqiperi",
+    "tirana",
+    "albania",
+    "realestate",
+    "app",
+    "download"
+  ]
+}

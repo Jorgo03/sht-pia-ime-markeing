@@ -1,0 +1,97 @@
+{
+  "template": "new-feature-spotlight",
+  "id": "new-feature-spotlight",
+  "title": {
+    "sq": "Veçori e re",
+    "en": "New feature spotlight",
+    "it": "Nuova funzione"
+  },
+  "brief": "15 s, UI. One live feature, deep-dived on its real screen (default: location map + similar listings on the detail page).",
+  "modes": [
+    "ui-motion"
+  ],
+  "targetDuration": 15,
+  "language": "sq",
+  "format": "reel",
+  "palette": "night",
+  "voice": {
+    "provider": "none"
+  },
+  "audio": {
+    "music": {
+      "bed": "warm",
+      "bpm": 104
+    }
+  },
+  "features": [],
+  "scenes": [
+    {
+      "scene": "ui-zoom-through-search",
+      "duration": 2.6,
+      "vars": {
+        "line": {
+          "sq": "E re në *Shtëpia.ime.*",
+          "en": "New in *Shtëpia.ime.*",
+          "it": "Novità in *Shtëpia.ime.*"
+        }
+      }
+    },
+    {
+      "scene": "feature-spotlight",
+      "duration": 3.4,
+      "vars": {
+        "screen": "detail-1-scrolled",
+        "region": "location",
+        "title": {
+          "sq": "Vendndodhja *e saktë.*",
+          "en": "The *exact* location.",
+          "it": "La posizione *esatta.*"
+        },
+        "kicker": {
+          "sq": "Në çdo pronë",
+          "en": "On every listing",
+          "it": "In ogni annuncio"
+        },
+        "scale": 1.15,
+        "lift": -20
+      }
+    },
+    {
+      "scene": "feature-spotlight",
+      "duration": 3.4,
+      "vars": {
+        "screen": "detail-1-scrolled",
+        "region": "similar",
+        "title": {
+          "sq": "Prona *të ngjashme.*",
+          "en": "Similar *homes.*",
+          "it": "Immobili *simili.*"
+        },
+        "kicker": {
+          "sq": "Një prekje larg",
+          "en": "One tap away",
+          "it": "A un tocco"
+        }
+      }
+    },
+    {
+      "scene": "outro-lockup-tagline",
+      "duration": 5.6,
+      "payoff": true
+    }
+  ],
+  "caption": {
+    "sq": "Çdo pronë tani tregon vendndodhjen në hartë dhe prona të ngjashme.",
+    "en": "Every listing shows its location on a map — and similar homes.",
+    "it": "Ogni annuncio mostra la posizione sulla mappa — e immobili simili."
+  },
+  "hashtags": [
+    "shtepiaime",
+    "shtepi",
+    "pronatshqiperi",
+    "tirana",
+    "albania",
+    "realestate",
+    "newfeature"
+  ]
+}

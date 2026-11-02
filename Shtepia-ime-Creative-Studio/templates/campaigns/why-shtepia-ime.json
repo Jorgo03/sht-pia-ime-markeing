@@ -1,0 +1,85 @@
+{
+  "template": "why-shtepia-ime",
+  "id": "why-shtepia-ime",
+  "title": {
+    "sq": "Pse Shtëpia.ime?",
+    "en": "Why Shtëpia.ime?",
+    "it": "Perché Shtëpia.ime?"
+  },
+  "brief": "15 s, typography only. Benefits as type, no screens.",
+  "modes": [
+    "kinetic-typography"
+  ],
+  "targetDuration": 15,
+  "language": "sq",
+  "format": "reel",
+  "palette": "night",
+  "voice": {
+    "provider": "none"
+  },
+  "audio": {
+    "music": {
+      "bed": "bright",
+      "bpm": 118
+    }
+  },
+  "features": [],
+  "scenes": [
+    {
+      "scene": "type-split-word",
+      "duration": 3.2,
+      "vars": {
+        "inside": {
+          "sq": "fillon me *një kërkim.*",
+          "en": "starts with *one search.*",
+          "it": "inizia con *una ricerca.*"
+        }
+      }
+    },
+    {
+      "scene": "type-stack-poster",
+      "duration": 2.2,
+      "palette": "orange",
+      "vars": {
+        "lines": {
+          "sq": "Shitje|*&*|qira",
+          "en": "Sale|*&*|rent",
+          "it": "Vendita|*&*|affitto"
+        }
+      }
+    },
+    {
+      "scene": "type-highlighter",
+      "duration": 3.0,
+      "vars": {
+        "text": {
+          "sq": "[Shitje] dhe [qira], me [foto dhe hartë].",
+          "en": "[Sale] and [rent], with [photos and a map].",
+          "it": "[Vendita] e [affitto], con [foto e mappa]."
+        }
+      }
+    },
+    {
+      "scene": "feature-languages",
+      "duration": 3.6
+    },
+    {
+      "scene": "logo-flood-stacked",
+      "duration": 3.0,
+      "payoff": true
+    }
+  ],
+  "caption": {
+    "sq": "Shitje dhe qira, harta dhe 8 gjuhë. Pse Shtëpia.ime? Sepse shtëpia jote meriton më shumë se një kërkim i lodhshëm.",
+    "en": "Sale and rent, a map and 8 languages. Why Shtëpia.ime? Because your home deserves a better search.",
+    "it": "Vendita e affitto, mappa e 8 lingue. Perché Shtëpia.ime? Perché la tua casa merita una ricerca migliore."
+  },
+  "hashtags": [
+    "shtepiaime",
+    "shtepi",
+    "pronatshqiperi",
+    "tirana",
+    "albania",
+    "realestate"
+  ]
+}

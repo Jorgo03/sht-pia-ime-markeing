@@ -27,11 +27,13 @@
     S.ready(() => {
       $('.handle').textContent = v.handle;
       const H = S.fmt.H, W = S.fmt.W;
-      tl.fromTo($('.orb'), { scale: 0.2, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: 'expo.out' }, 0.05);
-      tl.fromTo($('.halo'), { scale: 0.2, opacity: 0 }, { scale: 1, opacity: 0.8, duration: 1.4, ease: 'power2.out' }, 0.1);
+      // Designed for 3.8 s; every time below scales to the slot it is given.
+      const k = Math.min(1.2, c.dur / 3.8), T = (x) => +(x * k).toFixed(3);
+      tl.fromTo($('.orb'), { scale: 0.2, opacity: 0 }, { scale: 1, opacity: 1, duration: T(0.5), ease: 'expo.out' }, T(0.05));
+      tl.fromTo($('.halo'), { scale: 0.2, opacity: 0 }, { scale: 1, opacity: 0.8, duration: T(1.4), ease: 'power2.out' }, T(0.1));
       // Pull back from the knob: the symbol starts huge around its knob hole.
-      tl.fromTo($('.mark'), { scale: 14, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.5, ease: 'expo.inOut' }, 0.45);
-      tl.to($('.orb'), { opacity: 0, duration: 0.3 }, 1.4);
+      tl.fromTo($('.mark'), { scale: 14, opacity: 0 }, { scale: 1, opacity: 1, duration: T(1.5), ease: 'expo.inOut' }, T(0.45));
+      tl.to($('.orb'), { opacity: 0, duration: T(0.3) }, T(1.4));
       // Then the symbol glides onto the door of the official horizontal lockup
       // and hands over to it: the logo is never rearranged, only revealed.
       const lockW = 620, lockH = lockW * 256 / 1027.61;           // lockup viewBox 1027.61 x 256
@@ -42,14 +44,14 @@
       const ox = markLeft + 165.3, oy = markTop + 191.1;          // transform origin (knob)
       const cx = ox + (markLeft + 150 - ox) * s, cy = oy + (markTop + 150 - oy) * s;
       const tx = lockLeft + doorBox / 2 - cx, ty = lockTop + doorBox / 2 - cy;
-      tl.to($('.mark'), { scale: s, x: tx, y: ty, duration: 0.75, ease: 'power3.inOut' }, 2.0);
-      tl.to($('.halo'), { opacity: 0.35, duration: 0.75 }, 2.0);
-      tl.set($('.name'), { opacity: 1 }, 2.75);
-      tl.set($('.mark'), { opacity: 0 }, 2.75);
-      tl.fromTo($('.name'), { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 0.01 }, 2.74);
+      tl.to($('.mark'), { scale: s, x: tx, y: ty, duration: T(0.75), ease: 'power3.inOut' }, T(2.0));
+      tl.to($('.halo'), { opacity: 0.35, duration: T(0.75) }, T(2.0));
+      tl.set($('.name'), { opacity: 1 }, T(2.75));
+      tl.set($('.mark'), { opacity: 0 }, T(2.75));
+      tl.fromTo($('.name'), { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: T(0.01) }, T(2.74));
       // The name sweeps in from behind the door (mask grows left to right).
-      tl.fromTo($('.lk'), { clipPath: 'inset(0 75% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 0.6, ease: 'expo.out' }, 2.75);
-      S.a.blurIn(tl, $('.handle'), 3.1);
+      tl.fromTo($('.lk'), { clipPath: 'inset(0 75% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: T(0.6), ease: 'expo.out' }, T(2.75));
+      S.a.blurIn(tl, $('.handle'), T(3.1));
       S.tx.out(c, $('.stage'), 'none');
       c.done();
     });

@@ -1,0 +1,40 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: radial-gradient(ellipse at 50% 55%, var(--ground2), var(--ground) 70%); }
+    #root .world { perspective: 2600px; perspective-origin: 50% 35%; }
+    #root .cam { position: absolute; inset: 0; transform-style: preserve-3d; }
+    #root .cap { position: absolute; left: var(--safe-left); right: calc(var(--W) - var(--safe-right)); top: calc(var(--safe-top) + 10px); text-align: center; z-index: 5; }
+    #root .cap .headline { font-size: 88px; }
+    #root .tagpin { position: absolute; left: 50%; top: 50%; z-index: 6; }
+  </style>
+  <div data-hf-id="hf-o7es" id="root" data-composition-id="s03-city-iso-rise" data-width="1080" data-height="1920" data-composition-variables='[{"id":"duration","type":"number","label":"Duration (s)","default":3.4,"min":0.5,"max":600,"step":0.1},{"id":"start","type":"number","label":"Start in film (s, set by the builder)","default":0,"min":0,"max":3600,"step":0.01},{"id":"in","type":"enum","label":"Transition in","default":"zoom-out","options":[{"value":"auto","label":"auto"},{"value":"none","label":"none"},{"value":"blur","label":"blur"},{"value":"whip-left","label":"whip-left"},{"value":"whip-right","label":"whip-right"},{"value":"whip-up","label":"whip-up"},{"value":"zoom-in","label":"zoom-in"},{"value":"zoom-out","label":"zoom-out"},{"value":"iris","label":"iris"},{"value":"slide-up","label":"slide-up"},{"value":"shutter","label":"shutter"},{"value":"paper","label":"paper"},{"value":"flood","label":"flood"},{"value":"dip","label":"dip"}]},{"id":"out","type":"enum","label":"Transition out","default":"zoom-in","options":[{"value":"auto","label":"auto"},{"value":"none","label":"none"},{"value":"blur","label":"blur"},{"value":"whip-left","label":"whip-left"},{"value":"whip-right","label":"whip-right"},{"value":"whip-up","label":"whip-up"},{"value":"zoom-in","label":"zoom-in"},{"value":"zoom-out","label":"zoom-out"},{"value":"iris","label":"iris"},{"value":"slide-up","label":"slide-up"},{"value":"shutter","label":"shutter"},{"value":"paper","label":"paper"},{"value":"dip","label":"dip"}]},{"id":"palette","type":"enum","label":"Palette","default":"","options":[{"value":"","label":"(scene default)"},{"value":"night","label":"night"},{"value":"paper","label":"paper"},{"value":"orange","label":"orange"},{"value":"navy","label":"navy"},{"value":"mono","label":"mono"}]},{"id":"kicker","type":"string","label":"Kicker","default":"Tiranë"},{"id":"title","type":"string","label":"Headline (*accent*)","default":"Qyteti yt, *në një vend.*"},{"id":"pin","type":"string","label":"Pin label","default":"Blloku"},{"id":"seed","type":"number","label":"City seed","default":11,"min":1,"max":999,"step":1}]'>
+    <div data-hf-id="hf-jx4t" class="stage layer">
+      <div data-hf-id="hf-n1vw" class="world"><div data-hf-id="hf-12x1" class="cam"></div></div>
+      <div data-hf-id="hf-2mgg" class="cap"><div data-hf-id="hf-kqmg" class="kicker k"></div><div data-hf-id="hf-g5r0" class="headline t"></div></div>
+      <div data-hf-id="hf-q3yb" class="d3-label tagpin"></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('s03-city-iso-rise', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      const D = S.d3;
+      const plane = D.plane($('.cam'), { size: 2400, tiltX: 58, rotZ: -38 });
+      const blocks = D.city(plane, { n: 8, cell: 180, seed: v.seed, maxH: 380, size: 2400 });
+      $('.k').textContent = v.kicker;
+      S.rich($('.t'), v.title);
+      $('.tagpin').textContent = v.pin;
+      gsap.set($('.cam'), { y: S.fmt.portrait ? 200 : 60, scale: S.fmt.portrait ? 0.95 : 0.75 });
+      D.rise(tl, blocks, 0.1, { stagger: 0.012, dur: 0.9 });
+      tl.fromTo(plane, { rotationZ: -60, rotationX: 62 }, { rotationZ: -30, rotationX: 56, duration: c.dur, ease: 'power1.inOut' }, 0);
+      S.a.blurIn(tl, $('.k'), 0.3);
+      S.a.wordsBlur(tl, S.words($('.t')), 0.45);
+      tl.fromTo($('.tagpin'), { y: -60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'back.out(2)' }, 1.3);
+      S.tx.out(c, $('.stage'), 'zoom-in');
+      c.done();
+    });
+  })();
+  </script>
+</template>

@@ -7,9 +7,36 @@
   "in": "none",
   "out": "blur",
   "vars": {
-    "text": { "type": "string", "label": "Text ([brackets] = highlighted)", "default": "Gjej [shitje] dhe [qira] në gjithë Shqipërinë — me [foto, hartë dhe çmim] në një vend." }
+    "text": {
+      "type": "string",
+      "label": "Text ([brackets] = highlighted)",
+      "default": "[Shitje] dhe [qira], me [foto dhe hartë]."
+    }
   },
-  "features": ["listing-type", "map-view"],
-  "sfx": [{ "id": "whoosh-paper", "at": 0.5, "volume": 0.25 }, { "id": "whoosh-paper", "at": 1.05, "volume": 0.25 }, { "id": "whoosh-paper", "at": 1.6, "volume": 0.25 }],
-  "tags": ["typography", "highlight", "sentence"]
+  "features": [
+    "listing-type",
+    "map-view"
+  ],
+  "sfx": [
+    {
+      "id": "whoosh-paper",
+      "at": 0.5,
+      "volume": 0.25
+    },
+    {
+      "id": "whoosh-paper",
+      "at": 1.05,
+      "volume": 0.25
+    },
+    {
+      "id": "whoosh-paper",
+      "at": 1.6,
+      "volume": 0.25
+    }
+  ],
+  "tags": [
+    "typography",
+    "highlight",
+    "sentence"
+  ]
 }

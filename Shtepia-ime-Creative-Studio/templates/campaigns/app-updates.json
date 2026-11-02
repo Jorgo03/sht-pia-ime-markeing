@@ -1,0 +1,79 @@
+{
+  "template": "app-updates",
+  "id": "app-updates",
+  "title": {
+    "sq": "Përditësimet e aplikacionit",
+    "en": "App updates",
+    "it": "Aggiornamenti dell'app"
+  },
+  "brief": "15 s, UI. Changelog style: dark mode + languages. Swap scenes for what actually shipped.",
+  "modes": [
+    "ui-motion",
+    "kinetic-typography"
+  ],
+  "targetDuration": 15,
+  "language": "sq",
+  "format": "reel",
+  "palette": "night",
+  "voice": {
+    "provider": "none"
+  },
+  "audio": {
+    "music": {
+      "bed": "bright",
+      "bpm": 108
+    }
+  },
+  "features": [],
+  "scenes": [
+    {
+      "scene": "type-mask-lines",
+      "duration": 3.0,
+      "vars": {
+        "kicker": {
+          "sq": "Çfarë ka të re",
+          "en": "What's new",
+          "it": "Novità"
+        },
+        "title": {
+          "sq": "Shtëpia.ime,|*më e mirë.*",
+          "en": "Shtëpia.ime,|*even better.*",
+          "it": "Shtëpia.ime,|*ancora meglio.*"
+        },
+        "body": {
+          "sq": "Disa përmirësime që i pret.",
+          "en": "A few improvements you asked for.",
+          "it": "Alcuni miglioramenti che aspettavi."
+        }
+      }
+    },
+    {
+      "scene": "feature-dark-mode",
+      "duration": 3.0
+    },
+    {
+      "scene": "feature-languages",
+      "duration": 4.2
+    },
+    {
+      "scene": "outro-lockup-tagline",
+      "duration": 4.8,
+      "payoff": true
+    }
+  ],
+  "caption": {
+    "sq": "Modaliteti i errët dhe 8 gjuhë: Shtëpia.ime, ditë e natë.",
+    "en": "Dark mode and 8 languages: Shtëpia.ime, day and night.",
+    "it": "Modalità scura e 8 lingue: Shtëpia.ime, giorno e notte."
+  },
+  "hashtags": [
+    "shtepiaime",
+    "shtepi",
+    "pronatshqiperi",
+    "tirana",
+    "albania",
+    "realestate",
+    "update",
+    "darkmode"
+  ]
+}

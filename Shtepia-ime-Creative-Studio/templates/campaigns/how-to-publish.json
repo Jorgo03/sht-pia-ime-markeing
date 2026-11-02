@@ -1,0 +1,110 @@
+{
+  "template": "how-to-publish",
+  "id": "how-to-publish",
+  "title": {
+    "sq": "Si të publikosh pronën",
+    "en": "How to publish a property",
+    "it": "Come pubblicare un immobile"
+  },
+  "brief": "15 s, print + type. The listing wizard is live but has no screenshots yet, so this film uses no app screens. Capture the wizard to upgrade it.",
+  "modes": [
+    "print",
+    "kinetic-typography"
+  ],
+  "targetDuration": 15,
+  "language": "sq",
+  "format": "reel",
+  "palette": "paper",
+  "voice": {
+    "provider": "none"
+  },
+  "audio": {
+    "music": {
+      "bed": "paper",
+      "bpm": 112
+    }
+  },
+  "features": [
+    "publish-listing",
+    "auto-translate"
+  ],
+  "scenes": [
+    {
+      "scene": "hook-paper-door",
+      "duration": 2.6,
+      "vars": {
+        "title": {
+          "sq": "Ke një pronë për *të shitur?*",
+          "en": "Got a home *to sell?*",
+          "it": "Hai una casa *da vendere?*"
+        }
+      }
+    },
+    {
+      "scene": "paper-cards-stack",
+      "duration": 3.6,
+      "vars": {
+        "title": {
+          "sq": "Publiko *hap pas hapi.*",
+          "en": "Publish *step by step.*",
+          "it": "Pubblica *passo dopo passo.*"
+        },
+        "items": {
+          "sq": "Shto foto|Vendos çmimin|Përshkruaje|Publiko",
+          "en": "Add photos|Set the price|Describe it|Publish",
+          "it": "Aggiungi foto|Imposta il prezzo|Descrivila|Pubblica"
+        }
+      }
+    },
+    {
+      "scene": "type-mask-lines",
+      "duration": 3.4,
+      "vars": {
+        "title": {
+          "sq": "Shpallja jote,|*në 8 gjuhë.*",
+          "en": "Your listing,|*in 8 languages.*",
+          "it": "Il tuo annuncio,|*in 8 lingue.*"
+        },
+        "body": {
+          "sq": "Përkthimi automatik e çon pronën tënde edhe te diaspora.",
+          "en": "Automatic translation takes your listing to the diaspora too.",
+          "it": "La traduzione automatica porta l'annuncio anche alla diaspora."
+        },
+        "kicker": "Shtëpia.ime"
+      }
+    },
+    {
+      "scene": "paper-key-unlock",
+      "duration": 2.8,
+      "vars": {
+        "title": {
+          "sq": "Gati për *blerësin e ri.*",
+          "en": "Ready for *the next owner.*",
+          "it": "Pronta per *il nuovo proprietario.*"
+        }
+      }
+    },
+    {
+      "scene": "outro-lockup-tagline",
+      "duration": 2.6,
+      "payoff": true,
+      "vars": {
+        "ground": "light"
+      }
+    }
+  ],
+  "caption": {
+    "sq": "Publiko pronën tënde në Shtëpia.ime hap pas hapi — dhe arrij blerës në 8 gjuhë.",
+    "en": "Publish your property on Shtëpia.ime step by step — and reach buyers in 8 languages.",
+    "it": "Pubblica il tuo immobile su Shtëpia.ime passo dopo passo — in 8 lingue."
+  },
+  "hashtags": [
+    "shtepiaime",
+    "shtepi",
+    "pronatshqiperi",
+    "tirana",
+    "albania",
+    "realestate",
+    "sellyourhome"
+  ]
+}

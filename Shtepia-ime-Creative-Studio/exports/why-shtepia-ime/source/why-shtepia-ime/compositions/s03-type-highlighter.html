@@ -1,0 +1,29 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--ground); }
+    #root .para { position: absolute; left: var(--safe-left); right: var(--cap-x); top: 50%; transform: translateY(-50%); font-family: var(--font-serif); font-weight: 500; font-size: 84px; line-height: 1.18; letter-spacing: -0.02em; color: var(--ink); }
+    #root .para .hl { color: var(--ink); padding: 0 .08em; }
+  </style>
+  <div data-hf-id="hf-a2ja" id="root" data-composition-id="s03-type-highlighter" data-width="1080" data-height="1920" data-composition-variables='[{"id":"duration","type":"number","label":"Duration (s)","default":2.8,"min":0.5,"max":600,"step":0.1},{"id":"start","type":"number","label":"Start in film (s, set by the builder)","default":0,"min":0,"max":3600,"step":0.01},{"id":"in","type":"enum","label":"Transition in","default":"none","options":[{"value":"auto","label":"auto"},{"value":"none","label":"none"},{"value":"blur","label":"blur"},{"value":"whip-left","label":"whip-left"},{"value":"whip-right","label":"whip-right"},{"value":"whip-up","label":"whip-up"},{"value":"zoom-in","label":"zoom-in"},{"value":"zoom-out","label":"zoom-out"},{"value":"iris","label":"iris"},{"value":"slide-up","label":"slide-up"},{"value":"shutter","label":"shutter"},{"value":"paper","label":"paper"},{"value":"flood","label":"flood"},{"value":"dip","label":"dip"}]},{"id":"out","type":"enum","label":"Transition out","default":"blur","options":[{"value":"auto","label":"auto"},{"value":"none","label":"none"},{"value":"blur","label":"blur"},{"value":"whip-left","label":"whip-left"},{"value":"whip-right","label":"whip-right"},{"value":"whip-up","label":"whip-up"},{"value":"zoom-in","label":"zoom-in"},{"value":"zoom-out","label":"zoom-out"},{"value":"iris","label":"iris"},{"value":"slide-up","label":"slide-up"},{"value":"shutter","label":"shutter"},{"value":"paper","label":"paper"},{"value":"dip","label":"dip"}]},{"id":"palette","type":"enum","label":"Palette","default":"","options":[{"value":"","label":"(scene default)"},{"value":"night","label":"night"},{"value":"paper","label":"paper"},{"value":"orange","label":"orange"},{"value":"navy","label":"navy"},{"value":"mono","label":"mono"}]},{"id":"text","type":"string","label":"Text ([brackets] = highlighted)","default":"[Shitje] dhe [qira], me [foto dhe hartë]."}]'>
+    <div data-hf-id="hf-jx4t" class="stage layer">
+      <div data-hf-id="hf-z4dm" class="para"></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('s03-type-highlighter', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      // "[words]" in the copy get a highlighter band, drawn in order.
+      const para = $('.para');
+      para.innerHTML = String(v.text).replace(/[&<>]/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m])).replace(/\[([^\]]+)\]/g, '<span class="hl">$1</span>');
+      tl.fromTo(para, { opacity: 0, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.25 }, 0.05);
+      const marks = Array.from(para.querySelectorAll('.hl'));
+      marks.forEach((m, i) => S.a.highlight(tl, m, 0.5 + i * 0.55, { dur: 0.45, color: 'rgba(255,125,26,.55)' }));
+      S.tx.out(c, $('.stage'), 'blur');
+      c.done();
+    });
+  })();
+  </script>
+</template>

@@ -1,0 +1,21 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    #root .sheet { position: absolute; left: -5%; right: -5%; top: 0; height: 120%; }
+  </style>
+  <div data-hf-id="hf-1zz6" id="root" data-composition-id="s02-tx-paper-sweep" data-width="1080" data-height="1920" data-composition-variables='[{"id":"duration","type":"number","label":"Duration (s)","default":0.9,"min":0.5,"max":600,"step":0.1},{"id":"start","type":"number","label":"Start in film (s, set by the builder)","default":0,"min":0,"max":3600,"step":0.01},{"id":"in","type":"enum","label":"Transition in","default":"none","options":[{"value":"auto","label":"auto"},{"value":"none","label":"none"},{"value":"blur","label":"blur"},{"value":"whip-left","label":"whip-left"},{"value":"whip-right","label":"whip-right"},{"value":"whip-up","label":"whip-up"},{"value":"zoom-in","label":"zoom-in"},{"value":"zoom-out","label":"zoom-out"},{"value":"iris","label":"iris"},{"value":"slide-up","label":"slide-up"},{"value":"shutter","label":"shutter"},{"value":"paper","label":"paper"},{"value":"flood","label":"flood"},{"value":"dip","label":"dip"}]},{"id":"out","type":"enum","label":"Transition out","default":"none","options":[{"value":"auto","label":"auto"},{"value":"none","label":"none"},{"value":"blur","label":"blur"},{"value":"whip-left","label":"whip-left"},{"value":"whip-right","label":"whip-right"},{"value":"whip-up","label":"whip-up"},{"value":"zoom-in","label":"zoom-in"},{"value":"zoom-out","label":"zoom-out"},{"value":"iris","label":"iris"},{"value":"slide-up","label":"slide-up"},{"value":"shutter","label":"shutter"},{"value":"paper","label":"paper"},{"value":"dip","label":"dip"}]},{"id":"palette","type":"enum","label":"Palette","default":"","options":[{"value":"","label":"(scene default)"},{"value":"night","label":"night"},{"value":"paper","label":"paper"},{"value":"orange","label":"orange"},{"value":"navy","label":"navy"},{"value":"mono","label":"mono"}]}]'>
+    <div data-hf-id="hf-rgst" class="sheet paper" data-palette="paper" style="--lift:40px"></div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('s02-tx-paper-sweep', window.__hyperframes.getVariables());
+    const { tl, $ } = c;
+    const s = $('.sheet'), d = c.dur;
+    S.print.torn(s, { edge: 'top', seed: 21, depth: 3, teeth: 30 });
+    // A paper sheet slides up over the frame (covering it at mid-slot) and on out the top.
+    tl.fromTo(s, { yPercent: 100, rotation: 2 }, { yPercent: -8, rotation: 0, duration: d * 0.5, ease: 'power3.out' }, 0);
+    tl.to(s, { yPercent: -120, rotation: -2, duration: d * 0.45, ease: 'power3.in' }, d * 0.52);
+    c.done();
+  })();
+  </script>
+</template>

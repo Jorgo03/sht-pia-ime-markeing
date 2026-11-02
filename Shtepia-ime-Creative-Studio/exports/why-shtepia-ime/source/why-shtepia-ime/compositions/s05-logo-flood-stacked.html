@@ -1,0 +1,37 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: var(--ground); }
+    #root .flood { position: absolute; inset: -10%; background: var(--accent); }
+    #root .ink { position: absolute; inset: -10%; background: #000; }
+    #root .stack { position: absolute; left: 50%; top: 46%; width: 520px; margin: -260px 0 0 -260px; }
+    #root .stack img { width: 100%; display: block; }
+    #root .line { position: absolute; left: var(--cap-x); right: var(--cap-x); top: 66%; text-align: center; }
+    #root .line .headline { font-size: 64px; color: #fff; }
+  </style>
+  <div data-hf-id="hf-j65t" id="root" data-composition-id="s05-logo-flood-stacked" data-width="1080" data-height="1920" data-composition-variables='[{"id":"duration","type":"number","label":"Duration (s)","default":3,"min":0.5,"max":600,"step":0.1},{"id":"start","type":"number","label":"Start in film (s, set by the builder)","default":0,"min":0,"max":3600,"step":0.01},{"id":"in","type":"enum","label":"Transition in","default":"flood","options":[{"value":"auto","label":"auto"},{"value":"none","label":"none"},{"value":"blur","label":"blur"},{"value":"whip-left","label":"whip-left"},{"value":"whip-right","label":"whip-right"},{"value":"whip-up","label":"whip-up"},{"value":"zoom-in","label":"zoom-in"},{"value":"zoom-out","label":"zoom-out"},{"value":"iris","label":"iris"},{"value":"slide-up","label":"slide-up"},{"value":"shutter","label":"shutter"},{"value":"paper","label":"paper"},{"value":"flood","label":"flood"},{"value":"dip","label":"dip"}]},{"id":"out","type":"enum","label":"Transition out","default":"none","options":[{"value":"auto","label":"auto"},{"value":"none","label":"none"},{"value":"blur","label":"blur"},{"value":"whip-left","label":"whip-left"},{"value":"whip-right","label":"whip-right"},{"value":"whip-up","label":"whip-up"},{"value":"zoom-in","label":"zoom-in"},{"value":"zoom-out","label":"zoom-out"},{"value":"iris","label":"iris"},{"value":"slide-up","label":"slide-up"},{"value":"shutter","label":"shutter"},{"value":"paper","label":"paper"},{"value":"dip","label":"dip"}]},{"id":"palette","type":"enum","label":"Palette","default":"","options":[{"value":"","label":"(scene default)"},{"value":"night","label":"night"},{"value":"paper","label":"paper"},{"value":"orange","label":"orange"},{"value":"navy","label":"navy"},{"value":"mono","label":"mono"}]},{"id":"line","type":"string","label":"Closing line (*accent*)","default":"Shtëpia jote. *Zgjedhja jote.*"}]'>
+    <div data-hf-id="hf-m3p8" class="flood"></div>
+    <div data-hf-id="hf-7kb0" class="ink"></div>
+    <div data-hf-id="hf-d1zs" class="stack"><img data-hf-id="hf-vgsr" src="assets/logos/lockup-stacked-dark.svg" alt="Shtëpia.ime" /></div>
+    <div data-hf-id="hf-np12" class="line"><div data-hf-id="hf-g5r0" class="headline t"></div></div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('s05-logo-flood-stacked', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      S.rich($('.t'), v.line);
+      // Orange floods up from the bottom, then black wipes over it from the
+      // top (the door never sits on orange: the logo appears on black only).
+      tl.fromTo($('.flood'), { yPercent: 100 }, { yPercent: 0, duration: 0.45, ease: 'power3.inOut' }, 0);
+      tl.fromTo($('.ink'), { yPercent: -100 }, { yPercent: 0, duration: 0.5, ease: 'power3.inOut' }, 0.45);
+      tl.fromTo($('.stack'), { scale: 0.92, opacity: 0, filter: 'blur(14px)' }, { scale: 1, opacity: 1, filter: 'blur(0px)', duration: 0.7, ease: 'expo.out' }, 0.95);
+      // Hidden until the logo has landed, then faint → ink word by word.
+      tl.set($('.line'), { opacity: 0 }, 0);
+      tl.set($('.line'), { opacity: 1 }, 1.45);
+      S.a.wordsInk(tl, S.words($('.t')), 1.5, { stagger: 0.09 });
+      S.tx.out(c, $('.stack'), 'none');
+      c.done();
+    });
+  })();
+  </script>
+</template>

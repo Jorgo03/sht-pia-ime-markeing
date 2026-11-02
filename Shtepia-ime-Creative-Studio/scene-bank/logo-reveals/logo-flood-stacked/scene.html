@@ -25,6 +25,9 @@
       tl.fromTo($('.flood'), { yPercent: 100 }, { yPercent: 0, duration: 0.45, ease: 'power3.inOut' }, 0);
       tl.fromTo($('.ink'), { yPercent: -100 }, { yPercent: 0, duration: 0.5, ease: 'power3.inOut' }, 0.45);
       tl.fromTo($('.stack'), { scale: 0.92, opacity: 0, filter: 'blur(14px)' }, { scale: 1, opacity: 1, filter: 'blur(0px)', duration: 0.7, ease: 'expo.out' }, 0.95);
+      // Hidden until the logo has landed, then faint → ink word by word.
+      tl.set($('.line'), { opacity: 0 }, 0);
+      tl.set($('.line'), { opacity: 1 }, 1.45);
       S.a.wordsInk(tl, S.words($('.t')), 1.5, { stagger: 0.09 });
       S.tx.out(c, $('.stack'), 'none');
       c.done();

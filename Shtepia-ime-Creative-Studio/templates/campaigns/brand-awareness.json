@@ -1,0 +1,79 @@
+{
+  "template": "brand-awareness",
+  "id": "brand-awareness",
+  "title": {
+    "sq": "Gjej shtëpinë tënde",
+    "en": "Find your home",
+    "it": "Trova casa tua"
+  },
+  "brief": "15 s, print studio. Warm cut-paper brand film.",
+  "modes": [
+    "print"
+  ],
+  "targetDuration": 15,
+  "language": "sq",
+  "format": "reel",
+  "palette": "paper",
+  "voice": {
+    "provider": "none"
+  },
+  "audio": {
+    "music": {
+      "bed": "paper",
+      "bpm": 112
+    }
+  },
+  "features": [],
+  "scenes": [
+    {
+      "scene": "paper-town-popup",
+      "duration": 3.4,
+      "vars": {
+        "title": {
+          "sq": "Gjej *shtëpinë* tënde",
+          "en": "Find *your* home",
+          "it": "Trova *casa* tua"
+        }
+      }
+    },
+    {
+      "scene": "tx-paper-sweep",
+      "duration": 0.9
+    },
+    {
+      "scene": "map-albania-pins",
+      "duration": 3.2,
+      "palette": "paper"
+    },
+    {
+      "scene": "paper-torn-reveal",
+      "duration": 3.0
+    },
+    {
+      "scene": "paper-key-unlock",
+      "duration": 2.6
+    },
+    {
+      "scene": "outro-lockup-tagline",
+      "duration": 2.8,
+      "payoff": true,
+      "vars": {
+        "ground": "light"
+      }
+    }
+  ],
+  "caption": {
+    "sq": "Çdo shtëpi ka një histori. Gjeje tëndën në Shtëpia.ime.",
+    "en": "Every home has a story. Find yours on Shtëpia.ime.",
+    "it": "Ogni casa ha una storia. Trova la tua su Shtëpia.ime."
+  },
+  "hashtags": [
+    "shtepiaime",
+    "shtepi",
+    "pronatshqiperi",
+    "tirana",
+    "albania",
+    "realestate",
+    "home"
+  ]
+}

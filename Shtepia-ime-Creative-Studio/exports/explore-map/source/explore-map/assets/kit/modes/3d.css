@@ -1,0 +1,33 @@
+/* 3D STUDIO — CSS 3D primitives. A .world holds perspective; .s3 nodes keep
+   preserve-3d so boxes, buildings and phones keep real depth. */
+.world { position: absolute; inset: 0; perspective: 2400px; perspective-origin: 50% 40%; }
+.s3 { position: absolute; transform-style: preserve-3d; }
+.face { position: absolute; left: 0; top: 0; } /* no backface culling: prism faces are oriented both ways; 3D sorting handles depth */
+.box { transform-style: preserve-3d; position: absolute; }
+.bld-win {
+  background-image:
+    repeating-linear-gradient(0deg, transparent 0 18px, rgba(0,0,0,.18) 18px 22px),
+    repeating-linear-gradient(90deg, transparent 0 22px, rgba(0,0,0,.12) 22px 26px);
+}
+.bld-lit {
+  background-image:
+    repeating-linear-gradient(0deg, transparent 0 18px, rgba(255,200,140,.0) 18px 22px),
+    radial-gradient(circle at 30% 20%, rgba(255,190,120,.0), transparent);
+}
+.floor-grid {
+  position: absolute; left: 50%; top: 50%; width: 3200px; height: 3200px; margin: -1600px 0 0 -1600px;
+  background-image:
+    linear-gradient(var(--line) 2px, transparent 2px),
+    linear-gradient(90deg, var(--line) 2px, transparent 2px);
+  background-size: 120px 120px;
+  -webkit-mask-image: radial-gradient(circle, #000 20%, transparent 62%);
+          mask-image: radial-gradient(circle, #000 20%, transparent 62%);
+}
+.d3-phone .d3-screen { overflow: hidden; background: #000; }
+.d3-phone .d3-screen img { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; }
+.d3-label {
+  position: absolute; white-space: nowrap; transform: translate(-50%, -100%);
+  font-family: var(--font-sans), sans-serif; font-weight: 700; font-size: 30px; color: var(--ink);
+  background: var(--surface); padding: 12px 22px; border-radius: 999px; box-shadow: 0 14px 30px rgba(0,0,0,.35);
+}
+.three-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }

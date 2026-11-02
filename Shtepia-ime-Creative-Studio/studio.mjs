@@ -4,25 +4,31 @@
 //   node studio.mjs <command> [args]      (or: npm run studio -- <command>)
 //
 // Commands
-//   init                         check the machine, generate brand.css, the sfx library, previews
+//   init                         check the machine, regenerate brand.css, the sfx library and previews
 //   scenes [--mode m] [--json]   list the scene bank
 //   templates                    list campaign templates
 //   new <template> [--lang sq|en|it] [--format reel] [--id x]   storyboard from a template
 //   plan "<one sentence>"        draft storyboard from a brief (rule-based; Claude refines it)
 //   build <storyboard.json> [--format f]   storyboard -> HyperFrames project in projects/
-//   music <project>              compose an original bed timed to the project's cuts
-//   voice <project>              narration from storyboard.voice (OpenAI / ElevenLabs / file / none)
+//   voices                       narration providers and whether they are configured here
+//   talking-head <video> [--lang sq]  silence cuts + transcript → a storyboard for real footage
 //   check <project>              hyperframes check (lint, runtime, layout, contrast)
 //   snapshot <project> [--at 1,2]  PNG frames + contact sheet
 //   render <project> [--quality draft|delivery] [--format f]
 //   qc <project> [--video file]  quality gates + 0–100 score → QC.md / qc.json
-//   export <project> [--formats reel,square]  final folder in exports/<id>/
-//   video <storyboard|template> [--formats ...]  build → music → check → render → qc → export
+//   export <storyboard|template> [--formats reel,square]  render + QC + final folder in exports/<id>/
+//   video <storyboard|template> [--formats reel,youtube] [--lang en] [--quality draft]
+//                                the whole pipeline: voice → music → build → render → QC → export
 //   previews [--only id,id]      regenerate scene-bank previews
 //   preview-scene <scene-id>     one-scene project you can open in the Studio
 import fs from 'node:fs';
 import path from 'node:path';
-import { KIT, build, registry, brandCss, readJSON, hf, timeline } from './render/build.mjs';
+import { execSync } from 'node:child_process';
+import { KIT, build, registry, brandCss, readJSON, hf, timeline, resolveFormat } from './render/build.mjs';
+import { produce, exportBundle, render as renderProject, projectPath, prepareAudio } from './render/produce.mjs';
+import { qc as runQc } from './quality-control/qc.mjs';
+import { PROVIDERS, available, loadEnv } from './voice-studio/voice.mjs';
+import { planFromBrief, localize } from './render/plan.mjs';
 
 const [, , cmd, ...rest] = process.argv;
 const flags = {}; const args = [];
@@ -39,13 +45,18 @@ const projectDir = (p) => {
   if (!d) die(`no built project at ${p}`);
   return path.resolve(d);
 };
+// A storyboard file, or a campaign template id (localised with --lang).
 const loadStoryboard = (p) => {
-  const file = fs.existsSync(p) ? p : fs.existsSync(path.join(KIT, p)) ? path.join(KIT, p) : null;
-  if (!file) die(`no storyboard at ${p}`);
-  const sb = JSON.parse(fs.readFileSync(file, 'utf8'));
+  const tpl = path.join(KIT, 'templates/campaigns', `${p}.json`);
+  const file = fs.existsSync(p) ? p : fs.existsSync(path.join(KIT, p)) ? path.join(KIT, p) : fs.existsSync(tpl) ? tpl : null;
+  if (!file) die(`no storyboard or template "${p}" (npm run templates lists templates)`);
+  let sb = JSON.parse(fs.readFileSync(file, 'utf8'));
+  if (sb.template || file === tpl) sb = localize(sb, flags.lang || sb.language || 'sq');
+  if (flags.id) sb.id = flags.id;
   sb.__dir = path.dirname(path.resolve(file));
   return sb;
 };
+const formatsFlag = () => (flags.formats ? String(flags.formats).split(',') : flags.format ? [String(flags.format)] : null);
 
 const commands = {
   async brand() {
@@ -123,6 +134,97 @@ const commands = {
       console.log(`contact sheet: ${path.relative(KIT, sheet)}`);
     }
     console.log(`${pngs.length} previews written (scene-bank/<category>/<id>/preview.png)`);
+  },
+
+  async templates() {
+    const dir = path.join(KIT, 'templates/campaigns');
+    for (const f of fs.readdirSync(dir).filter((x) => x.endsWith('.json')).sort()) {
+      const t = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
+      console.log(`  ${t.id.padEnd(24)} ${String(t.targetDuration).padStart(3)}s  ${t.modes.join(' + ').padEnd(34)} ${localize(t, 'en').title}`);
+    }
+  },
+
+  // Storyboard from a template, written to storyboards/<id>.json for editing.
+  async new() {
+    const sb = loadStoryboard(args[0] || die('new <template-id> [--lang sq|en|it] [--id name]'));
+    if (flags.format) sb.format = String(flags.format);
+    if (flags.palette) sb.palette = String(flags.palette);
+    delete sb.__dir;
+    const out = path.join(KIT, 'storyboards', `${sb.id}.json`);
+    fs.mkdirSync(path.dirname(out), { recursive: true });
+    fs.writeFileSync(out, JSON.stringify(sb, null, 2) + '\n');
+    console.log(`storyboards/${sb.id}.json written (${sb.language}, ${sb.scenes.length} scenes). Next: npm run video -- storyboards/${sb.id}.json`);
+  },
+
+  // One sentence -> draft storyboard (rule-based). It never renders: the
+  // draft is for approval (Claude refines the copy and scenes with the person).
+  async plan() {
+    const brief = args.join(' ').trim() || die('plan "<one sentence describing the video>"');
+    const { sb, reasoning } = planFromBrief(brief);
+    const out = path.join(KIT, 'storyboards', `${sb.id}.json`);
+    fs.mkdirSync(path.dirname(out), { recursive: true });
+    fs.writeFileSync(out, JSON.stringify(sb, null, 2) + '\n');
+    console.log(reasoning.map((r) => '  · ' + r).join('\n'));
+    console.log(`\ndraft: storyboards/${sb.id}.json — ${sb.scenes.length} scenes, ${sb.targetDuration}s, ${sb.language}, ${sb.format}`);
+    for (const [i, s] of sb.scenes.entries()) console.log(`  ${String(i + 1).padStart(2)}. ${String(s.duration).padStart(4)}s  ${s.scene}`);
+    console.log('\nReview / edit it, then: npm run video -- storyboards/' + sb.id + '.json');
+  },
+
+  async voices() {
+    loadEnv(KIT);
+    for (const [k, p] of Object.entries(PROVIDERS)) {
+      const a = available(k);
+      console.log(`  ${k.padEnd(11)} ${a.ok ? '✓ ready      ' : '✗ unavailable'} ${p.label} [${p.languages.join(', ')}]${a.ok ? '' : ' — ' + a.why}${p.note ? '\n              ' + p.note : ''}`);
+    }
+  },
+
+  async 'talking-head'() {
+    const { prepareTalkingHead } = await import('./modes/talking-head/prepare.mjs');
+    const r = await prepareTalkingHead(args[0] || die('talking-head <video file> [--lang sq] [--id name]'), { lang: flags.lang || 'sq', id: flags.id, minSilence: flags.silence ? +flags.silence : 0.45 });
+    console.log(`storyboards/${r.id}.json written: ${r.cuts} cuts kept from ${r.source}s → ${r.duration}s; words: ${r.words}`);
+  },
+
+  async qc() {
+    const dir = projectDir(args[0]);
+    const meta = JSON.parse(fs.readFileSync(path.join(dir, 'meta.json'), 'utf8'));
+    const video = flags.video ? path.resolve(String(flags.video)) : path.join(dir, 'renders', `${meta.id}.mp4`);
+    if (!fs.existsSync(video)) die(`no render at ${video} (run: node studio.mjs render ${args[0]})`);
+    const r = await runQc({ projectDir: dir, video });
+    if (!r.final) process.exitCode = 2;
+  },
+
+  // Full pipeline for one storyboard or template.
+  async video() {
+    const sb = loadStoryboard(args[0] || die('video <storyboard.json | template-id> [--formats reel,youtube] [--lang en]'));
+    const results = await produce(sb, { formats: formatsFlag(), quality: flags.quality || 'delivery' });
+    exportBundle(sb, results);
+    const bad = results.filter((r) => r.report && !r.report.final);
+    if (bad.length) { console.log(`\n⚠ not final: ${bad.map((r) => r.format + ' (' + r.report.score + '/100)').join(', ')} — read QC_<format>.md`); process.exitCode = 2; }
+  },
+  async export() { return commands.video(); },
+
+  // A project with one scene, for working on it in the HyperFrames Studio.
+  async 'preview-scene'() {
+    const id = args[0] || die('preview-scene <scene-id>');
+    const m = registry()[id] || die(`no scene "${id}"`);
+    const { dir } = build({ id: `scene--${id}`, title: m.name, format: flags.format || 'reel', duration: m.duration, scenes: [{ scene: id, start: 0 }] }, {});
+    console.log(`open it: cd ${path.relative(process.cwd(), dir)} && npx hyperframes preview`);
+  },
+
+  // Check the machine and (re)generate everything derived.
+  async init() {
+    const ok = (b, m) => console.log(`${b ? '  ✓' : '  ✗'} ${m}`);
+    const [maj] = process.versions.node.split('.').map(Number);
+    ok(maj >= 22, `Node ${process.versions.node} (need ≥ 22)`);
+    let ff = false; try { execSync('ffmpeg -version', { stdio: 'pipe' }); ff = true; } catch { /* missing */ }
+    ok(ff, 'FFmpeg on PATH');
+    ok(fs.existsSync(path.join(KIT, 'node_modules/.bin/hyperframes')), 'hyperframes installed (npm install)');
+    try { hf(['doctor']); ok(true, 'hyperframes doctor: Chrome found'); } catch (e) { ok(/Chrome\s+(system|bundled|✓)/.test(String(e.stdout)), 'hyperframes doctor (see `npx hyperframes doctor`)'); }
+    await commands.brand();
+    execSync('node sound-design/sfx.mjs', { cwd: KIT, stdio: 'inherit' });
+    if (!flags['no-previews']) await commands.previews();
+    await commands.voices();
+    console.log('\nReady. Try:  npm run templates   ·   npm run video -- why-shtepia-ime');
   },
 
   async render() {

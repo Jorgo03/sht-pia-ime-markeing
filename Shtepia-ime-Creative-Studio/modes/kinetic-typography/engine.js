@@ -7,8 +7,10 @@
 
   // A stack of lines, each fitted to the same width (poster headline).
   // lines: ["FIND", "YOUR", "*HOME*"]. Returns the line elements.
-  K.stack = (parent, lines, { width = 900, cls = 'display', max = 420, min = 60, gap = 0 } = {}) => {
+  K.stack = (parent, lines, { width = 900, cls = 'display', max = 420, min = 60, gap = 0, height = null } = {}) => {
     const out = [];
+    // The stack must also fit the safe HEIGHT (line-height ≈ 0.9 em).
+    if (height) max = Math.min(max, Math.floor(height / lines.length / 0.92));
     for (const text of lines) {
       const mask = document.createElement('div'); mask.className = 'line-mask';
       const line = document.createElement('div'); line.className = `line ${cls}`;

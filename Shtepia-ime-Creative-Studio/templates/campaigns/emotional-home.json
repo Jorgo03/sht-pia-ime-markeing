@@ -1,0 +1,104 @@
+{
+  "template": "emotional-home",
+  "id": "emotional-home",
+  "title": {
+    "sq": "Mirë se vjen në shtëpi",
+    "en": "Welcome home",
+    "it": "Benvenuto a casa"
+  },
+  "brief": "25 s, cinematic + paper. Slow, warm, music-led; the app appears once, the feeling carries the rest.",
+  "modes": [
+    "cinematic",
+    "print",
+    "ui-motion"
+  ],
+  "targetDuration": 25,
+  "language": "sq",
+  "format": "reel",
+  "palette": "night",
+  "voice": {
+    "provider": "none"
+  },
+  "audio": {
+    "music": {
+      "bed": "cinematic",
+      "bpm": 80
+    }
+  },
+  "features": [],
+  "scenes": [
+    {
+      "scene": "hook-paper-door",
+      "duration": 2.8,
+      "palette": "paper",
+      "vars": {
+        "title": {
+          "sq": "Çdo derë *ka një histori.*",
+          "en": "Every door *has a story.*",
+          "it": "Ogni porta *ha una storia.*"
+        }
+      }
+    },
+    {
+      "scene": "city-skyline-paper",
+      "duration": 3.6
+    },
+    {
+      "scene": "cine-location-title",
+      "duration": 3.4,
+      "vars": {
+        "city": "gjirokaster",
+        "photo": "assets/property-images/stone-house.jpg"
+      }
+    },
+    {
+      "scene": "property-kenburns-facts",
+      "duration": 3.8,
+      "vars": {
+        "listing": "apartment-blloku",
+        "title": {
+          "sq": "Dritë, *pamje, qetësi.*",
+          "en": "Light, *a view, calm.*",
+          "it": "Luce, *vista, calma.*"
+        }
+      }
+    },
+    {
+      "scene": "room-model-3d",
+      "duration": 3.6
+    },
+    {
+      "scene": "phone-rise",
+      "duration": 3.4,
+      "vars": {
+        "screen": "detail-1",
+        "theme": "light",
+        "title": {
+          "sq": "Gjeje *këtu.*",
+          "en": "Find it *here.*",
+          "it": "Trovala *qui.*"
+        }
+      }
+    },
+    {
+      "scene": "outro-into-the-door",
+      "duration": 4.4,
+      "payoff": true
+    }
+  ],
+  "caption": {
+    "sq": "Shtëpia nuk është vetëm një adresë. Gjej vendin ku do të ndihesh në shtëpi.",
+    "en": "A home is more than an address. Find the place that feels like yours.",
+    "it": "Una casa è più di un indirizzo. Trova il posto che senti tuo."
+  },
+  "hashtags": [
+    "shtepiaime",
+    "shtepi",
+    "pronatshqiperi",
+    "tirana",
+    "albania",
+    "realestate",
+    "welcomehome",
+    "family"
+  ]
+}

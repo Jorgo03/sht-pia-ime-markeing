@@ -1,17 +1,29 @@
 {
   "name": "shtepia-ime-creative-studio",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
+  "type": "module",
+  "description": "Shtëpia.ime Creative Studio — a reusable motion-graphics and automated video production kit built on HyperFrames.",
+  "engines": { "node": ">=22" },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "setup": "node studio.mjs init",
+    "video": "node studio.mjs video",
+    "plan": "node studio.mjs plan",
+    "new": "node studio.mjs new",
+    "build": "node studio.mjs build",
+    "qc": "node studio.mjs qc",
+    "export": "node studio.mjs export",
+    "scenes": "node studio.mjs scenes",
+    "templates": "node studio.mjs templates",
+    "previews": "node studio.mjs previews",
+    "studio": "node studio.mjs"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "gsap": "^3.13.0",
-    "hyperframes": "^0.8.225",
-    "three": "^0.159.0"
+    "gsap": "3.13.0",
+    "hyperframes": "0.8.225",
+    "three": "0.159.0"
+  },
+  "optionalDependencies": {
+    "playwright": "1.63.0"
   }
 }

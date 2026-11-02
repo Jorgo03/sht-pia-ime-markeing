@@ -134,7 +134,10 @@
     const text = tt === 'uppercase' ? el.textContent.toUpperCase() : tt === 'lowercase' ? el.textContent.toLowerCase() : el.textContent;
     const width = (size) => S.measure(text, `${st} ${wt} ${size}px ${fam}`) + lsEm * size * [...text].length;
     let lo = min, hi = max;
-    for (let i = 0; i < 18; i++) { const mid = (lo + hi) / 2; if (width(mid) <= maxWidth) lo = mid; else hi = mid; }
+    // Canvas metrics run ~5% narrower than the rendered display face (kerning,
+    // variable-font axes): keep a 7% margin so fitted type stays in its box.
+    const target = maxWidth * 0.93;
+    for (let i = 0; i < 18; i++) { const mid = (lo + hi) / 2; if (width(mid) <= target) lo = mid; else hi = mid; }
     const size = Math.floor(lo);
     el.style.fontSize = size + 'px';
     el.style.whiteSpace = 'nowrap';

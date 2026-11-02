@@ -1,0 +1,40 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--paper-shade); }
+    #root .plate { position: absolute; left: 50%; top: 46%; width: 300px; height: 460px; margin: -230px 0 0 -150px; border-radius: 150px 150px 24px 24px; }
+    #root .hole { position: absolute; left: 50%; top: 52%; width: 52px; height: 52px; margin-left: -26px; border-radius: 50%; background: #1a1714; }
+    #root .hole::after { content: ""; position: absolute; left: 16px; top: 36px; width: 20px; height: 60px; background: #1a1714; border-radius: 0 0 6px 6px; }
+    #root .key { position: absolute; left: 50%; top: 46%; width: 420px; height: 154px; margin-top: -77px; }
+    #root .flash { position: absolute; inset: 0; background: radial-gradient(circle at 50% 46%, rgba(255,214,160,.95), rgba(255,125,26,0) 55%); opacity: 0; }
+  </style>
+  <div data-hf-id="hf-8uwo" id="root" data-composition-id="s05-paper-key-unlock" data-width="1080" data-height="1920" data-composition-variables='[{"id":"duration","type":"number","label":"Duration (s)","default":2.8,"min":0.5,"max":600,"step":0.1},{"id":"start","type":"number","label":"Start in film (s, set by the builder)","default":0,"min":0,"max":3600,"step":0.01},{"id":"in","type":"enum","label":"Transition in","default":"none","options":[{"value":"auto","label":"auto"},{"value":"none","label":"none"},{"value":"blur","label":"blur"},{"value":"whip-left","label":"whip-left"},{"value":"whip-right","label":"whip-right"},{"value":"whip-up","label":"whip-up"},{"value":"zoom-in","label":"zoom-in"},{"value":"zoom-out","label":"zoom-out"},{"value":"iris","label":"iris"},{"value":"slide-up","label":"slide-up"},{"value":"shutter","label":"shutter"},{"value":"paper","label":"paper"},{"value":"flood","label":"flood"},{"value":"dip","label":"dip"}]},{"id":"out","type":"enum","label":"Transition out","default":"zoom-in","options":[{"value":"auto","label":"auto"},{"value":"none","label":"none"},{"value":"blur","label":"blur"},{"value":"whip-left","label":"whip-left"},{"value":"whip-right","label":"whip-right"},{"value":"whip-up","label":"whip-up"},{"value":"zoom-in","label":"zoom-in"},{"value":"zoom-out","label":"zoom-out"},{"value":"iris","label":"iris"},{"value":"slide-up","label":"slide-up"},{"value":"shutter","label":"shutter"},{"value":"paper","label":"paper"},{"value":"dip","label":"dip"}]},{"id":"palette","type":"enum","label":"Palette","default":"","options":[{"value":"","label":"(scene default)"},{"value":"night","label":"night"},{"value":"paper","label":"paper"},{"value":"orange","label":"orange"},{"value":"navy","label":"navy"},{"value":"mono","label":"mono"}]},{"id":"title","type":"string","label":"Headline (*accent*)","default":"Çelësat e *shtëpisë së re.*"},{"id":"footer","type":"string","label":"Footer","default":"Gjeje në Shtëpia.ime"}]'>
+    <div data-hf-id="hf-7l05" class="stage layer grain" data-palette="paper">
+      <div data-hf-id="hf-2mgg" class="cap"><div data-hf-id="hf-g5r0" class="headline t"></div></div>
+      <div data-hf-id="hf-aqhe" class="plate paper"><div data-hf-id="hf-hm9y" class="hole"></div></div>
+      <div data-hf-id="hf-nujl" class="key cut"></div>
+      <div data-hf-id="hf-xwk6" class="flash"></div>
+      <div data-hf-id="hf-6szy" class="cap low"><div data-hf-id="hf-kqmg" class="kicker k"></div></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('s05-paper-key-unlock', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      $('.key').innerHTML = S.print.key({ w: 420 });
+      S.rich($('.t'), v.title); $('.k').textContent = v.footer;
+      // Key slides in (its ring stays outside the plate), turns 90°, light bursts.
+      S.print.drop(tl, $('.plate'), 0.0, { dur: 0.6 });
+      tl.fromTo($('.key'), { x: 700, rotation: -12 }, { x: -150, rotation: 0, duration: 0.8, ease: 'expo.out' }, 0.35);
+      tl.to($('.key'), { scaleY: 0.12, duration: 0.25, ease: 'power2.inOut' }, 1.25);
+      tl.fromTo($('.flash'), { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.out' }, 1.45);
+      tl.to($('.flash'), { opacity: 0.35, duration: 0.6 }, 1.75);
+      S.a.wordsBlur(tl, S.words($('.t')), 0.1);
+      S.a.blurIn(tl, $('.k'), 1.7);
+      S.tx.out(c, $('.stage'), 'zoom-in');
+      c.done();
+    });
+  })();
+  </script>
+</template>

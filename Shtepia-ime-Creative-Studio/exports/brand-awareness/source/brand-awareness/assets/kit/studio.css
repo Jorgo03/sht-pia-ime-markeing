@@ -1,0 +1,124 @@
+/* Shtëpia.ime Creative Studio — shared stage styles.
+   Loaded by every built project after fonts.css and brand.css.
+   Every format has a 1080 px short side, so scenes are authored in px against
+   1080 and read --W/--H/--safe-* (set by the builder on <html>) for layout. */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+  width: var(--W, 1080px); height: var(--H, 1920px);
+  overflow: hidden; background: #000;
+  -webkit-font-smoothing: antialiased; text-rendering: geometricPrecision;
+}
+
+/* A scene's full-frame layers. */
+.layer { position: absolute; inset: 0; }
+.fill { position: absolute; inset: 0; width: 100%; height: 100%; }
+.center { display: flex; align-items: center; justify-content: center; }
+.col { display: flex; flex-direction: column; }
+.ground { background: var(--ground); }
+.ground2 { background: var(--ground2); }
+
+/* The title-safe box for this format (platform UI never covers it). */
+.safe {
+  position: absolute;
+  top: var(--safe-top); left: var(--safe-left);
+  width: calc(var(--safe-right) - var(--safe-left));
+  height: calc(var(--safe-bottom) - var(--safe-top));
+}
+
+/* Centred caption box: symmetric margins wide enough to clear the platform's
+   right-hand action rail (--cap-x = max(safe-left, W - safe-right)). */
+.cap {
+  position: absolute; z-index: 5; text-align: center;
+  left: var(--cap-x, 180px); right: var(--cap-x, 180px); top: calc(var(--safe-top) + 10px);
+}
+.cap .headline { font-size: 86px; }
+.cap .kicker { margin-bottom: 22px; }
+.cap.low { top: auto; bottom: calc(var(--H) - var(--safe-bottom) + 10px); }
+[data-orient="landscape"] .cap .headline { font-size: 76px; }
+
+/* ---------- Type ---------- */
+.serif { font-family: var(--font-serif), Georgia, serif; font-weight: 500; letter-spacing: -0.025em; }
+.sans { font-family: var(--font-sans), system-ui, sans-serif; }
+.mono { font-family: var(--font-mono), monospace; }
+
+/* The app's headline voice: serif, payoff words in italic accent. */
+.headline {
+  font-family: var(--font-serif), Georgia, serif; font-weight: 500;
+  font-size: 96px; line-height: 1.04; letter-spacing: -0.025em;
+  color: var(--ink);
+}
+.headline em, .accent-em em { font-style: italic; color: var(--accent-text, var(--accent)); }
+/* Italic Newsreader caps overhang to the left: keep the gap before an accent visible. */
+.headline em, .accent-em em { margin-left: 0.07em; }
+.headline.xl { font-size: 128px; }
+.headline.l { font-size: 112px; }
+.headline.m { font-size: 80px; }
+.headline.s { font-size: 64px; }
+
+.display {
+  font-family: var(--font-display), system-ui, sans-serif; font-weight: 800;
+  letter-spacing: -0.04em; line-height: 0.92; color: var(--ink);
+  text-transform: none;
+}
+.display em { font-style: normal; color: var(--accent-text, var(--accent)); }
+
+.kicker {
+  font-family: var(--font-mono), monospace; font-weight: 400;
+  font-size: 28px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--ink-muted);
+}
+.kicker .dash { display: inline-block; width: 44px; height: 2px; background: var(--accent); vertical-align: middle; margin-right: 18px; }
+
+.body { font-family: var(--font-sans), system-ui, sans-serif; font-weight: 500; font-size: 40px; line-height: 1.3; color: var(--ink-muted); }
+
+/* Split helpers: words and chars must be inline-block to transform. */
+.sp { white-space: pre-wrap; }
+.w, .ch { display: inline-block; will-change: transform, opacity, filter; }
+.line-mask { display: block; overflow: hidden; padding: 0.06em 0 0.12em; margin: -0.06em 0 -0.12em; }
+.line-mask > .line { display: block; }
+
+/* ---------- Brand pieces ---------- */
+.logo { display: block; }
+.logo img, img.logo { display: block; width: 100%; height: auto; }
+
+.pill {
+  display: inline-flex; align-items: center; gap: 16px;
+  padding: 22px 40px; border-radius: 999px;
+  font-family: var(--font-sans), sans-serif; font-weight: 700; font-size: 38px;
+  /* accent-2 (#E85D00) keeps white bold type ≥ 3:1 (WCAG AA, large text). */
+  background: var(--accent-2); color: #fff;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 18px 50px rgba(255,95,31,.35);
+}
+.pill.ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 2px var(--line); }
+
+.chip {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 14px 26px; border-radius: 999px;
+  font-family: var(--font-sans), sans-serif; font-weight: 600; font-size: 30px;
+  background: var(--surface); color: var(--ink);
+  box-shadow: inset 0 0 0 2px var(--line);
+}
+.chip .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); }
+
+.glow {
+  position: absolute; left: 50%; top: 50%;
+  width: 1500px; height: 1500px; margin: -750px 0 0 -750px; border-radius: 50%;
+  background: radial-gradient(circle, var(--glow) 0%, transparent 62%);
+  pointer-events: none;
+}
+
+/* Soft vignette overlay drawn above graphics (never a filter on footage). */
+.vignette {
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0) 55%, rgba(0,0,0,.5) 100%);
+}
+
+/* A photo that fills its box. */
+.photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+/* Letterbox bars for cinematic beats. */
+.bars::before, .bars::after {
+  content: ""; position: absolute; left: 0; right: 0; height: var(--bar, 0px); background: #000; z-index: 40;
+}
+.bars::before { top: 0; } .bars::after { bottom: 0; }

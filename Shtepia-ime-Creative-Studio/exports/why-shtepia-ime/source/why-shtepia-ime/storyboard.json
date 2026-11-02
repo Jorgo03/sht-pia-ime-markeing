@@ -1,0 +1,66 @@
+{
+  "template": "why-shtepia-ime",
+  "id": "why-shtepia-ime",
+  "title": "Pse Shtëpia.ime?",
+  "brief": "15 s, typography only. Benefits as type, no screens.",
+  "modes": [
+    "kinetic-typography"
+  ],
+  "targetDuration": 15,
+  "language": "sq",
+  "format": "reel",
+  "palette": "night",
+  "voice": {
+    "provider": "none"
+  },
+  "audio": {
+    "music": {
+      "bed": "bright",
+      "bpm": 118,
+      "src": "assets/audio/bed.m4a"
+    }
+  },
+  "features": [],
+  "scenes": [
+    {
+      "scene": "type-split-word",
+      "duration": 3.2,
+      "vars": {
+        "inside": "fillon me *një kërkim.*"
+      }
+    },
+    {
+      "scene": "type-stack-poster",
+      "duration": 2.2,
+      "palette": "orange",
+      "vars": {
+        "lines": "Shitje|*&*|qira"
+      }
+    },
+    {
+      "scene": "type-highlighter",
+      "duration": 3,
+      "vars": {
+        "text": "[Shitje] dhe [qira], me [foto dhe hartë]."
+      }
+    },
+    {
+      "scene": "feature-languages",
+      "duration": 3.6
+    },
+    {
+      "scene": "logo-flood-stacked",
+      "duration": 3,
+      "payoff": true
+    }
+  ],
+  "caption": "Shitje dhe qira, harta dhe 8 gjuhë. Pse Shtëpia.ime? Sepse shtëpia jote meriton më shumë se një kërkim i lodhshëm.",
+  "hashtags": [
+    "shtepiaime",
+    "shtepi",
+    "pronatshqiperi",
+    "tirana",
+    "albania",
+    "realestate"
+  ]
+}

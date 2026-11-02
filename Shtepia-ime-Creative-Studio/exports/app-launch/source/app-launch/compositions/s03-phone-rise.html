@@ -1,0 +1,39 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--ground); perspective: 2400px; }
+    #root .cap { position: absolute; left: var(--safe-left); right: calc(var(--W) - var(--safe-right)); top: calc(var(--safe-top) + 10px); text-align: center; z-index: 5; }
+    #root .cap .headline { font-size: 84px; }
+    #root .floor { position: absolute; left: 50%; bottom: 3%; width: 820px; height: 160px; margin-left: -410px; border-radius: 50%;
+      background: radial-gradient(ellipse, var(--glow), transparent 70%); filter: blur(20px); }
+    [data-orient="landscape"] #root .cap { top: 50%; left: 6%; right: 56%; text-align: left; transform: translateY(-50%); }
+  </style>
+  <div data-hf-id="hf-ayjj" id="root" data-composition-id="s03-phone-rise" data-width="1080" data-height="1920" data-composition-variables='[{"id":"duration","type":"number","label":"Duration (s)","default":3.2,"min":0.5,"max":600,"step":0.1},{"id":"start","type":"number","label":"Start in film (s, set by the builder)","default":0,"min":0,"max":3600,"step":0.01},{"id":"in","type":"enum","label":"Transition in","default":"none","options":[{"value":"auto","label":"auto"},{"value":"none","label":"none"},{"value":"blur","label":"blur"},{"value":"whip-left","label":"whip-left"},{"value":"whip-right","label":"whip-right"},{"value":"whip-up","label":"whip-up"},{"value":"zoom-in","label":"zoom-in"},{"value":"zoom-out","label":"zoom-out"},{"value":"iris","label":"iris"},{"value":"slide-up","label":"slide-up"},{"value":"shutter","label":"shutter"},{"value":"paper","label":"paper"},{"value":"flood","label":"flood"},{"value":"dip","label":"dip"}]},{"id":"out","type":"enum","label":"Transition out","default":"blur","options":[{"value":"auto","label":"auto"},{"value":"none","label":"none"},{"value":"blur","label":"blur"},{"value":"whip-left","label":"whip-left"},{"value":"whip-right","label":"whip-right"},{"value":"whip-up","label":"whip-up"},{"value":"zoom-in","label":"zoom-in"},{"value":"zoom-out","label":"zoom-out"},{"value":"iris","label":"iris"},{"value":"slide-up","label":"slide-up"},{"value":"shutter","label":"shutter"},{"value":"paper","label":"paper"},{"value":"dip","label":"dip"}]},{"id":"palette","type":"enum","label":"Palette","default":"","options":[{"value":"","label":"(scene default)"},{"value":"night","label":"night"},{"value":"paper","label":"paper"},{"value":"orange","label":"orange"},{"value":"navy","label":"navy"},{"value":"mono","label":"mono"}]},{"id":"title","type":"string","label":"Caption (*accent*)","default":"Njihuni me *Shtëpia.ime.*"},{"id":"screen","type":"enum","label":"Screen","default":"home","options":[{"value":"home","label":"home"},{"value":"home-scrolled","label":"home-scrolled"},{"value":"explore","label":"explore"},{"value":"filters","label":"filters"},{"value":"map","label":"map"},{"value":"detail-1","label":"detail-1"},{"value":"detail-1-scrolled","label":"detail-1-scrolled"},{"value":"detail-2","label":"detail-2"},{"value":"detail-2-scrolled","label":"detail-2-scrolled"}]},{"id":"next","type":"string","label":"Push to screen (optional)","default":""},{"id":"theme","type":"enum","label":"App theme","default":"dark","options":[{"value":"light","label":"light"},{"value":"dark","label":"dark"}]}]'>
+    <div data-hf-id="hf-jx4t" class="stage layer">
+      <div data-hf-id="hf-2s7n" class="glow"></div>
+      <div data-hf-id="hf-kk9u" class="floor"></div>
+      <div data-hf-id="hf-qhvs" class="phone-host layer"></div>
+      <div data-hf-id="hf-2mgg" class="cap"><div data-hf-id="hf-g5r0" class="headline t"></div></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('s03-phone-rise', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      const land = S.fmt.landscape;
+      const w = land ? 380 : S.fmt.H < 1500 ? 440 : 560;
+      const p = S.ui.phone($('.phone-host'), { screen: v.screen, theme: v.theme, w, x: land ? 300 : 0, y: land ? 0 : 150 });
+      S.rich($('.t'), v.title);
+      S.tx.in(c, $('.stage'), 'none');
+      tl.fromTo($('.glow'), { opacity: 0 }, { opacity: 0.6, duration: 1.2 }, 0);
+      S.ui.enter(tl, p, 0.0, { dur: 1.2 });
+      S.ui.glare(tl, p, 0.9, 1.4);
+      S.a.wordsRise(tl, S.words($('.t')), 0.45);
+      if (v.next) S.ui.go(tl, p, v.next, c.dur - 1.0, { kind: 'push' });
+      S.tx.out(c, $('.stage'), 'blur');
+      c.done();
+    });
+  })();
+  </script>
+</template>

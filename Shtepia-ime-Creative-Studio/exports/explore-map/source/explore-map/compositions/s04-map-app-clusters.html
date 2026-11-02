@@ -1,0 +1,42 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--ground); }
+  </style>
+  <div data-hf-id="hf-x493" id="root" data-composition-id="s04-map-app-clusters" data-width="1080" data-height="1920" data-composition-variables='[{"id":"duration","type":"number","label":"Duration (s)","default":3.6,"min":0.5,"max":600,"step":0.1},{"id":"start","type":"number","label":"Start in film (s, set by the builder)","default":0,"min":0,"max":3600,"step":0.01},{"id":"in","type":"enum","label":"Transition in","default":"none","options":[{"value":"auto","label":"auto"},{"value":"none","label":"none"},{"value":"blur","label":"blur"},{"value":"whip-left","label":"whip-left"},{"value":"whip-right","label":"whip-right"},{"value":"whip-up","label":"whip-up"},{"value":"zoom-in","label":"zoom-in"},{"value":"zoom-out","label":"zoom-out"},{"value":"iris","label":"iris"},{"value":"slide-up","label":"slide-up"},{"value":"shutter","label":"shutter"},{"value":"paper","label":"paper"},{"value":"flood","label":"flood"},{"value":"dip","label":"dip"}]},{"id":"out","type":"enum","label":"Transition out","default":"zoom-in","options":[{"value":"auto","label":"auto"},{"value":"none","label":"none"},{"value":"blur","label":"blur"},{"value":"whip-left","label":"whip-left"},{"value":"whip-right","label":"whip-right"},{"value":"whip-up","label":"whip-up"},{"value":"zoom-in","label":"zoom-in"},{"value":"zoom-out","label":"zoom-out"},{"value":"iris","label":"iris"},{"value":"slide-up","label":"slide-up"},{"value":"shutter","label":"shutter"},{"value":"paper","label":"paper"},{"value":"dip","label":"dip"}]},{"id":"palette","type":"enum","label":"Palette","default":"","options":[{"value":"","label":"(scene default)"},{"value":"night","label":"night"},{"value":"paper","label":"paper"},{"value":"orange","label":"orange"},{"value":"navy","label":"navy"},{"value":"mono","label":"mono"}]},{"id":"title","type":"string","label":"Headline (*accent*)","default":"Eksploro *në hartë.*"},{"id":"from","type":"enum","label":"Start screen","default":"explore","options":[{"value":"explore","label":"explore"},{"value":"map","label":"map"}]},{"id":"region","type":"enum","label":"Region to focus","default":"clusterTirana","options":[{"value":"clusterTirana","label":"clusterTirana"},{"value":"clusterSouthA","label":"clusterSouthA"},{"value":"clusterSouthB","label":"clusterSouthB"},{"value":"count","label":"count"}]},{"id":"callout","type":"string","label":"Callout","default":"3 prona në Tiranë"},{"id":"zoom","type":"number","label":"Zoom","default":2.2,"min":1.2,"max":4,"step":0.1},{"id":"theme","type":"enum","label":"App theme","default":"light","options":[{"value":"light","label":"light"},{"value":"dark","label":"dark"}]}]'>
+    <div data-hf-id="hf-jx4t" class="stage layer">
+      <div data-hf-id="hf-2s7n" class="glow"></div>
+      <div data-hf-id="hf-qhvs" class="phone-host layer"></div>
+      <div data-hf-id="hf-2mgg" class="cap"><div data-hf-id="hf-g5r0" class="headline t"></div></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('s04-map-app-clusters', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      const land = S.fmt.landscape;
+      const p = S.ui.phone($('.phone-host'), { screen: v.from, theme: v.theme, w: land ? 380 : 540, y: land ? 40 : 140 });
+      S.rich($('.t'), v.title);
+      S.ui.enter(tl, p, 0, { dur: 0.9 });
+      S.a.wordsBlur(tl, S.words($('.t')), 0.3);
+      // Tap the map toggle on the real explore screen, switch to the real map.
+      let t = 0.9;
+      if (v.from === 'explore') {
+        S.ui.press(tl, p, 'mapToggle', t, { screen: 'explore' });
+        S.ui.go(tl, p, 'map', t + 0.25, { kind: 'fade', dur: 0.35 });
+        t += 0.7;
+      }
+      // Camera moves onto the Tirana cluster; spotlight + callout.
+      S.ui.zoomTo(tl, p, v.region, t, { screen: 'map', scale: v.zoom, dur: 0.9 });
+      const spot = S.ui.spot(tl, p, v.region, t + 0.7, { screen: 'map', pad: 18 });
+      const call = S.ui.callout(p, v.region, v.callout, { screen: 'map', side: 'top', gap: 30 });
+      call.style.fontSize = 34 / v.zoom + 'px';
+      call.style.padding = `${16 / v.zoom}px ${28 / v.zoom}px`;
+      S.a.pop(tl, call, t + 0.95);
+      S.tx.out(c, $('.stage'), 'zoom-in');
+      c.done();
+    });
+  })();
+  </script>
+</template>

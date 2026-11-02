@@ -1,0 +1,80 @@
+{
+  "template": "features-benefits",
+  "id": "features-benefits",
+  "title": {
+    "sq": "Veçoritë dhe përfitimet",
+    "en": "Features and benefits",
+    "it": "Funzioni e vantaggi"
+  },
+  "brief": "20 s, UI + typography. Four live features, each on its real screen.",
+  "modes": [
+    "ui-motion",
+    "kinetic-typography"
+  ],
+  "targetDuration": 20,
+  "language": "sq",
+  "format": "reel",
+  "palette": "night",
+  "voice": {
+    "provider": "none"
+  },
+  "audio": {
+    "music": {
+      "bed": "bright",
+      "bpm": 112
+    }
+  },
+  "features": [],
+  "scenes": [
+    {
+      "scene": "type-flash-rsvp",
+      "duration": 2.0,
+      "vars": {
+        "words": {
+          "sq": "Kërko.|Filtro.|Ruaj.|*Gjej.*",
+          "en": "Search.|Filter.|Save.|*Find.*",
+          "it": "Cerca.|Filtra.|Salva.|*Trova.*"
+        }
+      }
+    },
+    {
+      "scene": "phone-3d-spin",
+      "duration": 3.4
+    },
+    {
+      "scene": "search-filters-sheet",
+      "duration": 4.6
+    },
+    {
+      "scene": "feature-favorites",
+      "duration": 3.0
+    },
+    {
+      "scene": "feature-spotlight",
+      "duration": 3.2,
+      "vars": {
+        "screen": "detail-1",
+        "region": "amenities"
+      }
+    },
+    {
+      "scene": "cta-button-press",
+      "duration": 3.8,
+      "payoff": true
+    }
+  ],
+  "caption": {
+    "sq": "Filtra të saktë, harta, të preferuarat dhe çdo detaj i pronës — në një app.",
+    "en": "Precise filters, a map, favourites and every detail — in one app.",
+    "it": "Filtri precisi, mappa, preferiti e ogni dettaglio — in un'app."
+  },
+  "hashtags": [
+    "shtepiaime",
+    "shtepi",
+    "pronatshqiperi",
+    "tirana",
+    "albania",
+    "realestate",
+    "features"
+  ]
+}

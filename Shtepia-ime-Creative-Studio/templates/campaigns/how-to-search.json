@@ -1,0 +1,104 @@
+{
+  "template": "how-to-search",
+  "id": "how-to-search",
+  "title": {
+    "sq": "Si të kërkosh prona",
+    "en": "How to search for properties",
+    "it": "Come cercare immobili"
+  },
+  "brief": "Tutorial, 20 s, UI motion only. Three numbered steps on real screens.",
+  "modes": [
+    "ui-motion"
+  ],
+  "targetDuration": 20,
+  "language": "sq",
+  "format": "reel",
+  "palette": "night",
+  "voice": {
+    "provider": "none"
+  },
+  "audio": {
+    "music": {
+      "bed": "bright",
+      "bpm": 110
+    }
+  },
+  "features": [],
+  "scenes": [
+    {
+      "scene": "hook-city-slot",
+      "duration": 2.6
+    },
+    {
+      "scene": "search-type-results",
+      "duration": 4.0,
+      "vars": {
+        "title": {
+          "sq": "1 · Kërko *qytetin.*",
+          "en": "1 · Search *a city.*",
+          "it": "1 · Cerca *la città.*"
+        },
+        "query": "Tiranë"
+      }
+    },
+    {
+      "scene": "search-filters-sheet",
+      "duration": 4.6,
+      "vars": {
+        "title": {
+          "sq": "2 · Vendos *filtrat.*",
+          "en": "2 · Set *your filters.*",
+          "it": "2 · Imposta *i filtri.*"
+        },
+        "labels": {
+          "sq": "Buxheti yt, Sa dhoma?",
+          "en": "Your budget, How many rooms?",
+          "it": "Il tuo budget, Quante camere?"
+        }
+      }
+    },
+    {
+      "scene": "ui-push-nav",
+      "duration": 4.2,
+      "vars": {
+        "title": {
+          "sq": "3 · Hap *detajet.*",
+          "en": "3 · Open *the details.*",
+          "it": "3 · Apri *i dettagli.*"
+        },
+        "steps": {
+          "sq": "Kërko, Shfleto, Zbulo detajet",
+          "en": "Search, Browse, See the details",
+          "it": "Cerca, Sfoglia, Scopri i dettagli"
+        }
+      }
+    },
+    {
+      "scene": "outro-lockup-tagline",
+      "duration": 4.6,
+      "payoff": true,
+      "vars": {
+        "tagline": {
+          "sq": "Kërko. Krahaso. *Gjej.*",
+          "en": "Search. Compare. *Find.*",
+          "it": "Cerca. Confronta. *Trova.*"
+        }
+      }
+    }
+  ],
+  "caption": {
+    "sq": "Tre hapa për të gjetur pronën: kërko qytetin, vendos filtrat, hap detajet.",
+    "en": "Three steps to the right home: search the city, set filters, open the details.",
+    "it": "Tre passi per trovare casa: cerca la città, imposta i filtri, apri i dettagli."
+  },
+  "hashtags": [
+    "shtepiaime",
+    "shtepi",
+    "pronatshqiperi",
+    "tirana",
+    "albania",
+    "realestate",
+    "howto",
+    "tutorial"
+  ]
+}

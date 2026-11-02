@@ -1,0 +1,58 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--ground); }
+    #root .sky { position: absolute; inset: 0; background: linear-gradient(180deg, var(--ground2), var(--ground)); }
+    #root .sun { position: absolute; left: 50%; top: 30%; width: 260px; height: 260px; margin-left: -130px; border-radius: 50%; background: var(--accent); }
+    #root .hills { position: absolute; left: -2%; right: -2%; bottom: 0; height: 46%; }
+    #root .hills svg { width: 100%; height: 100%; display: block; }
+    #root .town { position: absolute; left: 0; right: 0; bottom: 18%; height: 30%; perspective: 1400px; }
+    #root .cap { position: absolute; left: var(--safe-left); right: calc(var(--W) - var(--safe-right)); top: calc(var(--safe-top) + 20px); text-align: center; }
+    #root .cap .headline { font-size: 92px; }
+    #root .label-row { position: absolute; left: 0; right: 0; top: 44%; text-align: center; }
+    #root .label { position: relative; display: inline-block; white-space: nowrap; }
+  </style>
+  <div data-hf-id="hf-wxre" id="root" data-composition-id="s01-paper-town-popup" data-width="1080" data-height="1920" data-composition-variables='[{"id":"duration","type":"number","label":"Duration (s)","default":3.4,"min":0.5,"max":600,"step":0.1},{"id":"start","type":"number","label":"Start in film (s, set by the builder)","default":0,"min":0,"max":3600,"step":0.01},{"id":"in","type":"enum","label":"Transition in","default":"none","options":[{"value":"auto","label":"auto"},{"value":"none","label":"none"},{"value":"blur","label":"blur"},{"value":"whip-left","label":"whip-left"},{"value":"whip-right","label":"whip-right"},{"value":"whip-up","label":"whip-up"},{"value":"zoom-in","label":"zoom-in"},{"value":"zoom-out","label":"zoom-out"},{"value":"iris","label":"iris"},{"value":"slide-up","label":"slide-up"},{"value":"shutter","label":"shutter"},{"value":"paper","label":"paper"},{"value":"flood","label":"flood"},{"value":"dip","label":"dip"}]},{"id":"out","type":"enum","label":"Transition out","default":"paper","options":[{"value":"auto","label":"auto"},{"value":"none","label":"none"},{"value":"blur","label":"blur"},{"value":"whip-left","label":"whip-left"},{"value":"whip-right","label":"whip-right"},{"value":"whip-up","label":"whip-up"},{"value":"zoom-in","label":"zoom-in"},{"value":"zoom-out","label":"zoom-out"},{"value":"iris","label":"iris"},{"value":"slide-up","label":"slide-up"},{"value":"shutter","label":"shutter"},{"value":"paper","label":"paper"},{"value":"dip","label":"dip"}]},{"id":"palette","type":"enum","label":"Palette","default":"","options":[{"value":"","label":"(scene default)"},{"value":"night","label":"night"},{"value":"paper","label":"paper"},{"value":"orange","label":"orange"},{"value":"navy","label":"navy"},{"value":"mono","label":"mono"}]},{"id":"title","type":"string","label":"Headline (*accent*)","default":"Gjej *shtëpinë* tënde","maxLength":40},{"id":"label","type":"string","label":"Stamp label","default":"Tiranë · Durrës · Vlorë"},{"id":"seed","type":"number","label":"Layout seed","default":4,"min":1,"max":99,"step":1}]'>
+    <div data-hf-id="hf-7l05" class="stage layer grain" data-palette="paper">
+      <div data-hf-id="hf-7ggn" class="sky"></div>
+      <div data-hf-id="hf-vzzz" class="sun cut" style="--lift:6px"></div>
+      <div data-hf-id="hf-0pfe" class="hills cut" style="--lift:14px"></div>
+      <div data-hf-id="hf-4mn0" class="town"></div>
+      <div data-hf-id="hf-2mgg" class="cap"><div data-hf-id="hf-g5r0" class="headline t"></div></div>
+      <div data-hf-id="hf-4785" class="label-row"><div data-hf-id="hf-2lxq" class="print-label label"></div></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('s01-paper-town-popup', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      const P = S.print;
+      $('.hills').innerHTML = P.hills({ w: 1100, h: 820, layers: 3, seed: v.seed });
+      const town = $('.town');
+      const W = S.fmt.W, H = Math.round(S.fmt.H * 0.30);
+      const n = S.fmt.landscape ? 7 : 5;
+      const items = [];
+      for (let i = 0; i < n; i++) {
+        const tall = i % 2 === 1;
+        const w = tall ? 190 : 230, h = tall ? H * 0.95 : H * 0.62;
+        const x = (W / (n + 1)) * (i + 1) - w / 2;
+        const svg = tall ? P.block({ w, h, floors: 7, seed: v.seed + i }) : P.house({ w, h, seed: v.seed + i, roof: i === Math.floor(n / 2) ? 'var(--accent)' : 'var(--accent-deep)' });
+        items.push(P.cut(town, svg, { x, y: H - h, w, h, lift: 10 }));
+      }
+      for (let i = 0; i < 3; i++) items.push(P.cut(town, P.tree({ seed: i + v.seed }), { x: (W / 4) * (i + 1) - 50 + (i - 1) * 40, y: H - 150, w: 100, h: 160, lift: 6 }));
+      S.rich($('.t'), v.title);
+      $('.label').textContent = v.label;
+
+      tl.fromTo($('.sun'), { yPercent: 160 }, { yPercent: 0, duration: 1.4, ease: 'expo.out' }, 0);
+      P.slide(tl, $('.hills'), 0.0, { from: 'bottom', dist: 900, dur: 0.9, rot: 0 });
+      P.popUp(tl, items, 0.45, { stagger: 0.09, dur: 0.7 });
+      S.a.charsDrop(tl, S.chars($('.t')), 0.3, { stagger: 0.025 });
+      P.stamp(tl, $('.label'), 1.4, { rot: -6 });
+      P.sway(tl, items.slice(-3), 1.6, Math.max(0.5, c.dur - 2.0), { amp: 4 });
+      S.tx.out(c, $('.stage'), 'paper');
+      c.done();
+    });
+  })();
+  </script>
+</template>

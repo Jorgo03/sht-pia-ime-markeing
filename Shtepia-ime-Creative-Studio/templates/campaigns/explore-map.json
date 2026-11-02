@@ -1,0 +1,99 @@
+{
+  "template": "explore-map",
+  "id": "explore-map",
+  "title": {
+    "sq": "Eksploro Tiranën në hartë",
+    "en": "Explore Tirana on the map",
+    "it": "Esplora Tirana sulla mappa"
+  },
+  "brief": "20 s, 3D + maps. Albania map, 3D city, real app map.",
+  "modes": [
+    "3d",
+    "print",
+    "ui-motion"
+  ],
+  "targetDuration": 20,
+  "language": "sq",
+  "format": "reel",
+  "palette": "night",
+  "voice": {
+    "provider": "none"
+  },
+  "audio": {
+    "music": {
+      "bed": "night",
+      "bpm": 96
+    }
+  },
+  "features": [],
+  "scenes": [
+    {
+      "scene": "map-albania-pins",
+      "duration": 3.4,
+      "vars": {
+        "kicker": {
+          "sq": "Në gjithë Shqipërinë",
+          "en": "All over Albania",
+          "it": "In tutta l'Albania"
+        }
+      }
+    },
+    {
+      "scene": "map-route-line",
+      "duration": 3.2,
+      "vars": {
+        "from": "durres",
+        "to": "tirane"
+      }
+    },
+    {
+      "scene": "city-iso-rise",
+      "duration": 3.4
+    },
+    {
+      "scene": "map-app-clusters",
+      "duration": 3.6
+    },
+    {
+      "scene": "three-pin-drop",
+      "duration": 3.0,
+      "vars": {
+        "place": {
+          "sq": "*Tiranë*",
+          "en": "*Tirana*",
+          "it": "*Tirana*"
+        },
+        "kicker": {
+          "sq": "Pronat e tua në",
+          "en": "Your next home in",
+          "it": "La tua casa a"
+        }
+      }
+    },
+    {
+      "scene": "outro-into-the-door",
+      "duration": 3.4,
+      "payoff": true
+    }
+  ],
+  "caption": {
+    "sq": "Shiko ku ndodhen pronat — çdo listim ka vendndodhjen në hartë.",
+    "en": "See where every home is — each listing has its location on the map.",
+    "it": "Guarda dove si trova ogni casa — ogni annuncio ha la posizione sulla mappa."
+  },
+  "hashtags": [
+    "shtepiaime",
+    "shtepi",
+    "pronatshqiperi",
+    "tirana",
+    "albania",
+    "realestate",
+    "map",
+    "tirane"
+  ],
+  "evidence": {
+    "3 prona në Tiranë": "map screenshot (config/screens.json map.clusterTirana) shows a cluster of 3",
+    "3 homes in Tirana": "map screenshot cluster reads 3",
+    "3 immobili a Tirana": "map screenshot cluster reads 3"
+  }
+}

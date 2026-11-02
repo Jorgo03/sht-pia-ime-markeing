@@ -1,0 +1,107 @@
+{
+  "template": "discover-dream-home",
+  "id": "discover-dream-home",
+  "title": {
+    "sq": "Zbulo shtëpinë e ëndrrave",
+    "en": "Discover your dream home",
+    "it": "Scopri la casa dei sogni"
+  },
+  "brief": "Emotional discovery, 20 s, cinematic. Photos carry it; real app moment in the middle.",
+  "modes": [
+    "cinematic",
+    "ui-motion"
+  ],
+  "targetDuration": 20,
+  "language": "sq",
+  "format": "reel",
+  "palette": "night",
+  "voice": {
+    "provider": "none"
+  },
+  "audio": {
+    "music": {
+      "bed": "cinematic",
+      "bpm": 84
+    }
+  },
+  "features": [],
+  "scenes": [
+    {
+      "scene": "hook-photo-montage",
+      "duration": 2.4,
+      "vars": {
+        "title": {
+          "sq": "Mijëra mundësi. *Një vend.*",
+          "en": "So many homes. *One place.*",
+          "it": "Tante case. *Un solo posto.*"
+        }
+      }
+    },
+    {
+      "scene": "cine-location-title",
+      "duration": 3.2,
+      "vars": {
+        "city": "dhermi",
+        "photo": "assets/property-images/villa-coast.jpg",
+        "region": {
+          "sq": "Riviera shqiptare",
+          "en": "Albanian Riviera",
+          "it": "Riviera albanese"
+        }
+      }
+    },
+    {
+      "scene": "property-kenburns-facts",
+      "duration": 3.6,
+      "vars": {
+        "listing": "villa-dhermi"
+      }
+    },
+    {
+      "scene": "property-card-dive",
+      "duration": 3.4,
+      "vars": {
+        "listing": "apartment-blloku"
+      }
+    },
+    {
+      "scene": "property-shutter-reveal",
+      "duration": 3.4,
+      "vars": {
+        "listing": "stone-gjirokaster",
+        "title": {
+          "sq": "Histori në *gur.*",
+          "en": "History in *stone.*",
+          "it": "Storia nella *pietra.*"
+        }
+      }
+    },
+    {
+      "scene": "outro-photo-endcard",
+      "duration": 4.0,
+      "payoff": true,
+      "vars": {
+        "line": {
+          "sq": "Çdo mundësi, *në një vend.*",
+          "en": "Every option, *in one place.*",
+          "it": "Ogni possibilità, *in un posto.*"
+        }
+      }
+    }
+  ],
+  "caption": {
+    "sq": "Nga bregdeti te kryeqyteti: shtëpia e ëndrrave mund të jetë një kërkim larg.",
+    "en": "From the coast to the capital: your dream home could be one search away.",
+    "it": "Dalla costa alla capitale: la casa dei sogni è a una ricerca di distanza."
+  },
+  "hashtags": [
+    "shtepiaime",
+    "shtepi",
+    "pronatshqiperi",
+    "tirana",
+    "albania",
+    "realestate",
+    "dreamhome",
+    "riviera"
+  ]
+}

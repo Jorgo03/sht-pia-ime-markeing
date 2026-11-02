@@ -22,7 +22,7 @@
       // are shaded darker so the stack reads as a solid block of letters.
       const N = 18, depth = 3.2;
       const probe = document.createElement('div'); probe.className = 'slice'; probe.textContent = v.word; $('.obj').appendChild(probe);
-      const fs = S.fit(probe, { maxWidth: (S.fmt.W - 2 * S.fmt.safe.left) * 0.92, max: 360 });
+      const fs = S.fit(probe, { maxWidth: (S.fmt.W - 2 * Math.max(S.fmt.safe.left, S.fmt.W - S.fmt.safe.right)) * 0.95, max: 360 });
       probe.remove();
       const w = S.measure(v.word.toUpperCase(), `800 ${fs}px Manrope`);
       for (let i = N - 1; i >= 0; i--) {

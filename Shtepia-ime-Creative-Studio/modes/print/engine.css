@@ -30,7 +30,7 @@
 }
 .print-stamp {
   position: absolute; display: inline-flex; align-items: center; justify-content: center;
-  border: 6px solid var(--accent); color: var(--accent); border-radius: 18px;
+  border: 6px solid var(--accent-text, var(--accent)); color: var(--accent-text, var(--accent)); border-radius: 18px;
   font-family: var(--font-mono), monospace; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
   padding: 18px 30px; font-size: 40px; mix-blend-mode: multiply;
 }

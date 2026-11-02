@@ -1,0 +1,57 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--ground); }
+    #root .dive { position: absolute; inset: 0; z-index: 10; overflow: hidden; }
+    #root .dive img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    #root .label { position: absolute; left: var(--cap-x); right: var(--cap-x); bottom: calc(var(--H) - var(--safe-bottom) + 10px); z-index: 12; text-align: center; color: #fff; }
+    #root .label .price { font-family: var(--font-serif); font-style: italic; font-size: 110px; color: #fff; line-height: 1; text-shadow: 0 6px 30px rgba(0,0,0,.5); }
+    #root .label .kicker { color: rgba(255,255,255,.85); margin-top: 14px; }
+    #root .scrim { position: absolute; inset: 0; z-index: 11; background: linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,0) 45%); }
+  </style>
+  <div data-hf-id="hf-bm9g" id="root" data-composition-id="s06-property-card-dive" data-width="1080" data-height="1920" data-composition-variables='[{"id":"duration","type":"number","label":"Duration (s)","default":3.4,"min":0.5,"max":600,"step":0.1},{"id":"start","type":"number","label":"Start in film (s, set by the builder)","default":0,"min":0,"max":3600,"step":0.01},{"id":"in","type":"enum","label":"Transition in","default":"none","options":[{"value":"auto","label":"auto"},{"value":"none","label":"none"},{"value":"blur","label":"blur"},{"value":"whip-left","label":"whip-left"},{"value":"whip-right","label":"whip-right"},{"value":"whip-up","label":"whip-up"},{"value":"zoom-in","label":"zoom-in"},{"value":"zoom-out","label":"zoom-out"},{"value":"iris","label":"iris"},{"value":"slide-up","label":"slide-up"},{"value":"shutter","label":"shutter"},{"value":"paper","label":"paper"},{"value":"flood","label":"flood"},{"value":"dip","label":"dip"}]},{"id":"out","type":"enum","label":"Transition out","default":"blur","options":[{"value":"auto","label":"auto"},{"value":"none","label":"none"},{"value":"blur","label":"blur"},{"value":"whip-left","label":"whip-left"},{"value":"whip-right","label":"whip-right"},{"value":"whip-up","label":"whip-up"},{"value":"zoom-in","label":"zoom-in"},{"value":"zoom-out","label":"zoom-out"},{"value":"iris","label":"iris"},{"value":"slide-up","label":"slide-up"},{"value":"shutter","label":"shutter"},{"value":"paper","label":"paper"},{"value":"dip","label":"dip"}]},{"id":"palette","type":"enum","label":"Palette","default":"","options":[{"value":"","label":"(scene default)"},{"value":"night","label":"night"},{"value":"paper","label":"paper"},{"value":"orange","label":"orange"},{"value":"navy","label":"navy"},{"value":"mono","label":"mono"}]},{"id":"listing","type":"enum","label":"Listing (demo data)","default":"villa-dhermi","options":[{"value":"villa-dhermi","label":"villa-dhermi"},{"value":"apartment-blloku","label":"apartment-blloku"},{"value":"seaside-durres","label":"seaside-durres"},{"value":"kitchen-rent","label":"kitchen-rent"},{"value":"building-tirana","label":"building-tirana"},{"value":"stone-gjirokaster","label":"stone-gjirokaster"}]},{"id":"theme","type":"enum","label":"App theme","default":"light","options":[{"value":"light","label":"light"},{"value":"dark","label":"dark"}]},{"id":"zoom","type":"number","label":"Zoom on card","default":1.7,"min":1.2,"max":3,"step":0.1}]'>
+    <div data-hf-id="hf-jx4t" class="stage layer">
+      <div data-hf-id="hf-qhvs" class="phone-host layer"></div>
+      <div data-hf-id="hf-snhi" class="dive"><img data-hf-id="hf-a2pi" class="big" alt="" /></div>
+      <div data-hf-id="hf-261e" class="scrim"></div>
+      <div data-hf-id="hf-x0aa" class="label"><div data-hf-id="hf-4k5b" class="price"></div><div data-hf-id="hf-4gk6" class="kicker where"></div></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('s06-property-card-dive', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    const L = S.listing(v.listing) || S.listing('villa-dhermi');
+    S.ready(() => {
+      const W = S.fmt.W, H = S.fmt.H;
+      const w = S.fmt.portrait ? 560 : 380;
+      const p = S.ui.phone($('.phone-host'), { screen: 'explore', theme: v.theme, w });
+      const region = L.card[1] + 'Photo';
+      const [rx, ry, rw, rh] = S.ui.region('explore', region);
+      $('.big').src = S.asset(L.photo);
+      $('.price').textContent = S.price(L.price, { suffix: L.suffix || '' });
+      $('.where').textContent = L.city;
+      // 1. The phone settles; 2. the camera tracks to the card's photo;
+      // 3. the photo becomes the world (clip grows from the card to the frame).
+      S.ui.enter(tl, p, 0, { dur: 0.9 });
+      const zs = v.zoom;
+      const tZoom = 0.7;
+      S.ui.zoomTo(tl, p, region, tZoom, { scale: zs, dur: 0.8 });
+      const w0 = rw * p.k * zs, h0 = rh * p.k * zs;
+      const inset = (x) => `inset(${(H - h0) / 2 * x}px ${(W - w0) / 2 * x}px ${(H - h0) / 2 * x}px ${(W - w0) / 2 * x}px round ${22 * x}px)`;
+      const s0 = Math.max(w0 / W, h0 / H);
+      const tGrow = tZoom + 0.8;
+      tl.set($('.dive'), { opacity: 0 }, 0);
+      tl.set($('.dive'), { opacity: 1 }, tGrow);
+      tl.fromTo($('.dive'), { clipPath: inset(1) }, { clipPath: inset(0), duration: 0.65, ease: 'power3.inOut' }, tGrow);
+      tl.fromTo($('.big'), { scale: s0 }, { scale: 1, duration: 0.65, ease: 'power3.inOut' }, tGrow);
+      tl.to($('.big'), { scale: 1.06, duration: Math.max(0.3, c.dur - tGrow - 0.65), ease: 'none' }, tGrow + 0.65);
+      tl.fromTo($('.scrim'), { opacity: 0 }, { opacity: 1, duration: 0.4 }, tGrow + 0.4);
+      S.a.slam(tl, $('.price'), tGrow + 0.55, { from: 1.4 });
+      S.a.blurIn(tl, $('.where'), tGrow + 0.75);
+      S.tx.out(c, $('.stage'), 'blur');
+      c.done();
+    }, [L.photo]);
+  })();
+  </script>
+</template>
