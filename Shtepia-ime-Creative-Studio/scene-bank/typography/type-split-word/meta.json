@@ -1,0 +1,15 @@
+{
+  "id": "type-split-word",
+  "name": "Split word reveals a line",
+  "mode": "kinetic-typography",
+  "technique": "One fitted word is built from two masked halves (ink top, accent bottom) that close on an accent seam, then split apart vertically to reveal a second line hidden inside the word.",
+  "duration": 3.0,
+  "in": "none",
+  "out": "blur",
+  "vars": {
+    "word": { "type": "string", "label": "Word", "default": "Shtëpia", "maxLength": 12 },
+    "inside": { "type": "string", "label": "Hidden line (*accent*)", "default": "fillon me *një kërkim.*" }
+  },
+  "sfx": [{ "id": "impact-type", "at": 0.25, "volume": 0.45 }, { "id": "whoosh-air", "at": 1.25, "volume": 0.4 }],
+  "tags": ["typography", "split", "reveal"]
+}

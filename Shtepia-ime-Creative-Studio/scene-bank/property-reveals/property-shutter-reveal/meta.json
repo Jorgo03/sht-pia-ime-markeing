@@ -1,0 +1,18 @@
+{
+  "id": "property-shutter-reveal",
+  "name": "Shutter-slat property reveal",
+  "mode": "cinematic",
+  "technique": "The photo is cut into vertical slats that open from the centre outwards like shutters while the whole plate settles from 1.12×; the price counts up in the app's own format and the title sharpens in over a bottom scrim.",
+  "duration": 3.4,
+  "in": "none",
+  "out": "blur",
+  "vars": {
+    "listing": { "type": "enum", "label": "Listing (demo data)", "default": "villa-dhermi", "options": ["villa-dhermi", "apartment-blloku", "seaside-durres", "kitchen-rent", "building-tirana", "stone-gjirokaster"] },
+    "photo": { "type": "string", "label": "Override photo path", "default": "" },
+    "title": { "type": "string", "label": "Override title (*accent*)", "default": "" },
+    "slats": { "type": "number", "label": "Slats", "default": 7, "min": 3, "max": 14, "step": 1 }
+  },
+  "features": ["listing-detail"],
+  "sfx": [{ "id": "whoosh-paper", "at": 0.05, "volume": 0.4 }, { "id": "pop", "at": 1.9, "volume": 0.4 }],
+  "tags": ["property", "photo", "price"]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "phone-3d-spin",
+  "name": "3D phone spin",
+  "mode": "3d",
+  "technique": "A phone with real thickness (stacked CSS-3D slices, rounded rim, glass) spins in from edge-on and settles into a slow orbit with a real screen on its face; feature chips (from features.json claims) pop out on alternating sides.",
+  "duration": 3.4,
+  "in": "none",
+  "out": "blur",
+  "vars": {
+    "kicker": { "type": "string", "label": "Kicker", "default": "Aplikacioni" },
+    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Gjithçka për *shtëpinë*, në xhep." },
+    "screen": { "type": "screen", "label": "Screen", "default": "explore" },
+    "theme": { "type": "enum", "label": "App theme", "default": "light", "options": ["light", "dark"] },
+    "chips": { "type": "string", "label": "Chips (comma separated, max 4)", "default": "Shitje & qira, Filtra të saktë, Harta, Të preferuarat" }
+  },
+  "screens": true,
+  "features": ["listing-type", "filters", "map-view", "favorites"],
+  "sfx": [{ "id": "whoosh-deep", "at": 0.0, "volume": 0.45 }, { "id": "pop", "at": 1.1 }, { "id": "pop", "at": 1.38 }],
+  "tags": ["phone", "3d", "features"]
+}

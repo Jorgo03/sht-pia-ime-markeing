@@ -1,0 +1,39 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--ground); perspective: 2400px; }
+    #root .cap { position: absolute; left: var(--safe-left); right: calc(var(--W) - var(--safe-right)); top: calc(var(--safe-top) + 10px); text-align: center; z-index: 5; }
+    #root .cap .headline { font-size: 84px; }
+    #root .floor { position: absolute; left: 50%; bottom: 3%; width: 820px; height: 160px; margin-left: -410px; border-radius: 50%;
+      background: radial-gradient(ellipse, var(--glow), transparent 70%); filter: blur(20px); }
+    [data-orient="landscape"] #root .cap { top: 50%; left: 6%; right: 56%; text-align: left; transform: translateY(-50%); }
+  </style>
+  <div id="root" data-composition-id="phone-rise" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="stage layer">
+      <div class="glow"></div>
+      <div class="floor"></div>
+      <div class="phone-host layer"></div>
+      <div class="cap"><div class="headline t"></div></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('phone-rise', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      const land = S.fmt.landscape;
+      const w = land ? 380 : S.fmt.H < 1500 ? 440 : 560;
+      const p = S.ui.phone($('.phone-host'), { screen: v.screen, theme: v.theme, w, x: land ? 300 : 0, y: land ? 0 : 150 });
+      S.rich($('.t'), v.title);
+      S.tx.in(c, $('.stage'), 'none');
+      tl.fromTo($('.glow'), { opacity: 0 }, { opacity: 0.6, duration: 1.2 }, 0);
+      S.ui.enter(tl, p, 0.0, { dur: 1.2 });
+      S.ui.glare(tl, p, 0.9, 1.4);
+      S.a.wordsRise(tl, S.words($('.t')), 0.45);
+      if (v.next) S.ui.go(tl, p, v.next, c.dur - 1.0, { kind: 'push' });
+      S.tx.out(c, $('.stage'), 'blur');
+      c.done();
+    });
+  })();
+  </script>
+</template>

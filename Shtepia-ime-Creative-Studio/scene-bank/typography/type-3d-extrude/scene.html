@@ -1,0 +1,45 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: radial-gradient(ellipse at 50% 45%, var(--ground2), var(--ground) 70%); perspective: 1800px; }
+    #root .obj { position: absolute; left: 50%; top: 46%; width: 0; height: 0; transform-style: preserve-3d; }
+    #root .slice { position: absolute; left: 0; top: 0; transform-style: preserve-3d; white-space: nowrap; font-family: var(--font-display); font-weight: 800; letter-spacing: -0.04em; line-height: 1; text-transform: uppercase; }
+    #root .sub { position: absolute; left: var(--cap-x); right: var(--cap-x); top: 64%; text-align: center; }
+  </style>
+  <div id="root" data-composition-id="type-3d-extrude" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="stage layer">
+      <div class="glow"></div>
+      <div class="obj"></div>
+      <div class="sub"><div class="kicker s"></div></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('type-3d-extrude', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      // Extruded type: N stacked copies at increasing depth; the back copies
+      // are shaded darker so the stack reads as a solid block of letters.
+      const N = 18, depth = 3.2;
+      const probe = document.createElement('div'); probe.className = 'slice'; probe.textContent = v.word; $('.obj').appendChild(probe);
+      const fs = S.fit(probe, { maxWidth: (S.fmt.W - 2 * S.fmt.safe.left) * 0.92, max: 360 });
+      probe.remove();
+      const w = S.measure(v.word.toUpperCase(), `800 ${fs}px Manrope`);
+      for (let i = N - 1; i >= 0; i--) {
+        const s = document.createElement('div'); s.className = 'slice'; s.textContent = v.word;
+        const k = i / (N - 1);
+        s.style.fontSize = fs + 'px';
+        s.style.color = i === 0 ? 'var(--accent)' : `color-mix(in srgb, var(--accent-deep) ${100 - k * 70}%, #000)`;
+        s.style.transform = `translate(${-w / 2}px, ${-fs / 2}px) translateZ(${-i * depth}px)`;
+        $('.obj').appendChild(s);
+      }
+      $('.s').textContent = v.sub;
+      tl.fromTo($('.obj'), { rotationY: -55, rotationX: 24, scale: 0.6, opacity: 0 }, { rotationY: -18, rotationX: 12, scale: 1, opacity: 1, duration: 1.1, ease: 'expo.out' }, 0);
+      tl.to($('.obj'), { rotationY: 16, rotationX: 6, duration: Math.max(0.4, c.dur - 1.1), ease: 'sine.inOut' }, 1.1);
+      S.a.blurIn(tl, $('.s'), 0.9);
+      S.tx.out(c, $('.stage'), 'zoom-in');
+      c.done();
+    });
+  })();
+  </script>
+</template>

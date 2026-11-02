@@ -1,0 +1,36 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--ground); }
+    #root .note { position: absolute; left: var(--cap-x); right: var(--cap-x); bottom: calc(var(--H) - var(--safe-bottom) + 4px); text-align: center; z-index: 6; }
+    #root .note .body { color: var(--ink); font-size: 40px; }
+  </style>
+  <div id="root" data-composition-id="feature-spotlight" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="stage layer">
+      <div class="glow"></div>
+      <div class="phone-host layer"></div>
+      <div class="cap"><div class="kicker k"></div><div class="headline t"></div></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('feature-spotlight', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      const land = S.fmt.landscape;
+      const p = S.ui.phone($('.phone-host'), { screen: v.screen, theme: v.theme, w: land ? 380 : 540, y: land ? 40 : 160 });
+      $('.k').textContent = v.kicker; S.rich($('.t'), v.title);
+      S.ui.enter(tl, p, 0, { dur: 0.8 });
+      S.a.blurIn(tl, $('.k'), 0.15);
+      S.a.wordsBlur(tl, S.words($('.t')), 0.25);
+      S.ui.spot(tl, p, v.region, 0.9, { pad: 12 });
+      const card = S.ui.lift(p, v.region, { radius: 22, pad: 6 });
+      tl.fromTo(card, { opacity: 0 }, { opacity: 1, duration: 0.01 }, 1.0);
+      S.ui.float(tl, card, 1.0, { scale: v.scale, y: v.lift, rot: 0, z: 140 });
+      if (v.callout) { const call = S.ui.callout(p, v.region, v.callout, { side: 'top', gap: 30 + Math.abs(v.lift) }); S.a.pop(tl, call, 1.4); }
+      S.tx.out(c, $('.stage'), 'blur');
+      c.done();
+    });
+  })();
+  </script>
+</template>

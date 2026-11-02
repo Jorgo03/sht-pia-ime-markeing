@@ -1,0 +1,53 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--ground); }
+    #root .word { position: absolute; left: 0; right: 0; top: 50%; height: 0; }
+    #root .half { position: absolute; left: 0; right: 0; text-align: center; overflow: hidden; }
+    #root .half .display { display: block; text-transform: uppercase; white-space: nowrap; }
+    #root .top { bottom: 0; height: var(--hh); }
+    #root .top .display { transform: translateY(50%); }
+    #root .bot { top: 0; height: var(--hh); }
+    #root .bot .display { transform: translateY(-50%); }
+    #root .seam { position: absolute; left: var(--safe-left); right: var(--safe-left); top: 50%; height: 4px; margin-top: -2px; background: var(--accent); }
+    #root .sub { position: absolute; left: var(--cap-x); right: var(--cap-x); top: 50%; text-align: center; opacity: 0; }
+    #root .sub .headline { font-size: 64px; }
+  </style>
+  <div id="root" data-composition-id="type-split-word" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="stage layer">
+      <div class="sub"><div class="headline s"></div></div>
+      <div class="word">
+        <div class="half top"><div class="display d1"></div></div>
+        <div class="half bot"><div class="display d2"></div></div>
+      </div>
+      <div class="seam"></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('type-split-word', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      $('.d1').textContent = v.word; $('.d2').textContent = v.word;
+      const width = S.fmt.W - 2 * S.fmt.safe.left;
+      const fs = S.fit($('.d1'), { maxWidth: width, max: 420 });
+      $('.d2').style.fontSize = fs + 'px';
+      $('.word').style.setProperty('--hh', fs * 0.5 + 'px');
+      $('.d1').style.color = 'var(--ink)'; $('.d2').style.color = 'var(--accent)';
+      S.rich($('.s'), v.inside);
+      // The seam draws, the word closes from both halves, then splits open
+      // vertically to reveal the line hidden inside it.
+      S.a.rule(tl, $('.seam'), 0.0, { dur: 0.4 });
+      tl.fromTo($('.top'), { yPercent: -60, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, 0.15);
+      tl.fromTo($('.bot'), { yPercent: 60, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.6, ease: 'expo.out' }, 0.15);
+      const open = 1.25;
+      tl.to($('.top'), { y: -fs * 0.55, duration: 0.6, ease: 'power3.inOut' }, open);
+      tl.to($('.bot'), { y: fs * 0.55, duration: 0.6, ease: 'power3.inOut' }, open);
+      tl.to($('.seam'), { scaleX: 0, duration: 0.3, ease: 'power3.in' }, open);
+      tl.fromTo($('.sub'), { opacity: 0, yPercent: -50, scale: 0.9 }, { opacity: 1, yPercent: -50, scale: 1, duration: 0.5, ease: 'expo.out' }, open + 0.25);
+      S.tx.out(c, $('.stage'), 'blur');
+      c.done();
+    });
+  })();
+  </script>
+</template>

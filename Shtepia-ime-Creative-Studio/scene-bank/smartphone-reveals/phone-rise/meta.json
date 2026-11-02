@@ -1,0 +1,19 @@
+{
+  "id": "phone-rise",
+  "name": "Phone rise",
+  "mode": "ui-motion",
+  "technique": "A real app screen in a CSS phone rises from below with a 24° tilt that settles on a long expo tail, a band of light crosses the glass, and the caption rises word by word. Optional push-navigation to a second real screen before the cut.",
+  "duration": 3.2,
+  "in": "none",
+  "out": "blur",
+  "vars": {
+    "title": { "type": "string", "label": "Caption (*accent*)", "default": "Njihuni me *Shtëpia.ime.*" },
+    "screen": { "type": "screen", "label": "Screen", "default": "home" },
+    "next": { "type": "string", "label": "Push to screen (optional)", "default": "" },
+    "theme": { "type": "enum", "label": "App theme", "default": "dark", "options": ["light", "dark"] }
+  },
+  "screens": true,
+  "features": ["search", "featured"],
+  "sfx": [{ "id": "whoosh-air", "at": 0.15, "volume": 0.5 }],
+  "tags": ["phone", "ui", "reveal"]
+}

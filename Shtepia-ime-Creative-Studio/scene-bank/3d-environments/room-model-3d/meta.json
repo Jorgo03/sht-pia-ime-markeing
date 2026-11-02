@@ -1,0 +1,21 @@
+{
+  "id": "room-model-3d",
+  "name": "Architectural model (floor plan rises)",
+  "mode": "3d",
+  "technique": "An architect's model: a paper floor plate lands on an isometric plane, thin CSS-3D walls (orange-capped) grow up room by room, room labels pop in and the model slowly orbits. The plan is illustrative ('2+1' layout), not a real listing's drawing.",
+  "duration": 3.6,
+  "in": "zoom-out",
+  "out": "blur",
+  "vars": {
+    "kicker": { "type": "string", "label": "Kicker", "default": "Apartament 2+1" },
+    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Njihe shtëpinë *para se ta vizitosh.*" },
+    "r1": { "type": "string", "label": "Room 1", "default": "Dhomë gjumi" },
+    "r2": { "type": "string", "label": "Room 2", "default": "Sallon" },
+    "r3": { "type": "string", "label": "Room 3", "default": "Dhomë gjumi" },
+    "r4": { "type": "string", "label": "Room 4", "default": "Banjo" },
+    "r5": { "type": "string", "label": "Room 5", "default": "Kuzhinë" }
+  },
+  "notes": "Illustrative layout: never present it as the floor plan of a specific listing.",
+  "sfx": [{ "id": "whoosh-deep", "at": 0.0, "volume": 0.35 }, { "id": "paper-rustle", "at": 0.4, "volume": 0.35 }, { "id": "pop", "at": 1.15, "volume": 0.35 }],
+  "tags": ["3d", "floorplan", "model"]
+}

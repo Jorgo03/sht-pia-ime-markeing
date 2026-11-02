@@ -1,0 +1,15 @@
+{
+  "id": "type-3d-extrude",
+  "name": "Extruded 3D type",
+  "mode": "3d",
+  "technique": "Solid 3D lettering without WebGL: 18 copies of the word stacked in depth (translateZ) with shading from accent to deep shadow, swung in from a 55° angle and slowly orbiting so the extrusion reads.",
+  "duration": 3.0,
+  "in": "none",
+  "out": "zoom-in",
+  "vars": {
+    "word": { "type": "string", "label": "Word", "default": "Shtëpia", "maxLength": 10 },
+    "sub": { "type": "string", "label": "Line under", "default": "Gjej. Ruaj. Hyr brenda." }
+  },
+  "sfx": [{ "id": "whoosh-deep", "at": 0.0, "volume": 0.45 }, { "id": "impact-soft", "at": 0.55, "volume": 0.45 }],
+  "tags": ["typography", "3d", "extrude"]
+}

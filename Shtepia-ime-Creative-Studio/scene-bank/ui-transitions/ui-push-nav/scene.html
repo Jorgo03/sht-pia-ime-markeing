@@ -1,0 +1,50 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--ground); }
+    #root .steps { position: absolute; left: var(--cap-x); right: var(--cap-x); bottom: calc(var(--H) - var(--safe-bottom) + 4px); text-align: center; z-index: 6; height: 60px; }
+    #root .step { position: absolute; left: 0; right: 0; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="ui-push-nav" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="stage layer">
+      <div class="glow"></div>
+      <div class="phone-host layer"></div>
+      <div class="cap"><div class="headline t"></div></div>
+      <div class="steps"></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('ui-push-nav', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      const land = S.fmt.landscape;
+      const flow = String(v.flow).split(/\s*,\s*/).filter(Boolean);
+      const taps = String(v.taps).split(/\s*,\s*/);
+      const names = String(v.steps).split(/\s*,\s*/);
+      const p = S.ui.phone($('.phone-host'), { screen: flow[0], theme: v.theme, w: land ? 360 : 520, y: land ? 30 : 110 });
+      S.rich($('.t'), v.title);
+      tl.set(p.el, { opacity: 1 }, 0);
+      S.a.wordsBlur(tl, S.words($('.t')), 0.1);
+      const step = (i, t) => {
+        const d = document.createElement('div'); d.className = 'kicker step'; d.textContent = `${String(i + 1).padStart(2, '0')} — ${names[i] || ''}`;
+        $('.steps').appendChild(d);
+        tl.fromTo(d, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.25, ease: 'power2.out' }, t);
+        return d;
+      };
+      let t = 0.3, prev = step(0, t);
+      const each = (c.dur - 0.9) / Math.max(1, flow.length - 1);
+      for (let i = 1; i < flow.length; i++) {
+        const tap = taps[i - 1];
+        if (tap) S.ui.press(tl, p, tap, t + each - 0.45, { screen: flow[i - 1] });
+        S.ui.go(tl, p, flow[i], t + each - 0.3, { kind: 'push', dur: 0.5 });
+        tl.to(prev, { opacity: 0, duration: 0.15 }, t + each - 0.3);
+        t += each;
+        prev = step(i, t - 0.1);
+      }
+      S.tx.out(c, $('.stage'), 'blur');
+      c.done();
+    });
+  })();
+  </script>
+</template>

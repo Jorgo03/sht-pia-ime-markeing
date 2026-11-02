@@ -1,0 +1,42 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--ground); }
+  </style>
+  <div id="root" data-composition-id="map-app-clusters" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="stage layer">
+      <div class="glow"></div>
+      <div class="phone-host layer"></div>
+      <div class="cap"><div class="headline t"></div></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('map-app-clusters', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      const land = S.fmt.landscape;
+      const p = S.ui.phone($('.phone-host'), { screen: v.from, theme: v.theme, w: land ? 380 : 540, y: land ? 40 : 140 });
+      S.rich($('.t'), v.title);
+      S.ui.enter(tl, p, 0, { dur: 0.9 });
+      S.a.wordsBlur(tl, S.words($('.t')), 0.3);
+      // Tap the map toggle on the real explore screen, switch to the real map.
+      let t = 0.9;
+      if (v.from === 'explore') {
+        S.ui.press(tl, p, 'mapToggle', t, { screen: 'explore' });
+        S.ui.go(tl, p, 'map', t + 0.25, { kind: 'fade', dur: 0.35 });
+        t += 0.7;
+      }
+      // Camera moves onto the Tirana cluster; spotlight + callout.
+      S.ui.zoomTo(tl, p, v.region, t, { screen: 'map', scale: v.zoom, dur: 0.9 });
+      const spot = S.ui.spot(tl, p, v.region, t + 0.7, { screen: 'map', pad: 18 });
+      const call = S.ui.callout(p, v.region, v.callout, { screen: 'map', side: 'top', gap: 30 });
+      call.style.fontSize = 34 / v.zoom + 'px';
+      call.style.padding = `${16 / v.zoom}px ${28 / v.zoom}px`;
+      S.a.pop(tl, call, t + 0.95);
+      S.tx.out(c, $('.stage'), 'zoom-in');
+      c.done();
+    });
+  })();
+  </script>
+</template>

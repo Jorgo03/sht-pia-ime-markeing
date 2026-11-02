@@ -1,0 +1,44 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--ground); perspective: 2400px; }
+  </style>
+  <div id="root" data-composition-id="cards-real-lift" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="stage layer">
+      <div class="glow"></div>
+      <div class="phone-host layer"></div>
+      <div class="cap"><div class="headline t"></div></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('cards-real-lift', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      const land = S.fmt.landscape;
+      const p = S.ui.phone($('.phone-host'), { screen: 'explore', theme: v.theme, w: land ? 360 : 520, y: land ? 40 : 170 });
+      S.rich($('.t'), v.title);
+      S.ui.enter(tl, p, 0, { dur: 0.8 });
+      S.a.wordsBlur(tl, S.words($('.t')), 0.3);
+      // Each real card (cropped from the screenshot) lifts out of the grid and
+      // fans out in front of the phone — real pixels, no redrawn UI.
+      const order = ['card1', 'card2', 'card3', 'card4', 'card5', 'card6'].slice(0, v.count);
+      const spread = land ? 220 : 150;
+      order.forEach((r, i) => {
+        const card = S.ui.lift(p, r, { screen: 'explore', radius: 18 });
+        const mid = (order.length - 1) / 2;
+        const t = 0.8 + i * 0.12;
+        tl.fromTo(card, { opacity: 0 }, { opacity: 1, duration: 0.01 }, t);
+        const [rx, ry, rw, rh] = S.ui.region('explore', r);
+        // Target: a fanned row across the lower phone, rotated like a hand of cards.
+        const tx = (i - mid) * spread - ((rx + rw / 2) * p.k - p.w / 2);
+        const ty = (S.fmt.portrait ? 240 : 80) - ((ry + rh / 2) * p.k - p.h / 2) + Math.abs(i - mid) * 22;
+        tl.fromTo(card, { x: 0, y: 0, rotation: 0, scale: 1, z: 0 }, { x: tx, y: ty, rotation: (i - mid) * 7, scale: v.scale, z: 200 + i * 10, duration: 0.8, ease: 'expo.out' }, t);
+      });
+      tl.to(p.el, { scale: 0.94, opacity: 0.55, duration: 0.8, ease: 'power2.out' }, 0.9);
+      S.tx.out(c, $('.stage'), 'whip-left');
+      c.done();
+    });
+  })();
+  </script>
+</template>

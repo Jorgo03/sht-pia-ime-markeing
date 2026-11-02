@@ -1,0 +1,46 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: radial-gradient(ellipse at 50% 60%, var(--ground2), var(--ground) 72%); }
+    #root .world { perspective: 2200px; perspective-origin: 50% 45%; }
+    #root .rig { position: absolute; left: 50%; top: 56%; width: 0; height: 0; transform-style: preserve-3d; }
+    #root .chips { position: absolute; left: 0; right: 0; top: 56%; height: 0; z-index: 6; }
+    #root .chip { position: absolute; white-space: nowrap; }
+  </style>
+  <div id="root" data-composition-id="phone-3d-spin" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="stage layer">
+      <div class="glow"></div>
+      <div class="world"><div class="rig"></div></div>
+      <div class="chips"></div>
+      <div class="cap"><div class="kicker k"></div><div class="headline t"></div></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('phone-3d-spin', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      const scale = S.fmt.portrait ? 1 : 0.62;
+      const ph = S.d3.phone($('.rig'), { src: S.screen(v.screen, v.theme), w: 520 * scale, h: 1127 * scale, depth: 32 * scale });
+      $('.k').textContent = v.kicker;
+      S.rich($('.t'), v.title);
+      const labels = String(v.chips).split(/\s*,\s*/).filter(Boolean).slice(0, 4);
+      const pos = [[-1, -0.32], [1, -0.08], [-1, 0.18], [1, 0.4]];
+      const chips = labels.map((l, i) => {
+        const d = document.createElement('div'); d.className = 'chip'; d.innerHTML = '<span class="dot"></span>' + l;
+        const [sx, sy] = pos[i];
+        Object.assign(d.style, { top: sy * 1127 * scale + 'px', [sx < 0 ? 'left' : 'right']: (S.fmt.portrait ? 40 : S.fmt.W * 0.2) + 'px' });
+        $('.chips').appendChild(d); return d;
+      });
+      // Spin in: from edge-on (90°) to a three-quarter view, then a slow orbit.
+      tl.fromTo(ph.el, { rotationY: 120, rotationX: 8, z: -600, opacity: 1 }, { rotationY: -16, rotationX: 4, z: 0, duration: 1.4, ease: 'expo.out' }, 0);
+      tl.to(ph.el, { rotationY: 12, rotationX: 2, duration: Math.max(0.5, c.dur - 1.4), ease: 'sine.inOut' }, 1.4);
+      S.a.blurIn(tl, $('.k'), 0.3);
+      S.a.wordsBlur(tl, S.words($('.t')), 0.45);
+      S.a.pop(tl, chips, 1.1, { stagger: 0.14 });
+      S.tx.out(c, $('.stage'), 'blur');
+      c.done();
+    });
+  })();
+  </script>
+</template>

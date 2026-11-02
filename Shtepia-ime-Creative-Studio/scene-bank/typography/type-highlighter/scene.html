@@ -1,0 +1,29 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--ground); }
+    #root .para { position: absolute; left: var(--safe-left); right: var(--cap-x); top: 50%; transform: translateY(-50%); font-family: var(--font-serif); font-weight: 500; font-size: 84px; line-height: 1.18; letter-spacing: -0.02em; color: var(--ink); }
+    #root .para .hl { color: var(--ink); padding: 0 .08em; }
+  </style>
+  <div id="root" data-composition-id="type-highlighter" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="stage layer">
+      <div class="para"></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('type-highlighter', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      // "[words]" in the copy get a highlighter band, drawn in order.
+      const para = $('.para');
+      para.innerHTML = String(v.text).replace(/[&<>]/g, (m) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m])).replace(/\[([^\]]+)\]/g, '<span class="hl">$1</span>');
+      tl.fromTo(para, { opacity: 0, filter: 'blur(8px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.25 }, 0.05);
+      const marks = Array.from(para.querySelectorAll('.hl'));
+      marks.forEach((m, i) => S.a.highlight(tl, m, 0.5 + i * 0.55, { dur: 0.45, color: 'rgba(255,125,26,.55)' }));
+      S.tx.out(c, $('.stage'), 'blur');
+      c.done();
+    });
+  })();
+  </script>
+</template>

@@ -1,0 +1,14 @@
+{
+  "id": "logo-flood-stacked",
+  "name": "Flood to stacked logo",
+  "mode": "kinetic-typography",
+  "technique": "Two colour floods: orange rises from the bottom, black wipes down over it, and the official stacked lockup sharpens out of a blur on black; the closing line turns from faint to ink word by word. The orange door is never placed on orange.",
+  "duration": 3.0,
+  "in": "flood",
+  "out": "none",
+  "vars": {
+    "line": { "type": "string", "label": "Closing line (*accent*)", "default": "Shtëpia jote. *Zgjedhja jote.*" }
+  },
+  "sfx": [{ "id": "whoosh-air", "at": 0.05, "volume": 0.5 }, { "id": "logo-reveal", "at": 0.95, "volume": 0.8 }],
+  "tags": ["logo", "brand", "flood"]
+}

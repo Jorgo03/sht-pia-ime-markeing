@@ -1,0 +1,548 @@
+{
+ "$comment": "Real Shtëpia.ime app screens (1290x2796, iPhone 6.7\"), captured by the app repo's marketing/launch-video/capture/capture.mjs. Regions are [x, y, w, h] in screenshot pixels, measured on the light theme; the dark captures share the same layout. The listings shown are the app's DEMO listings (fictional properties, AI-generated photos) — never present them as real offers. UI-motion scenes may only animate these regions: zoom to them, lift them, highlight them. Never draw UI that is not in a screenshot.",
+ "size": [
+  1290,
+  2796
+ ],
+ "themes": [
+  "light",
+  "dark"
+ ],
+ "path": "assets/screenshots/{theme}/{id}.png",
+ "screens": {
+  "home": {
+   "label": "Home — greeting, search, featured listing",
+   "features": [
+    "search",
+    "featured",
+    "favorites",
+    "ai-assistant"
+   ],
+   "regions": {
+    "header": [
+     0,
+     0,
+     1290,
+     160
+    ],
+    "headline": [
+     60,
+     170,
+     1100,
+     200
+    ],
+    "search": [
+     60,
+     430,
+     1170,
+     170
+    ],
+    "filterChip": [
+     1040,
+     480,
+     140,
+     80
+    ],
+    "aiAssistant": [
+     0,
+     640,
+     1290,
+     170
+    ],
+    "featuredLabel": [
+     60,
+     870,
+     560,
+     70
+    ],
+    "featuredCard": [
+     60,
+     966,
+     1170,
+     1084
+    ],
+    "featuredPhoto": [
+     60,
+     966,
+     1170,
+     658
+    ],
+    "featuredTitle": [
+     100,
+     1650,
+     900,
+     80
+    ],
+    "featuredFacts": [
+     110,
+     1820,
+     780,
+     90
+    ],
+    "featuredPrice": [
+     110,
+     1910,
+     340,
+     100
+    ],
+    "featuredHeart": [
+     1076,
+     1010,
+     110,
+     110
+    ],
+    "forYou": [
+     60,
+     2120,
+     1180,
+     330
+    ],
+    "bottomNav": [
+     50,
+     2560,
+     1190,
+     180
+    ],
+    "addButton": [
+     560,
+     2530,
+     170,
+     170
+    ]
+   }
+  },
+  "home-scrolled": {
+   "label": "Home scrolled — 'Sipas shijes suaj' row",
+   "features": [
+    "recommendations-row",
+    "favorites"
+   ],
+   "regions": {}
+  },
+  "explore": {
+   "label": "Explore — grid of listings with filters",
+   "features": [
+    "search",
+    "listing-type",
+    "grid-view",
+    "favorites",
+    "filters"
+   ],
+   "regions": {
+    "headline": [
+     60,
+     190,
+     700,
+     140
+    ],
+    "viewToggle": [
+     860,
+     200,
+     210,
+     110
+    ],
+    "mapToggle": [
+     976,
+     210,
+     90,
+     90
+    ],
+    "filterButton": [
+     1110,
+     200,
+     114,
+     110
+    ],
+    "search": [
+     60,
+     370,
+     1170,
+     134
+    ],
+    "chipAll": [
+     60,
+     550,
+     286,
+     126
+    ],
+    "chipSale": [
+     380,
+     550,
+     230,
+     126
+    ],
+    "chipRent": [
+     644,
+     550,
+     200,
+     126
+    ],
+    "count": [
+     60,
+     730,
+     600,
+     60
+    ],
+    "card1": [
+     64,
+     840,
+     560,
+     440
+    ],
+    "card2": [
+     666,
+     840,
+     560,
+     440
+    ],
+    "card3": [
+     64,
+     1324,
+     560,
+     440
+    ],
+    "card4": [
+     666,
+     1324,
+     560,
+     440
+    ],
+    "card5": [
+     64,
+     1808,
+     560,
+     440
+    ],
+    "card6": [
+     666,
+     1808,
+     560,
+     440
+    ],
+    "grid": [
+     60,
+     830,
+     1170,
+     1430
+    ],
+    "bottomNav": [
+     50,
+     2556,
+     1190,
+     184
+    ],
+    "card1Photo": [
+     76,
+     866,
+     536,
+     270
+    ],
+    "card2Photo": [
+     678,
+     866,
+     536,
+     270
+    ],
+    "card3Photo": [
+     76,
+     1350,
+     536,
+     270
+    ],
+    "card4Photo": [
+     678,
+     1350,
+     536,
+     270
+    ],
+    "card5Photo": [
+     76,
+     1832,
+     536,
+     270
+    ],
+    "card6Photo": [
+     678,
+     1832,
+     536,
+     270
+    ]
+   }
+  },
+  "filters": {
+   "label": "Filters sheet — city, reference, type, price, area, rooms, baths",
+   "features": [
+    "filters",
+    "listing-type",
+    "price-filter",
+    "area-filter",
+    "rooms-filter",
+    "reference-search"
+   ],
+   "regions": {
+    "sheet": [
+     0,
+     340,
+     1290,
+     2456
+    ],
+    "title": [
+     60,
+     400,
+     1230,
+     100
+    ],
+    "city": [
+     60,
+     636,
+     1164,
+     128
+    ],
+    "reference": [
+     60,
+     910,
+     1164,
+     140
+    ],
+    "type": [
+     70,
+     1206,
+     1150,
+     114
+    ],
+    "price": [
+     60,
+     1476,
+     1164,
+     134
+    ],
+    "area": [
+     60,
+     1760,
+     1164,
+     136
+    ],
+    "bedrooms": [
+     60,
+     2044,
+     1100,
+     112
+    ],
+    "bathrooms": [
+     60,
+     2300,
+     1100,
+     116
+    ],
+    "showResults": [
+     60,
+     2576,
+     1170,
+     160
+    ]
+   }
+  },
+  "map": {
+   "label": "Explore on the map — clusters over OpenStreetMap",
+   "features": [
+    "map-view",
+    "search",
+    "listing-type"
+   ],
+   "regions": {
+    "map": [
+     0,
+     730,
+     1290,
+     1850
+    ],
+    "count": [
+     60,
+     770,
+     250,
+     100
+    ],
+    "clusterTirana": [
+     494,
+     1622,
+     128,
+     128
+    ],
+    "clusterSouthA": [
+     494,
+     2416,
+     128,
+     128
+    ],
+    "clusterSouthB": [
+     700,
+     2380,
+     128,
+     128
+    ],
+    "search": [
+     60,
+     370,
+     1170,
+     134
+    ],
+    "chips": [
+     60,
+     550,
+     800,
+     126
+    ],
+    "attribution": [
+     790,
+     2500,
+     500,
+     60
+    ]
+   }
+  },
+  "detail-1": {
+   "label": "Listing detail — 2+1 apartment in Blloku, Tiranë (demo)",
+   "features": [
+    "listing-detail",
+    "favorites",
+    "share",
+    "amenities",
+    "ai-assistant"
+   ],
+   "regions": {
+    "photo": [
+     0,
+     0,
+     1290,
+     1090
+    ],
+    "heart": [
+     1114,
+     50,
+     120,
+     126
+    ],
+    "share": [
+     970,
+     50,
+     120,
+     126
+    ],
+    "title": [
+     60,
+     1160,
+     1140,
+     280
+    ],
+    "address": [
+     60,
+     1460,
+     1060,
+     60
+    ],
+    "description": [
+     60,
+     1580,
+     1200,
+     240
+    ],
+    "facts": [
+     60,
+     1900,
+     1170,
+     220
+    ],
+    "amenities": [
+     60,
+     2160,
+     1170,
+     420
+    ],
+    "askButton": [
+     710,
+     2636,
+     530,
+     114
+    ]
+   }
+  },
+  "detail-1-scrolled": {
+   "label": "Listing detail scrolled — location map + similar listings",
+   "features": [
+    "location-map",
+    "similar-listings",
+    "report-listing",
+    "ai-assistant"
+   ],
+   "regions": {
+    "location": [
+     60,
+     1090,
+     1170,
+     750
+    ],
+    "locationMap": [
+     120,
+     1224,
+     1050,
+     476
+    ],
+    "pin": [
+     604,
+     1424,
+     80,
+     80
+    ],
+    "similar": [
+     60,
+     1900,
+     1170,
+     680
+    ],
+    "askButton": [
+     710,
+     2636,
+     530,
+     114
+    ]
+   }
+  },
+  "detail-2": {
+   "label": "Listing detail — modern villa with pool in Dhërmi (demo)",
+   "features": [
+    "listing-detail",
+    "favorites",
+    "share",
+    "amenities"
+   ],
+   "regions": {
+    "photo": [
+     0,
+     0,
+     1290,
+     1090
+    ],
+    "title": [
+     60,
+     1160,
+     1140,
+     280
+    ],
+    "facts": [
+     60,
+     1900,
+     1170,
+     220
+    ]
+   }
+  },
+  "detail-2-scrolled": {
+   "label": "Listing detail scrolled (villa)",
+   "features": [
+    "location-map",
+    "similar-listings"
+   ],
+   "regions": {}
+  }
+ }
+}

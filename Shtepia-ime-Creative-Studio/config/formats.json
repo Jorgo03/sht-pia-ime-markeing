@@ -1,0 +1,33 @@
+{
+  "$comment": "Export formats. 'safe' is the box (in px) where text and the product must sit: platform UI covers the rest. QC checks every text box against it.",
+  "default": "reel",
+  "fps": 30,
+  "formats": {
+    "reel": {
+      "label": "Instagram Reels / TikTok / Shorts — 9:16",
+      "width": 1080, "height": 1920, "orientation": "portrait",
+      "safe": { "top": 168, "bottom": 1330, "left": 60, "right": 900 },
+      "note": "Nothing readable above 168 px or below 1330 px; keep text left of the action rail (x < 900)."
+    },
+    "tiktok": {
+      "label": "TikTok — 9:16 (same canvas as reel, larger bottom UI)",
+      "width": 1080, "height": 1920, "orientation": "portrait",
+      "safe": { "top": 168, "bottom": 1300, "left": 60, "right": 900 }
+    },
+    "youtube": {
+      "label": "YouTube — 16:9",
+      "width": 1920, "height": 1080, "orientation": "landscape",
+      "safe": { "top": 54, "bottom": 1026, "left": 96, "right": 1824 }
+    },
+    "square": {
+      "label": "Instagram feed — 1:1",
+      "width": 1080, "height": 1080, "orientation": "square",
+      "safe": { "top": 54, "bottom": 1026, "left": 54, "right": 1026 }
+    },
+    "portrait": {
+      "label": "Instagram portrait feed — 4:5",
+      "width": 1080, "height": 1350, "orientation": "portrait45",
+      "safe": { "top": 68, "bottom": 1282, "left": 54, "right": 1026 }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "ui-screens-wall",
+  "name": "Wall of real screens",
+  "mode": "3d",
+  "technique": "Every real screen (light and dark) tiled on a tilted 3D wall; alternate columns scroll in opposite directions at constant speed while the wall drifts towards camera behind a vignette and a centred headline. Product UI is shown flat on the wall plane, never distorted per-screen.",
+  "duration": 3.4,
+  "in": "zoom-out",
+  "out": "blur",
+  "vars": {
+    "kicker": { "type": "string", "label": "Kicker", "default": "Ditë apo natë" },
+    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Çdo mundësi, *në një vend.*" }
+  },
+  "screens": true,
+  "features": ["dark-mode"],
+  "sfx": [{ "id": "whoosh-air", "at": 0.0, "volume": 0.4 }],
+  "tags": ["ui", "wall", "overview", "3d"]
+}

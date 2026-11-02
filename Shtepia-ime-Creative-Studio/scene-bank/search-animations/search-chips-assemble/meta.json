@@ -1,0 +1,18 @@
+{
+  "id": "search-chips-assemble",
+  "name": "Search chips assemble",
+  "mode": "kinetic-typography",
+  "technique": "A typographic search bar (a designed graphic, not app UI) unrolls, and filter chips fly in from scattered positions with rotation and snap into it on a back-ease, the first one in the accent — the idea of filtering in one image.",
+  "duration": 3.0,
+  "in": "none",
+  "out": "zoom-in",
+  "vars": {
+    "kicker": { "type": "string", "label": "Kicker", "default": "Kërkimi" },
+    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Thjesht. *Si duhet.*" },
+    "chips": { "type": "string", "label": "Chips (max 3)", "default": "Tiranë, 2 dhoma, Shitje" },
+    "footer": { "type": "string", "label": "Footer line", "default": "Çmimi · Sipërfaqja · Dhomat · Tualetet" }
+  },
+  "features": ["filters", "listing-type"],
+  "sfx": [{ "id": "pop", "at": 0.85 }, { "id": "pop", "at": 1.07 }, { "id": "pop", "at": 1.29 }],
+  "tags": ["search", "chips", "typography"]
+}

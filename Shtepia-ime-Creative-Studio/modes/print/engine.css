@@ -1,0 +1,40 @@
+/* PRINT STUDIO — cut-paper look. Paper is a flat colour with a printed fibre
+   texture (a PNG grain tile from scripts/make-grain.py, multiplied; SVG
+   feTurbulence tiles render as dark noise in headless capture, so never use them) and a soft
+   contact shadow whose size tracks how high the sheet "lifts". */
+.paper {
+  position: absolute;
+  background-color: var(--paper);
+  background-image: url("../../illustrations/paper-grain.png");
+  background-blend-mode: multiply;
+  box-shadow: 0 var(--lift, 10px) calc(var(--lift, 10px) * 2.4) rgba(40, 22, 8, 0.28), 0 1px 2px rgba(40, 22, 8, 0.25);
+}
+.paper.orange { background-color: var(--accent); }
+.paper.ink { background-color: var(--ink); }
+.paper.shade { background-color: var(--paper-shade); }
+.paper.ground { background-color: var(--ground); }
+.paper.round { border-radius: 28px; }
+/* Grain over any flat colour layer (not footage). */
+.grain::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; mix-blend-mode: multiply; opacity: .5;
+  background-image: url("../../illustrations/paper-grain.png");
+}
+/* SVG cut-outs get the same contact shadow via drop-shadow on their wrapper. */
+.cut { position: absolute; filter: drop-shadow(0 var(--lift, 8px) calc(var(--lift, 8px) * 1.6) rgba(40, 22, 8, 0.32)); }
+.cut svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.print-label {
+  position: absolute; padding: 16px 28px; border-radius: 6px;
+  font-family: var(--font-mono), monospace; font-size: 30px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--ink); background: var(--paper);
+  box-shadow: 0 8px 20px rgba(40, 22, 8, .25);
+}
+.print-stamp {
+  position: absolute; display: inline-flex; align-items: center; justify-content: center;
+  border: 6px solid var(--accent); color: var(--accent); border-radius: 18px;
+  font-family: var(--font-mono), monospace; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+  padding: 18px 30px; font-size: 40px; mix-blend-mode: multiply;
+}
+.print-tape {
+  position: absolute; width: 180px; height: 54px; background: rgba(255, 240, 210, .62);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .12);
+}

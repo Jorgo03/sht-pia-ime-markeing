@@ -1,0 +1,15 @@
+{
+  "id": "logo-door-draw",
+  "name": "Door draw logo reveal",
+  "mode": "kinetic-typography",
+  "technique": "The official door path is drawn as a stroke (frame then leaf), the official symbol file fades over it, then the mark lifts away as the official horizontal lockup wipes in. Never redraws the logo: both end states are the brand's own SVG files.",
+  "duration": 3.4,
+  "in": "none",
+  "out": "none",
+  "vars": {
+    "tagline": { "type": "string", "label": "Tagline", "default": "Shtëpia jote. Zgjedhja jote." },
+    "ground": { "type": "enum", "label": "Ground", "default": "dark", "options": ["dark", "light"] }
+  },
+  "sfx": [{ "id": "whoosh-deep", "at": 0.0, "volume": 0.35 }, { "id": "logo-reveal", "at": 1.05, "volume": 0.8 }],
+  "tags": ["logo", "brand", "dark"]
+}

@@ -1,0 +1,41 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #000; }
+    #root .facts { position: absolute; left: var(--cap-x); right: var(--cap-x); bottom: calc(var(--H) - var(--safe-bottom) + 10px); z-index: 8; display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+    #root .chip { background: rgba(20,18,16,.72); color: #fff; box-shadow: inset 0 0 0 2px rgba(255,255,255,.18); backdrop-filter: blur(10px); }
+    #root .top { position: absolute; left: var(--cap-x); right: var(--cap-x); top: calc(var(--safe-top) + 60px); z-index: 8; text-align: center; color: #fff; }
+    #root .top .headline { color: #fff; font-size: 80px; text-shadow: 0 6px 30px rgba(0,0,0,.4); }
+    #root .top .kicker { color: rgba(255,255,255,.8); margin-bottom: 16px; }
+  </style>
+  <div id="root" data-composition-id="property-kenburns-facts" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="plate layer"></div>
+    <div class="fx layer"></div>
+    <div class="top"><div class="kicker k"></div><div class="headline t"></div></div>
+    <div class="facts"></div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('property-kenburns-facts', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    const L = S.listing(v.listing) || {};
+    const photo = v.photo || L.photo;
+    S.ready(() => {
+      const { cam } = S.cine.plate($('.plate'), photo);
+      S.cine.scrim($('.fx'), { side: 'top', strength: 0.6, size: 40 });
+      S.cine.scrim($('.fx'), { side: 'bottom', strength: 0.7, size: 40 });
+      S.cine.letterbox(tl, $('.fx'), 0.1, { dur: 0.9 });
+      S.cine.lightSweep(tl, $('.fx'), 0.6, { dur: 2.2 });
+      $('.k').textContent = L.city ? `${L.city}${L.type ? ' · ' + L.type : ''}` : '';
+      S.rich($('.t'), v.title || L.title || '');
+      const facts = [L.rooms && `${L.rooms} dhoma`, L.baths && `${L.baths} banjo`, L.area && `${L.area} m²`, L.year && `${L.year}`].filter(Boolean);
+      const chips = facts.map((f) => { const d = document.createElement('div'); d.className = 'chip'; d.innerHTML = '<span class="dot"></span>' + f; $('.facts').appendChild(d); return d; });
+      S.cam.push(tl, cam, 0, c.dur, { from: 1.0, to: 1.1, x: -2, y: -1 });
+      S.a.blurIn(tl, $('.k'), 0.5);
+      S.a.wordsBlur(tl, S.words($('.t')), 0.65);
+      S.a.pop(tl, chips, 1.3, { stagger: 0.12 });
+      S.tx.out(c, $('.plate'), 'dip');
+      c.done();
+    }, [photo]);
+  })();
+  </script>
+</template>

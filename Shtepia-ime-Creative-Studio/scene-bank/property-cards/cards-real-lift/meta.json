@@ -1,0 +1,19 @@
+{
+  "id": "cards-real-lift",
+  "name": "Real cards lift out of the grid",
+  "mode": "ui-motion",
+  "technique": "The six listing cards are cropped from the real explore screenshot (background-position crops, so it is the app's own pixels) and lift out of the grid one by one into a fanned hand in front of the dimming phone.",
+  "duration": 3.2,
+  "in": "none",
+  "out": "whip-left",
+  "vars": {
+    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Shfleto *me foto.*" },
+    "count": { "type": "number", "label": "Cards", "default": 5, "min": 2, "max": 6, "step": 1 },
+    "scale": { "type": "number", "label": "Card scale", "default": 1.45, "min": 1, "max": 2.2, "step": 0.05 },
+    "theme": { "type": "enum", "label": "App theme", "default": "light", "options": ["light", "dark"] }
+  },
+  "screens": true,
+  "features": ["grid-view"],
+  "sfx": [{ "id": "whoosh-paper", "at": 0.8, "volume": 0.4 }, { "id": "paper-rustle", "at": 0.9, "volume": 0.3 }],
+  "tags": ["cards", "ui", "lift"]
+}

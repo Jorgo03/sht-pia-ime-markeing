@@ -1,0 +1,15 @@
+{
+  "id": "hook-question",
+  "name": "Question hook",
+  "mode": "kinetic-typography",
+  "technique": "First two words are already on frame 0 (the thumbnail); the rest sharpen out of a blur word by word, then the italic accent payoff slams in under a soft door-light beam.",
+  "duration": 2.4,
+  "in": "none",
+  "out": "blur",
+  "vars": {
+    "kicker": { "type": "string", "label": "Kicker", "default": "Shtëpia.ime" },
+    "question": { "type": "string", "label": "Question (*accent*)", "default": "Po kërkon *shtëpinë tënde?*", "maxLength": 60 }
+  },
+  "sfx": [{ "id": "impact-soft", "at": 0.75, "volume": 0.6 }],
+  "tags": ["hook", "dark", "serif"]
+}

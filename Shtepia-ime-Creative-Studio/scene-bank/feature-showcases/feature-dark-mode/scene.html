@@ -1,0 +1,39 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .bgL, #root .bgD { position: absolute; inset: 0; }
+    #root .bgL { background: #f1ede6; }
+    #root .bgD { background: #0b0806; }
+    #root .label { position: absolute; left: var(--cap-x); right: var(--cap-x); bottom: calc(var(--H) - var(--safe-bottom) + 4px); text-align: center; z-index: 6; display: flex; justify-content: center; gap: 30px; }
+    #root .label .kicker { font-size: 32px; }
+  </style>
+  <div id="root" data-composition-id="feature-dark-mode" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="bgL"></div>
+    <div class="bgD"></div>
+    <div class="phone-host layer"></div>
+    <div class="cap"><div class="headline t"></div></div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('feature-dark-mode', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      const land = S.fmt.landscape;
+      const p = S.ui.phone($('.phone-host'), { screen: v.screen, theme: 'light', w: land ? 380 : 560, y: land ? 30 : 140, frame: 'dark' });
+      const dark = p.add(v.screen, 'dark');
+      dark.src = S.screen(v.screen, 'dark');
+      S.rich($('.t'), v.title);
+      tl.set(p.el, { opacity: 1 }, 0);
+      // Light -> dark: a diagonal wipe crosses the real screen and the world
+      // behind it at the same moment (both themes are real captures).
+      const wipe = (el, at) => tl.fromTo(el, { clipPath: 'polygon(0% 0%, 0% 0%, 0% 0%, 0% 0%)' }, { clipPath: 'polygon(0% 0%, 140% 0%, 100% 100%, -40% 100%)', duration: 0.9, ease: 'power3.inOut' }, at);
+      wipe(dark, v.at); wipe($('.bgD'), v.at);
+      tl.fromTo($('.t'), { color: '#1a1714' }, { color: '#f0ece6', duration: 0.5 }, v.at + 0.2);
+      S.a.wordsBlur(tl, S.words($('.t')), 0.1);
+      S.ui.glare(tl, p, v.at + 0.3, 1.2);
+      S.tx.out(c, $('.phone-host'), 'blur');
+      c.done();
+    });
+  })();
+  </script>
+</template>

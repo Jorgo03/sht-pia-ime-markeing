@@ -1,0 +1,49 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--ground); perspective: 2200px; }
+    #root .card { position: absolute; left: 50%; top: 52%; width: 700px; height: 980px; margin: -490px 0 0 -350px; transform-style: preserve-3d; }
+    #root .side { position: absolute; inset: 0; border-radius: 40px; overflow: hidden; backface-visibility: hidden; box-shadow: 0 50px 100px rgba(0,0,0,.5); }
+    #root .front img { width: 100%; height: 100%; object-fit: cover; }
+    #root .front .p { position: absolute; left: 40px; bottom: 40px; font-family: var(--font-serif); font-style: italic; font-size: 92px; color: #fff; text-shadow: 0 6px 24px rgba(0,0,0,.5); }
+    #root .back { background: var(--surface); transform: rotateY(180deg); padding: 60px 56px; display: flex; flex-direction: column; gap: 22px; }
+    #root .back .headline { font-size: 60px; }
+    #root .row { display: flex; justify-content: space-between; font-family: var(--font-sans); font-weight: 600; font-size: 36px; color: var(--ink); padding: 18px 0; border-bottom: 2px solid var(--line); }
+    #root .row b { color: var(--accent); font-weight: 800; }
+    #root .am { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; }
+    #root .am .chip { font-size: 26px; padding: 10px 20px; }
+  </style>
+  <div id="root" data-composition-id="card-flip-details" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="stage layer">
+      <div class="card">
+        <div class="side front"><img alt="" /><div class="p"></div></div>
+        <div class="side back"><div class="kicker where"></div><div class="headline ttl"></div><div class="rows"></div><div class="am"></div></div>
+      </div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('card-flip-details', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    const L = S.listing(v.listing) || S.listing('apartment-blloku');
+    S.ready(() => {
+      $('.front img').src = S.asset(L.photo);
+      $('.front .p').textContent = S.price(L.price, { suffix: L.suffix || '' });
+      $('.where').textContent = [L.deal, L.type, L.city].filter(Boolean).join(' · ');
+      S.rich($('.ttl'), L.title || L.city);
+      const rows = [['Dhoma', L.rooms], ['Banjo', L.baths], ['Sipërfaqja', L.area && L.area + ' m²'], ['Viti', L.year]].filter((r) => r[1]);
+      $('.rows').innerHTML = rows.map(([k, x]) => `<div class="row"><span>${k}</span><b>${x}</b></div>`).join('');
+      $('.am').innerHTML = (L.amenities || []).map((a) => `<span class="chip"><span class="dot"></span>${a}</span>`).join('');
+      if (!S.fmt.portrait) gsap.set($('.card'), { scale: 0.85 });
+      tl.fromTo($('.card'), { y: 500, rotationX: 30, opacity: 0 }, { y: 0, rotationX: 0, opacity: 1, duration: 0.8, ease: 'expo.out' }, 0);
+      // Flip: a half turn with a little lift at its middle.
+      tl.to($('.card'), { rotationY: 180, duration: 0.9, ease: 'power3.inOut' }, 1.1);
+      tl.to($('.card'), { z: 160, duration: 0.45, ease: 'power2.out', yoyo: true, repeat: 1 }, 1.1);
+      S.a.rise(tl, $('.rows .row'), 1.75, { y: 20, stagger: 0.07, dur: 0.5 });
+      S.a.pop(tl, $('.am').children, 2.1, { stagger: 0.05 });
+      S.tx.out(c, $('.stage'), 'zoom-out');
+      c.done();
+    }, [L.photo]);
+  })();
+  </script>
+</template>

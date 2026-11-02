@@ -1,0 +1,14 @@
+{
+  "id": "logo-knob-pullback",
+  "name": "Knob light pull-back",
+  "mode": "cinematic",
+  "technique": "Starts on a single warm point of light, then pulls back through the official door symbol from 14× around its knob hole (the logo's own story: the knob is the dot of .ime), then glides onto the door position of the official horizontal lockup and hands over to it as the name sweeps out from behind the door. Never rearranges the logo: every end state is an official file.",
+  "duration": 3.8,
+  "in": "none",
+  "out": "none",
+  "vars": {
+    "handle": { "type": "string", "label": "Handle / URL", "default": "@shtepia.ime" }
+  },
+  "sfx": [{ "id": "riser", "at": -0.4, "volume": 0.4 }, { "id": "logo-reveal", "at": 1.9, "volume": 0.8 }],
+  "tags": ["logo", "brand", "dark", "cinematic"]
+}

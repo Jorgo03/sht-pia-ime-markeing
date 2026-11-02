@@ -1,0 +1,95 @@
+{
+  "$comment": "What a video may claim. Source: the app repo's shtepia-ime-overview.md 'Feature Status' table (2026-07 audit) and the real screens in config/screens.json. QC fails any storyboard that names a feature id not listed here, or one whose status is not 'live' (unless that feature is switched on in 'overrides'). Update this file when the app changes — it is the accuracy gate.",
+  "updated": "2026-10-31",
+  "source": "Jorgo03/sht-pia-ime: shtepia-ime-overview.md, design-system/MASTER.md, marketing/launch-video/assets/screens",
+  "overrides": {
+    "ai-assistant": false,
+    "ai-search": false
+  },
+  "features": {
+    "search": {
+      "status": "live", "screens": ["home", "explore", "map"],
+      "claims": { "sq": "Kërko sipas qytetit, lagjes ose kodit postar", "en": "Search by city, neighbourhood or postcode", "it": "Cerca per città, quartiere o CAP" }
+    },
+    "filters": {
+      "status": "live", "screens": ["filters"],
+      "claims": { "sq": "Filtro sipas çmimit, sipërfaqes, dhomave dhe tualeteve", "en": "Filter by price, size, bedrooms and bathrooms", "it": "Filtra per prezzo, superficie, camere e bagni" }
+    },
+    "listing-type": {
+      "status": "live", "screens": ["explore", "filters", "map"],
+      "claims": { "sq": "Shitje apo qira — në një vend", "en": "For sale or for rent — in one place", "it": "Vendita o affitto — in un unico posto" }
+    },
+    "price-filter": { "status": "live", "screens": ["filters"], "claims": { "sq": "Vendos buxhetin tënd", "en": "Set your budget", "it": "Imposta il tuo budget" } },
+    "area-filter": { "status": "live", "screens": ["filters"], "claims": { "sq": "Zgjidh sipërfaqen në m²", "en": "Choose the size in m²", "it": "Scegli la superficie in m²" } },
+    "rooms-filter": { "status": "live", "screens": ["filters"], "claims": { "sq": "Sa dhoma gjumi të duhen?", "en": "How many bedrooms do you need?", "it": "Quante camere ti servono?" } },
+    "reference-search": { "status": "live", "screens": ["filters"], "claims": { "sq": "Gjej një pronë me kodin e saj", "en": "Find a property by its reference code", "it": "Trova un immobile con il suo codice" } },
+    "grid-view": { "status": "live", "screens": ["explore"], "claims": { "sq": "Shfleto pronat me foto", "en": "Browse listings photo-first", "it": "Sfoglia gli annunci con le foto" } },
+    "map-view": {
+      "status": "live", "screens": ["map"],
+      "claims": { "sq": "Eksploro pronat në hartë", "en": "Explore listings on the map", "it": "Esplora gli immobili sulla mappa" }
+    },
+    "listing-detail": {
+      "status": "live", "screens": ["detail-1", "detail-2"],
+      "claims": { "sq": "Çdo detaj: dhoma, banjo, m², viti", "en": "Every detail: rooms, baths, m², year", "it": "Ogni dettaglio: camere, bagni, m², anno" }
+    },
+    "amenities": { "status": "live", "screens": ["detail-1", "detail-2"], "claims": { "sq": "Shiko çfarë ka brenda", "en": "See what's inside", "it": "Scopri cosa c'è dentro" } },
+    "location-map": { "status": "live", "screens": ["detail-1-scrolled"], "claims": { "sq": "Vendndodhja e saktë në hartë", "en": "The exact location on a map", "it": "La posizione esatta sulla mappa" } },
+    "similar-listings": { "status": "live", "screens": ["detail-1-scrolled"], "claims": { "sq": "Prona të ngjashme, një prekje larg", "en": "Similar homes, one tap away", "it": "Immobili simili, a un tocco" } },
+    "favorites": {
+      "status": "live", "screens": ["home", "explore", "detail-1"],
+      "claims": { "sq": "Ruaj të preferuarat", "en": "Save your favourites", "it": "Salva i preferiti" }
+    },
+    "share": { "status": "live", "screens": ["detail-1"], "claims": { "sq": "Ndaje me familjen", "en": "Share it with your family", "it": "Condividilo con la famiglia" } },
+    "featured": { "status": "live", "screens": ["home"], "claims": { "sq": "Të zgjedhura këtë javë", "en": "Picked this week", "it": "Scelti questa settimana" } },
+    "recommendations-row": {
+      "status": "live", "screens": ["home-scrolled"],
+      "claims": { "sq": "Sipas shijes suaj", "en": "Picked for your taste", "it": "Secondo i tuoi gusti" },
+      "note": "Show the row as it is. Do NOT claim AI/smart/personalised recommendations: 'Smart recommendations' is 'not started'."
+    },
+    "report-listing": { "status": "live", "screens": ["detail-1-scrolled"], "claims": { "sq": "Raporto një shpallje", "en": "Report a listing", "it": "Segnala un annuncio" } },
+    "publish-listing": {
+      "status": "live", "screens": [],
+      "claims": { "sq": "Publiko pronën tënde hap pas hapi", "en": "Publish your property step by step", "it": "Pubblica il tuo immobile passo dopo passo" },
+      "note": "Live (listing wizard: draft → publish, images, video URL) but no screenshot captured yet. Use type/print scenes only, or capture the wizard first."
+    },
+    "messaging": {
+      "status": "live", "screens": [],
+      "claims": { "sq": "Shkruaj direkt agjentit", "en": "Message the agent directly", "it": "Scrivi direttamente all'agente" },
+      "note": "Live (v1) but no screenshot captured yet."
+    },
+    "viewings": {
+      "status": "live", "screens": [],
+      "claims": { "sq": "Rezervo një vizitë", "en": "Book a viewing", "it": "Prenota una visita" },
+      "note": "Live (request on property page, manage at /viewings) but no screenshot captured yet."
+    },
+    "saved-searches": { "status": "live", "screens": [], "claims": { "sq": "Ruaj kërkimet e tua", "en": "Save your searches", "it": "Salva le tue ricerche" } },
+    "wanted-homes": { "status": "live", "screens": [], "claims": { "sq": "Thuaj çfarë kërkon — agjentët të gjejnë", "en": "Post what you want — agents find you", "it": "Di' cosa cerchi — gli agenti ti trovano" } },
+    "multilingual": {
+      "status": "live", "screens": [],
+      "claims": { "sq": "Në 8 gjuhë, edhe për diasporën", "en": "In 8 languages, for the diaspora too", "it": "In 8 lingue, anche per la diaspora" }
+    },
+    "auto-translate": { "status": "live", "screens": [], "claims": { "sq": "Shpalljet përkthehen automatikisht", "en": "Listings translate automatically", "it": "Gli annunci si traducono automaticamente" } },
+    "dark-mode": { "status": "live", "screens": ["home"], "claims": { "sq": "Ditë apo natë", "en": "Light or dark", "it": "Chiaro o scuro" } },
+    "agent-dashboard": { "status": "live", "screens": [], "claims": { "sq": "Panel për agjentët", "en": "A dashboard for agents", "it": "Una dashboard per gli agenti" } },
+    "ai-assistant": {
+      "status": "flagged", "screens": ["home", "detail-1"],
+      "claims": { "sq": "Pyet asistentin AI", "en": "Ask the AI assistant", "it": "Chiedi all'assistente AI" },
+      "note": "Built, behind a flag, awaiting ANTHROPIC_API_KEY. The button is visible on the screens; do not claim it works until overrides.ai-assistant is true."
+    },
+    "ai-search": {
+      "status": "flagged", "screens": [],
+      "claims": { "sq": "Kërko me fjalët e tua", "en": "Search in your own words", "it": "Cerca con parole tue" },
+      "note": "Built, behind a flag."
+    }
+  },
+  "neverClaim": [
+    "price insight / price estimates (not started)",
+    "smart or AI recommendations (not started)",
+    "mortgage or loan approval",
+    "verified / guaranteed listings",
+    "number of users, downloads or listings (no data source)",
+    "'the best' or '#1' app in Albania",
+    "Apple or LinkedIn sign-in (provider consoles pending)",
+    "Kosovo / North Macedonia coverage beyond what the listings show"
+  ]
+}

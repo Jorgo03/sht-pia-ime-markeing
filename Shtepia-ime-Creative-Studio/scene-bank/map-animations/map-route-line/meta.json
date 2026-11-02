@@ -1,0 +1,17 @@
+{
+  "id": "map-route-line",
+  "name": "Route between two cities",
+  "mode": "kinetic-typography",
+  "technique": "The map auto-frames two real cities (true projected positions), a curved route draws between them while a dot rides the exact quadratic curve, and both ends pop with their names. Good for 'from the coast to the capital' or diaspora 'from abroad to home' beats.",
+  "duration": 3.2,
+  "in": "none",
+  "out": "blur",
+  "vars": {
+    "kicker": { "type": "string", "label": "Kicker", "default": "Afër gjithçkaje" },
+    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Nga *deti* në *qytet.*" },
+    "from": { "type": "enum", "label": "From city", "default": "durres", "options": ["tirane", "durres", "vlore", "shkoder", "sarande", "gjirokaster", "dhermi", "korce", "elbasan", "berat"] },
+    "to": { "type": "enum", "label": "To city", "default": "tirane", "options": ["tirane", "durres", "vlore", "shkoder", "sarande", "gjirokaster", "dhermi", "korce", "elbasan", "berat"] }
+  },
+  "sfx": [{ "id": "whoosh-air", "at": 0.5, "volume": 0.35 }, { "id": "pop", "at": 1.95, "volume": 0.45 }],
+  "tags": ["map", "route", "cities"]
+}

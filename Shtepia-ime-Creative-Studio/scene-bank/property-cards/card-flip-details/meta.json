@@ -1,0 +1,15 @@
+{
+  "id": "card-flip-details",
+  "name": "Card flips to details",
+  "mode": "3d",
+  "technique": "A property card rises with a tilt, then flips a half turn in 3D (backface-hidden faces, a lift at mid-flip) from the photo + price to a details sheet whose rows (rooms, baths, m², year) and amenities come from the listing data and stagger in.",
+  "duration": 3.4,
+  "in": "none",
+  "out": "zoom-out",
+  "vars": {
+    "listing": { "type": "enum", "label": "Listing (demo data)", "default": "apartment-blloku", "options": ["villa-dhermi", "apartment-blloku"] }
+  },
+  "features": ["listing-detail", "amenities"],
+  "sfx": [{ "id": "whoosh-air", "at": 1.15, "volume": 0.45 }, { "id": "pop", "at": 2.1, "volume": 0.35 }],
+  "tags": ["card", "flip", "details", "3d"]
+}

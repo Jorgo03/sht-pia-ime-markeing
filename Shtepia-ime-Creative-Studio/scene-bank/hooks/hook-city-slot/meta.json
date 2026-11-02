@@ -1,0 +1,17 @@
+{
+  "id": "hook-city-slot",
+  "name": "City slot-machine hook",
+  "mode": "kinetic-typography",
+  "technique": "The lead line is on frame 0; the last word rolls like a slot machine through real Albanian places (drop-in per roll, pure function of time) and lands on the final one, then a rule draws and a quiet line blurs in.",
+  "duration": 2.8,
+  "in": "none",
+  "out": "whip-up",
+  "vars": {
+    "lead": { "type": "string", "label": "Lead line", "default": "Shtëpia jote në" },
+    "options": { "type": "string", "label": "Rolling words (comma separated, last one lands)", "default": "Sarandë, Vlorë, Durrës, Gjirokastër, Dhërmi, Tiranë" },
+    "sub": { "type": "string", "label": "Quiet line", "default": "Shitje · Qira · Në gjithë Shqipërinë" }
+  },
+  "features": ["search", "listing-type"],
+  "sfx": [{ "id": "type-tick", "at": 0.3, "volume": 0.4 }, { "id": "pop", "at": 1.55, "volume": 0.5 }],
+  "tags": ["hook", "slot", "cities"]
+}

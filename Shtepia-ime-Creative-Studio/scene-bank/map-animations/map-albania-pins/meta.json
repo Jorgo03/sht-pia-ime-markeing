@@ -1,0 +1,17 @@
+{
+  "id": "map-albania-pins",
+  "name": "Albania map with city pins",
+  "mode": "print",
+  "technique": "The real outline of Albania (Natural Earth, public domain) draws itself as a stroke, the land fills, neighbours fade in, and pins drop with a bounce onto the true positions of the chosen cities (projected from WGS84), each followed by its label.",
+  "duration": 3.4,
+  "in": "none",
+  "out": "blur",
+  "vars": {
+    "kicker": { "type": "string", "label": "Kicker", "default": "Në gjithë Shqipërinë" },
+    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Nga bregdeti *te kryeqyteti.*" },
+    "cities": { "type": "string", "label": "City keys (comma separated)", "default": "shkoder, tirane, durres, vlore, dhermi, gjirokaster" }
+  },
+  "features": ["map-view"],
+  "sfx": [{ "id": "whoosh-paper", "at": 0.1, "volume": 0.35 }, { "id": "pop", "at": 1.2, "volume": 0.45 }, { "id": "pop", "at": 1.5, "volume": 0.4 }, { "id": "pop", "at": 1.8, "volume": 0.4 }],
+  "tags": ["map", "albania", "pins"]
+}

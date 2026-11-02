@@ -1,0 +1,37 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--ground); }
+  </style>
+  <div id="root" data-composition-id="search-type-results" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="stage layer">
+      <div class="glow"></div>
+      <div class="phone-host layer"></div>
+      <div class="cap"><div class="headline t"></div></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('search-type-results', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      const land = S.fmt.landscape;
+      const p = S.ui.phone($('.phone-host'), { screen: v.screen, theme: v.theme, w: land ? 380 : 540, y: land ? 40 : 150 });
+      S.rich($('.t'), v.title);
+      tl.set(p.el, { opacity: 1 }, 0);
+      S.a.wordsBlur(tl, S.words($('.t')), 0.1);
+      // Camera onto the real search field, type, then pull back to the results.
+      S.ui.zoomTo(tl, p, 'search', 0.1, { scale: v.zoom, dur: 0.7 });
+      const typed = S.ui.type(tl, p, v.query, 0.8, { cps: 14 });
+      S.ui.zoomOut(tl, p, typed + 0.25, { dur: 0.8 });
+      if (v.screen === 'explore') {
+        const s = S.ui.spot(tl, p, 'grid', typed + 0.9, { pad: 8 });
+        const call = S.ui.callout(p, 'count', v.callout, { side: 'top', gap: 18 });
+        S.a.pop(tl, call, typed + 1.0);
+      }
+      S.tx.out(c, $('.stage'), 'blur');
+      c.done();
+    });
+  })();
+  </script>
+</template>

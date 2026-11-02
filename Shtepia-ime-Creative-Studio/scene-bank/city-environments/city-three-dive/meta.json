@@ -1,0 +1,17 @@
+{
+  "id": "city-three-dive",
+  "name": "City dive (Three.js)",
+  "mode": "3d",
+  "technique": "WebGL: an instanced city (289 lit blocks, soft shadows, fog) grows outward while the camera dives from a high orbit to street level; an orange map pin drops on a closed-form spring onto the tallest block. Every frame is computed from timeline time.",
+  "duration": 3.6,
+  "in": "none",
+  "out": "blur",
+  "three": true,
+  "vars": {
+    "kicker": { "type": "string", "label": "Kicker", "default": "Eksploro" },
+    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Çdo lagje, *një prekje larg.*" },
+    "seed": { "type": "number", "label": "City seed", "default": 21, "min": 1, "max": 999, "step": 1 }
+  },
+  "sfx": [{ "id": "whoosh-deep", "at": 0.3, "volume": 0.5 }, { "id": "impact-soft", "at": 1.75, "volume": 0.5 }],
+  "tags": ["3d", "webgl", "city", "dive"]
+}

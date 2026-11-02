@@ -1,0 +1,19 @@
+{
+  "id": "ui-zoom-through-search",
+  "name": "Zoom through the search field",
+  "mode": "ui-motion",
+  "technique": "A transition with a cause: the camera tracks to the real search field, then zooms through it (9×, power4 ease-in, motion blur peaking at the fastest frame) and an accent iris opens from its centre into a full-frame typographic beat.",
+  "duration": 2.6,
+  "in": "none",
+  "out": "none",
+  "vars": {
+    "line": { "type": "string", "label": "Line on the flood (*accent* = dark)", "default": "Një kërkim. *Gjithë Shqipëria.*" },
+    "screen": { "type": "enum", "label": "Screen", "default": "home", "options": ["home", "explore", "map"] },
+    "region": { "type": "string", "label": "Region to zoom through", "default": "search" },
+    "theme": { "type": "enum", "label": "App theme", "default": "light", "options": ["light", "dark"] }
+  },
+  "screens": true,
+  "features": ["search"],
+  "sfx": [{ "id": "whoosh-deep", "at": 0.85, "volume": 0.55 }, { "id": "impact-type", "at": 1.25, "volume": 0.5 }],
+  "tags": ["transition", "zoom-through", "ui"]
+}

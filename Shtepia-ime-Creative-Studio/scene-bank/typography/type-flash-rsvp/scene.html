@@ -1,0 +1,30 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--ground); }
+    #root .k-flash { text-transform: none; }
+    #root .bar { position: absolute; left: var(--cap-x); right: var(--cap-x); bottom: calc(var(--H) - var(--safe-bottom) + 20px); height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+    #root .bar i { position: absolute; inset: 0; background: var(--accent); transform-origin: 0 50%; }
+  </style>
+  <div id="root" data-composition-id="type-flash-rsvp" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="stage layer">
+      <div class="words layer"></div>
+      <div class="bar"><i></i></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('type-flash-rsvp', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      const words = String(v.words).split(/\s*\|\s*/).filter(Boolean);
+      const each = Math.max(0.22, (c.dur - 0.5) / words.length);
+      const width = S.fmt.W - 2 * Math.max(S.fmt.safe.left, S.fmt.W - S.fmt.safe.right);
+      S.type.flash(tl, $('.words'), words, 0.0, { each, width });
+      tl.fromTo($('.bar i'), { scaleX: 0 }, { scaleX: 1, duration: each * words.length, ease: 'none' }, 0);
+      S.tx.out(c, $('.stage'), 'cut');
+      c.done();
+    });
+  })();
+  </script>
+</template>

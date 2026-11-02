@@ -1,0 +1,57 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: radial-gradient(ellipse at 50% 60%, var(--ground2), var(--ground) 70%); }
+    #root .world { perspective: 2600px; perspective-origin: 50% 30%; }
+    #root .cam { position: absolute; inset: 0; transform-style: preserve-3d; }
+    #root .floor { position: absolute; background: var(--paper); box-shadow: 0 0 0 6px var(--paper-shade); }
+    #root .tag { position: absolute; transform: translate(-50%, -50%); font-family: var(--font-mono); font-size: 26px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); white-space: nowrap; }
+    #root .stage .tag { color: #1a1714; }
+  </style>
+  <div id="root" data-composition-id="room-model-3d" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="stage layer">
+      <div class="world"><div class="cam"></div></div>
+      <div class="cap"><div class="kicker k"></div><div class="headline t"></div></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('room-model-3d', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      const D = S.d3;
+      const plane = D.plane($('.cam'), { size: 1600, tiltX: 55, rotZ: -32, grid: false });
+      // A generic 2+1 floor plan (illustrative, not a real listing's plan):
+      // [x, y, w, d, label] in plan units (1 unit = 10 px).
+      const off = 300, U = 10;
+      const rooms = [[0, 0, 44, 50, v.r1], [44, 0, 56, 50, v.r2], [0, 50, 34, 50, v.r3], [34, 50, 30, 50, v.r4], [64, 50, 36, 50, v.r5]];
+      const floor = document.createElement('div'); floor.className = 'floor';
+      Object.assign(floor.style, { left: off + 'px', top: off + 'px', width: 100 * U + 'px', height: 100 * U + 'px' });
+      plane.appendChild(floor);
+      const walls = [], tags = [];
+      const T = 1.2, H = 150;
+      rooms.forEach(([x, y, w, d, label], i) => {
+        const X = off + x * U, Y = off + y * U, Wd = w * U, Dp = d * U;
+        // Four thin walls per room, door gaps on the shared side.
+        walls.push(D.prism(plane, { x: X, y: Y, w: Wd, d: T * U, h: H, color: 'var(--surface)', windows: false, top: 'var(--accent)' }));
+        walls.push(D.prism(plane, { x: X, y: Y, w: T * U, d: Dp * 0.55, h: H, color: 'var(--surface)', windows: false, top: 'var(--accent)' }));
+        if (i === rooms.length - 1 || x + w >= 100) walls.push(D.prism(plane, { x: X + Wd - T * U, y: Y, w: T * U, d: Dp, h: H, color: 'var(--surface)', windows: false, top: 'var(--accent)' }));
+        if (y + d >= 100) walls.push(D.prism(plane, { x: X, y: Y + Dp - T * U, w: Wd, d: T * U, h: H, color: 'var(--surface)', windows: false, top: 'var(--accent)' }));
+        const tag = document.createElement('div'); tag.className = 'tag'; tag.textContent = label;
+        Object.assign(tag.style, { left: X + Wd / 2 + 'px', top: Y + Dp / 2 + 'px' });
+        plane.appendChild(tag); tags.push(tag);
+      });
+      $('.k').textContent = v.kicker; S.rich($('.t'), v.title);
+      gsap.set($('.cam'), { y: S.fmt.portrait ? 220 : 80, scale: S.fmt.portrait ? 1 : 0.75 });
+      tl.fromTo(floor, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.6, ease: 'expo.out' }, 0);
+      D.rise(tl, walls, 0.35, { stagger: 0.04, dur: 0.7 });
+      S.a.pop(tl, tags, 1.1, { stagger: 0.08 });
+      tl.fromTo(plane, { rotationZ: -50, rotationX: 62 }, { rotationZ: -22, rotationX: 52, duration: c.dur, ease: 'power1.inOut' }, 0);
+      S.a.blurIn(tl, $('.k'), 0.2);
+      S.a.wordsBlur(tl, S.words($('.t')), 0.3);
+      S.tx.out(c, $('.stage'), 'blur');
+      c.done();
+    });
+  })();
+  </script>
+</template>

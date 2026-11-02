@@ -1,0 +1,14 @@
+{
+  "id": "hook-paper-door",
+  "name": "Paper door opens",
+  "mode": "print",
+  "technique": "A cut-paper door (arched, like the brand's door) swings open on its hinge in 3D; its contact shadow grows with the swing, warm light floods out of the opening and the camera walks into it. An original illustration — not the logo.",
+  "duration": 2.6,
+  "in": "none",
+  "out": "zoom-in",
+  "vars": {
+    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Hap derën e *shtëpisë së re.*" }
+  },
+  "sfx": [{ "id": "paper-rustle", "at": 0.45, "volume": 0.5 }, { "id": "whoosh-deep", "at": 1.6, "volume": 0.4 }],
+  "tags": ["hook", "print", "door", "light"]
+}

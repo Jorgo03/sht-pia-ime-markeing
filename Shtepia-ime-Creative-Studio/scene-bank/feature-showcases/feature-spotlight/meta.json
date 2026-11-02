@@ -1,0 +1,23 @@
+{
+  "id": "feature-spotlight",
+  "name": "Feature spotlight",
+  "mode": "ui-motion",
+  "technique": "The generic feature beat: a real screen, the rest of it dims under a spotlight, the chosen region lifts off the glass towards the viewer as a card of the app's own pixels, and a callout names it. Pick any screen + region from config/screens.json.",
+  "duration": 3.2,
+  "in": "none",
+  "out": "blur",
+  "vars": {
+    "kicker": { "type": "string", "label": "Kicker", "default": "Detajet" },
+    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Shiko *çfarë ka brenda.*" },
+    "screen": { "type": "screen", "label": "Screen", "default": "detail-1" },
+    "region": { "type": "string", "label": "Region (from config/screens.json)", "default": "amenities" },
+    "callout": { "type": "string", "label": "Callout (empty = none)", "default": "" },
+    "scale": { "type": "number", "label": "Lift scale", "default": 1.25, "min": 1, "max": 2, "step": 0.05 },
+    "lift": { "type": "number", "label": "Lift offset (px, up is negative)", "default": -40, "min": -400, "max": 400, "step": 10 },
+    "theme": { "type": "enum", "label": "App theme", "default": "light", "options": ["light", "dark"] }
+  },
+  "screens": true,
+  "features": ["amenities"],
+  "sfx": [{ "id": "whoosh-air", "at": 0.95, "volume": 0.35 }, { "id": "pop", "at": 1.4, "volume": 0.4 }],
+  "tags": ["feature", "ui", "spotlight", "generic"]
+}

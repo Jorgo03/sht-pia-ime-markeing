@@ -1,0 +1,48 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--ground); perspective: 2600px; }
+    #root .wall { position: absolute; left: 50%; top: 50%; width: 2400px; height: 3600px; margin: -1800px 0 0 -1200px; transform-style: preserve-3d; }
+    #root .col { position: absolute; top: 0; width: 400px; display: flex; flex-direction: column; gap: 60px; }
+    #root .col img { width: 400px; height: 867px; border-radius: 48px; box-shadow: 0 40px 80px rgba(0,0,0,.45); display: block; }
+    #root .veil { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,0) 30%, var(--ground) 85%); z-index: 3; }
+    #root .mid { position: absolute; left: var(--cap-x); right: var(--cap-x); top: 50%; transform: translateY(-50%); text-align: center; z-index: 5; }
+    #root .mid .headline { font-size: 112px; text-shadow: 0 10px 40px rgba(0,0,0,.6); }
+  </style>
+  <div id="root" data-composition-id="ui-screens-wall" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="stage layer">
+      <div class="wall" data-layout-ignore></div>
+      <div class="veil"></div>
+      <div class="mid"><div class="kicker k"></div><div class="headline t"></div></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('ui-screens-wall', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      const ids = ['home', 'explore', 'map', 'detail-1', 'filters', 'detail-2', 'home-scrolled', 'detail-1-scrolled', 'detail-2-scrolled'];
+      const r = S.rng(5);
+      const cols = [];
+      for (let i = 0; i < 5; i++) {
+        const col = document.createElement('div'); col.className = 'col'; col.style.left = i * 480 + 'px';
+        for (let k = 0; k < 4; k++) {
+          const id = ids[(i * 3 + k * 2) % ids.length];
+          const th = (i + k) % 2 ? 'dark' : 'light';
+          const img = document.createElement('img'); img.src = S.screen(id, th); col.appendChild(img);
+        }
+        $('.wall').appendChild(col); cols.push(col);
+      }
+      $('.k').textContent = v.kicker; S.rich($('.t'), v.title);
+      gsap.set($('.wall'), { rotationX: 34, rotationZ: -22, scale: S.fmt.portrait ? 0.9 : 0.7 });
+      // Alternate columns scroll in opposite directions (linear: constant speed is the point).
+      cols.forEach((col, i) => tl.fromTo(col, { y: i % 2 ? -900 : 0 }, { y: i % 2 ? 0 : -900, duration: c.dur, ease: 'none' }, 0));
+      tl.fromTo($('.wall'), { z: -400 }, { z: 0, duration: c.dur, ease: 'power1.out' }, 0);
+      S.a.blurIn(tl, $('.k'), 0.3);
+      S.a.wordsRise(tl, S.words($('.t')), 0.45);
+      S.tx.out(c, $('.stage'), 'blur');
+      c.done();
+    });
+  })();
+  </script>
+</template>

@@ -1,0 +1,50 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--ground); }
+    #root .grid { position: absolute; left: var(--cap-x); right: var(--cap-x); top: 50%; transform: translateY(-40%); display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+    #root .tile { background: var(--surface); border-radius: 32px; padding: 34px 30px; box-shadow: inset 0 0 0 2px var(--line); }
+    #root .tile svg { width: 72px; height: 72px; display: block; }
+    #root .tile svg path, #root .tile svg rect, #root .tile svg circle, #root .tile svg polyline { fill: none; stroke: var(--accent); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+    #root .v { margin-top: 26px; font-family: var(--font-display); font-weight: 800; font-size: 96px; letter-spacing: -0.04em; color: var(--ink); line-height: 1; }
+    #root .l { margin-top: 10px; }
+    [data-orient="landscape"] #root .grid { grid-template-columns: repeat(4, 1fr); }
+  </style>
+  <div id="root" data-composition-id="stat-facts-grid" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="stage layer">
+      <div class="cap"><div class="kicker k"></div><div class="headline t"></div></div>
+      <div class="grid"></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('stat-facts-grid', window.__hyperframes.getVariables());
+    const { tl, v, $, $$ } = c;
+    const L = S.listing(v.listing) || S.listing('apartment-blloku');
+    // Line icons drawn for this kit (bed, bath, area, calendar).
+    const icons = {
+      bed: '<svg viewBox="0 0 48 48"><path pathLength="100" d="M6 34V14M6 26h36v8M42 34v-8M12 26v-6h12v6"/></svg>',
+      bath: '<svg viewBox="0 0 48 48"><path pathLength="100" d="M6 24h36v6a8 8 0 0 1-8 8H14a8 8 0 0 1-8-8zM12 24V10a4 4 0 0 1 8 0M14 38l-2 4M34 38l2 4"/></svg>',
+      area: '<svg viewBox="0 0 48 48"><path pathLength="100" d="M8 8h32v32H8zM8 20h12v20M28 8v12h12"/></svg>',
+      year: '<svg viewBox="0 0 48 48"><path pathLength="100" d="M8 12h32v28H8zM8 20h32M16 6v10M32 6v10"/></svg>',
+    };
+    S.ready(() => {
+      const facts = [['bed', L.rooms, 'dhoma'], ['bath', L.baths, 'banjo'], ['area', L.area, 'm²'], ['year', L.year, 'ndërtuar']].filter((f) => f[1]);
+      $('.grid').innerHTML = facts.map(([i, , l]) => `<div class="tile">${icons[i]}<div class="v">0</div><div class="kicker l">${l}</div></div>`).join('');
+      $('.k').textContent = [L.type, L.city].filter(Boolean).join(' · ');
+      S.rich($('.t'), v.title || L.title || '');
+      S.a.blurIn(tl, $('.k'), 0.05);
+      S.a.wordsBlur(tl, S.words($('.t')), 0.15);
+      const tiles = $$('.tile');
+      S.a.rise(tl, tiles, 0.4, { y: 50, stagger: 0.09, dur: 0.7 });
+      tiles.forEach((tile, i) => {
+        S.a.draw(tl, tile.querySelector('path'), 0.55 + i * 0.09, { dur: 0.8 });
+        const val = facts[i][1];
+        S.a.count(tl, tile.querySelector('.v'), facts[i][0] === 'year' ? val - 30 : 0, val, 0.6 + i * 0.09, { dur: 1.0, format: (x) => String(Math.round(x)) });
+      });
+      S.tx.out(c, $('.stage'), 'whip-up');
+      c.done();
+    });
+  })();
+  </script>
+</template>

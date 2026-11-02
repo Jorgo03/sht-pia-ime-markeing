@@ -1,0 +1,42 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--ground); }
+    #root .beam { position: absolute; left: 50%; top: -10%; width: 340px; height: 130%; margin-left: -170px;
+      background: linear-gradient(90deg, transparent, var(--glow), transparent); filter: blur(40px); opacity: .0; }
+    #root .copy { position: absolute; left: var(--safe-left); right: calc(var(--W) - var(--safe-right)); top: 0; bottom: 0;
+      display: flex; flex-direction: column; justify-content: center; gap: 36px; }
+    #root .kicker { text-align: left; }
+    #root .headline { font-size: 118px; }
+  </style>
+  <div id="root" data-composition-id="hook-question" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="stage layer">
+      <div class="beam"></div>
+      <div class="copy">
+        <div class="kicker"><span class="dash"></span><span class="k"></span></div>
+        <div class="headline q"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('hook-question', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      $('.k').textContent = v.kicker;
+      S.rich($('.q'), v.question);
+      const words = S.words($('.q'));
+      const accent = words.filter((w) => w.parentElement.tagName === 'EM');
+      const plain = words.filter((w) => !accent.includes(w));
+      // Frame 0 already shows the first words (thumbnail = hook).
+      tl.set(plain.slice(0, 2), { opacity: 1 }, 0);
+      let t = S.a.wordsBlur(tl, plain.slice(2), 0.05, { stagger: 0.07 });
+      S.a.blurIn(tl, $('.kicker'), 0.1);
+      tl.fromTo($('.beam'), { opacity: 0, scaleX: 0.3 }, { opacity: 0.9, scaleX: 1, duration: 0.9, ease: 'power2.out' }, t);
+      S.a.slam(tl, accent, t + 0.1, { from: 1.6 });
+      S.tx.out(c, $('.stage'), 'blur');
+      c.done();
+    });
+  })();
+  </script>
+</template>

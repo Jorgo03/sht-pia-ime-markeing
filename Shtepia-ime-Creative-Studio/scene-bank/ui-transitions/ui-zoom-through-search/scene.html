@@ -1,0 +1,36 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--ground); }
+    #root .flood { position: absolute; inset: 0; background: var(--accent); z-index: 20; clip-path: circle(0% at 50% 50%); }
+    #root .flood .headline { position: absolute; left: var(--cap-x); right: var(--cap-x); top: 50%; transform: translateY(-50%); text-align: center; color: #fff; font-size: 120px; }
+    #root .flood .headline em { color: #141210; }
+  </style>
+  <div id="root" data-composition-id="ui-zoom-through-search" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="stage layer">
+      <div class="phone-host layer"></div>
+      <div class="flood"><div class="headline t"></div></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('ui-zoom-through-search', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      const land = S.fmt.landscape;
+      const p = S.ui.phone($('.phone-host'), { screen: v.screen, theme: v.theme, w: land ? 380 : 560, y: land ? 0 : 60 });
+      S.rich($('.t'), v.line);
+      tl.set(p.el, { opacity: 1 }, 0);
+      // Track to the search field (0.6 s), then zoom THROUGH it: strong ease-in,
+      // motion blur peaking at the fastest frame; its fill becomes the next world.
+      S.ui.zoomTo(tl, p, v.region, 0.2, { scale: 1.6, dur: 0.6 });
+      S.ui.zoomTo(tl, p, v.region, 0.85, { scale: 9, dur: 0.4, ease: 'power4.in' });
+      tl.fromTo(p.cam, { filter: 'blur(0px)' }, { filter: 'blur(14px)', duration: 0.4, ease: 'power4.in' }, 0.85);
+      tl.fromTo($('.flood'), { clipPath: 'circle(0% at 50% 50%)' }, { clipPath: 'circle(150% at 50% 50%)', duration: 0.35, ease: 'power3.in' }, 1.05);
+      S.a.wordsRise(tl, S.words($('.t')), 1.35, { y: 30 });
+      S.tx.out(c, $('.flood'), 'none');
+      c.done();
+    });
+  })();
+  </script>
+</template>

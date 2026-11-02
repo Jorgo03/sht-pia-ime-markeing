@@ -1,0 +1,66 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--ground); }
+    #root .mapbox { position: absolute; left: 50%; top: 54%; }
+    #root .mapbox svg.base { position: absolute; inset: 0; width: 100%; height: 100%; }
+    #root .land.neighbour { fill: color-mix(in srgb, var(--ink) 7%, var(--ground)); stroke: var(--line); stroke-width: 2; }
+    #root .land.home { fill: color-mix(in srgb, var(--ink) 16%, var(--ground)); stroke: color-mix(in srgb, var(--ink) 35%, var(--ground)); stroke-width: 2; }
+    #root svg.route { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+    #root .route path.trail { fill: none; stroke: var(--accent); stroke-width: 7; stroke-linecap: round; }
+    #root .route path.dash { fill: none; stroke: var(--ink); stroke-width: 3; stroke-dasharray: 2 14; stroke-linecap: round; opacity: .5; }
+    #root .dot { position: absolute; width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 10px rgba(255,125,26,.25); z-index: 4; }
+    #root .end { position: absolute; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; background: var(--ink); z-index: 3; }
+    #root .city { position: absolute; z-index: 5; white-space: nowrap; font-family: var(--font-sans); font-weight: 800; font-size: 40px; color: var(--ink); }
+  </style>
+  <div id="root" data-composition-id="map-route-line" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="stage layer">
+      <div class="mapbox"></div>
+      <div class="cap"><div class="kicker k"></div><div class="headline t"></div></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('map-route-line', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      const m = window.STUDIO_DATA.map;
+      const A = m.cities[v.from] || m.cities.durres, B = m.cities[v.to] || m.cities.tirane;
+      // Frame the two cities: zoom the map so the route fills ~60% of the width.
+      const span = Math.max(Math.hypot(B.x - A.x, B.y - A.y), 80);
+      const zoom = Math.min(4, (S.fmt.W * 0.6) / span);
+      const bw = m.width * zoom, bh = m.height * zoom;
+      const box = $('.mapbox');
+      const mx = (A.x + B.x) / 2 * zoom, my = (A.y + B.y) / 2 * zoom;
+      Object.assign(box.style, { width: bw + 'px', height: bh + 'px', marginLeft: -mx + 'px', marginTop: -my + 'px' });
+      box.innerHTML = S.print.albania({}).replace('<svg ', '<svg class="base" ');
+      const ax = A.x * zoom, ay = A.y * zoom, bx = B.x * zoom, by = B.y * zoom;
+      const cx = (ax + bx) / 2 - (by - ay) * 0.25, cy = (ay + by) / 2 + (bx - ax) * 0.25;
+      const d = `M${ax},${ay} Q${cx},${cy} ${bx},${by}`;
+      box.insertAdjacentHTML('beforeend', `<svg class="route" viewBox="0 0 ${bw} ${bh}"><path class="dash" d="${d}"/><path class="trail" pathLength="100" d="${d}"/></svg>`);
+      const end1 = document.createElement('div'); end1.className = 'end'; Object.assign(end1.style, { left: ax + 'px', top: ay + 'px' });
+      const end2 = document.createElement('div'); end2.className = 'end'; Object.assign(end2.style, { left: bx + 'px', top: by + 'px' });
+      const dot = document.createElement('div'); dot.className = 'dot';
+      const la = document.createElement('div'); la.className = 'city'; la.textContent = A.name; Object.assign(la.style, { left: ax + 30 + 'px', top: ay - 70 + 'px' });
+      const lb = document.createElement('div'); lb.className = 'city'; lb.textContent = B.name; Object.assign(lb.style, { left: bx + 30 + 'px', top: by - 70 + 'px' });
+      box.append(end1, end2, dot, la, lb);
+      $('.k').textContent = v.kicker;
+      S.rich($('.t'), v.title);
+      // The route draws; a dot travels its quadratic curve (exact, from t).
+      const trail = box.querySelector('.trail');
+      S.a.draw(tl, trail, 0.5, { dur: 1.5, ease: 'power2.inOut' });
+      const pr = { k: 0 };
+      const place = () => { const k = pr.k, u = 1 - k; dot.style.left = u * u * ax + 2 * u * k * cx + k * k * bx + 'px'; dot.style.top = u * u * ay + 2 * u * k * cy + k * k * by + 'px'; };
+      place();
+      tl.fromTo(pr, { k: 0 }, { k: 1, duration: 1.5, ease: 'power2.inOut', onUpdate: place }, 0.5);
+      S.a.pop(tl, [end1, la], 0.2);
+      S.a.pop(tl, [end2, lb], 1.9);
+      tl.fromTo(box, { scale: 0.9 }, { scale: 1, duration: c.dur, ease: 'power2.out' }, 0);
+      S.a.blurIn(tl, $('.k'), 0.1);
+      S.a.wordsBlur(tl, S.words($('.t')), 0.25);
+      S.tx.out(c, $('.stage'), 'blur');
+      c.done();
+    });
+  })();
+  </script>
+</template>

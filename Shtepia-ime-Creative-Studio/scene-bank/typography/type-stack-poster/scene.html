@@ -1,0 +1,32 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--ground); }
+    #root .stack { position: absolute; left: var(--safe-left); right: var(--safe-left); top: 50%; transform: translateY(-50%); }
+    #root .stack .display { text-transform: uppercase; display: block; line-height: .86; }
+    #root .foot { position: absolute; left: var(--safe-left); right: var(--cap-x); bottom: calc(var(--H) - var(--safe-bottom) + 4px); display: flex; justify-content: space-between; }
+  </style>
+  <div id="root" data-composition-id="type-stack-poster" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="stage layer">
+      <div class="stack"></div>
+      <div class="foot"><div class="kicker a"></div><div class="kicker b"></div></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('type-stack-poster', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      const lines = String(v.lines).split(/\s*\|\s*/).filter(Boolean);
+      const width = S.fmt.W - 2 * S.fmt.safe.left;
+      const els = S.type.stack($('.stack'), lines, { width, max: 460, min: 80 });
+      $('.a').textContent = v.footLeft; $('.b').textContent = v.footRight;
+      // Each fitted line rises out of its own mask, overlapping by 60%.
+      S.a.linesRise(tl, els, 0.05, { stagger: 0.14, dur: 0.75 });
+      S.a.blurIn(tl, [$('.a'), $('.b')], 0.6);
+      S.tx.out(c, $('.stage'), 'shutter');
+      c.done();
+    });
+  })();
+  </script>
+</template>

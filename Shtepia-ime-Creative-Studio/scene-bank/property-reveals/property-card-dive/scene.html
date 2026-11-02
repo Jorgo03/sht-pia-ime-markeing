@@ -1,0 +1,57 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--ground); }
+    #root .dive { position: absolute; inset: 0; z-index: 10; overflow: hidden; }
+    #root .dive img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    #root .label { position: absolute; left: var(--cap-x); right: var(--cap-x); bottom: calc(var(--H) - var(--safe-bottom) + 10px); z-index: 12; text-align: center; color: #fff; }
+    #root .label .price { font-family: var(--font-serif); font-style: italic; font-size: 110px; color: #fff; line-height: 1; text-shadow: 0 6px 30px rgba(0,0,0,.5); }
+    #root .label .kicker { color: rgba(255,255,255,.85); margin-top: 14px; }
+    #root .scrim { position: absolute; inset: 0; z-index: 11; background: linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,0) 45%); }
+  </style>
+  <div id="root" data-composition-id="property-card-dive" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="stage layer">
+      <div class="phone-host layer"></div>
+      <div class="dive"><img class="big" alt="" /></div>
+      <div class="scrim"></div>
+      <div class="label"><div class="price"></div><div class="kicker where"></div></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('property-card-dive', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    const L = S.listing(v.listing) || S.listing('villa-dhermi');
+    S.ready(() => {
+      const W = S.fmt.W, H = S.fmt.H;
+      const w = S.fmt.portrait ? 560 : 380;
+      const p = S.ui.phone($('.phone-host'), { screen: 'explore', theme: v.theme, w });
+      const region = L.card[1] + 'Photo';
+      const [rx, ry, rw, rh] = S.ui.region('explore', region);
+      $('.big').src = S.asset(L.photo);
+      $('.price').textContent = S.price(L.price, { suffix: L.suffix || '' });
+      $('.where').textContent = L.city;
+      // 1. The phone settles; 2. the camera tracks to the card's photo;
+      // 3. the photo becomes the world (clip grows from the card to the frame).
+      S.ui.enter(tl, p, 0, { dur: 0.9 });
+      const zs = v.zoom;
+      const tZoom = 0.7;
+      S.ui.zoomTo(tl, p, region, tZoom, { scale: zs, dur: 0.8 });
+      const w0 = rw * p.k * zs, h0 = rh * p.k * zs;
+      const inset = (x) => `inset(${(H - h0) / 2 * x}px ${(W - w0) / 2 * x}px ${(H - h0) / 2 * x}px ${(W - w0) / 2 * x}px round ${22 * x}px)`;
+      const s0 = Math.max(w0 / W, h0 / H);
+      const tGrow = tZoom + 0.8;
+      tl.set($('.dive'), { opacity: 0 }, 0);
+      tl.set($('.dive'), { opacity: 1 }, tGrow);
+      tl.fromTo($('.dive'), { clipPath: inset(1) }, { clipPath: inset(0), duration: 0.65, ease: 'power3.inOut' }, tGrow);
+      tl.fromTo($('.big'), { scale: s0 }, { scale: 1, duration: 0.65, ease: 'power3.inOut' }, tGrow);
+      tl.to($('.big'), { scale: 1.06, duration: Math.max(0.3, c.dur - tGrow - 0.65), ease: 'none' }, tGrow + 0.65);
+      tl.fromTo($('.scrim'), { opacity: 0 }, { opacity: 1, duration: 0.4 }, tGrow + 0.4);
+      S.a.slam(tl, $('.price'), tGrow + 0.55, { from: 1.4 });
+      S.a.blurIn(tl, $('.where'), tGrow + 0.75);
+      S.tx.out(c, $('.stage'), 'blur');
+      c.done();
+    }, [L.photo]);
+  })();
+  </script>
+</template>

@@ -1,0 +1,21 @@
+{
+  "id": "stat-big-number",
+  "name": "Big number with ring",
+  "mode": "kinetic-typography",
+  "technique": "A full-width display number counts up (1.4 s, power3.out, lands and holds) while a progress ring draws round it; the unit pops in the accent and a label sharpens below. Only for numbers with a source (features.json or real data).",
+  "duration": 3.0,
+  "in": "none",
+  "out": "zoom-in",
+  "vars": {
+    "value": { "type": "number", "label": "Number", "default": 8, "min": 0, "max": 99999999, "step": 1 },
+    "prefix": { "type": "string", "label": "Prefix", "default": "" },
+    "unit": { "type": "string", "label": "Unit", "default": "" },
+    "label": { "type": "string", "label": "Label (*accent*)", "default": "gjuhë, *një shtëpi.*" },
+    "source": { "type": "string", "label": "Source line (keep claims honest)", "default": "sq · en · de · it · es · pl · ru · fr" },
+    "ring": { "type": "number", "label": "Ring fill %", "default": 100, "min": 0, "max": 100, "step": 1 }
+  },
+  "features": ["multilingual"],
+  "notes": "Never put user, download or listing counts here without a real data source (features.json → neverClaim).",
+  "sfx": [{ "id": "riser", "at": -0.4, "volume": 0.3 }, { "id": "impact-type", "at": 1.6, "volume": 0.5 }],
+  "tags": ["stat", "number", "counter"]
+}

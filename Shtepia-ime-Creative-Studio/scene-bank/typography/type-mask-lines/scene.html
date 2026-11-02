@@ -1,0 +1,37 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--ground); }
+    #root .block { position: absolute; left: var(--safe-left); right: var(--cap-x); top: 50%; transform: translateY(-50%); }
+    #root .block .headline { font-size: 112px; }
+    #root .rule { width: 120px; height: 3px; background: var(--accent); margin: 40px 0 30px; }
+    #root .body { max-width: 760px; }
+  </style>
+  <div id="root" data-composition-id="type-mask-lines" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="stage layer">
+      <div class="block">
+        <div class="kicker k"><span class="dash"></span><span class="kt"></span></div>
+        <div class="headline t" style="margin-top:30px"></div>
+        <div class="rule"></div>
+        <div class="body b"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('type-mask-lines', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      $('.kt').textContent = v.kicker;
+      const lines = S.lineRich($('.t'), v.title);
+      S.rich($('.b'), v.body);
+      S.a.blurIn(tl, $('.k'), 0.05);
+      S.a.linesRise(tl, lines, 0.2, { stagger: 0.12, dur: 0.9 });
+      S.a.rule(tl, $('.rule'), 0.75);
+      S.a.wordsInk(tl, S.words($('.b')), 0.95, { stagger: 0.05 });
+      S.tx.out(c, $('.stage'), 'blur');
+      c.done();
+    });
+  })();
+  </script>
+</template>

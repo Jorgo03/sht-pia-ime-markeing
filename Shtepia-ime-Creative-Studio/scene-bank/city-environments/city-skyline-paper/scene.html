@@ -1,0 +1,60 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: linear-gradient(180deg, #2b1a12 0%, #8a3b12 46%, #ff9a4d 100%); }
+    #root .layerL { position: absolute; left: -10%; right: -10%; bottom: 0; }
+    #root .layerL svg { width: 100%; height: 100%; display: block; }
+    #root .sun { position: absolute; left: 50%; width: 300px; height: 300px; margin-left: -150px; border-radius: 50%; background: #ffd9a8; box-shadow: 0 0 120px 40px rgba(255,190,120,.45); }
+    #root .cap .headline { color: #fff; }
+    #root .cap .kicker { color: rgba(255,255,255,.75); }
+  </style>
+  <div id="root" data-composition-id="city-skyline-paper" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="stage layer grain">
+      <div class="sun"></div>
+      <div class="layerL l0 cut"></div><div class="layerL l1 cut"></div><div class="layerL l2 cut"></div><div class="layerL l3 cut"></div>
+      <div class="cap"><div class="kicker k"></div><div class="headline t"></div></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('city-skyline-paper', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    // A skyline row: seeded towers, roofs and a minaret-free generic city.
+    const row = (seed, h, fill, win) => {
+      const r = S.rng(seed); let x = 0, out = '';
+      while (x < 1300) {
+        const w = 60 + r() * 120, bh = h * (0.35 + r() * 0.65);
+        out += `<rect x="${x}" y="${h - bh}" width="${w}" height="${bh}" fill="${fill}"/>`;
+        if (win) for (let y = h - bh + 18; y < h - 20; y += 34) for (let k = 10; k < w - 18; k += 26) if (r() > 0.55) out += `<rect x="${x + k}" y="${y}" width="12" height="16" fill="${win}" opacity="${0.5 + r() * 0.5}"/>`;
+        if (r() > 0.7) out += `<polygon points="${x},${h - bh} ${x + w / 2},${h - bh - 40} ${x + w},${h - bh}" fill="${fill}"/>`;
+        x += w + r() * 14;
+      }
+      return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 ${h}" preserveAspectRatio="none">${out}</svg>`;
+    };
+    S.ready(() => {
+      const H = S.fmt.H;
+      const rows = [
+        { el: $('.l0'), h: H * 0.5, seed: v.seed, fill: '#a8502a', win: null },
+        { el: $('.l1'), h: H * 0.42, seed: v.seed + 1, fill: '#6b2f17', win: '#ffcf96' },
+        { el: $('.l2'), h: H * 0.32, seed: v.seed + 2, fill: '#3d1c0f', win: '#ffb366' },
+        { el: $('.l3'), h: H * 0.18, seed: v.seed + 3, fill: '#1c0e08', win: '#ff9a4d' },
+      ];
+      rows.forEach((r) => { r.el.style.height = r.h + 'px'; r.el.innerHTML = row(r.seed, r.h, r.fill, r.win); });
+      $('.sun').style.top = H * 0.36 + 'px';
+      $('.k').textContent = v.kicker;
+      S.rich($('.t'), v.title);
+      // Layers rise from the bottom one after another, then drift at different
+      // speeds (parallax); the sun sets slowly behind them.
+      rows.forEach((r, i) => {
+        tl.fromTo(r.el, { y: r.h * 0.9, '--lift': '30px' }, { y: 0, '--lift': '10px', duration: 0.9, ease: 'expo.out' }, 0.1 + i * 0.12);
+        tl.to(r.el, { x: -(i + 1) * 18, duration: c.dur - 1, ease: 'none' }, 1.0);
+      });
+      tl.fromTo($('.sun'), { y: -80 }, { y: 140, duration: c.dur, ease: 'none' }, 0);
+      S.a.blurIn(tl, $('.k'), 0.5);
+      S.a.wordsRise(tl, S.words($('.t')), 0.65);
+      S.tx.out(c, $('.stage'), 'blur');
+      c.done();
+    });
+  })();
+  </script>
+</template>

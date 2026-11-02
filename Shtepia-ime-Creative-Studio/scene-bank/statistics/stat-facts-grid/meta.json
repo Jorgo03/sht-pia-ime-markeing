@@ -1,0 +1,16 @@
+{
+  "id": "stat-facts-grid",
+  "name": "Facts grid with drawn icons",
+  "mode": "kinetic-typography",
+  "technique": "A 2×2 grid (4×1 in landscape) of fact tiles rises with a stagger; in each, a line icon drawn for the kit (bed, bath, area, calendar) draws itself on while its number counts up — rooms, baths, m² and year straight from the listing data.",
+  "duration": 3.0,
+  "in": "none",
+  "out": "whip-up",
+  "vars": {
+    "listing": { "type": "enum", "label": "Listing (demo data)", "default": "apartment-blloku", "options": ["villa-dhermi", "apartment-blloku"] },
+    "title": { "type": "string", "label": "Override title (*accent*)", "default": "" }
+  },
+  "features": ["listing-detail"],
+  "sfx": [{ "id": "pop", "at": 0.45 }, { "id": "pop", "at": 0.63 }, { "id": "type-tick", "at": 0.8, "volume": 0.3 }],
+  "tags": ["stat", "facts", "icons"]
+}

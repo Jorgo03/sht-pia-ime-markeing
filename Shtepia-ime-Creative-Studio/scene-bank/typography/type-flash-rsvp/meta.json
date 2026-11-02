@@ -1,0 +1,14 @@
+{
+  "id": "type-flash-rsvp",
+  "name": "One word per beat",
+  "mode": "kinetic-typography",
+  "technique": "RSVP: one word at a time fills the frame (each fitted to the safe width), arriving with a 1.25→1 snap and cutting hard to the next, while a thin progress bar runs at constant speed. Time 'each' to the music's beat.",
+  "duration": 2.4,
+  "in": "cut",
+  "out": "cut",
+  "vars": {
+    "words": { "type": "string", "label": "Words (| separated, *accent*)", "default": "Kërko.|Krahaso.|Ruaj.|*Gjej.*" }
+  },
+  "sfx": [{ "id": "impact-type", "at": 0.0, "volume": 0.4 }, { "id": "impact-type", "at": 0.48, "volume": 0.4 }, { "id": "impact-type", "at": 0.96, "volume": 0.4 }, { "id": "impact-soft", "at": 1.44, "volume": 0.5 }],
+  "tags": ["typography", "rsvp", "beat"]
+}

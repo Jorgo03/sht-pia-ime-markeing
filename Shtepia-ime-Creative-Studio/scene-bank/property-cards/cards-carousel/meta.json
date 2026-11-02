@@ -1,0 +1,17 @@
+{
+  "id": "cards-carousel",
+  "name": "Property card carousel",
+  "mode": "kinetic-typography",
+  "technique": "A track of motion-graphic property cards (photo, price in the app's format, city) glides past the centre; a per-frame depth falloff makes the centred card large and sharp and its neighbours smaller, rotated and softly blurred. A designed card, not app UI.",
+  "duration": 3.6,
+  "in": "none",
+  "out": "whip-left",
+  "vars": {
+    "kicker": { "type": "string", "label": "Kicker", "default": "Të zgjedhura këtë javë" },
+    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Gjej *të duhurën.*" },
+    "listings": { "type": "string", "label": "Listings (demo keys, comma separated)", "default": "villa-dhermi, apartment-blloku, seaside-durres, stone-gjirokaster" }
+  },
+  "notes": "Demo listings are fictional. For a real campaign, add real listings to config/listings.json.",
+  "sfx": [{ "id": "whoosh-air", "at": 0.0, "volume": 0.4 }, { "id": "whoosh-air", "at": 0.85, "volume": 0.3 }],
+  "tags": ["cards", "carousel", "prices"]
+}

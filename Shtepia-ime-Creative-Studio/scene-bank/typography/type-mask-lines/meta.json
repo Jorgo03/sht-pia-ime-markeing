@@ -1,0 +1,17 @@
+{
+  "id": "type-mask-lines",
+  "name": "Editorial line masks",
+  "mode": "kinetic-typography",
+  "technique": "Magazine layout in the app's own voice: mono kicker with an accent dash, a serif headline whose lines (split where the writer puts '|') rise out of masks, an accent rule grows, and the body copy turns from faint to ink word by word at reading pace.",
+  "duration": 3.4,
+  "in": "none",
+  "out": "blur",
+  "vars": {
+    "kicker": { "type": "string", "label": "Kicker", "default": "Shtëpia.ime" },
+    "title": { "type": "string", "label": "Headline (| = line break, *accent*)", "default": "Tregu i pronave,|*më i qartë*|se kurrë." },
+    "body": { "type": "string", "label": "Body", "default": "Çmime, foto, harta dhe detaje — në shqip, anglisht, italisht dhe në 5 gjuhë të tjera." }
+  },
+  "features": ["multilingual", "map-view", "listing-detail"],
+  "sfx": [{ "id": "whoosh-paper", "at": 0.2, "volume": 0.3 }],
+  "tags": ["typography", "editorial", "serif"]
+}

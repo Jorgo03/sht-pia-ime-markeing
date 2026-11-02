@@ -1,0 +1,16 @@
+{
+  "id": "paper-town-popup",
+  "name": "Pop-up paper town",
+  "mode": "print",
+  "technique": "Pop-up-book construction: cut-paper hills slide up, a paper sun rises, houses and apartment blocks stand up hinged at their base (rotateX −88° → 0 with back-ease), the headline letters drop in, and a label is stamped. Contact shadows grow and shrink with each sheet's lift.",
+  "duration": 3.4,
+  "in": "none",
+  "out": "paper",
+  "vars": {
+    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Gjej *shtëpinë* tënde", "maxLength": 40 },
+    "label": { "type": "string", "label": "Stamp label", "default": "Tiranë · Durrës · Vlorë" },
+    "seed": { "type": "number", "label": "Layout seed", "default": 4, "min": 1, "max": 99, "step": 1 }
+  },
+  "sfx": [{ "id": "paper-rustle", "at": 0.45, "volume": 0.5 }, { "id": "stamp", "at": 1.62, "volume": 0.6 }],
+  "tags": ["print", "paper", "town", "light"]
+}

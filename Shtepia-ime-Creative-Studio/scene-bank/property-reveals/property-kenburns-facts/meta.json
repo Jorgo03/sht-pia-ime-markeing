@@ -1,0 +1,17 @@
+{
+  "id": "property-kenburns-facts",
+  "name": "Ken Burns with facts",
+  "mode": "cinematic",
+  "technique": "Cinematic still: letterbox bars close in, a warm light band sweeps across, the camera pushes 1.0→1.1 with a slow drift, and the listing's real facts (rooms, baths, m², year from the demo data) pop in as glass chips.",
+  "duration": 3.6,
+  "in": "none",
+  "out": "dip",
+  "vars": {
+    "listing": { "type": "enum", "label": "Listing (demo data)", "default": "apartment-blloku", "options": ["villa-dhermi", "apartment-blloku"] },
+    "photo": { "type": "string", "label": "Override photo path", "default": "" },
+    "title": { "type": "string", "label": "Override title (*accent*)", "default": "" }
+  },
+  "features": ["listing-detail"],
+  "sfx": [{ "id": "ambient-room", "at": 0.0, "volume": 0.25 }, { "id": "pop", "at": 1.3, "volume": 0.4 }],
+  "tags": ["property", "cinematic", "facts"]
+}

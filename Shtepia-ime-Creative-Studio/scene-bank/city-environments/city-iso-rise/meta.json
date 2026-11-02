@@ -1,0 +1,17 @@
+{
+  "id": "city-iso-rise",
+  "name": "Iso city rise (CSS 3D)",
+  "mode": "3d",
+  "technique": "A seeded isometric city of real CSS-3D prisms (five shaded faces, window texture) grows from the ground outward from the centre while the whole plane slowly orbits; orange accent towers mark listings. Sharp text, no WebGL.",
+  "duration": 3.4,
+  "in": "zoom-out",
+  "out": "zoom-in",
+  "vars": {
+    "kicker": { "type": "string", "label": "Kicker", "default": "Tiranë" },
+    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Qyteti yt, *në një vend.*" },
+    "pin": { "type": "string", "label": "Pin label", "default": "Blloku" },
+    "seed": { "type": "number", "label": "City seed", "default": 11, "min": 1, "max": 999, "step": 1 }
+  },
+  "sfx": [{ "id": "whoosh-deep", "at": 0.0, "volume": 0.4 }, { "id": "pop", "at": 1.35, "volume": 0.5 }],
+  "tags": ["3d", "city", "tirana"]
+}

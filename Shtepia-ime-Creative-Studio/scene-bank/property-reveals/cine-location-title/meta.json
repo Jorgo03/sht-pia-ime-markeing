@@ -1,0 +1,17 @@
+{
+  "id": "cine-location-title",
+  "name": "Cinematic location title",
+  "mode": "cinematic",
+  "technique": "Film-title treatment: the plate pulls back from 1.14× as letterbox bars close in; the place's real WGS84 coordinates appear in mono, the place name arrives letter by letter, an accent hairline draws and the region blurs in.",
+  "duration": 3.2,
+  "in": "none",
+  "out": "blur",
+  "vars": {
+    "city": { "type": "enum", "label": "Place (sets coordinates)", "default": "tirane", "options": ["tirane", "durres", "vlore", "shkoder", "sarande", "gjirokaster", "dhermi", "korce", "elbasan", "berat"] },
+    "place": { "type": "string", "label": "Override name", "default": "" },
+    "region": { "type": "string", "label": "Region line", "default": "Shqipëri" },
+    "photo": { "type": "string", "label": "Plate photo", "default": "assets/property-images/living-tirana.jpg" }
+  },
+  "sfx": [{ "id": "ambient-city", "at": 0.0, "volume": 0.3 }, { "id": "type-tick", "at": 0.5, "volume": 0.3 }],
+  "tags": ["cinematic", "location", "title"]
+}

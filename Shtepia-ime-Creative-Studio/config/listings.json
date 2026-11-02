@@ -1,0 +1,114 @@
+{
+ "$comment": "The six DEMO listings that appear in the real app screenshots (config/screens.json). They are fictional (AI-generated photos, invented prices) — use them to show how the app works, never as real offers. Each maps to its photo and to the explore-grid card that shows it. Replace with real, cleared listings for property campaigns. title is null where the screens never show one (only price + city are visible in the grid): do not invent titles. type/deal are null where a screen does not show them (the grid shows only price and city; \"/muaj\" marks the rental).",
+ "demo": true,
+ "listings": {
+  "villa-dhermi": {
+   "title": "Vilë moderne me pishinë në Dhërmi",
+   "city": "Dhërmi",
+   "cityKey": "dhermi",
+   "type": "Vilë",
+   "deal": "Shitje",
+   "price": 640000,
+   "suffix": "",
+   "rooms": 3,
+   "baths": 3,
+   "area": 240,
+   "year": 2022,
+   "photo": "assets/property-images/villa-coast.jpg",
+   "card": [
+    "explore",
+    "card1"
+   ],
+   "detail": "detail-2",
+   "amenities": [
+    "Pishinë",
+    "Kopësht",
+    "Parking",
+    "Kondicionim"
+   ]
+  },
+  "apartment-blloku": {
+   "title": "Apartament 2+1 me pamje nga Dajti",
+   "city": "Tiranë",
+   "cityKey": "tirane",
+   "type": "Apartament",
+   "deal": "Shitje",
+   "price": 235000,
+   "suffix": "",
+   "rooms": 2,
+   "baths": 2,
+   "area": 112,
+   "year": 2022,
+   "address": "Rruga Pjetër Bogdani, Blloku, Tiranë",
+   "photo": "assets/property-images/living-tirana.jpg",
+   "card": [
+    "explore",
+    "card2"
+   ],
+   "detail": "detail-1",
+   "amenities": [
+    "Ballkon",
+    "Ashensor",
+    "E mobiluar",
+    "Kondicionim",
+    "Ngrohje"
+   ]
+  },
+  "seaside-durres": {
+   "title": null,
+   "city": "Durrës",
+   "cityKey": "durres",
+   "type": null,
+   "deal": null,
+   "price": 168000,
+   "suffix": "",
+   "photo": "assets/property-images/seaside-durres.jpg",
+   "card": [
+    "explore",
+    "card3"
+   ]
+  },
+  "kitchen-rent": {
+   "title": null,
+   "city": "Tiranë",
+   "cityKey": "tirane",
+   "type": null,
+   "deal": "Qira",
+   "price": 850,
+   "suffix": "/muaj",
+   "photo": "assets/property-images/kitchen.jpg",
+   "card": [
+    "explore",
+    "card4"
+   ]
+  },
+  "building-tirana": {
+   "title": null,
+   "city": "Tiranë",
+   "cityKey": "tirane",
+   "type": null,
+   "deal": null,
+   "price": 189000,
+   "suffix": "",
+   "photo": "assets/property-images/building-tirana.jpg",
+   "card": [
+    "explore",
+    "card5"
+   ]
+  },
+  "stone-gjirokaster": {
+   "title": null,
+   "city": "Gjirokastër",
+   "cityKey": "gjirokaster",
+   "type": null,
+   "deal": null,
+   "price": 155000,
+   "suffix": "",
+   "photo": "assets/property-images/stone-house.jpg",
+   "card": [
+    "explore",
+    "card6"
+   ]
+  }
+ }
+}

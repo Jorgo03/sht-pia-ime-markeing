@@ -1,0 +1,18 @@
+{
+  "id": "property-card-dive",
+  "name": "Dive into a listing card",
+  "mode": "ui-motion",
+  "technique": "Object becomes the world: on the real explore screen the camera tracks onto one listing card, then that card's photo grows (clip-path from the card's exact on-screen rect to full frame, radius shrinking) into the full-resolution photograph; the price lands in the app's format.",
+  "duration": 3.4,
+  "in": "none",
+  "out": "blur",
+  "vars": {
+    "listing": { "type": "enum", "label": "Listing (demo data)", "default": "villa-dhermi", "options": ["villa-dhermi", "apartment-blloku", "seaside-durres", "kitchen-rent", "building-tirana", "stone-gjirokaster"] },
+    "theme": { "type": "enum", "label": "App theme", "default": "light", "options": ["light", "dark"] },
+    "zoom": { "type": "number", "label": "Zoom on card", "default": 1.7, "min": 1.2, "max": 3, "step": 0.1 }
+  },
+  "screens": true,
+  "features": ["grid-view"],
+  "sfx": [{ "id": "ui-tap", "at": 1.45, "volume": 0.5 }, { "id": "whoosh-deep", "at": 1.5, "volume": 0.45 }],
+  "tags": ["property", "ui", "transition", "zoom-through"]
+}

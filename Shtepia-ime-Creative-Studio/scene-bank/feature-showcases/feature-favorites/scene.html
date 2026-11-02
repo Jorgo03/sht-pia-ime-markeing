@@ -1,0 +1,45 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--ground); }
+    #root .burst { position: absolute; left: 50%; top: 50%; width: 0; height: 0; z-index: 30; }
+    #root .heart { position: absolute; width: 60px; height: 60px; margin: -30px 0 0 -30px; }
+    #root .heart svg { width: 100%; height: 100%; display: block; }
+  </style>
+  <div id="root" data-composition-id="feature-favorites" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="stage layer">
+      <div class="glow"></div>
+      <div class="phone-host layer"></div>
+      <div class="burst"></div>
+      <div class="cap"><div class="headline t"></div></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('feature-favorites', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      const land = S.fmt.landscape;
+      const p = S.ui.phone($('.phone-host'), { screen: v.screen, theme: v.theme, w: land ? 380 : 540, y: land ? 30 : 140 });
+      S.rich($('.t'), v.title);
+      tl.set(p.el, { opacity: 1 }, 0);
+      S.a.wordsBlur(tl, S.words($('.t')), 0.1);
+      const zoom = v.zoom;
+      S.ui.zoomTo(tl, p, v.region, 0.3, { scale: zoom, dur: 0.8 });
+      S.ui.press(tl, p, v.region, 1.2);
+      // Celebration around the press: small brand-orange hearts fly outwards.
+      // (A motion-graphic overlay, not a change to the app's own icon.)
+      const heart = '<svg viewBox="0 0 24 24"><path fill="#FF7D1A" d="M12 21s-7.5-4.6-9.6-9.3C.9 8.2 3 4.6 6.6 4.6c2 0 3.6 1.2 4.4 2.7.8-1.5 2.4-2.7 4.4-2.7 3.6 0 5.7 3.6 4.2 7.1C19.5 16.4 12 21 12 21z"/></svg>';
+      const r = S.rng(9);
+      for (let i = 0; i < 9; i++) {
+        const h = document.createElement('div'); h.className = 'heart'; h.innerHTML = heart; $('.burst').appendChild(h);
+        const a = (i / 9) * Math.PI * 2 + r() * 0.4, d = 160 + r() * 140, s = 0.5 + r() * 0.7;
+        tl.fromTo(h, { x: 0, y: 0, scale: 0, opacity: 1 }, { x: Math.cos(a) * d, y: Math.sin(a) * d - 60, scale: s, opacity: 0, duration: 0.9, ease: 'power2.out' }, 1.3 + r() * 0.08);
+      }
+      S.ui.zoomOut(tl, p, 2.0, { dur: 0.7 });
+      S.tx.out(c, $('.stage'), 'blur');
+      c.done();
+    });
+  })();
+  </script>
+</template>

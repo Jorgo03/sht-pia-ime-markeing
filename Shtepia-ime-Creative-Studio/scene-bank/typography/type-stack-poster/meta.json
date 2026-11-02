@@ -1,0 +1,17 @@
+{
+  "id": "type-stack-poster",
+  "name": "Stacked poster type",
+  "mode": "kinetic-typography",
+  "technique": "Poster stack: every line is fitted to the full safe width (canvas-measured, so 'HOME' and 'SHTËPIA' fill the same width at different sizes) and rises out of its own mask with overlapping timing; mono footers frame it like a print poster.",
+  "duration": 2.6,
+  "in": "none",
+  "out": "shutter",
+  "palette": "orange",
+  "vars": {
+    "lines": { "type": "string", "label": "Lines (| separated, *accent*)", "default": "Gjej|*shtëpinë*|tënde" },
+    "footLeft": { "type": "string", "label": "Footer left", "default": "Shtëpia.ime" },
+    "footRight": { "type": "string", "label": "Footer right", "default": "Shitje · Qira" }
+  },
+  "sfx": [{ "id": "impact-type", "at": 0.15, "volume": 0.45 }, { "id": "impact-type", "at": 0.45, "volume": 0.4 }],
+  "tags": ["typography", "poster", "bold"]
+}

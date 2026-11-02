@@ -1,0 +1,39 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #000; }
+    #root .cine-loc { position: absolute; left: var(--cap-x); right: var(--cap-x); top: 50%; transform: translateY(-50%); text-align: center; z-index: 10; }
+    #root .cine-place { color: #fff; font-size: 150px; text-shadow: 0 8px 40px rgba(0,0,0,.4); }
+    #root .cine-coord, #root .cine-region { color: rgba(255,255,255,.82); }
+    #root .cine-coord { margin-bottom: 26px; }
+    #root .cine-region { margin-top: 26px; }
+    #root .hair { width: 140px; height: 2px; margin: 24px auto 0; background: var(--accent); }
+  </style>
+  <div id="root" data-composition-id="cine-location-title" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="plate layer"></div>
+    <div class="fx layer"></div>
+    <div class="txt layer"></div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('cine-location-title', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    const city = (window.STUDIO_DATA.map.cities[v.city]) || window.STUDIO_DATA.map.cities.tirane;
+    S.ready(() => {
+      const { cam } = S.cine.plate($('.plate'), v.photo);
+      const sh = document.createElement('div');
+      Object.assign(sh.style, { position: 'absolute', inset: 0, background: 'rgba(0,0,0,.35)' });
+      $('.fx').appendChild(sh);
+      S.cine.letterbox(tl, $('.fx'), 0, { dur: 1.0 });
+      const loc = S.cine.location($('.txt'), { place: v.place || city.name, region: v.region, lat: city.lat, lon: city.lon });
+      const hair = document.createElement('div'); hair.className = 'hair'; loc.el.insertBefore(hair, loc.region);
+      S.cam.push(tl, cam, 0, c.dur, { from: 1.14, to: 1.0, ease: 'power2.out' });
+      S.a.blurIn(tl, loc.coord, 0.3, { dur: 0.4 });
+      S.a.charsIn(tl, S.chars(loc.place), 0.5, { stagger: 0.06 });
+      S.a.rule(tl, hair, 1.1);
+      S.a.blurIn(tl, loc.region, 1.3);
+      S.tx.out(c, $('.txt'), 'blur');
+      c.done();
+    }, [v.photo]);
+  })();
+  </script>
+</template>

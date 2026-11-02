@@ -1,0 +1,121 @@
+{
+  "$comment": "Single source of truth for colours and type. Run `npm run brand` (or any build) to regenerate components/brand.css. Logo colours are fixed by assets/logos/logo-guide.md and are never themed.",
+  "name": "Shtëpia.ime",
+  "company": "Future Home Orange",
+  "handle": "@shtepia.ime",
+  "website": "shtepia.ime",
+  "logo": {
+    "door": "#FF5F1F",
+    "files": {
+      "symbol": "assets/logos/symbol-orange.svg",
+      "symbolWhite": "assets/logos/symbol-white.svg",
+      "symbolBlack": "assets/logos/symbol-black.svg",
+      "lockupDark": "assets/logos/lockup-horizontal-dark.svg",
+      "lockupLight": "assets/logos/lockup-horizontal-light.svg",
+      "stackedDark": "assets/logos/lockup-stacked-dark.svg",
+      "stackedLight": "assets/logos/lockup-stacked-light.svg",
+      "wordmarkBlack": "assets/logos/wordmark-black.svg",
+      "appIconLight": "assets/logos/app-icon-light.svg",
+      "appIconDark": "assets/logos/app-icon-dark.svg"
+    },
+    "rules": [
+      "Never recolour, stretch, rotate, outline, shadow or gradient the door.",
+      "Never put the orange door on mid-tone or busy photos: use symbol-white or symbol-black there.",
+      "The knob is a hole: never fill it.",
+      "Clear space: at least 1/7 of the door's width on every side."
+    ]
+  },
+  "fonts": {
+    "serif": "Newsreader",
+    "sans": "Manrope",
+    "mono": "JetBrains Mono",
+    "display": "Manrope"
+  },
+  "palettes": {
+    "night": {
+      "label": "Night (default) — dark ground, orange accent",
+      "ground": "#0b0806",
+      "ground2": "#141210",
+      "surface": "#1e1b18",
+      "ink": "#f0ece6",
+      "inkMuted": "rgba(240,236,230,0.58)",
+      "accent": "#FF7D1A",
+      "accent2": "#e85d00",
+      "accentDeep": "#cc5200",
+      "paper": "#f1ede6",
+      "paperShade": "#e3dccf",
+      "line": "rgba(240,236,230,0.14)",
+      "trust": "#9db8e0",
+      "glow": "rgba(255,95,31,0.55)"
+    },
+    "paper": {
+      "label": "Paper — the app's light theme, warm cream ground",
+      "ground": "#f1ede6",
+      "ground2": "#faf6ef",
+      "surface": "#ffffff",
+      "ink": "#1a1714",
+      "inkMuted": "rgba(26,23,20,0.58)",
+      "accent": "#FF7D1A",
+      "accent2": "#e85d00",
+      "accentDeep": "#cc5200",
+      "paper": "#faf6ef",
+      "paperShade": "#e6ddcd",
+      "line": "rgba(26,23,20,0.12)",
+      "trust": "#0a2f63",
+      "glow": "rgba(255,125,26,0.35)"
+    },
+    "orange": {
+      "label": "Orange flood — accent as ground for bold type beats",
+      "ground": "#FF7D1A",
+      "ground2": "#e85d00",
+      "surface": "#ff9a4d",
+      "ink": "#141210",
+      "inkMuted": "rgba(20,18,16,0.62)",
+      "accent": "#ffffff",
+      "accent2": "#141210",
+      "accentDeep": "#7a2e00",
+      "paper": "#fff4ea",
+      "paperShade": "#ffd9b8",
+      "line": "rgba(20,18,16,0.18)",
+      "trust": "#0a2f63",
+      "glow": "rgba(255,255,255,0.35)"
+    },
+    "navy": {
+      "label": "Navy trust — alternative for finance/bank-partner campaigns",
+      "ground": "#071a36",
+      "ground2": "#0a2f63",
+      "surface": "#123a70",
+      "ink": "#f3f6fb",
+      "inkMuted": "rgba(243,246,251,0.6)",
+      "accent": "#FF7D1A",
+      "accent2": "#e85d00",
+      "accentDeep": "#cc5200",
+      "paper": "#eef2f8",
+      "paperShade": "#d5deec",
+      "line": "rgba(243,246,251,0.14)",
+      "trust": "#9db8e0",
+      "glow": "rgba(255,125,26,0.40)"
+    },
+    "mono": {
+      "label": "Monochrome — black and white with a single orange point",
+      "ground": "#000000",
+      "ground2": "#111111",
+      "surface": "#1c1c1c",
+      "ink": "#ffffff",
+      "inkMuted": "rgba(255,255,255,0.55)",
+      "accent": "#FF7D1A",
+      "accent2": "#ffffff",
+      "accentDeep": "#cc5200",
+      "paper": "#ffffff",
+      "paperShade": "#e5e5e5",
+      "line": "rgba(255,255,255,0.16)",
+      "trust": "#ffffff",
+      "glow": "rgba(255,125,26,0.30)"
+    }
+  },
+  "voice": {
+    "tone": "Warm, confident, editorial. Short sentences. Never hype words like 'revolutionary' or 'best ever'.",
+    "headlineStyle": "Serif headline; the payoff words in italic orange: 'Gjej *shtëpinë tënde.*'",
+    "kicker": "Mono, uppercase, wide tracking — like a catalogue plate number."
+  }
+}

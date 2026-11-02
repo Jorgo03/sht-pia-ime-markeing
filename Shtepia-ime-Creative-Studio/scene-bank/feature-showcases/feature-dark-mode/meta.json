@@ -1,0 +1,18 @@
+{
+  "id": "feature-dark-mode",
+  "name": "Light to dark mode",
+  "mode": "ui-motion",
+  "technique": "One real screen captured in both themes: a diagonal wipe crosses the phone and the world behind it at the same time, turning day into night; the headline changes ink with the ground.",
+  "duration": 2.8,
+  "in": "none",
+  "out": "blur",
+  "vars": {
+    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Ditë apo *natë.*" },
+    "screen": { "type": "screen", "label": "Screen", "default": "home" },
+    "at": { "type": "number", "label": "Wipe starts at (s)", "default": 0.9, "min": 0.2, "max": 3, "step": 0.1 }
+  },
+  "screens": true,
+  "features": ["dark-mode"],
+  "sfx": [{ "id": "whoosh-air", "at": 0.95, "volume": 0.4 }],
+  "tags": ["feature", "dark-mode", "ui"]
+}

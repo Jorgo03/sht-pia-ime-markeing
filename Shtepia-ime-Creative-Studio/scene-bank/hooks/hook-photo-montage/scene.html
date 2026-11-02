@@ -1,0 +1,44 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #000; }
+    #root .reel { z-index: 1; }
+    #root .shot { position: absolute; inset: 0; opacity: 0; }
+    #root .shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    #root .shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,0) 35%, rgba(0,0,0,0) 60%, rgba(0,0,0,.7)); z-index: 3; }
+    #root .cap .headline { color: #fff; font-size: 104px; text-shadow: 0 6px 30px rgba(0,0,0,.45); }
+    #root .count { position: absolute; left: var(--cap-x); bottom: calc(var(--H) - var(--safe-bottom) + 20px); z-index: 6; color: rgba(255,255,255,.8); }
+  </style>
+  <div id="root" data-composition-id="hook-photo-montage" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="reel layer"></div>
+    <div class="shade"></div>
+    <div class="cap"><div class="headline t"></div></div>
+    <div class="kicker count"></div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('hook-photo-montage', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    const photos = String(v.photos).split(/\s*,\s*/).filter(Boolean);
+    S.ready(() => {
+      const reel = $('.reel');
+      const shots = photos.map((p) => { const d = document.createElement('div'); d.className = 'shot'; d.innerHTML = `<img src="${S.asset(p)}" alt="">`; reel.appendChild(d); return d; });
+      S.rich($('.t'), v.title);
+      // Montage: one photo per cut, each with a small push; the last one holds.
+      const each = v.cut, n = shots.length;
+      shots.forEach((s, i) => {
+        const t = i * each;
+        tl.set(s, { opacity: 1, zIndex: i + 1 }, t);
+        tl.fromTo(s.firstChild, { scale: 1.12 }, { scale: i === n - 1 ? 1.0 : 1.06, duration: i === n - 1 ? c.dur - t : each, ease: 'power2.out' }, t);
+      });
+      // Plate-number counter ticks on every cut (proxy tween: a function of time).
+      const cnt = { i: 0 }; const pad = (x) => String(x).padStart(2, '0');
+      const paint = () => { $('.count').textContent = `${pad(Math.min(n, Math.floor(cnt.i) + 1))} / ${pad(n)}  ·  ${v.counter}`; };
+      paint();
+      tl.fromTo(cnt, { i: 0 }, { i: n - 1, duration: (n - 1) * each, ease: 'none', onUpdate: paint }, 0);
+      tl.set($('.t'), { opacity: 1 }, 0);
+      S.tx.out(c, $('.reel'), 'blur');
+      c.done();
+    }, photos);
+  })();
+  </script>
+</template>

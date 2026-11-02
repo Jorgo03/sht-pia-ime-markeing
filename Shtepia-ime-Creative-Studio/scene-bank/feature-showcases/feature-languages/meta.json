@@ -1,0 +1,16 @@
+{
+  "id": "feature-languages",
+  "name": "Eight languages",
+  "mode": "kinetic-typography",
+  "technique": "A welcome word rolls through the app's eight real locales (sq, en, it, de, fr, es, pl, ru) one after another — each fitted to the safe width — while the matching language code lights up in a row of mono plates.",
+  "duration": 4.2,
+  "in": "none",
+  "out": "blur",
+  "vars": {
+    "kicker": { "type": "string", "label": "Kicker", "default": "Edhe për diasporën" },
+    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Në *8 gjuhë.*" }
+  },
+  "features": ["multilingual"],
+  "sfx": [{ "id": "type-tick", "at": 0.5, "volume": 0.3 }, { "id": "type-tick", "at": 0.9, "volume": 0.3 }, { "id": "type-tick", "at": 1.3, "volume": 0.3 }, { "id": "type-tick", "at": 1.7, "volume": 0.3 }],
+  "tags": ["feature", "languages", "diaspora"]
+}

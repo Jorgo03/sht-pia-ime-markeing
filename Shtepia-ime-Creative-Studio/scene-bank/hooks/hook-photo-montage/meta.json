@@ -1,0 +1,18 @@
+{
+  "id": "hook-photo-montage",
+  "name": "Photo montage hook",
+  "mode": "cinematic",
+  "technique": "A fast montage of property photographs cut every ~0.18 s (each with a short push-in), a plate-number counter that ticks on every cut, and a bold line that is already on frame 0; the last photo lands and holds. Photos are shown untouched.",
+  "duration": 2.4,
+  "in": "none",
+  "out": "blur",
+  "vars": {
+    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Mijëra mundësi. *Një vend.*" },
+    "photos": { "type": "string", "label": "Photos (comma separated paths)", "default": "assets/property-images/villa-coast.jpg, assets/property-images/living-tirana.jpg, assets/property-images/seaside-durres.jpg, assets/property-images/kitchen.jpg, assets/property-images/building-tirana.jpg, assets/property-images/stone-house.jpg" },
+    "cut": { "type": "number", "label": "Seconds per cut", "default": 0.18, "min": 0.1, "max": 0.8, "step": 0.01 },
+    "counter": { "type": "string", "label": "Counter label", "default": "Prona" }
+  },
+  "notes": "Default photos are the app's DEMO listing images (AI-generated). Replace with real, cleared property photos for paid campaigns. The headline must not state a listing count without a data source.",
+  "sfx": [{ "id": "whoosh-air", "at": 0.0, "volume": 0.35 }],
+  "tags": ["hook", "montage", "photos"]
+}

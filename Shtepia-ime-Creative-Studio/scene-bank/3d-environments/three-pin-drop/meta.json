@@ -1,0 +1,16 @@
+{
+  "id": "three-pin-drop",
+  "name": "3D pin drop (Three.js)",
+  "mode": "3d",
+  "technique": "WebGL: a lit orange map pin falls onto a gridded ground plane on a closed-form spring (damping 0.5), casting a soft shadow; a single ripple ring spreads from the landing point while the camera arcs slowly and the place name types in letter by letter.",
+  "duration": 3.0,
+  "in": "none",
+  "out": "blur",
+  "three": true,
+  "vars": {
+    "kicker": { "type": "string", "label": "Kicker", "default": "Pronë e re në" },
+    "place": { "type": "string", "label": "Place (*accent*)", "default": "*Tiranë*" }
+  },
+  "sfx": [{ "id": "whoosh-air", "at": 0.15, "volume": 0.35 }, { "id": "impact-soft", "at": 0.85, "volume": 0.55 }],
+  "tags": ["3d", "webgl", "pin", "map"]
+}

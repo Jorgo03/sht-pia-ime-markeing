@@ -1,0 +1,45 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--ground); }
+    #root .mark { position: absolute; left: 50%; top: 42%; width: 360px; height: 360px; margin: -180px 0 0 -180px; }
+    #root .mark svg, #root .mark img { position: absolute; inset: 0; width: 100%; height: 100%; }
+    #root .outline path { fill: none; stroke: var(--door); stroke-width: 2.4; }
+    #root .lockup { position: absolute; left: 50%; top: 62%; width: 640px; margin-left: -320px; }
+    #root .lockup img { width: 100%; display: block; }
+    #root .tag { position: absolute; left: 0; right: 0; top: 70%; text-align: center; }
+  </style>
+  <div id="root" data-composition-id="logo-door-draw" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="stage layer">
+      <div class="glow"></div>
+      <div class="mark">
+        <!-- Stroke of the OFFICIAL door path (assets/logos/symbol-orange.svg); the end state is the official file itself. -->
+        <svg class="outline" viewBox="0 0 256 256"><path pathLength="100" d="M50,231V99A78,78 0 0 1 206,99V231H184V99A56,56 0 0 0 72,99V231Z"/><path pathLength="100" d="M126.00,101.67A4,4 0 0 1 128.46,97.97L168.46,81.31A4,4 0 0 1 174.00,85.00L174.00,227.00A4,4 0 0 1 170.00,231.00L130.00,231.00A4,4 0 0 1 126.00,227.00Z"/></svg>
+        <img class="solid" src="assets/logos/symbol-orange.svg" alt="Shtëpia.ime" />
+      </div>
+      <div class="lockup"><img class="word" src="assets/logos/lockup-horizontal-dark.svg" alt="" /></div>
+      <div class="tag kicker"></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('logo-door-draw', window.__hyperframes.getVariables());
+    const { tl, v, $, $$ } = c;
+    S.ready(() => {
+      $('.tag').textContent = v.tagline;
+      if (v.ground === 'light') $('.word').src = 'assets/logos/lockup-horizontal-light.svg';
+      S.tx.in(c, $('.stage'), 'none');
+      tl.fromTo($('.glow'), { opacity: 0, scale: 0.6 }, { opacity: 0.55, scale: 1, duration: 1.4, ease: 'power2.out' }, 0);
+      S.a.draw(tl, $$('.outline path'), 0.05, { dur: 0.9, stagger: 0.18 });
+      tl.fromTo($('.solid'), { opacity: 0 }, { opacity: 1, duration: 0.25, ease: 'power2.out' }, 1.05);
+      tl.to($('.outline'), { opacity: 0, duration: 0.2 }, 1.2);
+      // The mark moves up and shrinks as the lockup (the official file) wipes in.
+      tl.to($('.mark'), { y: -120, scale: 0.55, opacity: 0, duration: 0.6, ease: 'power3.inOut' }, 1.5);
+      S.a.wipe(tl, $('.lockup'), 1.75, { dir: 'left', dur: 0.7 });
+      S.a.blurIn(tl, $('.tag'), 2.3);
+      S.tx.out(c, $('.stage'), 'none');
+      c.done();
+    });
+  })();
+  </script>
+</template>

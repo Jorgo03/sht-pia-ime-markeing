@@ -1,0 +1,310 @@
+{
+ "whoosh-air-1": {
+  "file": "assets/sound/sfx/whoosh-air-1.m4a",
+  "duration": 0.7,
+  "peak": 0.301,
+  "use": "scene cut / fast card move",
+  "origin": "original (sound-design/sfx.mjs)"
+ },
+ "whoosh-air-2": {
+  "file": "assets/sound/sfx/whoosh-air-2.m4a",
+  "duration": 0.7,
+  "peak": 0.281,
+  "use": "scene cut / fast card move",
+  "origin": "original (sound-design/sfx.mjs)"
+ },
+ "whoosh-air-3": {
+  "file": "assets/sound/sfx/whoosh-air-3.m4a",
+  "duration": 0.7,
+  "peak": 0.291,
+  "use": "scene cut / fast card move",
+  "origin": "original (sound-design/sfx.mjs)"
+ },
+ "whoosh-paper-1": {
+  "file": "assets/sound/sfx/whoosh-paper-1.m4a",
+  "duration": 0.55,
+  "peak": 0.327,
+  "use": "paper sheet sliding / print-mode transition",
+  "origin": "original (sound-design/sfx.mjs)"
+ },
+ "whoosh-paper-2": {
+  "file": "assets/sound/sfx/whoosh-paper-2.m4a",
+  "duration": 0.55,
+  "peak": 0.274,
+  "use": "paper sheet sliding / print-mode transition",
+  "origin": "original (sound-design/sfx.mjs)"
+ },
+ "whoosh-deep": {
+  "file": "assets/sound/sfx/whoosh-deep.m4a",
+  "duration": 1.1,
+  "peak": 0.929,
+  "use": "camera dive / zoom-through",
+  "origin": "original (sound-design/sfx.mjs)"
+ },
+ "impact-soft": {
+  "file": "assets/sound/sfx/impact-soft.m4a",
+  "duration": 1.2,
+  "peak": 0.012,
+  "use": "headline landing, chapter beat",
+  "origin": "original (sound-design/sfx.mjs)"
+ },
+ "impact-cinema": {
+  "file": "assets/sound/sfx/impact-cinema.m4a",
+  "duration": 2.2,
+  "peak": 0.017,
+  "use": "the payoff, once per film",
+  "origin": "original (sound-design/sfx.mjs)"
+ },
+ "impact-type": {
+  "file": "assets/sound/sfx/impact-type.m4a",
+  "duration": 0.5,
+  "peak": 0.001,
+  "use": "kinetic type slam",
+  "origin": "original (sound-design/sfx.mjs)"
+ },
+ "logo-reveal": {
+  "file": "assets/sound/sfx/logo-reveal.m4a",
+  "duration": 3.2,
+  "peak": 0.23,
+  "use": "logo / end card",
+  "origin": "original (sound-design/sfx.mjs)"
+ },
+ "ui-tap-1": {
+  "file": "assets/sound/sfx/ui-tap-1.m4a",
+  "duration": 0.18,
+  "peak": 0,
+  "use": "a press on a real UI element",
+  "origin": "original (sound-design/sfx.mjs)"
+ },
+ "ui-tap-2": {
+  "file": "assets/sound/sfx/ui-tap-2.m4a",
+  "duration": 0.18,
+  "peak": 0.001,
+  "use": "a press on a real UI element",
+  "origin": "original (sound-design/sfx.mjs)"
+ },
+ "ui-swipe": {
+  "file": "assets/sound/sfx/ui-swipe.m4a",
+  "duration": 0.35,
+  "peak": 0.21,
+  "use": "screen-to-screen navigation",
+  "origin": "original (sound-design/sfx.mjs)"
+ },
+ "type-tick-1": {
+  "file": "assets/sound/sfx/type-tick-1.m4a",
+  "duration": 0.08,
+  "peak": 0.001,
+  "use": "letters / lines arriving",
+  "origin": "original (sound-design/sfx.mjs)"
+ },
+ "type-tick-2": {
+  "file": "assets/sound/sfx/type-tick-2.m4a",
+  "duration": 0.08,
+  "peak": 0,
+  "use": "letters / lines arriving",
+  "origin": "original (sound-design/sfx.mjs)"
+ },
+ "type-tick-3": {
+  "file": "assets/sound/sfx/type-tick-3.m4a",
+  "duration": 0.08,
+  "peak": 0,
+  "use": "letters / lines arriving",
+  "origin": "original (sound-design/sfx.mjs)"
+ },
+ "pop-1": {
+  "file": "assets/sound/sfx/pop-1.m4a",
+  "duration": 0.25,
+  "peak": 0,
+  "use": "chip, badge or number landing",
+  "origin": "original (sound-design/sfx.mjs)"
+ },
+ "pop-2": {
+  "file": "assets/sound/sfx/pop-2.m4a",
+  "duration": 0.25,
+  "peak": 0,
+  "use": "chip, badge or number landing",
+  "origin": "original (sound-design/sfx.mjs)"
+ },
+ "paper-drop-1": {
+  "file": "assets/sound/sfx/paper-drop-1.m4a",
+  "duration": 0.4,
+  "peak": 0.012,
+  "use": "a paper sheet landing on the table",
+  "origin": "original (sound-design/sfx.mjs)"
+ },
+ "paper-drop-2": {
+  "file": "assets/sound/sfx/paper-drop-2.m4a",
+  "duration": 0.4,
+  "peak": 0.017,
+  "use": "a paper sheet landing on the table",
+  "origin": "original (sound-design/sfx.mjs)"
+ },
+ "paper-rustle": {
+  "file": "assets/sound/sfx/paper-rustle.m4a",
+  "duration": 0.9,
+  "peak": 0.733,
+  "use": "paper layers settling, page turn",
+  "origin": "original (sound-design/sfx.mjs)"
+ },
+ "stamp": {
+  "file": "assets/sound/sfx/stamp.m4a",
+  "duration": 0.5,
+  "peak": 0.001,
+  "use": "a stamp hitting paper",
+  "origin": "original (sound-design/sfx.mjs)"
+ },
+ "riser": {
+  "file": "assets/sound/sfx/riser.m4a",
+  "duration": 2,
+  "peak": 1.884,
+  "use": "tension into the payoff (once)",
+  "origin": "original (sound-design/sfx.mjs)"
+ },
+ "ambient-room": {
+  "file": "assets/sound/sfx/ambient-room.m4a",
+  "duration": 8,
+  "peak": 1.43,
+  "use": "quiet interior room tone under cinematic stills",
+  "origin": "original (sound-design/sfx.mjs)"
+ },
+ "ambient-city": {
+  "file": "assets/sound/sfx/ambient-city.m4a",
+  "duration": 8,
+  "peak": 3.978,
+  "use": "distant city air for Tirana / map beats",
+  "origin": "original (sound-design/sfx.mjs)"
+ },
+ "px-chime": {
+  "file": "assets/sound/sfx/chime.mp3",
+  "duration": 2.5,
+  "peak": 0.416,
+  "use": "Soft melodic chime — gentle positive beat: success/confirmation or a lighthearted transition. Sync to the visual moment.",
+  "origin": "Pixabay Content License (see CREDITS.md)"
+ },
+ "px-click-soft": {
+  "file": "assets/sound/sfx/click-soft.mp3",
+  "duration": 0.37,
+  "peak": 0.051,
+  "use": "Quiet short click — low-key UI tap / soft selection. Short accent, sync exactly to the on-screen action.",
+  "origin": "Pixabay Content License (see CREDITS.md)"
+ },
+ "px-click": {
+  "file": "assets/sound/sfx/click.mp3",
+  "duration": 0.37,
+  "peak": 0.051,
+  "use": "Crisp UI click — button press, toggle, selection. Short accent, sync exactly to the on-screen action.",
+  "origin": "Pixabay Content License (see CREDITS.md)"
+ },
+ "px-error": {
+  "file": "assets/sound/sfx/error.mp3",
+  "duration": 1.62,
+  "peak": 0.739,
+  "use": "Negative / error tone — failure state, a 'wrong' beat, or a glitchy interruption.",
+  "origin": "Pixabay Content License (see CREDITS.md)"
+ },
+ "px-glitch-1": {
+  "file": "assets/sound/sfx/glitch-1.mp3",
+  "duration": 2.64,
+  "peak": 0.741,
+  "use": "Punchy digital glitch — hard-cut accent or sudden reveal. Trigger on the hit; let the decay bleed into the next shot (J-cut).",
+  "origin": "Pixabay Content License (see CREDITS.md)"
+ },
+ "px-glitch-2": {
+  "file": "assets/sound/sfx/glitch-2.mp3",
+  "duration": 3.5,
+  "peak": 0.023,
+  "use": "Harsh, longer glitch — chaotic / jarring transition or a distorted reveal.",
+  "origin": "Pixabay Content License (see CREDITS.md)"
+ },
+ "px-glitch-3": {
+  "file": "assets/sound/sfx/glitch-3.mp3",
+  "duration": 3.1,
+  "peak": 1.823,
+  "use": "Low-key glitch texture — subtle digital shift, minimal transition that sits under other audio.",
+  "origin": "Pixabay Content License (see CREDITS.md)"
+ },
+ "px-impact-bass-1": {
+  "file": "assets/sound/sfx/impact-bass-1.mp3",
+  "duration": 2.12,
+  "peak": 0.073,
+  "use": "Bass impact hit — logo/hero snap, headline slam. Trigger on the visual landing; decay carries into the next shot (J-cut).",
+  "origin": "Pixabay Content License (see CREDITS.md)"
+ },
+ "px-impact-bass-2": {
+  "file": "assets/sound/sfx/impact-bass-2.mp3",
+  "duration": 2.59,
+  "peak": 0.126,
+  "use": "Bass impact with a short swell — brief anticipation then a deep hit. Place so the peak lands on the reveal.",
+  "origin": "Pixabay Content License (see CREDITS.md)"
+ },
+ "px-key-press": {
+  "file": "assets/sound/sfx/key-press.mp3",
+  "duration": 0.4,
+  "peak": 0.075,
+  "use": "Single key press — one keystroke / terminal-input beat. Short accent, sync to the typed character.",
+  "origin": "Pixabay Content License (see CREDITS.md)"
+ },
+ "px-notification": {
+  "file": "assets/sound/sfx/notification.mp3",
+  "duration": 2.46,
+  "peak": 0.227,
+  "use": "Notification chime — alert, message-in, toast/badge appears. Sync to the element entering.",
+  "origin": "Pixabay Content License (see CREDITS.md)"
+ },
+ "px-ping": {
+  "file": "assets/sound/sfx/ping.mp3",
+  "duration": 1.32,
+  "peak": 0.323,
+  "use": "Sharp electronic ping — punchy accent on a key reveal or data point. Sync to the beat.",
+  "origin": "Pixabay Content License (see CREDITS.md)"
+ },
+ "px-pop": {
+  "file": "assets/sound/sfx/pop.mp3",
+  "duration": 0.72,
+  "peak": 0.119,
+  "use": "Quick pop — element appear/spawn, chip/tag/badge in. Small precise accent, sync to the pop-in.",
+  "origin": "Pixabay Content License (see CREDITS.md)"
+ },
+ "px-riser": {
+  "file": "assets/sound/sfx/riser.mp3",
+  "duration": 10.03,
+  "peak": 3.982,
+  "use": "Long cinematic riser (~10s build, peak at the end). Trigger at (climax_time − 10.03s) so it crests exactly on the reveal.",
+  "origin": "Pixabay Content License (see CREDITS.md)"
+ },
+ "px-sparkle": {
+  "file": "assets/sound/sfx/sparkle.mp3",
+  "duration": 1.8,
+  "peak": 0.025,
+  "use": "Bright sparkle / shimmer — magical reveal or 'shine' highlight on a hero element. Sync to the highlight.",
+  "origin": "Pixabay Content License (see CREDITS.md)"
+ },
+ "px-typing": {
+  "file": "assets/sound/sfx/typing.mp3",
+  "duration": 1.5,
+  "peak": 0.455,
+  "use": "Typing burst (~1.5s of keys) — keyboard / code typing reveal, text-being-typed beat. Start as the text begins typing.",
+  "origin": "Pixabay Content License (see CREDITS.md)"
+ },
+ "px-whoosh-cinematic": {
+  "file": "assets/sound/sfx/whoosh-cinematic.mp3",
+  "duration": 5.54,
+  "peak": 2.502,
+  "use": "Cinematic whoosh build (~5.5s) — sweeping scene transition. Align so the swell peaks on the cut.",
+  "origin": "Pixabay Content License (see CREDITS.md)"
+ },
+ "px-whoosh-short": {
+  "file": "assets/sound/sfx/whoosh-short.mp3",
+  "duration": 0.57,
+  "peak": 0.161,
+  "use": "Short whoosh — quick swipe/slide accent, fast element move, snappy transition. Sync to the motion.",
+  "origin": "Pixabay Content License (see CREDITS.md)"
+ },
+ "px-whoosh": {
+  "file": "assets/sound/sfx/whoosh.mp3",
+  "duration": 0.57,
+  "peak": 0.161,
+  "use": "Punchy whoosh/impact — fast reveal or hard transition accent. Sync to the motion.",
+  "origin": "Pixabay Content License (see CREDITS.md)"
+ }
+}

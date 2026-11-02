@@ -1,0 +1,18 @@
+{
+  "id": "screens-depth-dolly",
+  "name": "Dolly through floating screens",
+  "mode": "3d",
+  "technique": "Real screens float in 3D space along an S path; the camera dollies forward through them while a computed depth of field blurs each screen by its distance from the focus plane, so focus passes from screen to screen.",
+  "duration": 3.6,
+  "in": "none",
+  "out": "blur",
+  "vars": {
+    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Çdo hap, *pa humbur kohë.*" },
+    "screens": { "type": "string", "label": "Screens in depth order", "default": "home, explore, detail-1, map" },
+    "theme": { "type": "enum", "label": "App theme", "default": "dark", "options": ["light", "dark"] }
+  },
+  "screens": true,
+  "features": ["search", "grid-view", "listing-detail", "map-view"],
+  "sfx": [{ "id": "whoosh-deep", "at": 0.6, "volume": 0.35 }, { "id": "whoosh-air", "at": 1.6, "volume": 0.3 }, { "id": "whoosh-air", "at": 2.6, "volume": 0.3 }],
+  "tags": ["3d", "dof", "screens", "dolly"]
+}

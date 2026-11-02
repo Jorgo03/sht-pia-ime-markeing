@@ -1,0 +1,16 @@
+{
+  "id": "stat-price-counter",
+  "name": "Odometer price reveal",
+  "mode": "kinetic-typography",
+  "technique": "Odometer: every digit of the price (in the app's '€ 235,000' format) is a vertical strip that rolls to its value, right-hand columns rolling more turns so the number settles left to right; a tilted photo card of the listing sits above.",
+  "duration": 3.0,
+  "in": "none",
+  "out": "blur",
+  "vars": {
+    "listing": { "type": "enum", "label": "Listing (demo data)", "default": "apartment-blloku", "options": ["villa-dhermi", "apartment-blloku", "seaside-durres", "kitchen-rent", "building-tirana", "stone-gjirokaster"] },
+    "title": { "type": "string", "label": "Override title (*accent*)", "default": "" }
+  },
+  "features": ["listing-detail"],
+  "sfx": [{ "id": "type-tick", "at": 0.4, "volume": 0.3 }, { "id": "type-tick", "at": 0.7, "volume": 0.3 }, { "id": "pop", "at": 1.6, "volume": 0.45 }],
+  "tags": ["stat", "price", "odometer"]
+}

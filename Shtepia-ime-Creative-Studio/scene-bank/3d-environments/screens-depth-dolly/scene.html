@@ -1,0 +1,54 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--ground); }
+    #root .space { position: absolute; inset: 0; perspective: 1400px; perspective-origin: 50% 45%; }
+    #root .rig { position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+    #root .scr { position: absolute; width: 420px; height: 910px; margin: -455px 0 0 -210px; border-radius: 52px; overflow: hidden; box-shadow: 0 40px 90px rgba(0,0,0,.55); border: 10px solid #121010; }
+    #root .scr img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  </style>
+  <div id="root" data-composition-id="screens-depth-dolly" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="stage layer">
+      <div class="glow"></div>
+      <div class="space" data-layout-ignore><div class="rig"></div></div>
+      <div class="cap"><div class="headline t"></div></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('screens-depth-dolly', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      const ids = String(v.screens).split(/\s*,\s*/).filter(Boolean);
+      const r = S.rng(3);
+      // Screens float at increasing depth along a gentle S path.
+      const items = ids.map((id, i) => {
+        const d = document.createElement('div'); d.className = 'scr';
+        d.innerHTML = `<img src="${S.screen(id, v.theme)}" alt="">`;
+        $('.rig').appendChild(d);
+        return { el: d, x: (i % 2 ? 1 : -1) * (180 + r() * 120), y: (r() - 0.5) * 300, z: -i * 900, rot: (i % 2 ? -1 : 1) * (8 + r() * 6) };
+      });
+      S.rich($('.t'), v.title);
+      // Dolly: the camera travels forward through the screens. Each frame the
+      // depth of every screen is recomputed and its blur follows its distance
+      // from the focus plane (depth of field).
+      const cam = { z: -400 };
+      const total = (ids.length - 1) * 900 + 300;
+      const draw = () => {
+        items.forEach((it) => {
+          const z = it.z + cam.z + 900;               // distance in front of the focus plane
+          const blur = Math.min(14, Math.abs(z) / 70);
+          it.el.style.transform = `translate3d(${it.x}px, ${it.y}px, ${z}px) rotateY(${it.rot}deg)`;
+          it.el.style.filter = `blur(${blur.toFixed(2)}px)`;
+          it.el.style.opacity = String(S.clamp(1 - (z - 300) / 500));
+        });
+      };
+      draw();
+      tl.fromTo(cam, { z: -400 }, { z: total - 900, duration: c.dur, ease: 'power1.inOut', onUpdate: draw }, 0);
+      S.a.wordsBlur(tl, S.words($('.t')), 0.3);
+      S.tx.out(c, $('.stage'), 'blur');
+      c.done();
+    });
+  })();
+  </script>
+</template>

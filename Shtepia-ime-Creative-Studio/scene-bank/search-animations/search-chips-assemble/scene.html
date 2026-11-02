@@ -1,0 +1,44 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #root .stage { background: var(--ground); }
+    #root .bar { position: absolute; left: var(--cap-x); right: var(--cap-x); top: 52%; height: 150px; margin-top: -75px; border-radius: 999px; background: var(--surface); box-shadow: inset 0 0 0 3px var(--line), 0 30px 60px rgba(0,0,0,.3); }
+    #root .glass { position: absolute; left: 44px; top: 50%; width: 44px; height: 44px; margin-top: -26px; border: 6px solid var(--ink-muted); border-radius: 50%; }
+    #root .glass::after { content: ""; position: absolute; width: 6px; height: 22px; right: -12px; bottom: -18px; background: var(--ink-muted); transform: rotate(-45deg); border-radius: 3px; }
+    #root .slot { position: absolute; left: 120px; right: 30px; top: 0; bottom: 0; display: flex; align-items: center; gap: 14px; flex-wrap: nowrap; overflow: visible; }
+    #root .q { font-size: 36px; padding: 14px 24px; flex: none; }
+    #root .q.hot { background: var(--accent); color: #fff; box-shadow: none; }
+    #root .count { position: absolute; left: 0; right: 0; top: 62%; text-align: center; }
+    #root .count .num { font-family: var(--font-display); font-weight: 800; font-size: 140px; color: var(--ink); letter-spacing: -0.04em; }
+  </style>
+  <div id="root" data-composition-id="search-chips-assemble" data-width="1080" data-height="1920" data-composition-variables='[]'>
+    <div class="stage layer">
+      <div class="cap"><div class="kicker k"></div><div class="headline t"></div></div>
+      <div class="bar"><div class="glass"></div><div class="slot"></div></div>
+      <div class="count"><div class="kicker lab"></div></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    const c = S.scene('search-chips-assemble', window.__hyperframes.getVariables());
+    const { tl, v, $ } = c;
+    S.ready(() => {
+      const words = String(v.chips).split(/\s*,\s*/).filter(Boolean).slice(0, 3);
+      const chips = words.map((w, i) => { const d = document.createElement('span'); d.className = 'chip q' + (i === 0 ? ' hot' : ''); d.textContent = w; $('.slot').appendChild(d); return d; });
+      $('.k').textContent = v.kicker; S.rich($('.t'), v.title); $('.lab').textContent = v.footer;
+      tl.fromTo($('.bar'), { scaleX: 0.3, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.6, ease: 'expo.out' }, 0.05);
+      // Chips fly in from scattered positions and snap into the field.
+      const from = [[-420, -520, -18], [380, -640, 14], [-260, 560, 10]];
+      chips.forEach((ch, i) => {
+        const [x, y, r] = from[i];
+        tl.fromTo(ch, { x, y, rotation: r, scale: 1.4, opacity: 0 }, { x: 0, y: 0, rotation: 0, scale: 1, opacity: 1, duration: 0.7, ease: 'back.out(1.4)' }, 0.45 + i * 0.22);
+      });
+      S.a.blurIn(tl, $('.k'), 0.1);
+      S.a.wordsBlur(tl, S.words($('.t')), 0.2);
+      S.a.blurIn(tl, $('.lab'), 1.6);
+      S.tx.out(c, $('.stage'), 'zoom-in');
+      c.done();
+    });
+  })();
+  </script>
+</template>

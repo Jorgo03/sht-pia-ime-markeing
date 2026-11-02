@@ -1,0 +1,18 @@
+{
+  "id": "phone-trio-fan",
+  "name": "Three phones fan out",
+  "mode": "ui-motion",
+  "technique": "Three phones with three real screens rise together as one stack, then the outer two fan out with a rotation (the centre stays on top) — a whole-product overview in one move.",
+  "duration": 3.2,
+  "in": "none",
+  "out": "zoom-in",
+  "vars": {
+    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Kërko. Krahaso. *Gjej.*" },
+    "screens": { "type": "string", "label": "Screens: centre, left, right", "default": "home, explore, map" },
+    "theme": { "type": "enum", "label": "App theme", "default": "light", "options": ["light", "dark"] }
+  },
+  "screens": true,
+  "features": ["search", "grid-view", "map-view"],
+  "sfx": [{ "id": "whoosh-air", "at": 0.05, "volume": 0.45 }, { "id": "whoosh-paper", "at": 0.75, "volume": 0.35 }],
+  "tags": ["phone", "ui", "overview"]
+}
