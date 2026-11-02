@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Shtëpia.ime Creative Studio — a reusable motion-graphics and automated video production kit built on HyperFrames.",
-  "engines": { "node": ">=22" },
+  "description": "Sht\u00ebpia.ime Creative Studio \u2014 a reusable motion-graphics and automated video production kit built on HyperFrames.",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "setup": "node studio.mjs init",
     "video": "node studio.mjs video",
@@ -16,7 +18,9 @@
     "scenes": "node studio.mjs scenes",
     "templates": "node studio.mjs templates",
     "previews": "node studio.mjs previews",
-    "studio": "node studio.mjs"
+    "studio": "node studio.mjs",
+    "idea": "node studio.mjs idea",
+    "app": "node studio.mjs app"
   },
   "dependencies": {
     "gsap": "3.13.0",

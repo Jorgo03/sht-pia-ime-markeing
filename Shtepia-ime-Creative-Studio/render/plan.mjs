@@ -10,13 +10,21 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { KIT, registry } from './build.mjs';
 
-const LANGS = ['sq', 'en', 'it'];
-const isLangMap = (o) => o && typeof o === 'object' && !Array.isArray(o) && Object.keys(o).length && Object.keys(o).every((k) => LANGS.includes(k));
+export const LANGS = ['sq', 'en', 'de', 'it', 'es', 'pl', 'ru', 'fr']; // the app's 8 locales
+const MAP_KEYS = ['sq', 'en', 'it', 'de', 'es', 'pl', 'ru', 'fr'];
+const tables = {};
+// Translations for languages a copy map does not carry: config/locales/<lang>.json, keyed by the Albanian source.
+export function translate(map, lang) {
+  if (map[lang] != null) return map[lang];
+  if (!(lang in tables)) { try { tables[lang] = JSON.parse(fs.readFileSync(path.join(KIT, 'config/locales', `${lang}.json`), 'utf8')).strings; } catch { tables[lang] = {}; } }
+  return tables[lang][map.sq] ?? map.en ?? map.sq;
+}
+const isLangMap = (o) => o && typeof o === 'object' && !Array.isArray(o) && 'sq' in o && Object.keys(o).every((k) => MAP_KEYS.includes(k));
 
 // Replace every {sq,en,it} map with the chosen language (fallback sq).
 export function localize(node, lang) {
   if (Array.isArray(node)) return node.map((x) => localize(x, lang));
-  if (isLangMap(node)) return node[lang] ?? node.sq;
+  if (isLangMap(node)) return translate(node, lang);
   if (node && typeof node === 'object') {
     const out = {};
     for (const [k, v] of Object.entries(node)) out[k] = localize(v, lang);
@@ -57,7 +65,7 @@ const PLACES = { tirane: ['tiran'], durres: ['durrës', 'durres', 'durazzo'], vl
 
 const slug = (s) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
-export function planFromBrief(brief) {
+export function planFromBrief(brief, { raw = false } = {}) {
   const b = brief.toLowerCase();
   const why = [];
   // Length
@@ -65,7 +73,7 @@ export function planFromBrief(brief) {
   const dur = m ? Math.min(90, Math.max(6, +m[1])) : 20;
   why.push(m ? `length: ${dur} s (from "${m[0]}")` : 'length: 20 s (default)');
   // Language
-  const lang = /\balbanian|shqip|\bsq\b/.test(b) ? 'sq' : /\bitalian|italiano|\bit\b/.test(b) ? 'it' : /\benglish|anglisht|\ben\b/.test(b) ? 'en' : 'sq';
+  const lang = /\balbanian|shqip|\bsq\b/.test(b) ? 'sq' : /\bitalian|italiano/.test(b) ? 'it' : /\benglish|anglisht/.test(b) ? 'en' : /\bgerman|deutsch/.test(b) ? 'de' : /\bspanish|español/.test(b) ? 'es' : /\bpolish|polski/.test(b) ? 'pl' : /\brussian|русск/.test(b) ? 'ru' : /\bfrench|français/.test(b) ? 'fr' : 'sq';
   why.push(`language: ${lang}${/albanian|shqip|italian|english|anglisht|italiano/.test(b) ? '' : ' (default)'}`);
   // Format
   const format = /youtube|16:9|landscape|horizontal/.test(b) ? 'youtube' : /square|1:1|feed post/.test(b) ? 'square' : /4:5|portrait feed/.test(b) ? 'portrait' : /tiktok/.test(b) ? 'tiktok' : 'reel';
@@ -86,7 +94,8 @@ export function planFromBrief(brief) {
   const ranked = templates.map((t) => [score(t), t]).sort((a, c) => c[0] - a[0]);
   const tpl = ranked[0][1];
   why.push(`closest template: ${tpl.id} (${tpl.modes.join(' + ')}); runners-up: ${ranked.slice(1, 3).map(([, t]) => t.id).join(', ')}`);
-  let sb = localize(JSON.parse(JSON.stringify(tpl)), lang);
+  // raw: keep the {sq,en,…} copy maps so the same plan can be produced in every language.
+  let sb = raw ? JSON.parse(JSON.stringify(tpl)) : localize(JSON.parse(JSON.stringify(tpl)), lang);
   // Mode preference: swap a scene for a same-category one in the requested mode.
   const reg = registry();
   if (modes.length) {
@@ -114,7 +123,7 @@ export function planFromBrief(brief) {
     const [key] = place; const city = key; const name = { tirane: { sq: 'Tiranë', en: 'Tirana', it: 'Tirana' } }[key];
     for (const x of sb.scenes) {
       if (x.scene === 'cine-location-title') x.vars = { ...(x.vars || {}), city };
-      if (x.scene === 'three-pin-drop' && name) x.vars = { ...(x.vars || {}), place: `*${name[lang]}*` };
+      if (x.scene === 'three-pin-drop' && name) x.vars = { ...(x.vars || {}), place: raw ? { sq: `*${name.sq}*`, en: `*${name.en}*`, it: `*${name.it}*` } : `*${name[lang]}*` };
       if (x.scene === 'map-route-line') x.vars = { ...(x.vars || {}), to: city };
     }
   }

@@ -16,6 +16,13 @@ The kit lives in `Shtepia-ime-Creative-Studio/`. It renders with HyperFrames (HT
 5. **No fake people.** Talking-head mode only cuts and frames real footage the person supplies.
 6. **Numbers need a source.** A count on screen ("3 prona në Tiranë") must be readable off a real screen or come from real data; declare it in the storyboard's `evidence` map, or QC fails it.
 
+## Standing instructions from the owner
+
+- **Every new video idea is produced in all 8 app languages**: sq, en, de, it, es, pl, ru, fr. Use `node studio.mjs idea "<brief>"` (or `--template <id>` / `--storyboard <file with {sq,en,…} copy maps>`). Copy in maps that lack a language is translated from `config/locales/<lang>.json` (keyed by the Albanian source); add any new strings there for all 5 extra languages.
+- **Deliver the videos here in the chat** — send every `local/library/<id>/<lang>/video.mp4` with `SendUserFile` (display: render), and give each language's caption + hashtags (from `caption.txt`) ready to paste on social media.
+- **Videos never go to GitHub.** They live only in the local library (`local/`, git-ignored) and the owner's local app (`npm run app` → http://127.0.0.1:4747): every idea × language, copy caption, download, tick where it was posted. Never commit `exports/`, `local/` or any MP4.
+- The owner chooses what to post from the chat / local app; do not post to social media yourself.
+
 ## The work loop
 
 1. **Understand the brief** — length, language (sq default; en, it), platform/format (reel default; youtube, square, portrait, tiktok), goal, modes asked for, places, features. Ask only what changes the film; otherwise use the defaults.

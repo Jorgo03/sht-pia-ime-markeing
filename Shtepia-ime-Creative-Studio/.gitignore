@@ -1,7 +1,9 @@
+*.wav
+.env
+.hyperframes/
+exports/
+exports/*/source/
+local/
 node_modules/
 projects/
-.hyperframes/
 renders/
-*.wav
-exports/*/source/
-.env

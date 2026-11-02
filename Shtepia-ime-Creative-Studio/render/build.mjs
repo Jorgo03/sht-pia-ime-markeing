@@ -57,7 +57,13 @@ export const resetRegistry = () => { _registry = null; };
 
 // Declared variables for a scene's root (HyperFrames' data-composition-variables).
 // Scene text defaults may be {sq,en,it}: resolved to the film's language.
-const pickLang = (d, lang) => (d && typeof d === 'object' && !Array.isArray(d) && 'sq' in d ? d[lang] ?? d.sq : d);
+const _loc = {};
+const pickLang = (d, lang) => {
+  if (!(d && typeof d === 'object' && !Array.isArray(d) && 'sq' in d)) return d;
+  if (d[lang] != null) return d[lang];
+  if (!(lang in _loc)) { try { _loc[lang] = readJSON(`config/locales/${lang}.json`).strings; } catch { _loc[lang] = {}; } }
+  return _loc[lang][d.sq] ?? d.en ?? d.sq;
+};
 function declareVars(meta, lang = 'sq') {
   const std = {
     duration: { type: 'number', label: 'Duration (s)', default: meta.duration ?? 3, min: 0.5, max: 600, step: 0.1 },

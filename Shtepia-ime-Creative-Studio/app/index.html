@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="sq">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Shtëpia.ime Studio</title>
+<style>
+  :root { --bg:#0b0806; --card:#171310; --line:rgba(240,236,230,.12); --ink:#f0ece6; --muted:rgba(240,236,230,.6); --accent:#FF7D1A; --ok:#5fbf7a; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.45 system-ui, -apple-system, Segoe UI, sans-serif; }
+  header { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 16px; padding: 14px 20px; background: rgba(11,8,6,.92); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+  header h1 { margin: 0; font: 600 20px Georgia, serif; } header h1 em { color: var(--accent); font-style: italic; }
+  header .sp { flex: 1; }
+  select, button { font: inherit; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 7px 12px; cursor: pointer; }
+  button:hover { border-color: var(--accent); }
+  main { padding: 20px; max-width: 1500px; margin: 0 auto; }
+  .idea { margin-bottom: 40px; }
+  .idea h2 { font: 600 24px Georgia, serif; margin: 0 0 4px; }
+  .idea .meta { color: var(--muted); margin-bottom: 14px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; }
+  .card video { width: 100%; aspect-ratio: 9/16; background: #000; display: block; object-fit: contain; }
+  .card .body { padding: 12px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  .row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .lang { font: 700 13px ui-monospace, monospace; letter-spacing: .1em; background: var(--accent); color: #141210; padding: 3px 8px; border-radius: 6px; }
+  .qc { font-size: 12px; color: var(--muted); } .qc.ok { color: var(--ok); }
+  .cap { font-size: 13px; color: var(--muted); white-space: pre-wrap; max-height: 7.5em; overflow: auto; border-left: 2px solid var(--line); padding-left: 8px; }
+  .posted label { font-size: 12px; color: var(--muted); display: inline-flex; gap: 4px; align-items: center; margin-right: 8px; cursor: pointer; }
+  .posted input:checked + span { color: var(--ok); }
+  .empty { color: var(--muted); padding: 60px 0; text-align: center; }
+  a.btn { color: var(--ink); text-decoration: none; border: 1px solid var(--line); border-radius: 10px; padding: 6px 10px; font-size: 13px; }
+  a.btn:hover, button.small:hover { border-color: var(--accent); }
+  button.small { padding: 6px 10px; font-size: 13px; }
+  .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #141210; padding: 8px 16px; border-radius: 999px; font-weight: 600; opacity: 0; transition: opacity .2s; }
+  .toast.on { opacity: 1; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Shtëpia.ime <em>Studio</em></h1>
+  <span class="sp"></span>
+  <label>Gjuha <select id="lang"><option value="">Të gjitha (8)</option><option>sq</option><option>en</option><option>de</option><option>it</option><option>es</option><option>pl</option><option>ru</option><option>fr</option></select></label>
+  <label><input type="checkbox" id="unposted" /> Vetëm të papostuarat</label>
+  <button id="reload">Rifresko</button>
+</header>
+<main id="main"><div class="empty">Duke ngarkuar…</div></main>
+<div class="toast" id="toast"></div>
+<script>
+const NAMES = { sq: 'Shqip', en: 'English', de: 'Deutsch', it: 'Italiano', es: 'Español', pl: 'Polski', ru: 'Русский', fr: 'Français' };
+const PLATFORMS = ['instagram', 'tiktok', 'facebook', 'youtube'];
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+function toast(t) { const el = $('#toast'); el.textContent = t; el.classList.add('on'); setTimeout(() => el.classList.remove('on'), 1400); }
+async function load() {
+  const ideas = await (await fetch('/api/ideas')).json();
+  const only = $('#lang').value, unposted = $('#unposted').checked;
+  const main = $('#main');
+  if (!ideas.length) { main.innerHTML = '<div class="empty">Ende asnjë ide. Krijo një: <code>node studio.mjs idea "…"</code></div>'; return; }
+  main.innerHTML = ideas.map((idea) => {
+    const langs = Object.entries(idea.languages).filter(([l]) => !only || l === only)
+      .filter(([l]) => !unposted || !Object.values((idea.status || {})[l] || {}).some(Boolean));
+    if (!langs.length) return '';
+    return `<section class="idea"><h2>${esc(idea.title)}</h2>
+      <div class="meta">${esc(idea.brief || '')} · ${new Date(idea.created).toLocaleString()} · ${esc(idea.format)} · ${Object.keys(idea.languages).length} gjuhë</div>
+      <div class="grid">${langs.map(([l, v]) => {
+        const st = (idea.status || {})[l] || {};
+        const base = `/library/${encodeURIComponent(idea.id)}/`;
+        return `<div class="card">
+          <video src="${base}${v.video}" poster="${base}${v.thumbnail}" controls preload="none" playsinline></video>
+          <div class="body">
+            <div class="row"><span class="lang">${l.toUpperCase()}</span><span>${NAMES[l] || l}</span><span class="sp" style="flex:1"></span>
+              ${v.qc ? `<span class="qc ${v.qc.final ? 'ok' : ''}">QC ${v.qc.score}${v.qc.final ? ' ✓' : ''}</span>` : ''}</div>
+            <div class="cap">${esc(v.caption)}\n\n${esc(v.hashtags)}</div>
+            <div class="row">
+              <button class="small" data-copy="${esc(v.caption + '\n\n' + v.hashtags)}">Kopjo tekstin</button>
+              <a class="btn" href="${base}${v.video}?download">Shkarko MP4</a>
+            </div>
+            <div class="posted">${PLATFORMS.map((p) => `<label><input type="checkbox" data-id="${esc(idea.id)}" data-lang="${l}" data-platform="${p}" ${st[p] ? 'checked' : ''}/><span>${p}</span></label>`).join('')}</div>
+          </div></div>`;
+      }).join('')}</div></section>`;
+  }).join('') || '<div class="empty">Asgjë për këtë filtër.</div>';
+}
+document.addEventListener('click', async (e) => {
+  const b = e.target.closest('[data-copy]');
+  if (b) { await navigator.clipboard.writeText(b.dataset.copy); toast('Teksti u kopjua'); }
+});
+document.addEventListener('change', async (e) => {
+  const c = e.target.closest('input[data-platform]');
+  if (!c) return;
+  await fetch('/api/status', { method: 'POST', body: JSON.stringify({ id: c.dataset.id, lang: c.dataset.lang, platform: c.dataset.platform, posted: c.checked }) });
+  toast(c.checked ? `Shënuar: postuar në ${c.dataset.platform}` : 'Hequr');
+});
+$('#lang').onchange = load; $('#unposted').onchange = load; $('#reload').onclick = load;
+load();
+</script>
+</body>
+</html>

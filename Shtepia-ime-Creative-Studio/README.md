@@ -6,6 +6,8 @@ You can type one sentence into Claude Code and get a planned, approved, rendered
 
 ```bash
 npm run setup                                   # once: checks the machine, generates sound + previews
+npm run idea -- "your idea in one sentence"      # ONE idea → 8 languages → local/library/<id>/<lang>/
+npm run app                                     # your private local app: http://127.0.0.1:4747
 npm run video -- why-shtepia-ime                # a campaign template → exports/why-shtepia-ime/
 npm run video -- app-launch --lang en --formats reel,youtube,square
 ```
@@ -14,13 +16,21 @@ In Claude Code (from the repo root): *"Create a 20-second premium Albanian adver
 
 ---
 
+## Your local library and app (8 languages)
+
+`npm run idea -- "<brief>"` (or `-- --template <id>`, `-- --storyboard <file>`) produces the idea in the app's 8 languages — Shqip, English, Deutsch, Italiano, Español, Polski, Русский, Français — each rendered, QC-checked and saved with a post-ready caption + hashtags in `local/library/<id>/<lang>/` (`video.mp4`, `thumbnail.jpg`, `caption.txt`, `QC.md`). `--langs sq,en` limits it; `--format youtube` changes the canvas.
+
+`npm run app` opens your private library on http://127.0.0.1:4747 (this machine only): every idea × language with the player, **Copy caption**, **Download MP4**, and posted-ticks for Instagram / TikTok / Facebook / YouTube, so you always know what is already out. `local/` and `exports/` are git-ignored: **videos never go to GitHub**.
+
+Translations for the 5 languages beyond sq/en/it live in `config/locales/{de,es,pl,ru,fr}.json`, keyed by the Albanian source text. Russian uses Noto Serif / Manrope / JetBrains Mono Cyrillic, registered under the brand font names so the look stays the same.
+
 ## What is inside
 
 | | |
 |---|---|
 | **6 creative modes** (`modes/`) | **Print** (cut paper: pop-up houses, torn reveals, stamps, paper maps) · **3D** (CSS-3D cities and phones with real depth, Three.js city dives and pins) · **UI Motion** (real app screenshots: zoom, lift a region off the glass, spotlight, navigate, type into the real search field) · **Kinetic typography** (fitted posters, RSVP, slot rolls, odometers, split words, 3D extrusion) · **Talking head** (silence cuts, punch-ins, word-by-word captions, lower thirds, split screens, B-roll cards over *real* footage) · **Cinematic** (letterbox, light sweeps, location titles, Ken Burns on untouched photos) |
 | **Scene bank** (`scene-bank/`) | 62 scenes in 18 categories, each with an editable config, preview, docs and a working implementation. Catalogue with previews: [`documentation/SCENES.md`](documentation/SCENES.md); overview sheet: `scene-bank/CONTACT-SHEET.jpg`. |
-| **12 campaign templates** (`templates/campaigns/`) | Launch · Discover your dream home · How to search · Explore on the map · How to publish · Features & benefits · Why Shtëpia.ime? · App updates · New feature spotlight · Download the app · Brand awareness · Emotional (Welcome home). All copy in Albanian, English and Italian. |
+| **12 campaign templates** (`templates/campaigns/`) | Launch · Discover your dream home · How to search · Explore on the map · How to publish · Features & benefits · Why Shtëpia.ime? · App updates · New feature spotlight · Download the app · Brand awareness · Emotional (Welcome home). All copy in the app's 8 languages (sq, en, de, it, es, pl, ru, fr). |
 | **Sound design** (`sound-design/`) | 25 original synthesized effects (whooshes, impacts, paper, UI taps, logo reveal, risers, ambiences) with measured hit times, and music beds composed to each film's cuts (5 moods). All original and licence-free. The 19 HyperFrames effects (Pixabay licence) are also included. |
 | **Voice studio** (`voice-studio/`) | Albanian, English and Italian narration through OpenAI or ElevenLabs (keys from `.env`), your own recordings, local Kokoro (English only), or no narration. Word timings drive the captions. |
 | **Quality control** (`quality-control/`) | 12 checks on the *rendered* file and the live page, a 0–100 score, required gates, and a contact sheet for the by-eye review. |

@@ -9,6 +9,10 @@
 //   templates                    list campaign templates
 //   new <template> [--lang sq|en|it] [--format reel] [--id x]   storyboard from a template
 //   plan "<one sentence>"        draft storyboard from a brief (rule-based; Claude refines it)
+//   idea "<brief>" | --storyboard f [--langs sq,en,…] [--format reel]
+//                                one idea → a video in each of the app's 8 languages, saved to the
+//                                local library (local/library/<id>/<lang>/) with post-ready captions
+//   app [--port 4747]            your private local app: every idea × language, captions, downloads
 //   build <storyboard.json> [--format f]   storyboard -> HyperFrames project in projects/
 //   voices                       narration providers and whether they are configured here
 //   talking-head <video> [--lang sq] [--transcript t.srt]  silence cuts + transcript → storyboard for real footage
@@ -29,7 +33,7 @@ import { KIT, build, registry, brandCss, readJSON, hf, timeline, resolveFormat }
 import { produce, exportBundle, render as renderProject, projectPath, prepareAudio } from './render/produce.mjs';
 import { qc as runQc } from './quality-control/qc.mjs';
 import { PROVIDERS, available, loadEnv } from './voice-studio/voice.mjs';
-import { planFromBrief, localize } from './render/plan.mjs';
+import { planFromBrief, localize, LANGS } from './render/plan.mjs';
 
 const [, , cmd, ...rest] = process.argv;
 const flags = {}; const args = [];
@@ -192,6 +196,40 @@ const commands = {
     console.log(`\ndraft: storyboards/${sb.id}.json — ${sb.scenes.length} scenes, ${sb.targetDuration}s, ${sb.language}, ${sb.format}`);
     for (const [i, s] of sb.scenes.entries()) console.log(`  ${String(i + 1).padStart(2)}. ${String(s.duration).padStart(4)}s  ${s.scene}`);
     console.log('\nReview / edit it, then: npm run video -- storyboards/' + sb.id + '.json');
+  },
+
+  // One idea in all 8 languages → local library (never committed).
+  async idea() {
+    let sb;
+    if (flags.storyboard) { sb = JSON.parse(fs.readFileSync(path.resolve(String(flags.storyboard)), 'utf8')); }
+    else if (flags.template) { sb = JSON.parse(fs.readFileSync(path.join(KIT, 'templates/campaigns', `${flags.template}.json`), 'utf8')); }
+    else { const brief = args.join(' ').trim() || die('idea "<brief>"  |  idea --template <id>  |  idea --storyboard <file>'); const r = planFromBrief(brief, { raw: true }); sb = r.sb; console.log(r.reasoning.map((x) => '  · ' + x).join('\n')); }
+    if (flags.id) sb.id = String(flags.id);
+    const langs = flags.langs && flags.langs !== 'all' ? String(flags.langs).split(',') : LANGS;
+    const fmt = flags.format ? String(flags.format) : sb.format || 'reel';
+    const lib = path.join(KIT, 'local/library', sb.id);
+    fs.mkdirSync(lib, { recursive: true });
+    const meta = { id: sb.id, title: localize(sb.title || sb.id, 'en'), brief: sb.brief || '', created: new Date().toISOString(), format: fmt, languages: {} };
+    fs.writeFileSync(path.join(lib, 'storyboard.json'), JSON.stringify(sb, null, 2));
+    for (const lang of langs) {
+      const one = localize(JSON.parse(JSON.stringify({ ...sb, template: sb.template || 'idea' })), lang);
+      one.id = `${sb.id}-${lang}`; one.language = lang; one.__dir = KIT;
+      const [r] = await produce(one, { formats: [fmt], quality: flags.quality || 'delivery' });
+      const out = path.join(lib, lang); fs.mkdirSync(out, { recursive: true });
+      fs.copyFileSync(r.video, path.join(out, 'video.mp4'));
+      execSync(`ffmpeg -loglevel error -y -ss ${(one.thumbnailAt ?? 4.5)} -i "${r.video}" -frames:v 1 -q:v 3 "${path.join(out, 'thumbnail.jpg')}"`);
+      const tags = (one.hashtags || []).map((h) => (h.startsWith('#') ? h : '#' + h)).join(' ');
+      fs.writeFileSync(path.join(out, 'caption.txt'), `${(one.caption || '').trim()}\n\n${tags}\n`);
+      if (r.report) fs.copyFileSync(path.join(r.dir, 'qc/QC.md'), path.join(out, 'QC.md'));
+      meta.languages[lang] = { video: `${lang}/video.mp4`, thumbnail: `${lang}/thumbnail.jpg`, caption: (one.caption || '').trim(), hashtags: tags, title: one.title, qc: r.report ? { score: r.report.score, final: r.report.final } : null };
+      fs.writeFileSync(path.join(lib, 'idea.json'), JSON.stringify(meta, null, 2));
+    }
+    console.log(`\n✓ ${Object.keys(meta.languages).length} languages → local/library/${sb.id}/  (open them in: npm run app)`);
+  },
+
+  async app() {
+    const { startApp } = await import('./app/server.mjs');
+    startApp({ port: +(flags.port || 4747) });
   },
 
   async voices() {
