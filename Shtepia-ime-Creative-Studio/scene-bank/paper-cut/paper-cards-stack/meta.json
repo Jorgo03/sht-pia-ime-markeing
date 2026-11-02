@@ -7,10 +7,56 @@
   "in": "none",
   "out": "paper",
   "vars": {
-    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Pse *Shtëpia.ime?*" },
-    "items": { "type": "string", "label": "Items (| separated, max 5)", "default": "Shitje dhe qira|Filtra të saktë|Harta e pronave|8 gjuhë" }
+    "title": {
+      "type": "string",
+      "label": "Headline (*accent*)",
+      "default": {
+        "sq": "Pse *Shtëpia.ime?*",
+        "en": "Why *Shtëpia.ime?*",
+        "it": "Perché *Shtëpia.ime?*"
+      }
+    },
+    "items": {
+      "type": "string",
+      "label": "Items (| separated, max 5)",
+      "default": {
+        "sq": "Shitje dhe qira|Filtra të saktë|Harta e pronave|8 gjuhë",
+        "en": "Sale and rent|Precise filters|A map of homes|8 languages",
+        "it": "Vendita e affitto|Filtri precisi|Mappa degli immobili|8 lingue"
+      }
+    }
   },
-  "features": ["listing-type", "filters", "map-view", "multilingual"],
-  "sfx": [{ "id": "paper-drop", "at": 0.55, "volume": 0.5 }, { "id": "paper-drop", "at": 0.75, "volume": 0.5 }, { "id": "paper-drop", "at": 0.95, "volume": 0.5 }, { "id": "paper-drop", "at": 1.15, "volume": 0.5 }],
-  "tags": ["print", "list", "benefits"]
+  "features": [
+    "listing-type",
+    "filters",
+    "map-view",
+    "multilingual"
+  ],
+  "sfx": [
+    {
+      "id": "paper-drop",
+      "at": 0.55,
+      "volume": 0.5
+    },
+    {
+      "id": "paper-drop",
+      "at": 0.75,
+      "volume": 0.5
+    },
+    {
+      "id": "paper-drop",
+      "at": 0.95,
+      "volume": 0.5
+    },
+    {
+      "id": "paper-drop",
+      "at": 1.15,
+      "volume": 0.5
+    }
+  ],
+  "tags": [
+    "print",
+    "list",
+    "benefits"
+  ]
 }

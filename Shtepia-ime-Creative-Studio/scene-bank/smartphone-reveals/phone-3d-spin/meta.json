@@ -7,14 +7,73 @@
   "in": "none",
   "out": "blur",
   "vars": {
-    "kicker": { "type": "string", "label": "Kicker", "default": "Aplikacioni" },
-    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Gjithçka për *shtëpinë*, në xhep." },
-    "screen": { "type": "screen", "label": "Screen", "default": "explore" },
-    "theme": { "type": "enum", "label": "App theme", "default": "light", "options": ["light", "dark"] },
-    "chips": { "type": "string", "label": "Chips (comma separated, max 4)", "default": "Shitje & qira, Filtra të saktë, Harta, Të preferuarat" }
+    "kicker": {
+      "type": "string",
+      "label": "Kicker",
+      "default": {
+        "sq": "Aplikacioni",
+        "en": "The app",
+        "it": "L'app"
+      }
+    },
+    "title": {
+      "type": "string",
+      "label": "Headline (*accent*)",
+      "default": {
+        "sq": "Gjithçka për *shtëpinë*, në xhep.",
+        "en": "Everything for *your home*, in your pocket.",
+        "it": "Tutto per *la casa*, in tasca."
+      }
+    },
+    "screen": {
+      "type": "screen",
+      "label": "Screen",
+      "default": "explore"
+    },
+    "theme": {
+      "type": "enum",
+      "label": "App theme",
+      "default": "light",
+      "options": [
+        "light",
+        "dark"
+      ]
+    },
+    "chips": {
+      "type": "string",
+      "label": "Chips (comma separated, max 4)",
+      "default": {
+        "sq": "Shitje & qira, Filtra të saktë, Harta, Të preferuarat",
+        "en": "Sale & rent, Precise filters, Map, Favourites",
+        "it": "Vendita & affitto, Filtri precisi, Mappa, Preferiti"
+      }
+    }
   },
   "screens": true,
-  "features": ["listing-type", "filters", "map-view", "favorites"],
-  "sfx": [{ "id": "whoosh-deep", "at": 0.0, "volume": 0.45 }, { "id": "pop", "at": 1.1 }, { "id": "pop", "at": 1.38 }],
-  "tags": ["phone", "3d", "features"]
+  "features": [
+    "listing-type",
+    "filters",
+    "map-view",
+    "favorites"
+  ],
+  "sfx": [
+    {
+      "id": "whoosh-deep",
+      "at": 0.0,
+      "volume": 0.45
+    },
+    {
+      "id": "pop",
+      "at": 1.1
+    },
+    {
+      "id": "pop",
+      "at": 1.38
+    }
+  ],
+  "tags": [
+    "phone",
+    "3d",
+    "features"
+  ]
 }

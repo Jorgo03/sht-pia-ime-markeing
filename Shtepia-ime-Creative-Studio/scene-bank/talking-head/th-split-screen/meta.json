@@ -8,13 +8,49 @@
   "out": "none",
   "overlay": true,
   "vars": {
-    "screen": { "type": "screen", "label": "Screen", "default": "map" },
-    "region": { "type": "string", "label": "Zoom to region (optional)", "default": "clusterTirana" },
-    "tag": { "type": "string", "label": "Tag", "default": "Harta e pronave" },
-    "theme": { "type": "enum", "label": "App theme", "default": "light", "options": ["light", "dark"] }
+    "screen": {
+      "type": "screen",
+      "label": "Screen",
+      "default": "map"
+    },
+    "region": {
+      "type": "string",
+      "label": "Zoom to region (optional)",
+      "default": "clusterTirana"
+    },
+    "tag": {
+      "type": "string",
+      "label": "Tag",
+      "default": {
+        "sq": "Harta e pronave",
+        "en": "The map of homes",
+        "it": "La mappa degli immobili"
+      }
+    },
+    "theme": {
+      "type": "enum",
+      "label": "App theme",
+      "default": "light",
+      "options": [
+        "light",
+        "dark"
+      ]
+    }
   },
   "screens": true,
-  "features": ["map-view"],
-  "sfx": [{ "id": "whoosh-air", "at": 0.0, "volume": 0.4 }],
-  "tags": ["talking-head", "split-screen", "ui"]
+  "features": [
+    "map-view"
+  ],
+  "sfx": [
+    {
+      "id": "whoosh-air",
+      "at": 0.0,
+      "volume": 0.4
+    }
+  ],
+  "tags": [
+    "talking-head",
+    "split-screen",
+    "ui"
+  ]
 }

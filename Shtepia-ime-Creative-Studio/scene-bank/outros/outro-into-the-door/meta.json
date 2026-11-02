@@ -7,9 +7,36 @@
   "in": "blur",
   "out": "none",
   "vars": {
-    "line": { "type": "string", "label": "Closing line (*accent*)", "default": "Mirë se vjen *në shtëpi.*" },
-    "handle": { "type": "string", "label": "Handle / URL", "default": "Shtëpia.ime" }
+    "line": {
+      "type": "string",
+      "label": "Closing line (*accent*)",
+      "default": {
+        "sq": "Mirë se vjen *në shtëpi.*",
+        "en": "Welcome *home.*",
+        "it": "Benvenuto *a casa.*"
+      }
+    },
+    "handle": {
+      "type": "string",
+      "label": "Handle / URL",
+      "default": "Shtëpia.ime"
+    }
   },
-  "sfx": [{ "id": "whoosh-deep", "at": 0.95, "volume": 0.5 }, { "id": "impact-cinema", "at": 1.85, "volume": 0.6 }],
-  "tags": ["outro", "logo", "push-in"]
+  "sfx": [
+    {
+      "id": "whoosh-deep",
+      "at": 0.95,
+      "volume": 0.5
+    },
+    {
+      "id": "impact-cinema",
+      "at": 1.85,
+      "volume": 0.6
+    }
+  ],
+  "tags": [
+    "outro",
+    "logo",
+    "push-in"
+  ]
 }

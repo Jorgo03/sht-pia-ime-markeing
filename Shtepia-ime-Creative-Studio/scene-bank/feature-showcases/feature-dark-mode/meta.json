@@ -7,12 +7,43 @@
   "in": "none",
   "out": "blur",
   "vars": {
-    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Ditë apo *natë.*" },
-    "screen": { "type": "screen", "label": "Screen", "default": "home" },
-    "at": { "type": "number", "label": "Wipe starts at (s)", "default": 0.9, "min": 0.2, "max": 3, "step": 0.1 }
+    "title": {
+      "type": "string",
+      "label": "Headline (*accent*)",
+      "default": {
+        "sq": "Ditë apo *natë.*",
+        "en": "Day or *night.*",
+        "it": "Giorno o *notte.*"
+      }
+    },
+    "screen": {
+      "type": "screen",
+      "label": "Screen",
+      "default": "home"
+    },
+    "at": {
+      "type": "number",
+      "label": "Wipe starts at (s)",
+      "default": 0.9,
+      "min": 0.2,
+      "max": 3,
+      "step": 0.1
+    }
   },
   "screens": true,
-  "features": ["dark-mode"],
-  "sfx": [{ "id": "whoosh-air", "at": 0.95, "volume": 0.4 }],
-  "tags": ["feature", "dark-mode", "ui"]
+  "features": [
+    "dark-mode"
+  ],
+  "sfx": [
+    {
+      "id": "whoosh-air",
+      "at": 0.95,
+      "volume": 0.4
+    }
+  ],
+  "tags": [
+    "feature",
+    "dark-mode",
+    "ui"
+  ]
 }

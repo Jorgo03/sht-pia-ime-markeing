@@ -7,8 +7,31 @@
   "in": "flood",
   "out": "none",
   "vars": {
-    "line": { "type": "string", "label": "Closing line (*accent*)", "default": "Shtëpia jote. *Zgjedhja jote.*" }
+    "line": {
+      "type": "string",
+      "label": "Closing line (*accent*)",
+      "default": {
+        "sq": "Shtëpia jote. *Zgjedhja jote.*",
+        "en": "Your home. *Your choice.*",
+        "it": "La tua casa. *La tua scelta.*"
+      }
+    }
   },
-  "sfx": [{ "id": "whoosh-air", "at": 0.05, "volume": 0.5 }, { "id": "logo-reveal", "at": 0.95, "volume": 0.8 }],
-  "tags": ["logo", "brand", "flood"]
+  "sfx": [
+    {
+      "id": "whoosh-air",
+      "at": 0.05,
+      "volume": 0.5
+    },
+    {
+      "id": "logo-reveal",
+      "at": 0.95,
+      "volume": 0.8
+    }
+  ],
+  "tags": [
+    "logo",
+    "brand",
+    "flood"
+  ]
 }

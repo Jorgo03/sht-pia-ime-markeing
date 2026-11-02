@@ -8,14 +8,62 @@
   "out": "none",
   "overlay": true,
   "vars": {
-    "screen": { "type": "string", "label": "Real screen id (or empty to use image)", "default": "detail-1" },
-    "image": { "type": "string", "label": "Image path (if no screen)", "default": "assets/property-images/living-tirana.jpg" },
-    "keyword": { "type": "string", "label": "Keyword (*accent*)", "default": "*Çdo detaj*" },
-    "rotate": { "type": "number", "label": "Tilt (deg)", "default": -3, "min": -12, "max": 12, "step": 1 },
-    "theme": { "type": "enum", "label": "App theme", "default": "light", "options": ["light", "dark"] }
+    "screen": {
+      "type": "string",
+      "label": "Real screen id (or empty to use image)",
+      "default": "detail-1"
+    },
+    "image": {
+      "type": "string",
+      "label": "Image path (if no screen)",
+      "default": "assets/property-images/living-tirana.jpg"
+    },
+    "keyword": {
+      "type": "string",
+      "label": "Keyword (*accent*)",
+      "default": {
+        "sq": "*Çdo detaj*",
+        "en": "*Every detail*",
+        "it": "*Ogni dettaglio*"
+      }
+    },
+    "rotate": {
+      "type": "number",
+      "label": "Tilt (deg)",
+      "default": -3,
+      "min": -12,
+      "max": 12,
+      "step": 1
+    },
+    "theme": {
+      "type": "enum",
+      "label": "App theme",
+      "default": "light",
+      "options": [
+        "light",
+        "dark"
+      ]
+    }
   },
   "screens": true,
-  "features": ["listing-detail"],
-  "sfx": [{ "id": "pop", "at": 0.12, "volume": 0.45 }, { "id": "impact-type", "at": 0.4, "volume": 0.35 }],
-  "tags": ["talking-head", "b-roll", "card"]
+  "features": [
+    "listing-detail"
+  ],
+  "sfx": [
+    {
+      "id": "pop",
+      "at": 0.12,
+      "volume": 0.45
+    },
+    {
+      "id": "impact-type",
+      "at": 0.4,
+      "volume": 0.35
+    }
+  ],
+  "tags": [
+    "talking-head",
+    "b-roll",
+    "card"
+  ]
 }

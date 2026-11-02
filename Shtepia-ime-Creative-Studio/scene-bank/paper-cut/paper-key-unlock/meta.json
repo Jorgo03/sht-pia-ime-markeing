@@ -7,9 +7,50 @@
   "in": "none",
   "out": "zoom-in",
   "vars": {
-    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Çelësat e *shtëpisë së re.*" },
-    "footer": { "type": "string", "label": "Footer", "default": "Gjeje në Shtëpia.ime" }
+    "title": {
+      "type": "string",
+      "label": "Headline (*accent*)",
+      "default": {
+        "sq": "Çelësat e *shtëpisë së re.*",
+        "en": "The keys to *your new home.*",
+        "it": "Le chiavi della *tua nuova casa.*"
+      }
+    },
+    "footer": {
+      "type": "string",
+      "label": "Footer",
+      "default": {
+        "sq": "Gjeje në Shtëpia.ime",
+        "en": "Find it on Shtëpia.ime",
+        "it": "Trovala su Shtëpia.ime"
+      }
+    }
   },
-  "sfx": [{ "id": "paper-drop", "at": 0.15, "volume": 0.5 }, { "id": "whoosh-paper", "at": 0.35, "volume": 0.4 }, { "id": "stamp", "at": 1.3, "volume": 0.5 }, { "id": "impact-soft", "at": 1.45, "volume": 0.4 }],
-  "tags": ["print", "key", "payoff"]
+  "sfx": [
+    {
+      "id": "paper-drop",
+      "at": 0.15,
+      "volume": 0.5
+    },
+    {
+      "id": "whoosh-paper",
+      "at": 0.35,
+      "volume": 0.4
+    },
+    {
+      "id": "stamp",
+      "at": 1.3,
+      "volume": 0.5
+    },
+    {
+      "id": "impact-soft",
+      "at": 1.45,
+      "volume": 0.4
+    }
+  ],
+  "tags": [
+    "print",
+    "key",
+    "payoff"
+  ]
 }

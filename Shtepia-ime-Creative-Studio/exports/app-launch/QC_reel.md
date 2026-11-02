@@ -1,6 +1,6 @@
 # QC — app-launch (reel)
 
-**Score 82/100 — NOT FINAL (required checks failed: safe)**
+**Score 91/100 — PASSED: ready to export**
 
 | | Check | Weight | Result |
 |---|---|---|---|
@@ -10,7 +10,7 @@
 | ✅ | No long stretch without meaningful movement | 9 | something moves in every 2.5 s window (the end card may hold) |
 | ✅ | Transitions are smooth (no blank or flash frames) | 7 | no blank or flash frames between scenes |
 | ⚠️ | Text is readable on a phone (size floor, contrast) *(required)* | 10 | 5 lines too small or on screen too briefly (text_below_floor, line_unread) |
-| ❌ | Text and product inside the platform safe zone *(required)* | 9 | 4 text boxes outside the reel safe zone, e.g. "shtëpinë" at t=0.25s (53,994,483,1121) |
+| ✅ | Text and product inside the platform safe zone *(required)* | 9 | 131 text boxes across 50 samples, all inside the safe zone |
 | ✅ | Subtitles synchronised with the voice | 6 | no speech in the film: nothing to caption |
 | ✅ | Audio balanced (loudness, peaks, presence) | 7 | -17.6 LUFS integrated, true peak -2.3 dBFS (measured, not listened to) |
 | ✅ | No missing assets or runtime errors *(required)* | 8 | every referenced file present, hyperframes check: no lint/runtime errors |

@@ -56,7 +56,9 @@ export function registry() {
 export const resetRegistry = () => { _registry = null; };
 
 // Declared variables for a scene's root (HyperFrames' data-composition-variables).
-function declareVars(meta) {
+// Scene text defaults may be {sq,en,it}: resolved to the film's language.
+const pickLang = (d, lang) => (d && typeof d === 'object' && !Array.isArray(d) && 'sq' in d ? d[lang] ?? d.sq : d);
+function declareVars(meta, lang = 'sq') {
   const std = {
     duration: { type: 'number', label: 'Duration (s)', default: meta.duration ?? 3, min: 0.5, max: 600, step: 0.1 },
     start: { type: 'number', label: 'Start in film (s, set by the builder)', default: 0, min: 0, max: 3600, step: 0.01 },
@@ -66,7 +68,7 @@ function declareVars(meta) {
   };
   const all = { ...std, ...(meta.vars || {}) };
   return Object.entries(all).map(([id, v]) => {
-    const d = { id, type: v.type || 'string', label: v.label || id, default: v.default };
+    const d = { id, type: v.type || 'string', label: v.label || id, default: pickLang(v.default, lang) };
     if (d.type === 'enum') d.options = (v.options || []).map((o) => (typeof o === 'object' ? o : { value: o, label: o || '(scene default)' }));
     for (const k of ['min', 'max', 'step', 'placeholder', 'maxLength']) if (v[k] !== undefined) d[k] = v[k];
     if (d.type === 'screen') { d.type = 'enum'; d.options = Object.keys(readJSON('config/screens.json').screens).map((s) => ({ value: s, label: s })); }
@@ -77,12 +79,12 @@ function declareVars(meta) {
 }
 
 // Render one scene instance: rename its composition id and set its canvas.
-export function instantiate(meta, iid, fmt) {
+export function instantiate(meta, iid, fmt, lang = 'sq') {
   let html = fs.readFileSync(path.join(meta.dir, 'scene.html'), 'utf8');
   const id = meta.id;
   html = html.replaceAll(`"${id}"`, `"${iid}"`).replaceAll(`'${id}'`, `'${iid}'`);
   html = html.replace(/data-width="\d+"/, `data-width="${fmt.width}"`).replace(/data-height="\d+"/, `data-height="${fmt.height}"`);
-  const decl = JSON.stringify(declareVars(meta));
+  const decl = JSON.stringify(declareVars(meta, lang));
   if (!/data-composition-variables=/.test(html)) throw new Error(`${meta.rel}/scene.html: root needs data-composition-variables='[]'`);
   html = html.replace(/data-composition-variables='[^']*'/, `data-composition-variables='${attr(decl)}'`);
   return html;
@@ -167,7 +169,7 @@ export function build(sb, { out, format, log = console.log } = {}) {
   const texts = [];
   const hosts = [];
   for (const s of scenes) {
-    const html = instantiate(s.meta, s.iid, fmt);
+    const html = instantiate(s.meta, s.iid, fmt, sb.language || 'sq');
     write(path.join(dir, 'compositions', `${s.iid}.html`), html);
     texts.push(html);
     const vals = { ...(s.vars || {}), duration: s.duration, start: s.start };
@@ -186,9 +188,11 @@ export function build(sb, { out, format, log = console.log } = {}) {
     // rect: place the footage in part of the frame (split screens), e.g. {"top":0,"height":"50%"}.
     const r = f.rect || {};
     const box = r.top !== undefined || r.height !== undefined ? `left:${r.left ?? 0};top:${r.top ?? 0};width:${r.width ?? '100%'};height:${r.height ?? '100%'}` : 'inset:0';
-    media.push(`      <div id="fw-${i}" class="clip footage" data-start="${f.start}" data-duration="${len}" data-track-index="0" style="position:absolute;${box};z-index:${f.z ?? 1};overflow:hidden">
+    // The <video> carries the timing (HyperFrames decodes media that is timed
+    // itself); its untimed wrappers frame it and take the punch-in transforms.
+    media.push(`      <div id="fw-${i}" class="footage" style="position:absolute;${box};z-index:${f.z ?? 1};overflow:hidden">
         <div id="fp-${i}" class="punch" style="position:absolute;inset:0">
-          <video id="fv-${i}" src="${f.src}" data-media-start="${f.in}" ${f.hasAudio === false ? 'muted' : 'data-has-audio="true"'} data-volume="${f.volume ?? 1}" playsinline style="position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover"></video>
+          <video id="fv-${i}" class="clip" src="${f.src}" data-start="${f.start}" data-duration="${len}" data-track-index="0" data-media-start="${f.in}" ${f.hasAudio === false ? 'muted' : 'data-has-audio="true"'} data-volume="${f.volume ?? 1}" playsinline style="position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover"></video>
         </div>
       </div>`);
   });

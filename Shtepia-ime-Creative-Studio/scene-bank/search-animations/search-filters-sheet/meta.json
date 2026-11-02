@@ -7,14 +7,84 @@
   "in": "none",
   "out": "blur",
   "vars": {
-    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Filtra *të saktë.*" },
-    "stops": { "type": "string", "label": "Regions to visit (comma separated)", "default": "price, bedrooms" },
-    "labels": { "type": "string", "label": "Callouts (same order)", "default": "Buxheti yt, Sa dhoma?" },
-    "zoom": { "type": "number", "label": "Zoom", "default": 1.7, "min": 1.2, "max": 3, "step": 0.1 },
-    "theme": { "type": "enum", "label": "App theme", "default": "light", "options": ["light", "dark"] }
+    "title": {
+      "type": "string",
+      "label": "Headline (*accent*)",
+      "default": {
+        "sq": "Filtra *të saktë.*",
+        "en": "Precise *filters.*",
+        "it": "Filtri *precisi.*"
+      }
+    },
+    "stops": {
+      "type": "string",
+      "label": "Regions to visit (comma separated)",
+      "default": "price, bedrooms"
+    },
+    "labels": {
+      "type": "string",
+      "label": "Callouts (same order)",
+      "default": {
+        "sq": "Buxheti yt, Sa dhoma?",
+        "en": "Your budget, How many rooms?",
+        "it": "Il tuo budget, Quante camere?"
+      }
+    },
+    "zoom": {
+      "type": "number",
+      "label": "Zoom",
+      "default": 1.7,
+      "min": 1.2,
+      "max": 3,
+      "step": 0.1
+    },
+    "theme": {
+      "type": "enum",
+      "label": "App theme",
+      "default": "light",
+      "options": [
+        "light",
+        "dark"
+      ]
+    }
   },
   "screens": true,
-  "features": ["filters", "price-filter", "rooms-filter"],
-  "sfx": [{ "id": "ui-tap", "at": 0.45, "volume": 0.6 }, { "id": "ui-swipe", "at": 0.7, "volume": 0.4 }, { "id": "pop", "at": 1.8, "volume": 0.35 }, { "id": "pop", "at": 2.85, "volume": 0.35 }, { "id": "ui-tap", "at": 4.0, "volume": 0.6 }],
-  "tags": ["search", "filters", "ui", "walkthrough"]
+  "features": [
+    "filters",
+    "price-filter",
+    "rooms-filter"
+  ],
+  "sfx": [
+    {
+      "id": "ui-tap",
+      "at": 0.45,
+      "volume": 0.6
+    },
+    {
+      "id": "ui-swipe",
+      "at": 0.7,
+      "volume": 0.4
+    },
+    {
+      "id": "pop",
+      "at": 1.8,
+      "volume": 0.35
+    },
+    {
+      "id": "pop",
+      "at": 2.85,
+      "volume": 0.35
+    },
+    {
+      "id": "ui-tap",
+      "at": 4.0,
+      "volume": 0.6
+    }
+  ],
+  "tags": [
+    "search",
+    "filters",
+    "ui",
+    "walkthrough"
+  ]
 }

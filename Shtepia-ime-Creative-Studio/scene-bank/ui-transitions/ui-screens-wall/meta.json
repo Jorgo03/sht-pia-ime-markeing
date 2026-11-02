@@ -7,11 +7,40 @@
   "in": "zoom-out",
   "out": "blur",
   "vars": {
-    "kicker": { "type": "string", "label": "Kicker", "default": "Ditë apo natë" },
-    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Çdo mundësi, *në një vend.*" }
+    "kicker": {
+      "type": "string",
+      "label": "Kicker",
+      "default": {
+        "sq": "Ditë apo natë",
+        "en": "Day or night",
+        "it": "Giorno o notte"
+      }
+    },
+    "title": {
+      "type": "string",
+      "label": "Headline (*accent*)",
+      "default": {
+        "sq": "Çdo mundësi, *në një vend.*",
+        "en": "Every option, *in one place.*",
+        "it": "Ogni possibilità, *in un posto.*"
+      }
+    }
   },
   "screens": true,
-  "features": ["dark-mode"],
-  "sfx": [{ "id": "whoosh-air", "at": 0.0, "volume": 0.4 }],
-  "tags": ["ui", "wall", "overview", "3d"]
+  "features": [
+    "dark-mode"
+  ],
+  "sfx": [
+    {
+      "id": "whoosh-air",
+      "at": 0.0,
+      "volume": 0.4
+    }
+  ],
+  "tags": [
+    "ui",
+    "wall",
+    "overview",
+    "3d"
+  ]
 }

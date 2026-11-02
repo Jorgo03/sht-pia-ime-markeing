@@ -7,10 +7,50 @@
   "in": "none",
   "out": "paper",
   "vars": {
-    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Gjej *shtëpinë* tënde", "maxLength": 40 },
-    "label": { "type": "string", "label": "Stamp label", "default": "Tiranë · Durrës · Vlorë" },
-    "seed": { "type": "number", "label": "Layout seed", "default": 4, "min": 1, "max": 99, "step": 1 }
+    "title": {
+      "type": "string",
+      "label": "Headline (*accent*)",
+      "default": {
+        "sq": "Gjej *shtëpinë* tënde",
+        "en": "Find *your* home",
+        "it": "Trova *casa* tua"
+      },
+      "maxLength": 40
+    },
+    "label": {
+      "type": "string",
+      "label": "Stamp label",
+      "default": {
+        "sq": "Tiranë · Durrës · Vlorë",
+        "en": "Tirana · Durrës · Vlorë",
+        "it": "Tirana · Durazzo · Valona"
+      }
+    },
+    "seed": {
+      "type": "number",
+      "label": "Layout seed",
+      "default": 4,
+      "min": 1,
+      "max": 99,
+      "step": 1
+    }
   },
-  "sfx": [{ "id": "paper-rustle", "at": 0.45, "volume": 0.5 }, { "id": "stamp", "at": 1.62, "volume": 0.6 }],
-  "tags": ["print", "paper", "town", "light"]
+  "sfx": [
+    {
+      "id": "paper-rustle",
+      "at": 0.45,
+      "volume": 0.5
+    },
+    {
+      "id": "stamp",
+      "at": 1.62,
+      "volume": 0.6
+    }
+  ],
+  "tags": [
+    "print",
+    "paper",
+    "town",
+    "light"
+  ]
 }

@@ -7,15 +7,66 @@
   "in": "none",
   "out": "zoom-in",
   "vars": {
-    "value": { "type": "number", "label": "Number", "default": 8, "min": 0, "max": 99999999, "step": 1 },
-    "prefix": { "type": "string", "label": "Prefix", "default": "" },
-    "unit": { "type": "string", "label": "Unit", "default": "" },
-    "label": { "type": "string", "label": "Label (*accent*)", "default": "gjuhë, *një shtëpi.*" },
-    "source": { "type": "string", "label": "Source line (keep claims honest)", "default": "sq · en · de · it · es · pl · ru · fr" },
-    "ring": { "type": "number", "label": "Ring fill %", "default": 100, "min": 0, "max": 100, "step": 1 }
+    "value": {
+      "type": "number",
+      "label": "Number",
+      "default": 8,
+      "min": 0,
+      "max": 99999999,
+      "step": 1
+    },
+    "prefix": {
+      "type": "string",
+      "label": "Prefix",
+      "default": ""
+    },
+    "unit": {
+      "type": "string",
+      "label": "Unit",
+      "default": ""
+    },
+    "label": {
+      "type": "string",
+      "label": "Label (*accent*)",
+      "default": {
+        "sq": "gjuhë, *një shtëpi.*",
+        "en": "languages, *one home.*",
+        "it": "lingue, *una casa.*"
+      }
+    },
+    "source": {
+      "type": "string",
+      "label": "Source line (keep claims honest)",
+      "default": "sq · en · de · it · es · pl · ru · fr"
+    },
+    "ring": {
+      "type": "number",
+      "label": "Ring fill %",
+      "default": 100,
+      "min": 0,
+      "max": 100,
+      "step": 1
+    }
   },
-  "features": ["multilingual"],
+  "features": [
+    "multilingual"
+  ],
   "notes": "Never put user, download or listing counts here without a real data source (features.json → neverClaim).",
-  "sfx": [{ "id": "riser", "at": -0.4, "volume": 0.3 }, { "id": "impact-type", "at": 1.6, "volume": 0.5 }],
-  "tags": ["stat", "number", "counter"]
+  "sfx": [
+    {
+      "id": "riser",
+      "at": -0.4,
+      "volume": 0.3
+    },
+    {
+      "id": "impact-type",
+      "at": 1.6,
+      "volume": 0.5
+    }
+  ],
+  "tags": [
+    "stat",
+    "number",
+    "counter"
+  ]
 }

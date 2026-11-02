@@ -7,12 +7,58 @@
   "in": "none",
   "out": "blur",
   "vars": {
-    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Çdo hap, *pa humbur kohë.*" },
-    "screens": { "type": "string", "label": "Screens in depth order", "default": "home, explore, detail-1, map" },
-    "theme": { "type": "enum", "label": "App theme", "default": "dark", "options": ["light", "dark"] }
+    "title": {
+      "type": "string",
+      "label": "Headline (*accent*)",
+      "default": {
+        "sq": "Çdo hap, *pa humbur kohë.*",
+        "en": "Every step, *no time wasted.*",
+        "it": "Ogni passo, *senza perdere tempo.*"
+      }
+    },
+    "screens": {
+      "type": "string",
+      "label": "Screens in depth order",
+      "default": "home, explore, detail-1, map"
+    },
+    "theme": {
+      "type": "enum",
+      "label": "App theme",
+      "default": "dark",
+      "options": [
+        "light",
+        "dark"
+      ]
+    }
   },
   "screens": true,
-  "features": ["search", "grid-view", "listing-detail", "map-view"],
-  "sfx": [{ "id": "whoosh-deep", "at": 0.6, "volume": 0.35 }, { "id": "whoosh-air", "at": 1.6, "volume": 0.3 }, { "id": "whoosh-air", "at": 2.6, "volume": 0.3 }],
-  "tags": ["3d", "dof", "screens", "dolly"]
+  "features": [
+    "search",
+    "grid-view",
+    "listing-detail",
+    "map-view"
+  ],
+  "sfx": [
+    {
+      "id": "whoosh-deep",
+      "at": 0.6,
+      "volume": 0.35
+    },
+    {
+      "id": "whoosh-air",
+      "at": 1.6,
+      "volume": 0.3
+    },
+    {
+      "id": "whoosh-air",
+      "at": 2.6,
+      "volume": 0.3
+    }
+  ],
+  "tags": [
+    "3d",
+    "dof",
+    "screens",
+    "dolly"
+  ]
 }

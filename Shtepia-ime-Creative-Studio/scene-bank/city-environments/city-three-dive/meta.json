@@ -8,10 +8,49 @@
   "out": "blur",
   "three": true,
   "vars": {
-    "kicker": { "type": "string", "label": "Kicker", "default": "Eksploro" },
-    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Çdo lagje, *një prekje larg.*" },
-    "seed": { "type": "number", "label": "City seed", "default": 21, "min": 1, "max": 999, "step": 1 }
+    "kicker": {
+      "type": "string",
+      "label": "Kicker",
+      "default": {
+        "sq": "Eksploro",
+        "en": "Explore",
+        "it": "Esplora"
+      }
+    },
+    "title": {
+      "type": "string",
+      "label": "Headline (*accent*)",
+      "default": {
+        "sq": "Çdo lagje, *një prekje larg.*",
+        "en": "Every neighbourhood, *one tap away.*",
+        "it": "Ogni quartiere, *a un tocco.*"
+      }
+    },
+    "seed": {
+      "type": "number",
+      "label": "City seed",
+      "default": 21,
+      "min": 1,
+      "max": 999,
+      "step": 1
+    }
   },
-  "sfx": [{ "id": "whoosh-deep", "at": 0.3, "volume": 0.5 }, { "id": "impact-soft", "at": 1.75, "volume": 0.5 }],
-  "tags": ["3d", "webgl", "city", "dive"]
+  "sfx": [
+    {
+      "id": "whoosh-deep",
+      "at": 0.3,
+      "volume": 0.5
+    },
+    {
+      "id": "impact-soft",
+      "at": 1.75,
+      "volume": 0.5
+    }
+  ],
+  "tags": [
+    "3d",
+    "webgl",
+    "city",
+    "dive"
+  ]
 }

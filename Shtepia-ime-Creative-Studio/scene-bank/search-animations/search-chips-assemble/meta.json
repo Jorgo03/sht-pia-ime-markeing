@@ -7,12 +7,64 @@
   "in": "none",
   "out": "zoom-in",
   "vars": {
-    "kicker": { "type": "string", "label": "Kicker", "default": "Kërkimi" },
-    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Thjesht. *Si duhet.*" },
-    "chips": { "type": "string", "label": "Chips (max 3)", "default": "Tiranë, 2 dhoma, Shitje" },
-    "footer": { "type": "string", "label": "Footer line", "default": "Çmimi · Sipërfaqja · Dhomat · Tualetet" }
+    "kicker": {
+      "type": "string",
+      "label": "Kicker",
+      "default": {
+        "sq": "Kërkimi",
+        "en": "Search",
+        "it": "Ricerca"
+      }
+    },
+    "title": {
+      "type": "string",
+      "label": "Headline (*accent*)",
+      "default": {
+        "sq": "Thjesht. *Si duhet.*",
+        "en": "Simple. *As it should be.*",
+        "it": "Semplice. *Come deve essere.*"
+      }
+    },
+    "chips": {
+      "type": "string",
+      "label": "Chips (max 3)",
+      "default": {
+        "sq": "Tiranë, 2 dhoma, Shitje",
+        "en": "Tirana, 2 rooms, For sale",
+        "it": "Tirana, 2 camere, Vendita"
+      }
+    },
+    "footer": {
+      "type": "string",
+      "label": "Footer line",
+      "default": {
+        "sq": "Çmimi · Sipërfaqja · Dhomat · Tualetet",
+        "en": "Price · Size · Bedrooms · Bathrooms",
+        "it": "Prezzo · Superficie · Camere · Bagni"
+      }
+    }
   },
-  "features": ["filters", "listing-type"],
-  "sfx": [{ "id": "pop", "at": 0.85 }, { "id": "pop", "at": 1.07 }, { "id": "pop", "at": 1.29 }],
-  "tags": ["search", "chips", "typography"]
+  "features": [
+    "filters",
+    "listing-type"
+  ],
+  "sfx": [
+    {
+      "id": "pop",
+      "at": 0.85
+    },
+    {
+      "id": "pop",
+      "at": 1.07
+    },
+    {
+      "id": "pop",
+      "at": 1.29
+    }
+  ],
+  "tags": [
+    "search",
+    "chips",
+    "typography"
+  ]
 }

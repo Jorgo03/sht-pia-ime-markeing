@@ -3,3 +3,5 @@ projects/
 .hyperframes/
 renders/
 *.wav
+exports/*/source/
+.env

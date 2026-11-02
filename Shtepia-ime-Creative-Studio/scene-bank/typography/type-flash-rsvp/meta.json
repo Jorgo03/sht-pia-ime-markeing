@@ -7,8 +7,41 @@
   "in": "cut",
   "out": "cut",
   "vars": {
-    "words": { "type": "string", "label": "Words (| separated, *accent*)", "default": "Kërko.|Krahaso.|Ruaj.|*Gjej.*" }
+    "words": {
+      "type": "string",
+      "label": "Words (| separated, *accent*)",
+      "default": {
+        "sq": "Kërko.|Krahaso.|Ruaj.|*Gjej.*",
+        "en": "Search.|Compare.|Save.|*Find.*",
+        "it": "Cerca.|Confronta.|Salva.|*Trova.*"
+      }
+    }
   },
-  "sfx": [{ "id": "impact-type", "at": 0.0, "volume": 0.4 }, { "id": "impact-type", "at": 0.48, "volume": 0.4 }, { "id": "impact-type", "at": 0.96, "volume": 0.4 }, { "id": "impact-soft", "at": 1.44, "volume": 0.5 }],
-  "tags": ["typography", "rsvp", "beat"]
+  "sfx": [
+    {
+      "id": "impact-type",
+      "at": 0.0,
+      "volume": 0.4
+    },
+    {
+      "id": "impact-type",
+      "at": 0.48,
+      "volume": 0.4
+    },
+    {
+      "id": "impact-type",
+      "at": 0.96,
+      "volume": 0.4
+    },
+    {
+      "id": "impact-soft",
+      "at": 1.44,
+      "volume": 0.5
+    }
+  ],
+  "tags": [
+    "typography",
+    "rsvp",
+    "beat"
+  ]
 }

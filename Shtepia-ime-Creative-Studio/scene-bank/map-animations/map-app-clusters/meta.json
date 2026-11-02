@@ -7,16 +7,87 @@
   "in": "none",
   "out": "zoom-in",
   "vars": {
-    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Eksploro *në hartë.*" },
-    "from": { "type": "enum", "label": "Start screen", "default": "explore", "options": ["explore", "map"] },
-    "region": { "type": "enum", "label": "Region to focus", "default": "clusterTirana", "options": ["clusterTirana", "clusterSouthA", "clusterSouthB", "count"] },
-    "callout": { "type": "string", "label": "Callout", "default": "3 prona në Tiranë" },
-    "zoom": { "type": "number", "label": "Zoom", "default": 2.2, "min": 1.2, "max": 4, "step": 0.1 },
-    "theme": { "type": "enum", "label": "App theme", "default": "light", "options": ["light", "dark"] }
+    "title": {
+      "type": "string",
+      "label": "Headline (*accent*)",
+      "default": {
+        "sq": "Eksploro *në hartë.*",
+        "en": "Explore *on the map.*",
+        "it": "Esplora *sulla mappa.*"
+      }
+    },
+    "from": {
+      "type": "enum",
+      "label": "Start screen",
+      "default": "explore",
+      "options": [
+        "explore",
+        "map"
+      ]
+    },
+    "region": {
+      "type": "enum",
+      "label": "Region to focus",
+      "default": "clusterTirana",
+      "options": [
+        "clusterTirana",
+        "clusterSouthA",
+        "clusterSouthB",
+        "count"
+      ]
+    },
+    "callout": {
+      "type": "string",
+      "label": "Callout",
+      "default": {
+        "sq": "3 prona në Tiranë",
+        "en": "3 homes in Tirana",
+        "it": "3 immobili a Tirana"
+      }
+    },
+    "zoom": {
+      "type": "number",
+      "label": "Zoom",
+      "default": 2.2,
+      "min": 1.2,
+      "max": 4,
+      "step": 0.1
+    },
+    "theme": {
+      "type": "enum",
+      "label": "App theme",
+      "default": "light",
+      "options": [
+        "light",
+        "dark"
+      ]
+    }
   },
   "screens": true,
-  "features": ["map-view"],
+  "features": [
+    "map-view"
+  ],
   "notes": "The callout must match what the screen shows (the Tirana cluster reads 3 on the demo data).",
-  "sfx": [{ "id": "ui-tap", "at": 0.9, "volume": 0.6 }, { "id": "ui-swipe", "at": 1.15, "volume": 0.4 }, { "id": "pop", "at": 2.55, "volume": 0.4 }],
-  "tags": ["map", "ui", "spotlight"]
+  "sfx": [
+    {
+      "id": "ui-tap",
+      "at": 0.9,
+      "volume": 0.6
+    },
+    {
+      "id": "ui-swipe",
+      "at": 1.15,
+      "volume": 0.4
+    },
+    {
+      "id": "pop",
+      "at": 2.55,
+      "volume": 0.4
+    }
+  ],
+  "tags": [
+    "map",
+    "ui",
+    "spotlight"
+  ]
 }

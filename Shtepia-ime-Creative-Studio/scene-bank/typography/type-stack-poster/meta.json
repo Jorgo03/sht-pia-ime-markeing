@@ -8,10 +8,45 @@
   "out": "shutter",
   "palette": "orange",
   "vars": {
-    "lines": { "type": "string", "label": "Lines (| separated, *accent*)", "default": "Gjej|*shtëpinë*|tënde" },
-    "footLeft": { "type": "string", "label": "Footer left", "default": "Shtëpia.ime" },
-    "footRight": { "type": "string", "label": "Footer right", "default": "Shitje · Qira" }
+    "lines": {
+      "type": "string",
+      "label": "Lines (| separated, *accent*)",
+      "default": {
+        "sq": "Gjej|*shtëpinë*|tënde",
+        "en": "Find|*your*|home",
+        "it": "Trova|*casa*|tua"
+      }
+    },
+    "footLeft": {
+      "type": "string",
+      "label": "Footer left",
+      "default": "Shtëpia.ime"
+    },
+    "footRight": {
+      "type": "string",
+      "label": "Footer right",
+      "default": {
+        "sq": "Shitje · Qira",
+        "en": "Sale · Rent",
+        "it": "Vendita · Affitto"
+      }
+    }
   },
-  "sfx": [{ "id": "impact-type", "at": 0.15, "volume": 0.45 }, { "id": "impact-type", "at": 0.45, "volume": 0.4 }],
-  "tags": ["typography", "poster", "bold"]
+  "sfx": [
+    {
+      "id": "impact-type",
+      "at": 0.15,
+      "volume": 0.45
+    },
+    {
+      "id": "impact-type",
+      "at": 0.45,
+      "volume": 0.4
+    }
+  ],
+  "tags": [
+    "typography",
+    "poster",
+    "bold"
+  ]
 }

@@ -53,7 +53,23 @@ function transcribe(file, lang) {
   return { words, log: (r.stderr || '').slice(-400) };
 }
 
-export async function prepareTalkingHead(file, { lang = 'sq', id, minSilence = 0.45 } = {}) {
+// A transcript you already have: [{text,start,end}] JSON, or .srt/.vtt (each
+// cue's words spread evenly over the cue).
+export function readTranscript(f) {
+  const txt = fs.readFileSync(f, 'utf8');
+  if (/\.json$/i.test(f)) { const j = JSON.parse(txt); return (Array.isArray(j) ? j : j.words).map((w) => ({ text: String(w.text).trim(), start: +w.start, end: +w.end })); }
+  const ts = (x) => { const [h, m, r] = x.replace(',', '.').split(':'); return +h * 3600 + +m * 60 + +r; };
+  const out = [];
+  for (const block of txt.split(/\n\s*\n/)) {
+    const m = block.match(/(\d+:\d+:\d+[.,]\d+)\s*-->\s*(\d+:\d+:\d+[.,]\d+)\s*\n([\s\S]+)/);
+    if (!m) continue;
+    const a = ts(m[1]), b = ts(m[2]); const ws = m[3].replace(/<[^>]+>/g, '').split(/\s+/).filter(Boolean);
+    ws.forEach((w, i) => out.push({ text: w, start: +(a + ((b - a) * i) / ws.length).toFixed(3), end: +(a + ((b - a) * (i + 0.9)) / ws.length).toFixed(3), estimated: true }));
+  }
+  return out;
+}
+
+export async function prepareTalkingHead(file, { lang = 'sq', id, minSilence = 0.45, transcript = null } = {}) {
   if (!fs.existsSync(file)) throw new Error(`no file ${file}`);
   const name = id || path.basename(file).replace(/\.[^.]+$/, '').toLowerCase().replace(/[^a-z0-9]+/g, '-');
   const ext = path.extname(file).toLowerCase() || '.mp4';
@@ -64,14 +80,20 @@ export async function prepareTalkingHead(file, { lang = 'sq', id, minSilence = 0
   const info = probe(file);
   const hasAudio = info.streams.some((s) => s.codec_type === 'audio');
   const { duration, keep } = hasAudio ? detectSpeech(file, { minSilence }) : { duration: +info.format.duration, keep: [[0, +info.format.duration]] };
-  const tr = hasAudio ? transcribe(path.join(KIT, rel), lang) : { words: null };
+  const tr = transcript ? { words: readTranscript(transcript) } : hasAudio ? transcribe(path.join(KIT, rel), lang) : { words: null };
   // Footage segments on the film timeline + word times mapped through the cuts.
   const footage = []; let t = 0; const words = [];
   keep.forEach(([a, b], i) => {
     const seg = { src: rel, start: +t.toFixed(3), in: a, out: b, hasAudio, volume: 1 };
     if (i % 2 === 1) seg.punch = [{ at: a, scale: 1.14, y: -3 }];
     footage.push(seg);
-    for (const w of tr.words || []) if (w.start >= a - 0.02 && w.end <= b + 0.05) words.push({ text: w.text, start: +(t + (w.start - a)).toFixed(3), end: +(t + (w.end - a)).toFixed(3) });
+    // A word belongs to the segment that holds its midpoint; clamp it to the cut.
+    for (const w of tr.words || []) {
+      const mid = (w.start + w.end) / 2;
+      if (mid < a || mid > b) continue;
+      const s0 = Math.max(a, w.start), e0 = Math.min(b, w.end);
+      words.push({ text: w.text, start: +(t + (s0 - a)).toFixed(3), end: +(t + (e0 - a)).toFixed(3), ...(w.estimated ? { estimated: true } : {}) });
+    }
     t += b - a;
   });
   const film = +t.toFixed(3);

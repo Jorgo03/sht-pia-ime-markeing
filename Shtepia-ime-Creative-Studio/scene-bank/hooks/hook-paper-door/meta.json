@@ -7,8 +7,32 @@
   "in": "none",
   "out": "zoom-in",
   "vars": {
-    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Hap derën e *shtëpisë së re.*" }
+    "title": {
+      "type": "string",
+      "label": "Headline (*accent*)",
+      "default": {
+        "sq": "Hap derën e *shtëpisë së re.*",
+        "en": "Open the door to *your new home.*",
+        "it": "Apri la porta della *tua nuova casa.*"
+      }
+    }
   },
-  "sfx": [{ "id": "paper-rustle", "at": 0.45, "volume": 0.5 }, { "id": "whoosh-deep", "at": 1.6, "volume": 0.4 }],
-  "tags": ["hook", "print", "door", "light"]
+  "sfx": [
+    {
+      "id": "paper-rustle",
+      "at": 0.45,
+      "volume": 0.5
+    },
+    {
+      "id": "whoosh-deep",
+      "at": 1.6,
+      "volume": 0.4
+    }
+  ],
+  "tags": [
+    "hook",
+    "print",
+    "door",
+    "light"
+  ]
 }

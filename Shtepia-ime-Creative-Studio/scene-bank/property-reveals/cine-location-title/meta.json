@@ -7,11 +7,58 @@
   "in": "none",
   "out": "blur",
   "vars": {
-    "city": { "type": "enum", "label": "Place (sets coordinates)", "default": "tirane", "options": ["tirane", "durres", "vlore", "shkoder", "sarande", "gjirokaster", "dhermi", "korce", "elbasan", "berat"] },
-    "place": { "type": "string", "label": "Override name", "default": "" },
-    "region": { "type": "string", "label": "Region line", "default": "Shqipëri" },
-    "photo": { "type": "string", "label": "Plate photo", "default": "assets/property-images/living-tirana.jpg" }
+    "city": {
+      "type": "enum",
+      "label": "Place (sets coordinates)",
+      "default": "tirane",
+      "options": [
+        "tirane",
+        "durres",
+        "vlore",
+        "shkoder",
+        "sarande",
+        "gjirokaster",
+        "dhermi",
+        "korce",
+        "elbasan",
+        "berat"
+      ]
+    },
+    "place": {
+      "type": "string",
+      "label": "Override name",
+      "default": ""
+    },
+    "region": {
+      "type": "string",
+      "label": "Region line",
+      "default": {
+        "sq": "Shqipëri",
+        "en": "Albania",
+        "it": "Albania"
+      }
+    },
+    "photo": {
+      "type": "string",
+      "label": "Plate photo",
+      "default": "assets/property-images/living-tirana.jpg"
+    }
   },
-  "sfx": [{ "id": "ambient-city", "at": 0.0, "volume": 0.3 }, { "id": "type-tick", "at": 0.5, "volume": 0.3 }],
-  "tags": ["cinematic", "location", "title"]
+  "sfx": [
+    {
+      "id": "ambient-city",
+      "at": 0.0,
+      "volume": 0.3
+    },
+    {
+      "id": "type-tick",
+      "at": 0.5,
+      "volume": 0.3
+    }
+  ],
+  "tags": [
+    "cinematic",
+    "location",
+    "title"
+  ]
 }

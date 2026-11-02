@@ -22,17 +22,20 @@
       if (g.length >= max || gap >= 0.15 || /[.!?,;:]$/.test(w.text) || !next) { groups.push(g); g = []; }
     });
     const box = document.createElement('div'); box.className = 'th-captions';
-    const top = y ?? (S.fmt.portrait ? S.fmt.safe.bottom - 300 : S.fmt.H - 220);
+    // Just above the safe line (portrait) / low third (landscape): clear of the film's own type.
+    const top = y ?? (S.fmt.portrait ? S.fmt.safe.bottom - 170 : S.fmt.H - 200);
     Object.assign(box.style, { position: 'absolute', left: 0, right: 0, top: top + 'px', textAlign: 'center' });
     parent.appendChild(box);
     for (const grp of groups) {
       const el = document.createElement('div'); el.className = 'th-group';
-      Object.assign(el.style, { position: 'absolute', left: '60px', right: '60px', top: 0, textAlign: 'center', opacity: 0 });
-      const spans = grp.map((w) => {
+      Object.assign(el.style, { position: 'absolute', left: 'var(--cap-x)', right: 'var(--cap-x)', top: 0, textAlign: 'center', opacity: 0 });
+      // The words sit on a soft backing sized to the text (never a full-width bar).
+      const line = document.createElement('span'); line.className = 'th-line'; el.appendChild(line);
+      const spans = grp.map((w, i) => {
         const s = document.createElement('span'); s.className = 'w th-word'; s.textContent = w.text;
         if (kw.has(w.text.toLowerCase().replace(/[^\p{L}\p{N}]/gu, ''))) s.classList.add('th-key');
-        el.appendChild(s);
-        const sp = document.createElement('span'); sp.className = 'sp'; sp.textContent = ' '; el.appendChild(sp);
+        if (i) { const sp = document.createElement('span'); sp.className = 'sp'; sp.textContent = ' '; line.appendChild(sp); }
+        line.appendChild(s);
         return s;
       });
       box.appendChild(el);
@@ -55,7 +58,7 @@
     const st = document.createElement('style');
     st.textContent = `.th-group{font-family:var(--font-sans),sans-serif;font-weight:800;font-size:${size}px;line-height:1.08;color:#fff;letter-spacing:-.02em;
       text-shadow:0 4px 18px rgba(0,0,0,.55),0 2px 4px rgba(0,0,0,.6);}
-      .th-word{opacity:.72;margin:0 .06em}`;
+      .th-word{opacity:.72;margin:0 .06em}.th-line{background:rgba(12,9,7,.62);padding:.08em .32em .12em;border-radius:.28em;-webkit-box-decoration-break:clone;box-decoration-break:clone;line-height:1.32}`;
     document.head.appendChild(st);
   }
 

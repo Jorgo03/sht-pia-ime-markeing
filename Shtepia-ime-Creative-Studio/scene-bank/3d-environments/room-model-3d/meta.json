@@ -7,15 +7,91 @@
   "in": "zoom-out",
   "out": "blur",
   "vars": {
-    "kicker": { "type": "string", "label": "Kicker", "default": "Apartament 2+1" },
-    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Njihe shtëpinë *para se ta vizitosh.*" },
-    "r1": { "type": "string", "label": "Room 1", "default": "Dhomë gjumi" },
-    "r2": { "type": "string", "label": "Room 2", "default": "Sallon" },
-    "r3": { "type": "string", "label": "Room 3", "default": "Dhomë gjumi" },
-    "r4": { "type": "string", "label": "Room 4", "default": "Banjo" },
-    "r5": { "type": "string", "label": "Room 5", "default": "Kuzhinë" }
+    "kicker": {
+      "type": "string",
+      "label": "Kicker",
+      "default": {
+        "sq": "Apartament 2+1",
+        "en": "2-bed apartment",
+        "it": "Bilocale con 2 camere"
+      }
+    },
+    "title": {
+      "type": "string",
+      "label": "Headline (*accent*)",
+      "default": {
+        "sq": "Njihe shtëpinë *para se ta vizitosh.*",
+        "en": "Know the home *before you visit.*",
+        "it": "Conosci la casa *prima di visitarla.*"
+      }
+    },
+    "r1": {
+      "type": "string",
+      "label": "Room 1",
+      "default": {
+        "sq": "Dhomë gjumi",
+        "en": "Bedroom",
+        "it": "Camera"
+      }
+    },
+    "r2": {
+      "type": "string",
+      "label": "Room 2",
+      "default": {
+        "sq": "Sallon",
+        "en": "Living room",
+        "it": "Soggiorno"
+      }
+    },
+    "r3": {
+      "type": "string",
+      "label": "Room 3",
+      "default": {
+        "sq": "Dhomë gjumi",
+        "en": "Bedroom",
+        "it": "Camera"
+      }
+    },
+    "r4": {
+      "type": "string",
+      "label": "Room 4",
+      "default": {
+        "sq": "Banjo",
+        "en": "Bathroom",
+        "it": "Bagno"
+      }
+    },
+    "r5": {
+      "type": "string",
+      "label": "Room 5",
+      "default": {
+        "sq": "Kuzhinë",
+        "en": "Kitchen",
+        "it": "Cucina"
+      }
+    }
   },
   "notes": "Illustrative layout: never present it as the floor plan of a specific listing.",
-  "sfx": [{ "id": "whoosh-deep", "at": 0.0, "volume": 0.35 }, { "id": "paper-rustle", "at": 0.4, "volume": 0.35 }, { "id": "pop", "at": 1.15, "volume": 0.35 }],
-  "tags": ["3d", "floorplan", "model"]
+  "sfx": [
+    {
+      "id": "whoosh-deep",
+      "at": 0.0,
+      "volume": 0.35
+    },
+    {
+      "id": "paper-rustle",
+      "at": 0.4,
+      "volume": 0.35
+    },
+    {
+      "id": "pop",
+      "at": 1.15,
+      "volume": 0.35
+    }
+  ],
+  "tags": [
+    "3d",
+    "floorplan",
+    "model"
+  ]
 }

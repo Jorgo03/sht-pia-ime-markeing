@@ -7,11 +7,58 @@
   "in": "none",
   "out": "blur",
   "vars": {
-    "kicker": { "type": "string", "label": "Kicker", "default": "Në gjithë Shqipërinë" },
-    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Nga bregdeti *te kryeqyteti.*" },
-    "cities": { "type": "string", "label": "City keys (comma separated)", "default": "shkoder, tirane, durres, vlore, dhermi, gjirokaster" }
+    "kicker": {
+      "type": "string",
+      "label": "Kicker",
+      "default": {
+        "sq": "Në gjithë Shqipërinë",
+        "en": "All over Albania",
+        "it": "In tutta l'Albania"
+      }
+    },
+    "title": {
+      "type": "string",
+      "label": "Headline (*accent*)",
+      "default": {
+        "sq": "Nga bregdeti *te kryeqyteti.*",
+        "en": "From the coast *to the capital.*",
+        "it": "Dalla costa *alla capitale.*"
+      }
+    },
+    "cities": {
+      "type": "string",
+      "label": "City keys (comma separated)",
+      "default": "shkoder, tirane, durres, vlore, dhermi, gjirokaster"
+    }
   },
-  "features": ["map-view"],
-  "sfx": [{ "id": "whoosh-paper", "at": 0.1, "volume": 0.35 }, { "id": "pop", "at": 1.2, "volume": 0.45 }, { "id": "pop", "at": 1.5, "volume": 0.4 }, { "id": "pop", "at": 1.8, "volume": 0.4 }],
-  "tags": ["map", "albania", "pins"]
+  "features": [
+    "map-view"
+  ],
+  "sfx": [
+    {
+      "id": "whoosh-paper",
+      "at": 0.1,
+      "volume": 0.35
+    },
+    {
+      "id": "pop",
+      "at": 1.2,
+      "volume": 0.45
+    },
+    {
+      "id": "pop",
+      "at": 1.5,
+      "volume": 0.4
+    },
+    {
+      "id": "pop",
+      "at": 1.8,
+      "volume": 0.4
+    }
+  ],
+  "tags": [
+    "map",
+    "albania",
+    "pins"
+  ]
 }

@@ -10,7 +10,11 @@
     "text": {
       "type": "string",
       "label": "Text ([brackets] = highlighted)",
-      "default": "[Shitje] dhe [qira], me [foto dhe hartë]."
+      "default": {
+        "sq": "[Shitje] dhe [qira], me [foto dhe hartë].",
+        "en": "[Sale] and [rent], with [photos and a map].",
+        "it": "[Vendita] e [affitto], con [foto e mappa]."
+      }
     }
   },
   "features": [

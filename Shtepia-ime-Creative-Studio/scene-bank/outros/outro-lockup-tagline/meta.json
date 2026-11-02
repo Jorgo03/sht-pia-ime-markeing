@@ -7,10 +7,40 @@
   "in": "blur",
   "out": "none",
   "vars": {
-    "tagline": { "type": "string", "label": "Tagline (*accent*)", "default": "Shtëpia jote. *Zgjedhja jote.*" },
-    "handle": { "type": "string", "label": "Handle / URL", "default": "@shtepia.ime" },
-    "ground": { "type": "enum", "label": "Ground", "default": "dark", "options": ["dark", "light"] }
+    "tagline": {
+      "type": "string",
+      "label": "Tagline (*accent*)",
+      "default": {
+        "sq": "Shtëpia jote. *Zgjedhja jote.*",
+        "en": "Your home. *Your choice.*",
+        "it": "La tua casa. *La tua scelta.*"
+      }
+    },
+    "handle": {
+      "type": "string",
+      "label": "Handle / URL",
+      "default": "@shtepia.ime"
+    },
+    "ground": {
+      "type": "enum",
+      "label": "Ground",
+      "default": "dark",
+      "options": [
+        "dark",
+        "light"
+      ]
+    }
   },
-  "sfx": [{ "id": "logo-reveal", "at": 0.05, "volume": 0.7 }],
-  "tags": ["outro", "logo", "end-card"]
+  "sfx": [
+    {
+      "id": "logo-reveal",
+      "at": 0.05,
+      "volume": 0.7
+    }
+  ],
+  "tags": [
+    "outro",
+    "logo",
+    "end-card"
+  ]
 }

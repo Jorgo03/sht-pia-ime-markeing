@@ -7,11 +7,57 @@
   "in": "zoom-out",
   "out": "zoom-in",
   "vars": {
-    "kicker": { "type": "string", "label": "Kicker", "default": "Tiranë" },
-    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Qyteti yt, *në një vend.*" },
-    "pin": { "type": "string", "label": "Pin label", "default": "Blloku" },
-    "seed": { "type": "number", "label": "City seed", "default": 11, "min": 1, "max": 999, "step": 1 }
+    "kicker": {
+      "type": "string",
+      "label": "Kicker",
+      "default": {
+        "sq": "Tiranë",
+        "en": "Tirana",
+        "it": "Tirana"
+      }
+    },
+    "title": {
+      "type": "string",
+      "label": "Headline (*accent*)",
+      "default": {
+        "sq": "Qyteti yt, *në një vend.*",
+        "en": "Your city, *in one place.*",
+        "it": "La tua città, *in un posto.*"
+      }
+    },
+    "pin": {
+      "type": "string",
+      "label": "Pin label",
+      "default": {
+        "sq": "Blloku",
+        "en": "Blloku",
+        "it": "Blloku"
+      }
+    },
+    "seed": {
+      "type": "number",
+      "label": "City seed",
+      "default": 11,
+      "min": 1,
+      "max": 999,
+      "step": 1
+    }
   },
-  "sfx": [{ "id": "whoosh-deep", "at": 0.0, "volume": 0.4 }, { "id": "pop", "at": 1.35, "volume": 0.5 }],
-  "tags": ["3d", "city", "tirana"]
+  "sfx": [
+    {
+      "id": "whoosh-deep",
+      "at": 0.0,
+      "volume": 0.4
+    },
+    {
+      "id": "pop",
+      "at": 1.35,
+      "volume": 0.5
+    }
+  ],
+  "tags": [
+    "3d",
+    "city",
+    "tirana"
+  ]
 }

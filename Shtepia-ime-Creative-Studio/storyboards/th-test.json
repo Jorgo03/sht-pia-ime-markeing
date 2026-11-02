@@ -1,0 +1,226 @@
+{
+  "id": "th-test",
+  "title": "Talking head — th-test",
+  "language": "en",
+  "format": "reel",
+  "palette": "night",
+  "targetDuration": 11.4,
+  "modes": [
+    "talking-head"
+  ],
+  "footage": [
+    {
+      "src": "assets/footage/th-test.mp4",
+      "start": 0,
+      "in": 0.598,
+      "out": 2.518,
+      "hasAudio": true,
+      "volume": 1
+    },
+    {
+      "src": "assets/footage/th-test.mp4",
+      "start": 1.92,
+      "in": 3.753,
+      "out": 7.401,
+      "hasAudio": true,
+      "volume": 1,
+      "punch": [
+        {
+          "at": 3.753,
+          "scale": 1.14,
+          "y": -3
+        }
+      ]
+    },
+    {
+      "src": "assets/footage/th-test.mp4",
+      "start": 5.568,
+      "in": 8.304,
+      "out": 10.449,
+      "hasAudio": true,
+      "volume": 1
+    },
+    {
+      "src": "assets/footage/th-test.mp4",
+      "start": 7.713,
+      "in": 11.593,
+      "out": 12.689,
+      "hasAudio": true,
+      "volume": 1,
+      "punch": [
+        {
+          "at": 11.593,
+          "scale": 1.14,
+          "y": -3
+        }
+      ]
+    }
+  ],
+  "autoSfx": true,
+  "captions": {
+    "words": [
+      {
+        "text": "Looking",
+        "start": 0.002,
+        "end": 0.504
+      },
+      {
+        "text": "for",
+        "start": 0.56,
+        "end": 0.81
+      },
+      {
+        "text": "a",
+        "start": 0.838,
+        "end": 0.964
+      },
+      {
+        "text": "home",
+        "start": 0.978,
+        "end": 1.291
+      },
+      {
+        "text": "in",
+        "start": 1.326,
+        "end": 1.514
+      },
+      {
+        "text": "Tirana?",
+        "start": 1.535,
+        "end": 1.92
+      },
+      {
+        "text": "With",
+        "start": 1.958,
+        "end": 2.302
+      },
+      {
+        "text": "Shtëpia.ime",
+        "start": 2.34,
+        "end": 3.165
+      },
+      {
+        "text": "you",
+        "start": 3.257,
+        "end": 3.532
+      },
+      {
+        "text": "filter",
+        "start": 3.563,
+        "end": 4.045
+      },
+      {
+        "text": "by",
+        "start": 4.098,
+        "end": 4.305
+      },
+      {
+        "text": "price",
+        "start": 4.327,
+        "end": 4.74
+      },
+      {
+        "text": "and",
+        "start": 4.786,
+        "end": 5.061
+      },
+      {
+        "text": "rooms.",
+        "start": 5.092,
+        "end": 5.568
+      },
+      {
+        "text": "Then",
+        "start": 5.624,
+        "end": 5.868
+      },
+      {
+        "text": "you",
+        "start": 5.895,
+        "end": 6.09
+      },
+      {
+        "text": "see",
+        "start": 6.111,
+        "end": 6.306
+      },
+      {
+        "text": "every",
+        "start": 6.328,
+        "end": 6.62
+      },
+      {
+        "text": "listing",
+        "start": 6.653,
+        "end": 7.043
+      },
+      {
+        "text": "on",
+        "start": 7.086,
+        "end": 7.232
+      },
+      {
+        "text": "the",
+        "start": 7.249,
+        "end": 7.444
+      },
+      {
+        "text": "map.",
+        "start": 7.465,
+        "end": 7.709
+      },
+      {
+        "text": "Try",
+        "start": 7.792,
+        "end": 8.094
+      },
+      {
+        "text": "it",
+        "start": 8.127,
+        "end": 8.354
+      },
+      {
+        "text": "today.",
+        "start": 8.379,
+        "end": 8.809
+      }
+    ]
+  },
+  "audio": {
+    "music": {
+      "bed": "warm",
+      "bpm": 96,
+      "volume": 0.12
+    }
+  },
+  "scenes": [
+    {
+      "scene": "th-captions",
+      "start": 0,
+      "duration": 8.809,
+      "vars": {
+        "keywords": "Shtëpia.ime"
+      }
+    },
+    {
+      "scene": "th-lower-third",
+      "start": 0.3,
+      "duration": 3.6,
+      "vars": {
+        "name": "Emri Mbiemri",
+        "role": "Shtëpia.ime"
+      }
+    },
+    {
+      "scene": "outro-lockup-tagline",
+      "start": 8.809,
+      "duration": 2.6
+    }
+  ],
+  "duration": 11.41,
+  "notes": [
+    "4 speech segments kept from 13.8 s of footage (5.0 s of pauses cut).",
+    "25 transcribed words (en).",
+    "Replace the lower third placeholder with the speaker's real name and role. Add th-broll-card / th-split-screen scenes at the sentences that name a feature."
+  ]
+}

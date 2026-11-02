@@ -7,15 +7,67 @@
   "in": "none",
   "out": "blur",
   "vars": {
-    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Ruaj *të preferuarat.*" },
-    "screen": { "type": "enum", "label": "Screen", "default": "home", "options": ["home", "detail-1"] },
-    "region": { "type": "string", "label": "Heart region", "default": "featuredHeart" },
-    "zoom": { "type": "number", "label": "Zoom", "default": 2.4, "min": 1.2, "max": 4, "step": 0.1 },
-    "theme": { "type": "enum", "label": "App theme", "default": "light", "options": ["light", "dark"] }
+    "title": {
+      "type": "string",
+      "label": "Headline (*accent*)",
+      "default": {
+        "sq": "Ruaj *të preferuarat.*",
+        "en": "Save *your favourites.*",
+        "it": "Salva *i preferiti.*"
+      }
+    },
+    "screen": {
+      "type": "enum",
+      "label": "Screen",
+      "default": "home",
+      "options": [
+        "home",
+        "detail-1"
+      ]
+    },
+    "region": {
+      "type": "string",
+      "label": "Heart region",
+      "default": "featuredHeart"
+    },
+    "zoom": {
+      "type": "number",
+      "label": "Zoom",
+      "default": 2.4,
+      "min": 1.2,
+      "max": 4,
+      "step": 0.1
+    },
+    "theme": {
+      "type": "enum",
+      "label": "App theme",
+      "default": "light",
+      "options": [
+        "light",
+        "dark"
+      ]
+    }
   },
   "screens": true,
-  "features": ["favorites"],
+  "features": [
+    "favorites"
+  ],
   "notes": "For detail-1 set region to 'heart'.",
-  "sfx": [{ "id": "ui-tap", "at": 1.2, "volume": 0.6 }, { "id": "pop", "at": 1.3, "volume": 0.5 }],
-  "tags": ["feature", "favorites", "ui"]
+  "sfx": [
+    {
+      "id": "ui-tap",
+      "at": 1.2,
+      "volume": 0.6
+    },
+    {
+      "id": "pop",
+      "at": 1.3,
+      "volume": 0.5
+    }
+  ],
+  "tags": [
+    "feature",
+    "favorites",
+    "ui"
+  ]
 }

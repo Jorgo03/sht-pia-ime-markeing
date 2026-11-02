@@ -7,11 +7,53 @@
   "in": "none",
   "out": "whip-up",
   "vars": {
-    "lead": { "type": "string", "label": "Lead line", "default": "Shtëpia jote në" },
-    "options": { "type": "string", "label": "Rolling words (comma separated, last one lands)", "default": "Sarandë, Vlorë, Durrës, Gjirokastër, Dhërmi, Tiranë" },
-    "sub": { "type": "string", "label": "Quiet line", "default": "Shitje · Qira · Në gjithë Shqipërinë" }
+    "lead": {
+      "type": "string",
+      "label": "Lead line",
+      "default": {
+        "sq": "Shtëpia jote në",
+        "en": "Your home in",
+        "it": "Casa tua a"
+      }
+    },
+    "options": {
+      "type": "string",
+      "label": "Rolling words (comma separated, last one lands)",
+      "default": {
+        "sq": "Sarandë, Vlorë, Durrës, Gjirokastër, Dhërmi, Tiranë",
+        "en": "Sarandë, Vlorë, Durrës, Gjirokastër, Dhërmi, Tirana",
+        "it": "Saranda, Valona, Durazzo, Argirocastro, Dhërmi, Tirana"
+      }
+    },
+    "sub": {
+      "type": "string",
+      "label": "Quiet line",
+      "default": {
+        "sq": "Shitje · Qira · Në gjithë Shqipërinë",
+        "en": "Sale · Rent · All over Albania",
+        "it": "Vendita · Affitto · In tutta l'Albania"
+      }
+    }
   },
-  "features": ["search", "listing-type"],
-  "sfx": [{ "id": "type-tick", "at": 0.3, "volume": 0.4 }, { "id": "pop", "at": 1.55, "volume": 0.5 }],
-  "tags": ["hook", "slot", "cities"]
+  "features": [
+    "search",
+    "listing-type"
+  ],
+  "sfx": [
+    {
+      "id": "type-tick",
+      "at": 0.3,
+      "volume": 0.4
+    },
+    {
+      "id": "pop",
+      "at": 1.55,
+      "volume": 0.5
+    }
+  ],
+  "tags": [
+    "hook",
+    "slot",
+    "cities"
+  ]
 }

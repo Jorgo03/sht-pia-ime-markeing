@@ -7,10 +7,54 @@
   "in": "none",
   "out": "none",
   "vars": {
-    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Gati për *shtëpinë e re?*" },
-    "button": { "type": "string", "label": "Button", "default": "Fillo kërkimin" },
-    "after": { "type": "string", "label": "Line after the press (*accent* = dark)", "default": "Shtëpia.ime. *Link në bio.*" }
+    "title": {
+      "type": "string",
+      "label": "Headline (*accent*)",
+      "default": {
+        "sq": "Gati për *shtëpinë e re?*",
+        "en": "Ready for *a new home?*",
+        "it": "Pronto per *una nuova casa?*"
+      }
+    },
+    "button": {
+      "type": "string",
+      "label": "Button",
+      "default": {
+        "sq": "Fillo kërkimin",
+        "en": "Start searching",
+        "it": "Inizia a cercare"
+      }
+    },
+    "after": {
+      "type": "string",
+      "label": "Line after the press (*accent* = dark)",
+      "default": {
+        "sq": "Shtëpia.ime. *Link në bio.*",
+        "en": "Shtëpia.ime. *Link in bio.*",
+        "it": "Shtëpia.ime. *Link in bio.*"
+      }
+    }
   },
-  "sfx": [{ "id": "pop", "at": 0.38, "volume": 0.45 }, { "id": "ui-tap", "at": 1.85, "volume": 0.7 }, { "id": "whoosh-air", "at": 2.0, "volume": 0.45 }],
-  "tags": ["cta", "button", "flood"]
+  "sfx": [
+    {
+      "id": "pop",
+      "at": 0.38,
+      "volume": 0.45
+    },
+    {
+      "id": "ui-tap",
+      "at": 1.85,
+      "volume": 0.7
+    },
+    {
+      "id": "whoosh-air",
+      "at": 2.0,
+      "volume": 0.45
+    }
+  ],
+  "tags": [
+    "cta",
+    "button",
+    "flood"
+  ]
 }

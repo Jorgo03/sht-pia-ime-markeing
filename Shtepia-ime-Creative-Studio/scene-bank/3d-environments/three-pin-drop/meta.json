@@ -8,9 +8,41 @@
   "out": "blur",
   "three": true,
   "vars": {
-    "kicker": { "type": "string", "label": "Kicker", "default": "Pronë e re në" },
-    "place": { "type": "string", "label": "Place (*accent*)", "default": "*Tiranë*" }
+    "kicker": {
+      "type": "string",
+      "label": "Kicker",
+      "default": {
+        "sq": "Pronë e re në",
+        "en": "New listing in",
+        "it": "Nuovo annuncio a"
+      }
+    },
+    "place": {
+      "type": "string",
+      "label": "Place (*accent*)",
+      "default": {
+        "sq": "*Tiranë*",
+        "en": "*Tirana*",
+        "it": "*Tirana*"
+      }
+    }
   },
-  "sfx": [{ "id": "whoosh-air", "at": 0.15, "volume": 0.35 }, { "id": "impact-soft", "at": 0.85, "volume": 0.55 }],
-  "tags": ["3d", "webgl", "pin", "map"]
+  "sfx": [
+    {
+      "id": "whoosh-air",
+      "at": 0.15,
+      "volume": 0.35
+    },
+    {
+      "id": "impact-soft",
+      "at": 0.85,
+      "volume": 0.55
+    }
+  ],
+  "tags": [
+    "3d",
+    "webgl",
+    "pin",
+    "map"
+  ]
 }

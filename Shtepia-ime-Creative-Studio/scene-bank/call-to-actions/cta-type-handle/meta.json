@@ -7,10 +7,47 @@
   "in": "blur",
   "out": "none",
   "vars": {
-    "text": { "type": "string", "label": "Typed text (handle or URL)", "default": "@shtepia.ime" },
-    "line": { "type": "string", "label": "Line under", "default": "Na ndiq për pronat e reja" }
+    "text": {
+      "type": "string",
+      "label": "Typed text (handle or URL)",
+      "default": "@shtepia.ime"
+    },
+    "line": {
+      "type": "string",
+      "label": "Line under",
+      "default": {
+        "sq": "Na ndiq për pronat e reja",
+        "en": "Follow us for new listings",
+        "it": "Seguici per i nuovi annunci"
+      }
+    }
   },
   "notes": "@shtepia.ime is a placeholder handle (config/brand.json $todo): confirm it before publishing.",
-  "sfx": [{ "id": "type-tick", "at": 0.75, "volume": 0.3 }, { "id": "type-tick", "at": 1.0, "volume": 0.3 }, { "id": "type-tick", "at": 1.25, "volume": 0.3 }, { "id": "type-tick", "at": 1.5, "volume": 0.3 }],
-  "tags": ["cta", "handle", "typing"]
+  "sfx": [
+    {
+      "id": "type-tick",
+      "at": 0.75,
+      "volume": 0.3
+    },
+    {
+      "id": "type-tick",
+      "at": 1.0,
+      "volume": 0.3
+    },
+    {
+      "id": "type-tick",
+      "at": 1.25,
+      "volume": 0.3
+    },
+    {
+      "id": "type-tick",
+      "at": 1.5,
+      "volume": 0.3
+    }
+  ],
+  "tags": [
+    "cta",
+    "handle",
+    "typing"
+  ]
 }

@@ -7,15 +7,76 @@
   "in": "none",
   "out": "blur",
   "vars": {
-    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Nga kërkimi *te shtëpia.*" },
-    "flow": { "type": "string", "label": "Screens in order", "default": "home, explore, detail-1" },
-    "taps": { "type": "string", "label": "Region pressed before each push", "default": "search, card2" },
-    "steps": { "type": "string", "label": "Step names", "default": "Kërko, Shfleto, Zbulo detajet" },
-    "theme": { "type": "enum", "label": "App theme", "default": "light", "options": ["light", "dark"] }
+    "title": {
+      "type": "string",
+      "label": "Headline (*accent*)",
+      "default": {
+        "sq": "Nga kërkimi *te shtëpia.*",
+        "en": "From search *to home.*",
+        "it": "Dalla ricerca *alla casa.*"
+      }
+    },
+    "flow": {
+      "type": "string",
+      "label": "Screens in order",
+      "default": "home, explore, detail-1"
+    },
+    "taps": {
+      "type": "string",
+      "label": "Region pressed before each push",
+      "default": "search, card2"
+    },
+    "steps": {
+      "type": "string",
+      "label": "Step names",
+      "default": {
+        "sq": "Kërko, Shfleto, Zbulo detajet",
+        "en": "Search, Browse, See the details",
+        "it": "Cerca, Sfoglia, Scopri i dettagli"
+      }
+    },
+    "theme": {
+      "type": "enum",
+      "label": "App theme",
+      "default": "light",
+      "options": [
+        "light",
+        "dark"
+      ]
+    }
   },
   "screens": true,
-  "features": ["search", "grid-view", "listing-detail"],
+  "features": [
+    "search",
+    "grid-view",
+    "listing-detail"
+  ],
   "notes": "card2 on explore is the Blloku apartment, which is exactly detail-1: keep taps and the next screen consistent.",
-  "sfx": [{ "id": "ui-tap", "at": 1.35, "volume": 0.55 }, { "id": "ui-swipe", "at": 1.5, "volume": 0.4 }, { "id": "ui-tap", "at": 3.0, "volume": 0.55 }, { "id": "ui-swipe", "at": 3.15, "volume": 0.4 }],
-  "tags": ["ui", "navigation", "journey"]
+  "sfx": [
+    {
+      "id": "ui-tap",
+      "at": 1.35,
+      "volume": 0.55
+    },
+    {
+      "id": "ui-swipe",
+      "at": 1.5,
+      "volume": 0.4
+    },
+    {
+      "id": "ui-tap",
+      "at": 3.0,
+      "volume": 0.55
+    },
+    {
+      "id": "ui-swipe",
+      "at": 3.15,
+      "volume": 0.4
+    }
+  ],
+  "tags": [
+    "ui",
+    "navigation",
+    "journey"
+  ]
 }

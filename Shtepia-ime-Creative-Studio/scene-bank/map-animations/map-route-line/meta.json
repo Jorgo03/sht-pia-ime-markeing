@@ -7,11 +7,74 @@
   "in": "none",
   "out": "blur",
   "vars": {
-    "kicker": { "type": "string", "label": "Kicker", "default": "Afër gjithçkaje" },
-    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Nga *deti* në *qytet.*" },
-    "from": { "type": "enum", "label": "From city", "default": "durres", "options": ["tirane", "durres", "vlore", "shkoder", "sarande", "gjirokaster", "dhermi", "korce", "elbasan", "berat"] },
-    "to": { "type": "enum", "label": "To city", "default": "tirane", "options": ["tirane", "durres", "vlore", "shkoder", "sarande", "gjirokaster", "dhermi", "korce", "elbasan", "berat"] }
+    "kicker": {
+      "type": "string",
+      "label": "Kicker",
+      "default": {
+        "sq": "Afër gjithçkaje",
+        "en": "Close to everything",
+        "it": "Vicino a tutto"
+      }
+    },
+    "title": {
+      "type": "string",
+      "label": "Headline (*accent*)",
+      "default": {
+        "sq": "Nga *deti* në *qytet.*",
+        "en": "From the *sea* to the *city.*",
+        "it": "Dal *mare* alla *città.*"
+      }
+    },
+    "from": {
+      "type": "enum",
+      "label": "From city",
+      "default": "durres",
+      "options": [
+        "tirane",
+        "durres",
+        "vlore",
+        "shkoder",
+        "sarande",
+        "gjirokaster",
+        "dhermi",
+        "korce",
+        "elbasan",
+        "berat"
+      ]
+    },
+    "to": {
+      "type": "enum",
+      "label": "To city",
+      "default": "tirane",
+      "options": [
+        "tirane",
+        "durres",
+        "vlore",
+        "shkoder",
+        "sarande",
+        "gjirokaster",
+        "dhermi",
+        "korce",
+        "elbasan",
+        "berat"
+      ]
+    }
   },
-  "sfx": [{ "id": "whoosh-air", "at": 0.5, "volume": 0.35 }, { "id": "pop", "at": 1.95, "volume": 0.45 }],
-  "tags": ["map", "route", "cities"]
+  "sfx": [
+    {
+      "id": "whoosh-air",
+      "at": 0.5,
+      "volume": 0.35
+    },
+    {
+      "id": "pop",
+      "at": 1.95,
+      "volume": 0.45
+    }
+  ],
+  "tags": [
+    "map",
+    "route",
+    "cities"
+  ]
 }

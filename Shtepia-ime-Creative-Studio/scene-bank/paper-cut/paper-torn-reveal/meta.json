@@ -7,10 +7,51 @@
   "in": "none",
   "out": "blur",
   "vars": {
-    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Pas çdo dere, *një histori.*" },
-    "photo": { "type": "string", "label": "Photo path", "default": "assets/property-images/stone-house.jpg" },
-    "badge": { "type": "string", "label": "Stamp label", "default": "Gjirokastër" }
+    "title": {
+      "type": "string",
+      "label": "Headline (*accent*)",
+      "default": {
+        "sq": "Pas çdo dere, *një histori.*",
+        "en": "Behind every door, *a story.*",
+        "it": "Dietro ogni porta, *una storia.*"
+      }
+    },
+    "photo": {
+      "type": "string",
+      "label": "Photo path",
+      "default": "assets/property-images/stone-house.jpg"
+    },
+    "badge": {
+      "type": "string",
+      "label": "Stamp label",
+      "default": {
+        "sq": "Gjirokastër",
+        "en": "Gjirokastër",
+        "it": "Argirocastro"
+      }
+    }
   },
-  "sfx": [{ "id": "paper-rustle", "at": 0.5, "volume": 0.5 }, { "id": "whoosh-paper", "at": 1.35, "volume": 0.4 }, { "id": "stamp", "at": 2.02, "volume": 0.5 }],
-  "tags": ["print", "photo", "torn", "reveal"]
+  "sfx": [
+    {
+      "id": "paper-rustle",
+      "at": 0.5,
+      "volume": 0.5
+    },
+    {
+      "id": "whoosh-paper",
+      "at": 1.35,
+      "volume": 0.4
+    },
+    {
+      "id": "stamp",
+      "at": 2.02,
+      "volume": 0.5
+    }
+  ],
+  "tags": [
+    "print",
+    "photo",
+    "torn",
+    "reveal"
+  ]
 }

@@ -7,9 +7,32 @@
   "in": "none",
   "out": "blur",
   "vars": {
-    "kicker": { "type": "string", "label": "Kicker", "default": "Shtëpia.ime" },
-    "question": { "type": "string", "label": "Question (*accent*)", "default": "Po kërkon *shtëpinë tënde?*", "maxLength": 60 }
+    "kicker": {
+      "type": "string",
+      "label": "Kicker",
+      "default": "Shtëpia.ime"
+    },
+    "question": {
+      "type": "string",
+      "label": "Question (*accent*)",
+      "default": {
+        "sq": "Po kërkon *shtëpinë tënde?*",
+        "en": "Looking for *your home?*",
+        "it": "Cerchi *casa tua?*"
+      },
+      "maxLength": 60
+    }
   },
-  "sfx": [{ "id": "impact-soft", "at": 0.75, "volume": 0.6 }],
-  "tags": ["hook", "dark", "serif"]
+  "sfx": [
+    {
+      "id": "impact-soft",
+      "at": 0.75,
+      "volume": 0.6
+    }
+  ],
+  "tags": [
+    "hook",
+    "dark",
+    "serif"
+  ]
 }

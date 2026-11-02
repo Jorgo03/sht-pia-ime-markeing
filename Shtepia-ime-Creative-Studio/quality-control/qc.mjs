@@ -128,12 +128,15 @@ export async function qc({ projectDir, video, log = console.log, checkJson = tru
   try {
     const text = await textAudit(projectDir, filmDur, fmt);
     const tooSmall = text.boxes.filter((b) => b.h < 26 && !b.decor);
-    const outside = text.boxes.filter((b) => !b.decor && !b.inSafe);
+    // A box that leaves the zone for a single sample (an exit zoom, a slam
+    // overshoot) is motion, not layout: flag text outside in ≥2 consecutive samples.
+    const bad = text.boxes.filter((b) => !b.decor && !b.inSafe);
+    const outside = bad.filter((b) => bad.some((o) => o.text === b.text && Math.abs(o.t - b.t - 0.5) < 0.01));
     set('safe', outside.length ? (outside.length > 3 ? 'fail' : 'warn') : 'pass',
       outside.length ? `${outside.length} text boxes outside the ${fmt.name} safe zone, e.g. "${outside[0].text}" at t=${outside[0].t}s (${outside[0].rect.join(',')})` : `${text.boxes.length} text boxes across ${text.samples} samples, all inside the safe zone`,
       { samples: text.samples, outside: outside.slice(0, 12) });
-    R.__text = { tooSmall };
-  } catch (e) { set('safe', 'warn', `could not audit the live page: ${String(e.message).slice(0, 200)}`); R.__text = { tooSmall: [] }; }
+    R.__text = { tooSmall, collisions: text.collisions };
+  } catch (e) { set('safe', 'warn', `could not audit the live page: ${String(e.message).slice(0, 200)}`); R.__text = { tooSmall: [], collisions: [] }; }
 
   let check = null;
   if (checkJson) {
@@ -148,14 +151,16 @@ export async function qc({ projectDir, video, log = console.log, checkJson = tru
     const problems = [];
     if (small.length) problems.push(`${small.length} text boxes under 26 px tall (unreadable on a phone), e.g. "${small[0].text}"`);
     if (contrast.length) problems.push(`${contrast.length} contrast findings`);
+    const col = R.__text.collisions || [];
+    if (col.length) problems.push(`${col.length} text collisions (two lines overlapping ≥0.5 s), e.g. "${col[0].a}" over "${col[0].b}" at ${col[0].t}s`);
     if (floor.length) problems.push(`${floor.length} lines too small or on screen too briefly (${[...new Set(floor.map((f) => f.code))].join(', ')})`);
-    set('readable', small.length > 2 || contrast.length > 3 ? 'fail' : problems.length ? 'warn' : 'pass', problems.length ? problems.join('; ') : 'all text ≥26 px tall, no contrast or reading-time findings', { small: small.slice(0, 10), contrast: contrast.slice(0, 10).map((f) => f.message), floor: floor.slice(0, 10).map((f) => f.message) });
+    set('readable', small.length > 2 || contrast.length > 3 || col.length > 3 ? 'fail' : problems.length ? 'warn' : 'pass', problems.length ? problems.join('; ') : 'all text ≥26 px tall, no collisions, contrast or reading-time findings', { small: small.slice(0, 10), contrast: contrast.slice(0, 10).map((f) => f.message), floor: floor.slice(0, 10).map((f) => f.message), collisions: col.slice(0, 10) });
   }
   delete R.__text;
 
   // ---------- 8. Captions ----------
   {
-    const words = (() => { try { return JSON.parse(fs.readFileSync(path.join(projectDir, 'assets/voice/words.json'), 'utf8')); } catch { return null; } })();
+    const words = (() => { try { return JSON.parse(fs.readFileSync(path.join(projectDir, 'assets/voice/words.json'), 'utf8')); } catch { return Array.isArray(sb.captions && sb.captions.words) ? sb.captions.words : null; } })();
     const capScene = sb.scenes.find((s) => (registry()[s.scene] || {}).trackKind === 'captions');
     const hasVoice = /id="vo-|id="voice"/.test(idx) || (sb.footage || []).some((f) => f.hasAudio !== false);
     if (!hasVoice) set('captions', 'pass', 'no speech in the film: nothing to caption');
@@ -165,7 +170,7 @@ export async function qc({ projectDir, video, log = console.log, checkJson = tru
       const ws = words || [];
       const est = ws.filter((w) => w.estimated).length;
       const bad = ws.filter((w) => w.end < w.start || w.start < 0 || w.end > filmDur + 0.05);
-      set('captions', bad.length ? 'fail' : est ? 'warn' : 'pass', bad.length ? `${bad.length} words with impossible timings` : est ? `${est}/${ws.length} word timings estimated (no aligner): check sync by eye` : `${ws.length} words timed from the voice track`, { words: ws.length, estimated: est });
+      set('captions', bad.length ? 'fail' : est ? 'warn' : 'pass', bad.length ? `${bad.length} words with impossible timings` : est ? `${est}/${ws.length} word timings estimated (no aligner): check sync by eye` : `${ws.length} words timed from ${fs.existsSync(path.join(projectDir, 'assets/voice/words.json')) ? 'the voice track' : 'the transcript'}`, { words: ws.length, estimated: est });
     }
   }
 
@@ -286,7 +291,7 @@ async function textAudit(projectDir, dur, fmt) {
     await page.goto(url); await page.waitForFunction(() => window.__player && window.__playerReady !== false, null, { timeout: 30000 });
     await page.waitForTimeout(1500);
     const times = []; for (let t = 0.25; t < dur; t += 0.5) times.push(+t.toFixed(2));
-    const boxes = [];
+    const boxes = []; const collisions = [];
     for (const t of times) {
       await page.evaluate(async (tt) => { window.__player.seek(tt); if (window.__hfWaitForSeekCompletion) await window.__hfWaitForSeekCompletion(); }, t);
       await page.waitForTimeout(40);
@@ -322,8 +327,19 @@ async function textAudit(projectDir, dur, fmt) {
         return out;
       }, { safe: fmt.safe, W: fmt.width, H: fmt.height });
       for (const f of found) boxes.push({ t, ...f });
+      // Text-on-text collisions between different lines in this sample.
+      const live = found.filter((f) => !f.decor);
+      for (let i = 0; i < live.length; i++) for (let j = i + 1; j < live.length; j++) {
+        const [a, b] = [live[i].rect, live[j].rect];
+        const ix = Math.min(a[2], b[2]) - Math.max(a[0], b[0]), iy = Math.min(a[3], b[3]) - Math.max(a[1], b[1]);
+        if (ix <= 0 || iy <= 0) continue;
+        const small = Math.min((a[2] - a[0]) * (a[3] - a[1]), (b[2] - b[0]) * (b[3] - b[1]));
+        if (ix * iy > 0.2 * small) collisions.push({ t, a: live[i].text, b: live[j].text });
+      }
     }
-    return { samples: times.length, boxes };
+    // Keep collisions that persist across two consecutive samples.
+    const lasting = collisions.filter((c) => collisions.some((o) => o.a === c.a && o.b === c.b && Math.abs(o.t - c.t - 0.5) < 0.01));
+    return { samples: times.length, boxes, collisions: lasting };
   } finally {
     await browser.close();
     try { sh(bin, ['preview', '--stop', '--port', String(port)], { cwd: projectDir }); } catch { /* already stopped */ }

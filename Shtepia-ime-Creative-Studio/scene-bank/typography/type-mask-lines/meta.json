@@ -7,11 +7,45 @@
   "in": "none",
   "out": "blur",
   "vars": {
-    "kicker": { "type": "string", "label": "Kicker", "default": "Shtëpia.ime" },
-    "title": { "type": "string", "label": "Headline (| = line break, *accent*)", "default": "Tregu i pronave,|*më i qartë*|se kurrë." },
-    "body": { "type": "string", "label": "Body", "default": "Çmime, foto, harta dhe detaje — në shqip, anglisht, italisht dhe në 5 gjuhë të tjera." }
+    "kicker": {
+      "type": "string",
+      "label": "Kicker",
+      "default": "Shtëpia.ime"
+    },
+    "title": {
+      "type": "string",
+      "label": "Headline (| = line break, *accent*)",
+      "default": {
+        "sq": "Tregu i pronave,|*më i qartë*|se kurrë.",
+        "en": "The property market,|*clearer*|than ever.",
+        "it": "Il mercato immobiliare,|*più chiaro*|che mai."
+      }
+    },
+    "body": {
+      "type": "string",
+      "label": "Body",
+      "default": {
+        "sq": "Çmime, foto, harta dhe detaje — në shqip, anglisht, italisht dhe në 5 gjuhë të tjera.",
+        "en": "Prices, photos, maps and details — in Albanian, English, Italian and 5 more languages.",
+        "it": "Prezzi, foto, mappe e dettagli — in albanese, inglese, italiano e altre 5 lingue."
+      }
+    }
   },
-  "features": ["multilingual", "map-view", "listing-detail"],
-  "sfx": [{ "id": "whoosh-paper", "at": 0.2, "volume": 0.3 }],
-  "tags": ["typography", "editorial", "serif"]
+  "features": [
+    "multilingual",
+    "map-view",
+    "listing-detail"
+  ],
+  "sfx": [
+    {
+      "id": "whoosh-paper",
+      "at": 0.2,
+      "volume": 0.3
+    }
+  ],
+  "tags": [
+    "typography",
+    "editorial",
+    "serif"
+  ]
 }

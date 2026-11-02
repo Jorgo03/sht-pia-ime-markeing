@@ -10,13 +10,21 @@
     "word": {
       "type": "string",
       "label": "Word",
-      "default": "Shtëpia",
+      "default": {
+        "sq": "Shtëpia",
+        "en": "Shtëpia",
+        "it": "Shtëpia"
+      },
       "maxLength": 12
     },
     "inside": {
       "type": "string",
       "label": "Hidden line (*accent*)",
-      "default": "fillon me *një kërkim.*"
+      "default": {
+        "sq": "fillon me *një kërkim.*",
+        "en": "starts with *one search.*",
+        "it": "inizia con *una ricerca.*"
+      }
     }
   },
   "sfx": [

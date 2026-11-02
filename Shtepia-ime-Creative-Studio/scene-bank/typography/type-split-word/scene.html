@@ -31,7 +31,7 @@
     S.ready(() => {
       $('.d1').textContent = v.word; $('.d2').textContent = v.word;
       const width = S.fmt.W - 2 * Math.max(S.fmt.safe.left, S.fmt.W - S.fmt.safe.right);
-      const fs = S.fit($('.d1'), { maxWidth: width, max: 420 });
+      const fs = S.fit($('.d1'), { maxWidth: width, max: Math.min(420, S.fmt.H * 0.24) });
       $('.d2').style.fontSize = fs + 'px';
       $('.word').style.setProperty('--hh', fs * 0.6 + 'px');
       $('.d1').style.color = 'var(--ink)'; $('.d2').style.color = 'var(--accent)';

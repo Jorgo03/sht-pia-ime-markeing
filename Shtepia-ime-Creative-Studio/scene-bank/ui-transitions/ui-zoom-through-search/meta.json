@@ -7,13 +7,59 @@
   "in": "none",
   "out": "none",
   "vars": {
-    "line": { "type": "string", "label": "Line on the flood (*accent* = dark)", "default": "Një kërkim. *Gjithë Shqipëria.*" },
-    "screen": { "type": "enum", "label": "Screen", "default": "home", "options": ["home", "explore", "map"] },
-    "region": { "type": "string", "label": "Region to zoom through", "default": "search" },
-    "theme": { "type": "enum", "label": "App theme", "default": "light", "options": ["light", "dark"] }
+    "line": {
+      "type": "string",
+      "label": "Line on the flood (*accent* = dark)",
+      "default": {
+        "sq": "Një kërkim. *Gjithë Shqipëria.*",
+        "en": "One search. *All of Albania.*",
+        "it": "Una ricerca. *Tutta l'Albania.*"
+      }
+    },
+    "screen": {
+      "type": "enum",
+      "label": "Screen",
+      "default": "home",
+      "options": [
+        "home",
+        "explore",
+        "map"
+      ]
+    },
+    "region": {
+      "type": "string",
+      "label": "Region to zoom through",
+      "default": "search"
+    },
+    "theme": {
+      "type": "enum",
+      "label": "App theme",
+      "default": "light",
+      "options": [
+        "light",
+        "dark"
+      ]
+    }
   },
   "screens": true,
-  "features": ["search"],
-  "sfx": [{ "id": "whoosh-deep", "at": 0.85, "volume": 0.55 }, { "id": "impact-type", "at": 1.25, "volume": 0.5 }],
-  "tags": ["transition", "zoom-through", "ui"]
+  "features": [
+    "search"
+  ],
+  "sfx": [
+    {
+      "id": "whoosh-deep",
+      "at": 0.85,
+      "volume": 0.55
+    },
+    {
+      "id": "impact-type",
+      "at": 1.25,
+      "volume": 0.5
+    }
+  ],
+  "tags": [
+    "transition",
+    "zoom-through",
+    "ui"
+  ]
 }

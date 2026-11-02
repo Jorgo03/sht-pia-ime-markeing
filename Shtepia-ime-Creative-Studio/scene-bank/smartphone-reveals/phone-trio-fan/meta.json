@@ -7,12 +7,51 @@
   "in": "none",
   "out": "zoom-in",
   "vars": {
-    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Kërko. Krahaso. *Gjej.*" },
-    "screens": { "type": "string", "label": "Screens: centre, left, right", "default": "home, explore, map" },
-    "theme": { "type": "enum", "label": "App theme", "default": "light", "options": ["light", "dark"] }
+    "title": {
+      "type": "string",
+      "label": "Headline (*accent*)",
+      "default": {
+        "sq": "Kërko. Krahaso. *Gjej.*",
+        "en": "Search. Compare. *Find.*",
+        "it": "Cerca. Confronta. *Trova.*"
+      }
+    },
+    "screens": {
+      "type": "string",
+      "label": "Screens: centre, left, right",
+      "default": "home, explore, map"
+    },
+    "theme": {
+      "type": "enum",
+      "label": "App theme",
+      "default": "light",
+      "options": [
+        "light",
+        "dark"
+      ]
+    }
   },
   "screens": true,
-  "features": ["search", "grid-view", "map-view"],
-  "sfx": [{ "id": "whoosh-air", "at": 0.05, "volume": 0.45 }, { "id": "whoosh-paper", "at": 0.75, "volume": 0.35 }],
-  "tags": ["phone", "ui", "overview"]
+  "features": [
+    "search",
+    "grid-view",
+    "map-view"
+  ],
+  "sfx": [
+    {
+      "id": "whoosh-air",
+      "at": 0.05,
+      "volume": 0.45
+    },
+    {
+      "id": "whoosh-paper",
+      "at": 0.75,
+      "volume": 0.35
+    }
+  ],
+  "tags": [
+    "phone",
+    "ui",
+    "overview"
+  ]
 }

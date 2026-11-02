@@ -7,10 +7,49 @@
   "in": "none",
   "out": "blur",
   "vars": {
-    "kicker": { "type": "string", "label": "Kicker", "default": "Mbrëmje në qytet" },
-    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Çdo dritare, *një shtëpi.*" },
-    "seed": { "type": "number", "label": "Skyline seed", "default": 3, "min": 1, "max": 999, "step": 1 }
+    "kicker": {
+      "type": "string",
+      "label": "Kicker",
+      "default": {
+        "sq": "Mbrëmje në qytet",
+        "en": "Evening in the city",
+        "it": "Sera in città"
+      }
+    },
+    "title": {
+      "type": "string",
+      "label": "Headline (*accent*)",
+      "default": {
+        "sq": "Çdo dritare, *një shtëpi.*",
+        "en": "Every window, *a home.*",
+        "it": "Ogni finestra, *una casa.*"
+      }
+    },
+    "seed": {
+      "type": "number",
+      "label": "Skyline seed",
+      "default": 3,
+      "min": 1,
+      "max": 999,
+      "step": 1
+    }
   },
-  "sfx": [{ "id": "whoosh-paper", "at": 0.1, "volume": 0.4 }, { "id": "ambient-city", "at": 0.0, "volume": 0.25 }],
-  "tags": ["city", "print", "sunset", "parallax"]
+  "sfx": [
+    {
+      "id": "whoosh-paper",
+      "at": 0.1,
+      "volume": 0.4
+    },
+    {
+      "id": "ambient-city",
+      "at": 0.0,
+      "volume": 0.25
+    }
+  ],
+  "tags": [
+    "city",
+    "print",
+    "sunset",
+    "parallax"
+  ]
 }

@@ -7,10 +7,53 @@
   "in": "none",
   "out": "blur",
   "vars": {
-    "kicker": { "type": "string", "label": "Kicker", "default": "Edhe për diasporën" },
-    "title": { "type": "string", "label": "Headline (*accent*)", "default": "Në *8 gjuhë.*" }
+    "kicker": {
+      "type": "string",
+      "label": "Kicker",
+      "default": {
+        "sq": "Edhe për diasporën",
+        "en": "For the diaspora too",
+        "it": "Anche per la diaspora"
+      }
+    },
+    "title": {
+      "type": "string",
+      "label": "Headline (*accent*)",
+      "default": {
+        "sq": "Në *8 gjuhë.*",
+        "en": "In *8 languages.*",
+        "it": "In *8 lingue.*"
+      }
+    }
   },
-  "features": ["multilingual"],
-  "sfx": [{ "id": "type-tick", "at": 0.5, "volume": 0.3 }, { "id": "type-tick", "at": 0.9, "volume": 0.3 }, { "id": "type-tick", "at": 1.3, "volume": 0.3 }, { "id": "type-tick", "at": 1.7, "volume": 0.3 }],
-  "tags": ["feature", "languages", "diaspora"]
+  "features": [
+    "multilingual"
+  ],
+  "sfx": [
+    {
+      "id": "type-tick",
+      "at": 0.5,
+      "volume": 0.3
+    },
+    {
+      "id": "type-tick",
+      "at": 0.9,
+      "volume": 0.3
+    },
+    {
+      "id": "type-tick",
+      "at": 1.3,
+      "volume": 0.3
+    },
+    {
+      "id": "type-tick",
+      "at": 1.7,
+      "volume": 0.3
+    }
+  ],
+  "tags": [
+    "feature",
+    "languages",
+    "diaspora"
+  ]
 }

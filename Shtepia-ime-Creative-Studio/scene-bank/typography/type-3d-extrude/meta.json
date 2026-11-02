@@ -7,9 +7,41 @@
   "in": "none",
   "out": "zoom-in",
   "vars": {
-    "word": { "type": "string", "label": "Word", "default": "Shtëpia", "maxLength": 10 },
-    "sub": { "type": "string", "label": "Line under", "default": "Gjej. Ruaj. Hyr brenda." }
+    "word": {
+      "type": "string",
+      "label": "Word",
+      "default": {
+        "sq": "Shtëpia",
+        "en": "Shtëpia",
+        "it": "Shtëpia"
+      },
+      "maxLength": 10
+    },
+    "sub": {
+      "type": "string",
+      "label": "Line under",
+      "default": {
+        "sq": "Gjej. Ruaj. Hyr brenda.",
+        "en": "Find. Save. Step inside.",
+        "it": "Trova. Salva. Entra."
+      }
+    }
   },
-  "sfx": [{ "id": "whoosh-deep", "at": 0.0, "volume": 0.45 }, { "id": "impact-soft", "at": 0.55, "volume": 0.45 }],
-  "tags": ["typography", "3d", "extrude"]
+  "sfx": [
+    {
+      "id": "whoosh-deep",
+      "at": 0.0,
+      "volume": 0.45
+    },
+    {
+      "id": "impact-soft",
+      "at": 0.55,
+      "volume": 0.45
+    }
+  ],
+  "tags": [
+    "typography",
+    "3d",
+    "extrude"
+  ]
 }

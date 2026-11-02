@@ -7,13 +7,50 @@
   "in": "none",
   "out": "blur",
   "vars": {
-    "title": { "type": "string", "label": "Caption (*accent*)", "default": "Njihuni me *Shtëpia.ime.*" },
-    "screen": { "type": "screen", "label": "Screen", "default": "home" },
-    "next": { "type": "string", "label": "Push to screen (optional)", "default": "" },
-    "theme": { "type": "enum", "label": "App theme", "default": "dark", "options": ["light", "dark"] }
+    "title": {
+      "type": "string",
+      "label": "Caption (*accent*)",
+      "default": {
+        "sq": "Njihuni me *Shtëpia.ime.*",
+        "en": "Meet *Shtëpia.ime.*",
+        "it": "Ecco *Shtëpia.ime.*"
+      }
+    },
+    "screen": {
+      "type": "screen",
+      "label": "Screen",
+      "default": "home"
+    },
+    "next": {
+      "type": "string",
+      "label": "Push to screen (optional)",
+      "default": ""
+    },
+    "theme": {
+      "type": "enum",
+      "label": "App theme",
+      "default": "dark",
+      "options": [
+        "light",
+        "dark"
+      ]
+    }
   },
   "screens": true,
-  "features": ["search", "featured"],
-  "sfx": [{ "id": "whoosh-air", "at": 0.15, "volume": 0.5 }],
-  "tags": ["phone", "ui", "reveal"]
+  "features": [
+    "search",
+    "featured"
+  ],
+  "sfx": [
+    {
+      "id": "whoosh-air",
+      "at": 0.15,
+      "volume": 0.5
+    }
+  ],
+  "tags": [
+    "phone",
+    "ui",
+    "reveal"
+  ]
 }

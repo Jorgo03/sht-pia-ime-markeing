@@ -1,0 +1,65 @@
+{
+  "template": "why-shtepia-ime",
+  "id": "why-shtepia-ime-en",
+  "title": "Why Shtëpia.ime?",
+  "brief": "15 s, typography only. Benefits as type, no screens.",
+  "modes": [
+    "kinetic-typography"
+  ],
+  "targetDuration": 15,
+  "language": "en",
+  "format": "reel",
+  "palette": "night",
+  "voice": {
+    "provider": "none"
+  },
+  "audio": {
+    "music": {
+      "bed": "bright",
+      "bpm": 118
+    }
+  },
+  "features": [],
+  "scenes": [
+    {
+      "scene": "type-split-word",
+      "duration": 3.2,
+      "vars": {
+        "inside": "starts with *one search.*"
+      }
+    },
+    {
+      "scene": "type-stack-poster",
+      "duration": 2.2,
+      "palette": "orange",
+      "vars": {
+        "lines": "Sale|*&*|rent"
+      }
+    },
+    {
+      "scene": "type-highlighter",
+      "duration": 3,
+      "vars": {
+        "text": "[Sale] and [rent], with [photos and a map]."
+      }
+    },
+    {
+      "scene": "feature-languages",
+      "duration": 3.6
+    },
+    {
+      "scene": "logo-flood-stacked",
+      "duration": 3,
+      "payoff": true
+    }
+  ],
+  "caption": "Sale and rent, a map and 8 languages. Why Shtëpia.ime? Because your home deserves a better search.",
+  "hashtags": [
+    "shtepiaime",
+    "shtepi",
+    "pronatshqiperi",
+    "tirana",
+    "albania",
+    "realestate"
+  ]
+}
